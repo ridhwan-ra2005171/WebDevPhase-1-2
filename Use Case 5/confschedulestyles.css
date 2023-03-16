@@ -16,60 +16,80 @@ body{
     flex-direction: column;
     align-items: center;
 }
-.conference-card {
-  border: 1px solid #ccc;
+.conference-card{
+  text-align: left;
+    display: grid;
+    width: clamp(10rem, 85vw, 60rem);
+    grid-template-areas:
+    "card-date card-title"
+    "card-time card-presenter"
+    "card-location card-description"
+  ;
+
+  overflow: hidden;
+    border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin: 20px;
+  margin: 0.5rem;
   padding: 20px;
   max-width: 600px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.conference-info {
+/* .conference-info {
   display: flex;
   flex-direction: column;
-}
+} */
 
-.date-time-location {
+/* .date-time-location {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
-}
+} */
 
 .date {
-  font-size: 16px;
+    grid-area: card-date;
+  font-size: 2vw;
   font-weight: bold;
-  margin-right: 10px;
 }
 
-.time,
-.location {
-  font-size: 14px;
+.time{
+  grid-area: card-time;
+  font-size: 2vw;
   color: #666;
 }
 
-.title {
-  font-size: 28px;
-  font-weight: bold;
-  margin: 0 0 10px 0;
+.location{
+    grid-area: card-location;
 }
 
-.subtitle {
-  font-size: 20px;
+
+.title {
+  grid-area: card-title;
+
+  font-size: 4vw;
+  font-weight: bold;
+}
+
+/* .subtitle {
+
+  font-size: 2vw;
   font-style: italic;
   color: #666;
   margin: 0 0 10px 0;
-}
+} */
 
 .presenter {
-  font-size: 16px;
+  grid-area: card-presenter;
+
+  font-size: 2vw;
   font-weight: bold;
-  margin: 0 0 10px 0;
+  
 }
 
 .description {
-  font-size: 16px;
-  line-height: 1.5;
-  margin: 0;
+  grid-area: card-description;
+  font-size: 2vw;
+  
 }
