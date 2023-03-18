@@ -17,17 +17,18 @@ body{
     align-items: center;
 }
 .conference-card{
-  text-align: left;
     display: grid;
     width: clamp(10rem, 85vw, 60rem);
+    max-height: 10rem;    
     grid-template-areas:
     "card-date card-title"
     "card-time card-presenter"
     "card-location card-description"
   ;
+  
 
   overflow: hidden;
-    border: 1px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin: 0.5rem;
@@ -62,14 +63,17 @@ body{
 
 .location{
     grid-area: card-location;
+    font-size: 2vw;
+    
 }
 
 
 .title {
   grid-area: card-title;
-
-  font-size: 4vw;
+  font-size: 3vw;
   font-weight: bold;
+  margin: auto;
+
 }
 
 /* .subtitle {
