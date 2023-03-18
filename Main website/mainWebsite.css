@@ -1,4 +1,3 @@
-/* I added this for you so do not remove it */
 *,
 *::before,
 *::after {
@@ -24,8 +23,8 @@ body {
     font-size: 14px;
 }
 
-/* Navigation content */
-.logo img{
+/*============== Navigation content================= */
+.logo img {
     /* aspect-ratio: ; */
     width: 100%;
     /* size: ; */
@@ -49,20 +48,13 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-
-    width: 100%;
-
-    /* margin: 1rem; */
-    border-radius:0rem 0rem 1rem 1rem;
-    background-color: #f4f4f4;
-    
-     /* place-items: center; */
-     /* place-content: center; */
+    /* to make the nav bar stick to the top of the page on scroll ++++++++++ */
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+    background-color: white;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 1px 30px 0px;
-
-    /* border-bottom: slateblue solid 1px; */
-    
     padding: 1rem;
 }
 
@@ -72,6 +64,9 @@ ul {
     /* margin: 0rem 2rem; */
     /* font-weight: 700; */
 }
+
+/*========= End of navigation content ============*/
+
 
 header {
     display: flex;
