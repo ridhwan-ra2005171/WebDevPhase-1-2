@@ -1,0 +1,52 @@
+<form id="add-conference-form" >
+    <link rel="stylesheet" href="addSession.css">
+
+
+    <fieldset>
+        <legend><strong>Create Session</strong></legend>
+    
+    <div class="titlename">
+        <label for="tName">Name of Conference:</label>
+                    <input type="text" name="tName" id="tName" placeholder="Conference Name" required><br><br>    
+    </div>    
+    <div class="form-group">
+            <label>Select Paper:</label>
+            <select name="country" 
+            id="country" 
+            aria-placeholder="Hello"
+            onchange="handleCountryChange()">
+                <option value="" 
+                selected disabled> -Select Paper- </option>
+            </select>
+    </div>
+    
+    <br>
+    <div class="form-group">
+        <label>Select Paper:</label>
+        <select name="country" 
+        id="country" 
+        aria-placeholder="Hello"
+        onchange="handleCountryChange()">
+            <option value="" 
+            selected disabled> -Select Presenter- </option>
+        </select>
+    </div>
+<br>
+<div class="time">
+    <label for="time">Presentation Time:</label>
+    <input type="time" name="time" id="time">
+    
+</div>
+<br>
+    <div class="formgroup">
+        <label for="date">Date of Birth</label>
+        <input type="date" id="date" name="date" required>
+    <br>
+
+    <div class="titlename">
+        <label for="tName">Location:</label>
+                    <input type="text" name="locName" id="locName" placeholder="Enter Location" required><br><br>    
+    </div>
+</fieldset>
+<input type="submit" id="add-recipe-btn" value="Submit Conference Schedule">
+</form>
