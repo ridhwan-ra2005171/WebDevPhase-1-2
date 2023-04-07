@@ -6,13 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conf Plus</title>
+
+    <!-- New Google font: Roboto Slab --> <!--FONT-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="paperDashboard.css">
+    
 </head>
 
 <body>
     <nav class="nav-bar">
         <div class="logo">
-            <img src="../img/Capture2.PNG" alt="Conf Plus Logo">
+            <img src="../../img/ConfPlus logo.png" alt="Conf Plus Logo">
 
         </div>
         <ul>
@@ -26,10 +31,10 @@
 
     <main>
         <h2>Papers to Review</h2>
-        <div class="card-list">
+        <div class="card-list" id="review-cards">
             <!-- Card 1 example -->
             <div class="card">
-                <a href="#"><h4>Title </h4></a>
+                <a href="#"><h4>Paper 1 </h4></a>
                 <p class="abstract-container">Abstract Abstract Abstract Abstract
                     Abstract Abstract Abstract Abstract
                     Abstract Abstract Abstract Abstract
@@ -55,10 +60,12 @@
                 <p>dd-MM-yyyy . HH:MM</p>
             </div>
         </div>
+        
         <div class="break-line"></div>
 
         <h2>Submitted Reviews</h2>
-        <div class="card-list">
+
+        <div class="card-list"  id="submitted-cards">
 
             <div class="card">
                 <a href="#"><h4>Title </h4></a>

@@ -7,6 +7,10 @@
     /* outline: red solid; */
 }
 
+html {
+    font-family: 'Roboto Slab', serif;
+}
+
 
 /*============== Navigation content================= */
 .logo img {
@@ -37,6 +41,7 @@ ul {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    z-index: 5; /*T o make sure that the nav bar is always the top most element*/
     /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
     background-color: white;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 1px 30px 0px;
@@ -70,13 +75,16 @@ main h2 {
     border-bottom: solid #D6C5E5;
     width: 90vw;
     place-self: center;
-    margin: 2rem 0rem;
+    /* margin: 2rem 0rem; */
 }
 
 .card-list {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
     /* overflow: scroll; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+
     gap: 2rem;
     padding: 0rem 2rem 2rem;
     /* background-color: aliceblue; */
