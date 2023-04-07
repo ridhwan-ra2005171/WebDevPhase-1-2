@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Paper</title>
+    <!-- New Google font: Roboto Slab --> <!--FONT-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="reviewPaper.css">
+
+</head>
+
+<body id="review-container">
+    <main>
+
+    <header>
+        <h1>Reviewing...</h1>
+        <button id="cancel" class="btn">Go Back</button>
+    </header>
+
+    <article>
+        <h2 id="title">Paper 1</h2>
+        <br>
+        <div class="author-container">
+            <h3>Authors: </h3>
+            <p>Lorem ipsum dolor sit.</p>
+        </div>
+        <br>
+        <div class="presenter-container">
+            <h3>Presenter: </h3>
+            <p>Lorem, ipsum dolor.</p>
+        </div>
+        <br>
+
+        <h2>Abstract</h2>
+        <p id="abstract">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora ad, qui necessitatibus, sit
+            doloremque impedit optio et nam velit itaque, explicabo quos? Odit in incidunt explicabo numquam quaerat
+            porro laudantium?</p>
+        <br>
+    </article>
+
+    <form>
+        <fieldset>
+            <legend>Review</legend>
+
+            <h3>Overall Evaluation: </h3>
+            <label for="evaluation">
+                <input type="radio" name="evaluation" value="2"> Strong Accept
+                <br><input type="radio" name="evaluation" value="1"> Accept
+                <br><input type="radio" name="evaluation" value="0"> Borderline
+                <br><input type="radio" name="evaluation" value="-1"> Reject
+                <br><input type="radio" name="evaluation" value="-2"> Strong Reject
+            </label>
+
+            <h3>Paper contribution: </h3>
+            <label for="contribution">
+                <input type="radio" name="contribution" value="5"> major and significant contribution
+                <br><input type="radio" name="contribution" value="4"> clear contribution
+                <br><input type="radio" name="contribution" value="3"> minor contribution
+                <br><input type="radio" name="contribution" value="2"> no obvious contribution
+                <br><input type="radio" name="contribution" value="1"> no contribution
+            </label>
+
+            <label for="strnegths">
+                <h3>Paper strengths: </h3>
+                <textarea name="paper-strengths" id="paper-strengths" cols="50" rows="5"></textarea>
+            </label>
+
+            <label for="weakness">
+                <h3>Paper weakness: </h3>
+                <textarea name="paper-weakness" id="paper-weakness" cols="50" rows="5"></textarea>
+            </label>
+
+            <div class="buttons">
+                <input type="submit" class="btn submit-btn" name="submit" value="Submit">
+                <button id="cancel" class="btn">Cancel</button>
+            </div>
+
+
+        </fieldset>
+    </form>
+</main>
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* outline: red solid; */
+}
+
+html {
+    font-family: 'Roboto Slab', serif;
+}
+
+main {
+    padding: 2rem;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: solid ;
+}
+
+fieldset{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding:1rem;
+    border-radius: 1rem;
+    border: solid 2px #D6C5E5;
+
+}
+
+fieldset legend {
+    /* margin: 1rem; */
+    padding: 0rem 1rem ;
+}
+
+fieldset textarea {
+    /* margin-bottom: .3rem; */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 1rem;
+    padding: .3rem;
+    width: 100%;
+    border-radius: .7rem;
+    border: solid 2px #D6C5E5;
+
+}
+
+.buttons {
+    display: flex;
+    /* width: 100%; */
+    gap: 10%;
+    /* justify-self: center; */
+    /* align-items: center; */
+    justify-content: center;
+}

@@ -7,6 +7,10 @@
     /* outline: red solid; */
 }
 
+html {
+    font-family: 'Roboto Slab', serif;
+}
+
 
 /*============== Navigation content================= */
 .logo img {
@@ -71,13 +75,16 @@ main h2 {
     border-bottom: solid #D6C5E5;
     width: 90vw;
     place-self: center;
-    margin: 2rem 0rem;
+    /* margin: 2rem 0rem; */
 }
 
 .card-list {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
     /* overflow: scroll; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+
     gap: 2rem;
     padding: 0rem 2rem 2rem;
     /* background-color: aliceblue; */
