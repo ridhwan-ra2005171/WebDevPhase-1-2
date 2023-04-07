@@ -37,6 +37,7 @@ ul {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    z-index: 5; /*T o make sure that the nav bar is always the top most element*/
     /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
     background-color: white;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 1px 30px 0px;
