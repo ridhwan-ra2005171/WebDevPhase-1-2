@@ -36,6 +36,7 @@ fieldset{
     padding:1rem;
     border-radius: 1rem;
     border: solid 2px #D6C5E5;
+    /* max-width: 100vw; */
 
 }
 
@@ -57,9 +58,6 @@ fieldset textarea {
 
 .buttons {
     display: flex;
-    /* width: 100%; */
     gap: 10%;
-    /* justify-self: center; */
-    /* align-items: center; */
     justify-content: center;
 }

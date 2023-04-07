@@ -17,10 +17,10 @@
 
 <body id="review-container">
     <main>
-
+        <a href="../paperDashboard/paperDashboard.html">aaaa</a>
     <header>
         <h1>Reviewing...</h1>
-        <button id="cancel" class="btn">Go Back</button>
+        <button id="go-back" class="btn">Go Back</button>
     </header>
 
     <article>
@@ -28,12 +28,12 @@
         <br>
         <div class="author-container">
             <h3>Authors: </h3>
-            <p>Lorem ipsum dolor sit.</p>
+            <p id="authors">Lorem ipsum dolor sit.</p>
         </div>
         <br>
         <div class="presenter-container">
             <h3>Presenter: </h3>
-            <p>Lorem, ipsum dolor.</p>
+            <p id="presenter">Lorem, ipsum dolor.</p>
         </div>
         <br>
 
@@ -50,20 +50,20 @@
 
             <h3>Overall Evaluation: </h3>
             <label for="evaluation">
-                <input type="radio" name="evaluation" value="2"> Strong Accept
-                <br><input type="radio" name="evaluation" value="1"> Accept
-                <br><input type="radio" name="evaluation" value="0"> Borderline
-                <br><input type="radio" name="evaluation" value="-1"> Reject
-                <br><input type="radio" name="evaluation" value="-2"> Strong Reject
+                <input type="radio" id="evaluation" name="evaluation" value="2"> Strong Accept
+                <br><input type="radio" id="evaluation" name="evaluation" value="1"> Accept
+                <br><input type="radio" id="evaluation" name="evaluation" value="0"> Borderline
+                <br><input type="radio" id="evaluation"name="evaluation" value="-1"> Reject
+                <br><input type="radio" id="evaluation" name="evaluation" value="-2"> Strong Reject
             </label>
 
             <h3>Paper contribution: </h3>
             <label for="contribution">
-                <input type="radio" name="contribution" value="5"> major and significant contribution
-                <br><input type="radio" name="contribution" value="4"> clear contribution
-                <br><input type="radio" name="contribution" value="3"> minor contribution
-                <br><input type="radio" name="contribution" value="2"> no obvious contribution
-                <br><input type="radio" name="contribution" value="1"> no contribution
+                <input type="radio" id="contribution" name="contribution" value="5"> major and significant contribution
+                <br><input type="radio" id="contribution" name="contribution" value="4"> clear contribution
+                <br><input type="radio" id="contribution" name="contribution" value="3"> minor contribution
+                <br><input type="radio" id="contribution" name="contribution" value="2"> no obvious contribution
+                <br><input type="radio" id="contribution" name="contribution" value="1"> no contribution
             </label>
 
             <label for="strnegths">
@@ -77,7 +77,7 @@
             </label>
 
             <div class="buttons">
-                <input type="submit" class="btn submit-btn" name="submit" value="Submit">
+                <input id="submit" type="submit" class="btn submit-btn" name="submit" value="Submit">
                 <button id="cancel" class="btn">Cancel</button>
             </div>
 
@@ -86,6 +86,9 @@
     </form>
 </main>
 
-</body>
 
+    <script src="reviewPaper.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
 </html>
