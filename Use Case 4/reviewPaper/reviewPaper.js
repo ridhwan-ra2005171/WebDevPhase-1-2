@@ -1,3 +1,18 @@
+// Imports
+const papersUrl = "../../papers.json"; 
+const usersUrl = "../../users.json";
+
+async function getData(url) {
+    const data  = await (await fetch(url)).json();
+    // console.log(data);
+    return data;
+}
+
+
+
+
+
+
 // Paper Elements
 const paperTitle = document.querySelector("#title");
 // paperTitle.innerHTML = "Hi";
@@ -14,36 +29,49 @@ const backBtn = document.querySelector("#go-back");
 const cancelBtn = document.querySelector("#cancel");
 const submitBtn = document.querySelector("#submit");
 
+//load paper data into page
+async function getPapers(){
+    const papers = await getData(papersUrl);
+//  console.log(papers[1].title);
+paperTitle.innerHTML = papers[0].title;
+
+}
+getPapers()
+
 // Event listeners for buttons
 backBtn.addEventListener('click',returnToPage)
 cancelBtn.addEventListener('click',cancelReview)
 
-// The event listenr functions
-function returnToPage(e) {
+// The event listener functions
+async function returnToPage(e) {
     e.preventDefault();
-    // swal("Hello world!");
+    // swal("Are you sure you want to cancel?","","warning",{ buttons: ["Yes","No"],));
 
-    // window.location.href = "../paperDashboard/paperDashboard.html"; // return back to review paper dashboard
+    let result = await swal({
+        title: "Your changes will not be saved!",
+        dangerMode: true,
+        icon:"error",
+        buttons: ["Cancel", "Proceed"],
+      });
+
+    // console.log(result);
+    if (result === true) {
+        location.href = "../paperDashboard/paperDashboard.html"
+    }
 }
 
-function cancelReview(e) {
-    // const confirm = confirm("Are you sure you want to cancel?")
-    
-    let confirmation;
-    swal({
+async function cancelReview(e) {
+    e.preventDefault();
+    // alert("Are you sure you want to cancel?")
+    let result = await swal({
         title: "Are you sure you want to cancel?",
-        icon: "warning",
-        button: "Yes, cancel",
-      })
-      .then((value) => {console.log(value);});
-    ;
-
-    // console.log(confirmation);
-    if (confirmation === 1) {
-        // console.log('You pressed ok, cancelled:');
-    } else {
-        console.log('not cancelled');
-    }
-    // returnToPage(e);
+        icon:"warning",
+        buttons: ["No, stay", "Yes, cancel"],
+      });
+      
+    // console.log(result);
+    if (result === true) {
+        location.href = "../paperDashboard/paperDashboard.html"
+    } 
 }
 
