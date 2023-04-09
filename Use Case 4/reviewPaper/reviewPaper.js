@@ -2,20 +2,53 @@
 const papersUrl = "../../papers.json"; 
 const usersUrl = "../../users.json";
 
-async function getData(url) {
-    const data  = await (await fetch(url)).json();
-    // console.log(data);
-    return data;
+let papersloc = null;
+let usersloc = null;
+// elements
+const paperCont = document.querySelector("#paper-cont");
+// console.log(paperCont);
+
+//load data into/from local storage
+async function getData() {
+    papers  = await (await fetch(papersUrl)).json();
+    users  = await (await fetch(usersUrl)).json();
+    // let test = users.filter((index, user) => user.id === (papers[index].authors[index]));
+    test = users.find((u) => {
+        if (papers[0].authors.includes(u.id)) {
+            // return `${u.last_name}, ${u.first_name}`;   
+            return 4;
+        }})
+        
+    console.log(test);
+    // if (!localStorage.papersloc) {
+        // if the recipes dont exist in the local storage, create one and set
+        // i declared recipes as global variable in line 7
+        // papersloc  = await (await fetch(papersUrl)).json();
+        // localStorage.setItem("papersloc", JSON.stringify(papersloc));
+        // papersloc = JSON.parse(localStorage.papersloc);
+        // recipesContainer.innerHTML = papersloc
+        //   .map((p) => cardTemplate(p))
+        //   .join("");
+    //   } else {
+        // recipe array exists in the local storage, retrieve it
+        // papersloc = JSON.parse(localStorage.papersloc);
+        // paperTitle.innerHTML 
+        // paperCont.innerHTML = papersloc
+        //   .map((recipe) => recipeToHTML(recipe))
+        //   .join("");
+    //   }
 }
 
+// call load data
+getData()
 
-
+// const test = papers[0].authors;
+console.log(papers);
 
 
 
 // Paper Elements
 const paperTitle = document.querySelector("#title");
-// paperTitle.innerHTML = "Hi";
 const paperAuthors = document.querySelector("#authors");
 const paperPresenter = document.querySelector("#presenter");
 const paperAbstract = document.querySelector("#abstract");
@@ -33,7 +66,7 @@ const submitBtn = document.querySelector("#submit");
 async function getPapers(){
     const papers = await getData(papersUrl);
 //  console.log(papers[1].title);
-paperTitle.innerHTML = papers[0].title;
+// paperTitle.innerHTML = papers[0].title;
 
 }
 getPapers()
