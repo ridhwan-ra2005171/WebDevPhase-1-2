@@ -123,6 +123,12 @@ main h2 {
     /* width: fit-content; */
 }
 
+/* this one for details: date/time/location */
+.card details{
+    display: flex;
+    justify-content: space-between;
+}
+
 .abstract-container {
     white-space: normal;
     display: -webkit-box;
