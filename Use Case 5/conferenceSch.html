@@ -17,7 +17,7 @@
         </div>
         <ul>
             <li><a class="nav-link grey" href="#">Home</a></li>
-            <li><a class="nav-link grey" href="#">Create Session</a></li>
+            <li><a class="nav-link grey" href="#" onclick="window.location.href='addSession.html'">Create Session</a></li>
             <li><a class="nav-link grey" href="#">Help</a></li>
         </ul>
         <a href="#">username</a>
@@ -28,7 +28,8 @@
     <main>
                 <div class="card-list">
             <h2>Conference Schedules</h2>
-
+            
+            <!-- WE NEED TO HAVE FILTER DATE HERE -->
             <input type="search" placeholder="Search Book By Date" id="search" oninput="searchBook(this.value)">
             <!-- Card 1 example -->
             <div class="card">
@@ -60,6 +61,8 @@
         </div>
 
     </main>
+
+    <script src="conferenceSch.js"></script>
 
 </body>
 
