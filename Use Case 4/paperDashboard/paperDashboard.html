@@ -16,7 +16,7 @@
 
 </head>
 
-<body id="body-content">
+<body id="body-content" onload="displayPapers('../../papers.json')">
     <header>
         <nav class="nav-bar">
             <div class="logo">
@@ -38,21 +38,22 @@
         <h2>Papers to Review</h2>
         <div class="card-list" id="card-list">
             <!-- Card 1 example -->
-            <div class="card">
+            <!-- <div class="card">
                 <a href="#" onclick="loadPage('../reviewPaper/reviewPaper.html',this.id)">
-                    <h4>Paper 1 </h4>
-                </a>
-                <p class="abstract-container">Abstract Abstract Abstract Abstract
+                    <h3 id="paper-title">Paper 1</h3>
+                </a> -->
+                <!-- <p class="abstract-container">Abstract Abstract Abstract Abstract
                     Abstract Abstract Abstract Abstract
                     Abstract Abstract Abstract Abstract
                     Abstract Abstract Abstract Abstract
                     Abstract Abstract Abstract Abstract
-                </p>
-                <p>Author 1 Author 2 author 3 author 4 Author 5 Author 6 author 7 author 8</p>
-                <p>dd-MM-yyyy . HH:MM</p>
-            </div>
+                </p> -->
+                <!-- <p>Author 1 Author 2 author 3 author 4 Author 5 Author 6 author 7 author 8</p> -->
+                <!-- <p id="paper-date">dd-MM-yyyy . HH:MM</p> -->
+                <!-- <i class="fa fa-"></i> -->
+            <!-- </div> -->
 
-
+            <!-- 
             <div class="card">
                 <a href="#">
                     <h4>Title </h4>
@@ -69,14 +70,14 @@
                 <p>Abstract</p>
                 <p>Author1 Author2 </p>
                 <p>dd-MM-yyyy . HH:MM</p>
-            </div>
-        </div>
+            </div> -->
+         </div> 
 
-        <div class="break-line"></div>
+            <div class="break-line"></div>
 
-        <!-- <h2>Submitted Reviews</h2> -->
+            <!-- <h2>Submitted Reviews</h2> -->
 
-        <!-- <div class="card-list" id="submitted-cards">
+            <!-- <div class="card-list" id="submitted-cards">
 
             <div class="card">
                 <a href="#">
@@ -121,7 +122,11 @@
         </div> -->
 
     </main>
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     <script src="paperDashboard.js"></script>
+    <!-- Load the script of review papers so it can be used in loadPaper() function -->
+    <!-- <script src="../reviewPaper/reviewPaper.js"></script> -->
+
 </body>
 
 </html>

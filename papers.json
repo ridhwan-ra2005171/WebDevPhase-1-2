@@ -5,7 +5,9 @@
     "abstract": "the paper talks about ... and the ... to see if the.. and.",
     "authors": [14, 15, 16],
     "presenter": 14,
-    "reviewers": [7,11]
+    "reviewers": [7,11],
+    "date": "2023-3-16"
+    
   },
 
   {
@@ -14,7 +16,9 @@
     "abstract": "the paper talks about ... and the ... to see if the.. and.",
     "authors": [14, 17, 20],
     "presenter": 17,
-    "reviewers": [7,9]
+    "reviewers": [9,7],
+    "date": "2023-2-25"
+
   },
 
   {

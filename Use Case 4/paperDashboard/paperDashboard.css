@@ -69,6 +69,9 @@ main {
 
 main h2 {
     padding: 1rem 2rem;
+    align-self: center;
+    color: #663399;
+    color: #4d0099;
 }
 
 .break-line {
@@ -82,10 +85,11 @@ main h2 {
     /* display: flex; */
     /* flex-wrap: wrap; */
     /* overflow: scroll; */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-
-    gap: 2rem;
+    /* display: grid; */
+    /* grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); */
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
     padding: 0rem 2rem 2rem;
     /* background-color: aliceblue; */
 
@@ -93,7 +97,9 @@ main h2 {
 
 .card {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     background-color: white;
     padding: 1rem;
@@ -101,15 +107,19 @@ main h2 {
     /* border: indigo 0.2rem solid; */
     /* overflow: hidden; */
     /* text-overflow: ellipsis; */
-    width: clamp(10rem, 100%, 25rem);
+    /* width: clamp(10rem, 100%, 25rem); */
     /* height: 10rem; */
+    width: 100%;
     box-shadow: rgba(61, 71, 94, 0.1) 0px 4px 12px;
     transition: ease .2s;
 
 }
 
 .card:hover {
-    transform: translateY(-10px);
+    /* transform: translateY(-10px); */
+    transform: scale(102%);
+    /* background-color: #f2f9fe; */
+    /* border: solid rebeccapurple 1px; */
     box-shadow: rgba(61, 71, 94, 0.1) 0px 10px 15px;
 }
 
