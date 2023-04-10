@@ -8,33 +8,40 @@
     <title>Conf Plus</title>
 
     <!-- New Google font: Roboto Slab --> <!--FONT-->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="paperDashboard.css">
-    
+
 </head>
 
-<body>
-    <nav class="nav-bar">
-        <div class="logo">
-            <img src="../../img/ConfPlus logo.png" alt="Conf Plus Logo">
+<body id="body-content">
+    <header>
+        <nav class="nav-bar">
+            <div class="logo">
+                <img src="../../img/ConfPlus logo.png" alt="Conf Plus Logo">
 
-        </div>
-        <ul>
-            <li><a class="nav-link grey" href="#">Home</a></li>
-            <li><a class="nav-link grey" href="#">Review</a></li>
-            <li><a class="nav-link grey" href="#">Help</a></li>
-        </ul>
-        <a href="#">username</a>
-    </nav>
+            </div>
+            <ul>
+                <li><a class="nav-link grey" href="#">Home</a></li>
+                <li><a class="nav-link grey" href="#">Review</a></li>
+                <li><a class="nav-link grey" href="#">Help</a></li>
+            </ul>
+            <a href="#">username</a>
+        </nav>
+    </header>
+
     <!-- <header></header> -->
 
-    <main>
+    <main id="main-content">
         <h2>Papers to Review</h2>
-        <div class="card-list" id="review-cards">
+        <div class="card-list" id="card-list">
             <!-- Card 1 example -->
             <div class="card">
-                <a href="#"><h4>Paper 1 </h4></a>
+                <a href="#" onclick="loadPage('../reviewPaper/reviewPaper.html',this.id)">
+                    <h4>Paper 1 </h4>
+                </a>
                 <p class="abstract-container">Abstract Abstract Abstract Abstract
                     Abstract Abstract Abstract Abstract
                     Abstract Abstract Abstract Abstract
@@ -47,49 +54,61 @@
 
 
             <div class="card">
-                <a href="#"><h4>Title </h4></a>
+                <a href="#">
+                    <h4>Title </h4>
+                </a>
                 <p>Abstract</p>
                 <p>Author1 Author2 </p>
                 <p>dd-MM-yyyy . HH:MM</p>
             </div>
 
             <div class="card">
-                <a href="#"><h4>Title </h4></a>
+                <a href="#">
+                    <h4>Title </h4>
+                </a>
                 <p>Abstract</p>
                 <p>Author1 Author2 </p>
                 <p>dd-MM-yyyy . HH:MM</p>
             </div>
         </div>
-        
+
         <div class="break-line"></div>
 
-        <h2>Submitted Reviews</h2>
+        <!-- <h2>Submitted Reviews</h2> -->
 
-        <div class="card-list"  id="submitted-cards">
+        <!-- <div class="card-list" id="submitted-cards">
 
             <div class="card">
-                <a href="#"><h4>Title </h4></a>
+                <a href="#">
+                    <h4>Title </h4>
+                </a>
                 <p>Abstract</p>
                 <p>Author1 Author2 </p>
                 <p>dd-MM-yyyy . HH:MM</p>
             </div>
 
             <div class="card">
-                <a href="#"><h4>Title </h4></a>
+                <a href="#">
+                    <h4>Title </h4>
+                </a>
                 <p>Abstract</p>
                 <p>Author1 Author2 </p>
                 <p>dd-MM-yyyy . HH:MM</p>
             </div>
 
             <div class="card">
-                <a href="#"><h4>Title </h4></a>
+                <a href="#">
+                    <h4>Title </h4>
+                </a>
                 <p>Abstract</p>
                 <p>Author1 Author2 </p>
                 <p>dd-MM-yyyy . HH:MM</p>
             </div>
 
             <div class="card">
-                <a href="#"><h4>Title </h4></a>
+                <a href="#">
+                    <h4>Title </h4>
+                </a>
                 <p class="abstract-container">Abstract Abstract Abstract Abstract
                     Abstract Abstract Abstract Abstract
                     Abstract Abstract Abstract Abstract
@@ -99,10 +118,10 @@
                 <p>Author1 Author2 </p>
                 <p>dd-MM-yyyy . HH:MM</p>
             </div>
-        </div>
+        </div> -->
 
     </main>
-
+    <script src="paperDashboard.js"></script>
 </body>
 
 </html>

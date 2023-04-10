@@ -11,6 +11,54 @@ html {
     font-family: 'Roboto Slab', serif;
 }
 
+
+/*============== Navigation content================= */
+.logo img {
+    /* aspect-ratio: ; */
+    width: 100%;
+    /* size: ; */
+    height: auto;
+    /* width: 1rem; */
+}
+
+.logo {
+    width: 5rem;
+    /* margin: auto 0; */
+}
+
+a,
+ul {
+    text-decoration: none;
+    list-style: none;
+    color: black;
+}
+
+.nav-bar {
+    /* font-family: inherit; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* to make the nav bar stick to the top of the page on scroll ++++++++++ */
+    /* position: -webkit-sticky; */
+    /* position: sticky; */
+    top: 0;
+    z-index: 5; /*T o make sure that the nav bar is always the top most element*/
+    /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 1px 30px 0px;
+    padding: 1rem;
+}
+
+ul {
+    display: flex;
+    gap: 2rem;
+    /* margin: 0rem 2rem; */
+    /* font-weight: 700; */
+}
+
+/*========= End of navigation content ============*/
+
+
 main {
     padding: 2rem;
 }
@@ -20,24 +68,43 @@ article {
     flex-direction: column;
 }
 
+#go-back, .btn{
+    color: white;
+    font-family: inherit;
+    display: block;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: .7rem;
+    background-color: rebeccapurple;
+    /* cursor:pointer; */
 
+}
+
+#go-back:hover, .btn:hover {
+    background-color: rgb(172, 117, 226);
+    border: 0.2rem solid rebeccapurple;
+    padding: 0.4rem 0.8rem;
+}
+/* 
 header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
     border-bottom: solid ;
-}
+} */
 
-fieldset{
-    display: flex;
-    flex-direction: column;
+fieldset {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr auto;
+    
+    /* flex-direction: column; */
     gap: 1rem;
     padding:1rem;
     border-radius: 1rem;
     border: solid 2px #D6C5E5;
     /* max-width: 100vw; */
-
 }
 
 fieldset legend {
@@ -60,4 +127,12 @@ fieldset textarea {
     display: flex;
     gap: 10%;
     justify-content: center;
+}
+
+button, input[type="submit"], input[type="radio"] {
+    cursor:pointer;
+}
+
+@media screen and (min-width: 700px) {
+    
 }

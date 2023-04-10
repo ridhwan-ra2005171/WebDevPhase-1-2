@@ -10,85 +10,93 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-
+    <!-- // link  to CSS -->
     <link rel="stylesheet" href="reviewPaper.css">
 
 </head>
 
 <body id="review-container">
-    <main>
-        <a href="../paperDashboard/paperDashboard.html">aaaa</a>
     <header>
-        <h1>Reviewing...</h1>
-        <button id="go-back" class="btn">Go Back</button>
+        <nav class="nav-bar">
+            <div class="logo">
+                <img src="../../img/ConfPlus logo.png" alt="Conf Plus Logo">
+            </div>
+            <button id="go-back" class="btn">Go Back</button>
+        </nav>
     </header>
 
-    <article>
-        <h2 id="title">Paper 1</h2>
-        <br>
-        <div class="author-container">
-            <h3>Authors: </h3>
-            <p id="authors">Lorem ipsum dolor sit.</p>
-        </div>
-        <br>
-        <div class="presenter-container">
-            <h3>Presenter: </h3>
-            <p id="presenter">Lorem, ipsum dolor.</p>
-        </div>
-        <br>
-
-        <h2>Abstract</h2>
-        <p id="abstract">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora ad, qui necessitatibus, sit
-            doloremque impedit optio et nam velit itaque, explicabo quos? Odit in incidunt explicabo numquam quaerat
-            porro laudantium?</p>
-        <br>
-    </article>
-
-    <form>
-        <fieldset>
-            <legend>Review</legend>
-
-            <h3>Overall Evaluation: </h3>
-            <label for="evaluation">
-                <input type="radio" id="evaluation" name="evaluation" value="2"> Strong Accept
-                <br><input type="radio" id="evaluation" name="evaluation" value="1"> Accept
-                <br><input type="radio" id="evaluation" name="evaluation" value="0"> Borderline
-                <br><input type="radio" id="evaluation"name="evaluation" value="-1"> Reject
-                <br><input type="radio" id="evaluation" name="evaluation" value="-2"> Strong Reject
-            </label>
-
-            <h3>Paper contribution: </h3>
-            <label for="contribution">
-                <input type="radio" id="contribution" name="contribution" value="5"> major and significant contribution
-                <br><input type="radio" id="contribution" name="contribution" value="4"> clear contribution
-                <br><input type="radio" id="contribution" name="contribution" value="3"> minor contribution
-                <br><input type="radio" id="contribution" name="contribution" value="2"> no obvious contribution
-                <br><input type="radio" id="contribution" name="contribution" value="1"> no contribution
-            </label>
-
-            <label for="strnegths">
-                <h3>Paper strengths: </h3>
-                <textarea name="paper-strengths" id="paper-strengths" cols="50" rows="5"></textarea>
-            </label>
-
-            <label for="weakness">
-                <h3>Paper weakness: </h3>
-                <textarea name="paper-weakness" id="paper-weakness" cols="50" rows="5"></textarea>
-            </label>
-
-            <div class="buttons">
-                <input id="submit" type="submit" class="btn submit-btn" name="submit" value="Submit">
-                <button id="cancel" class="btn">Cancel</button>
+    <main>
+        <article id="paper-cont">
+            <h2 id="title">Paper 1</h2>
+            <br>
+            
+            <div class="author-cont">
+                <h3>Authors: </h3>
+                <p id="authors">Lorem ipsum dolor sit.</p>
             </div>
+            <br>
+
+            <div class="presenter-cont">
+                <h3>Presenter: </h3>
+                <p id="presenter">Lorem, ipsum dolor.</p>
+            </div>
+            <br>
+
+            <h2>Abstract</h2>
+            <p id="abstract-cont">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora ad, qui necessitatibus,
+                sit
+                doloremque impedit optio et nam velit itaque, explicabo quos? Odit in incidunt explicabo numquam quaerat
+                porro laudantium?</p>
+            <br>
+        </article>
+        <!-- // =========================================================================== -->
+        <form>
+            <fieldset>
+                <legend>Review</legend>
+
+                <h3>Overall Evaluation: </h3>
+                <label for="evaluation">
+                    <input type="radio" id="evaluation" name="evaluation" value="2"> Strong Accept
+                    <br><input type="radio" id="evaluation" name="evaluation" value="1"> Accept
+                    <br><input type="radio" id="evaluation" name="evaluation" value="0"> Borderline
+                    <br><input type="radio" id="evaluation" name="evaluation" value="-1"> Reject
+                    <br><input type="radio" id="evaluation" name="evaluation" value="-2"> Strong Reject
+                </label>
+
+                <h3>Paper contribution: </h3>
+                <label for="contribution">
+                    <input type="radio" id="contribution" name="contribution" value="5"> major and significant
+                    contribution
+                    <br><input type="radio" id="contribution" name="contribution" value="4"> clear contribution
+                    <br><input type="radio" id="contribution" name="contribution" value="3"> minor contribution
+                    <br><input type="radio" id="contribution" name="contribution" value="2"> no obvious contribution
+                    <br><input type="radio" id="contribution" name="contribution" value="1"> no contribution
+                </label>
+
+                <label for="strnegths">
+                    <h3>Paper strengths: </h3>
+                    <textarea name="paper-strengths" id="paper-strengths" cols="50" rows="5"></textarea>
+                </label>
+
+                <label for="weakness">
+                    <h3>Paper weakness: </h3>
+                    <textarea name="paper-weakness" id="paper-weakness" cols="50" rows="5"></textarea>
+                </label>
+
+                <div class="buttons">
+                    <input id="submit" type="submit" class="btn submit-btn" name="submit" value="Submit">
+                    <button id="cancel" class="btn">Cancel</button>
+                </div>
 
 
-        </fieldset>
-    </form>
-</main>
+            </fieldset>
+        </form>
+    </main>
 
 
     <script src="reviewPaper.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
+
 </html>

@@ -1,0 +1,49 @@
+[
+  {
+    "pid": 1,
+    "title": "The Security",
+    "abstract": "the paper talks about ... and the ... to see if the.. and.",
+    "authors": [14, 15, 16],
+    "presenter": 14,
+    "reviewers": [7,11]
+  },
+
+  {
+    "pid": 2,
+    "title": "The Web",
+    "abstract": "the paper talks about ... and the ... to see if the.. and.",
+    "authors": [14, 17, 20],
+    "presenter": 17,
+    "reviewers": [7,9]
+  },
+
+  {
+    "pid": 3,
+    "title": "The Effect of Div",
+    "abstract": "the paper talks about ... and the ... to see if the.. and.",
+    "authors": [18, 15],
+    "presenter": 15,
+    "reviewers": [5,6]
+
+  },
+
+  {
+    "pid": 4,
+    "title": "The Master of ML",
+    "abstract": "the paper talks about ... and the ... to see if the.. and.",
+    "authors": [16, 20, 19],
+    "presenter": 19,
+    "reviewers": [10,12]
+
+  },
+
+  {
+    "pid": 5,
+    "title": "The Human Eye",
+    "abstract": "the paper talks about ... and the ... to see if the.. and.",
+    "authors": [19, 18],
+    "presenter": 18,
+    "reviewers": [8,12]
+
+  }
+]
