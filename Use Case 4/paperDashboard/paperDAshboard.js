@@ -3,7 +3,7 @@ let usersUrl = "../../users.json";
 
 // assuming we have the gloabl variable USER_ID
 // we set it to 7 for testing sake only
-const USER_ID = 7;
+const USER_ID = 12;
 
 // Elements from html
 const cardList = document.querySelector("#card-list");

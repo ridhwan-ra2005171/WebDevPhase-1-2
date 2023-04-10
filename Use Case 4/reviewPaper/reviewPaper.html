@@ -58,18 +58,18 @@
 
                 <h3>Overall Evaluation: </h3>
                 <label for="evaluation">
-                        <input type="radio"  name="evaluation" value="2" required> Strong Accept
-                    <br><input type="radio"  name="evaluation" value="1" required> Accept
-                    <br><input type="radio"  name="evaluation" value="0"> Borderline
-                    <br><input type="radio"  name="evaluation" value="-1"> Reject
-                    <br><input type="radio"  name="evaluation" value="-2"> Strong Reject
+                    <input type="radio" name="evaluation" value="2" > Strong Accept
+                    <br><input type="radio" name="evaluation" value="1"> Accept
+                    <br><input type="radio" name="evaluation" value="0"> Borderline
+                    <br><input type="radio" name="evaluation" value="-1"> Reject
+                    <br><input type="radio" name="evaluation" value="-2"> Strong Reject
                 </label>
 
                 <h3>Paper contribution: </h3>
                 <label for="contribution">
-                    <input type="radio" id="contribution" name="contribution" value="5"> major and significant
+                    <input type="radio" id="contribution" name="contribution" value="5" required> major and significant
                     contribution
-                    <br><input type="radio" id="contribution" name="contribution" value="4"> clear contribution
+                    <br><input type="radio" id="contribution" name="contribution" value="4" > clear contribution
                     <br><input type="radio" id="contribution" name="contribution" value="3"> minor contribution
                     <br><input type="radio" id="contribution" name="contribution" value="2"> no obvious contribution
                     <br><input type="radio" id="contribution" name="contribution" value="1"> no contribution
@@ -77,17 +77,22 @@
 
                 <label for="strnegths">
                     <h3>Paper strengths: </h3>
-                    <textarea name="paper-strengths" id="paper-strengths" cols="50" rows="5"></textarea>
+                    <textarea name="paper-strengths" id="paper-strengths" cols="50" rows="5" ></textarea>
                 </label>
 
                 <label for="weakness">
                     <h3>Paper weakness: </h3>
-                    <textarea name="paper-weakness" id="paper-weakness" cols="50" rows="5"></textarea>
+                    <textarea name="paper-weakness" id="paper-weakness" cols="50" rows="5" ></textarea>
                 </label>
 
                 <div class="buttons">
-                    <input id="submit" type="submit" class="btn submit-btn" name="submit" value="Submit">
-                    <button id="cancel" class="btn">Cancel</button>
+                    <div class="primary">
+                        <input id="submit" type="submit" class="btn submit-btn" name="submit" value="Submit">
+                    </div>
+                    <div class="secondary">
+                        <input id="reset" type="reset" class="btn reset-btn" name="reset" value="Reset">
+                        <button id="cancel" class="btn">Cancel</button>
+                    </div>
                 </div>
 
 

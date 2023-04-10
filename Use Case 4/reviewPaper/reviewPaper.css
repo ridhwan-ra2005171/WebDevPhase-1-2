@@ -72,10 +72,10 @@ article {
     flex-direction: column;
 }
 
-#go-back, .btn{
+ .btn{
     color: white;
     font-family: inherit;
-    display: block;
+    /* display: block; */
     padding: 0.6rem 1rem;
     border: none;
     border-radius: .7rem;
@@ -84,7 +84,7 @@ article {
 
 }
 
-#go-back:hover, .btn:hover {
+.btn:hover {
     background-color: rgb(172, 117, 226);
     border: 0.2rem solid rebeccapurple;
     padding: 0.4rem 0.8rem;
@@ -100,8 +100,8 @@ header {
 
 fieldset {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr auto;
+    /* grid-template-columns: 1fr 1fr; */
+    /* grid-template-rows: 1fr 1fr auto; */
     
     /* flex-direction: column; */
     gap: 1rem;
@@ -130,13 +130,25 @@ fieldset textarea {
 .buttons {
     display: flex;
     gap: 10%;
-    justify-content: center;
+    /* place-items: center; */
+    /* place-content: center; */
+    /* justify-content: center; */
 }
 
-button, input[type="submit"], input[type="radio"] {
+button, input[type="submit"], input[type="radio"], input[type="reset"] {
     cursor:pointer;
 }
 
+
+.secondary {
+    display: flex;
+    gap: 1rem;
+    justify-content: right;
+    /* justify-self: right; */
+    /* align-items: end; */
+    /* outline: salmon solid; */
+    width: 100%;
+}
 @media screen and (min-width: 700px) {
     
 }
