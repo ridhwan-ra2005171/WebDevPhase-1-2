@@ -1,0 +1,38 @@
+[
+    {
+      "id": 1,
+      "title": "Paper 1 title",
+      "acceptedP": "paper1",
+      "presenter": "Kaki Lotchi",
+      "date": "10-04-2023",
+      "time": "11:00",
+      "location": "A07"
+    },
+    {
+      "id": 2,
+      "title": "Paper 2 title",
+      "acceptedP": "paper2",
+      "presenter": "Kaki Goblok",
+      "date": "11-04-2023",
+      "time": "08:00",
+      "location": "A07"
+    },
+    {
+      "id": 3,
+      "title": "Paper 3 title",
+      "acceptedP": "paper3",
+      "presenter": "Kaki Lonte",
+      "date": "12-04-2023",
+      "time": "14:00",
+      "location": "H07"
+    },
+    {
+      "id": 4,
+      "title": "Paper 4 title",
+      "acceptedP": "paper4",
+      "presenter": "Kaki Maroc",
+      "date": "13-04-2023",
+      "time": "15:00",
+      "location": "H11"
+    }
+  ]

@@ -4,6 +4,13 @@
 //Lists of schedules:
 let mySchedules= [];
 
+//to check if i can fetch the schedules:
+fetch("session.json").then(response => response.json()).then(data => showInfo(data));
+
+function showInfo(data){
+  console.table(data)
+}
+
 async function loadPage(pageUrl){
     const mainContent = document.querySelector("");
     const page = await fetch();
