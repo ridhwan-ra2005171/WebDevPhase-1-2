@@ -121,6 +121,26 @@ async function storeForm(e) {
     weakness: weakness.value,
   };
 
+  // wait a couple of seconds for confirmation
+  swal({
+    title: "Deleted!",
+    text: "Your row has been deleted.",
+    type: "success",
+    timer: 10000
+    });
+
+    let result = await swal({
+      title: "Your Review has been Submitted Successfully",
+      icon: "success",
+      buttons: "Ok",
+      closeOnClickOutside: false,
+    });
+  
+    if (result === true) {
+      location.href = "../paperDashboard/paperDashboard.html";
+    }
+
+
   // The storing objects in json file is for testing only!
   // the objects should be stored in localStorage
 //   const reviewedPapers = localStorage.reviewedPapers;
