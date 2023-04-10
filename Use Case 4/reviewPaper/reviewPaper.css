@@ -58,6 +58,10 @@ ul {
 
 /*========= End of navigation content ============*/
 
+.grey {
+    color: grey;
+    font-weight: 400;
+}
 
 main {
     padding: 2rem;

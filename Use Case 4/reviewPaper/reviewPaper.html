@@ -27,40 +27,42 @@
 
     <main>
         <article id="paper-cont">
-            <h2 id="title">Paper 1</h2>
+
+            <div class="title-cont">
+                <h3 class="grey">Title: </h3>
+                <h2 id="title"></h2>
+            </div>
             <br>
-            
+
             <div class="author-cont">
-                <h3>Authors: </h3>
-                <p id="authors">Lorem ipsum dolor sit.</p>
+                <h3 class="grey">Authors: </h3>
+                <p id="authors"></p>
             </div>
             <br>
 
-            <div class="presenter-cont">
+            <!-- <div class="presenter-cont">
                 <h3>Presenter: </h3>
-                <p id="presenter">Lorem, ipsum dolor.</p>
+                <p id="presenter"></p>
+            </div> -->
+            <!-- <br> -->
+            <div class="abstract-cont">
+                <h3 class="grey">Abstract</h3>
+                <p id="abstract"></p>
             </div>
-            <br>
-
-            <h2>Abstract</h2>
-            <p id="abstract-cont">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora ad, qui necessitatibus,
-                sit
-                doloremque impedit optio et nam velit itaque, explicabo quos? Odit in incidunt explicabo numquam quaerat
-                porro laudantium?</p>
             <br>
         </article>
         <!-- // =========================================================================== -->
-        <form>
+        <form id="myForm">
             <fieldset>
                 <legend>Review</legend>
 
                 <h3>Overall Evaluation: </h3>
                 <label for="evaluation">
-                    <input type="radio" id="evaluation" name="evaluation" value="2"> Strong Accept
-                    <br><input type="radio" id="evaluation" name="evaluation" value="1"> Accept
-                    <br><input type="radio" id="evaluation" name="evaluation" value="0"> Borderline
-                    <br><input type="radio" id="evaluation" name="evaluation" value="-1"> Reject
-                    <br><input type="radio" id="evaluation" name="evaluation" value="-2"> Strong Reject
+                        <input type="radio"  name="evaluation" value="2" required> Strong Accept
+                    <br><input type="radio"  name="evaluation" value="1" required> Accept
+                    <br><input type="radio"  name="evaluation" value="0"> Borderline
+                    <br><input type="radio"  name="evaluation" value="-1"> Reject
+                    <br><input type="radio"  name="evaluation" value="-2"> Strong Reject
                 </label>
 
                 <h3>Paper contribution: </h3>

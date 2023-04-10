@@ -2,6 +2,11 @@
 const papersUrl = "../../papers.json";
 const usersUrl = "../../users.json";
 
+// assuming we have the gloabl variable USER_ID
+// we set it to 7 for testing sake only
+const USER_ID = 7;
+
+
 let papersloc = null;
 let usersloc = null;
 // elements
@@ -13,14 +18,14 @@ async function getData() {
   papers = await (await fetch(papersUrl)).json();
   users = await (await fetch(usersUrl)).json();
   // let test = users.filter((index, user) => user.id === (papers[index].authors[index]));
-  test = users.find((u) => {
-    if (papers[0].authors.includes(u.id)) {
-      // return `${u.last_name}, ${u.first_name}`;
-      return 4;
-    }
-  });
+//   test = users.find((u) => {
+//     if (papers[0].authors.includes(u.id)) {
+//       // return `${u.last_name}, ${u.first_name}`;
+//       return 4;
+//     }
+//   });
 
-  console.log(test);
+//   console.log(test);
   // if (!localStorage.papersloc) {
   // if the recipes dont exist in the local storage, create one and set
   // i declared recipes as global variable in line 7
@@ -51,8 +56,13 @@ const paperTitle = document.querySelector("#title");
 const paperAuthors = document.querySelector("#authors");
 const paperPresenter = document.querySelector("#presenter");
 const paperAbstract = document.querySelector("#abstract");
+// Form
+const form = document.querySelector('#myForm');
+console.log(form);
 // Form Objects
-const evaluation = document.querySelector("#evaluation");
+const evaluation = document.querySelectorAll('input[name="evaluation"]:checked');
+// const eval = document.querySelector("")
+// console.log(evaluation);
 const contribution = document.querySelector("#contribution");
 const strengths = document.querySelector("#paper-strengths");
 const weakness = document.querySelector("#paper-weakness");
@@ -64,6 +74,7 @@ const submitBtn = document.querySelector("#submit");
 // Event listeners for buttons
 backBtn.addEventListener("click", returnToPrevPage);
 cancelBtn.addEventListener("click", cancelReview);
+form.addEventListener("submit", storeForm)
 
 //load paper
 async function laodPaper() {
@@ -74,28 +85,25 @@ async function laodPaper() {
     (p) => p.pid === parseInt(localStorage.paperAtm)
   );
 
-  const authorsObjects = users.filter((o1) => reviewPaper.authors.find((o2) => o1.id === o2));
-  let authorsNames = authorsObjects.map((author) => {
+  // getting authors names
+  const authObjects = users.filter((o1) =>
+    reviewPaper.authors.find((o2) => parseInt(o1.id) === parseInt(o2))
+  );
+  let authNames = authObjects.map((author) => {
     return `${author.first_name} ${author.last_name}`;
   });
-  console.log(authorsNames.join("; "));
 
-  // console.log(reviewPaper);
+  //getting presenter names
+  //   const presObjects = users.filter((o1) => parseInt(o1.id) === parseInt(reviewPaper.presenter));
+  //   let presName = presObjects.map((pres) => {
+  //     return `${pres.first_name} ${pres.last_name}`;
+  //   });
+
+  // changing the HTML accordingly
   paperTitle.innerHTML = reviewPaper.title;
-  paperAuthors.innerHTML = authorsNames.join("; ");
-//   console.log("Me");
-//   let result = users.filter((o1) => {
-    // reviewPaper.authors.find((o2) => o1.id === o2);
-    // return `${o1.first_name} ${o1.last_name}`;
-//   });
-
-  
-//   console.log(result);
-
- 
-
-
-  // console.log(getAuthorName());
+  paperAuthors.innerHTML = authNames.join("; ");
+  //   paperPresenter.innerHTML = presName
+  paperAbstract.innerHTML = reviewPaper.abstract;
 }
 
 laodPaper();
@@ -110,17 +118,7 @@ function getAuthorName(userId, authorId) {
   console.log(result);
 }
 
-// getAuthorName()
-// //load paper data into page
-// async function getPapers(){
-//     const papers = await getData(papersUrl);
-// //  console.log(papers[1].title);
-// // paperTitle.innerHTML = papers[0].title;
-// }
-
-// getPapers()
-
-// The event listener functions
+// The event listener functions :::::::::::::::::::::::::::::::::::
 // return to previous page
 async function returnToPrevPage(e) {
   e.preventDefault();
@@ -148,8 +146,37 @@ async function cancelReview(e) {
     buttons: ["No, stay", "Yes, cancel"],
   });
 
-  // console.log(result);
   if (result === true) {
     location.href = "../paperDashboard/paperDashboard.html";
   }
+
+
+
+}
+// console.log(evaluation.value);
+
+
+// Dealing with the form
+async function storeForm(e) {
+    const eval = await evaluation.value; 
+    const cont = await contribution.value;
+
+    console.log("aaaa");
+    const reviewedPaper = {
+        'pid': parseInt(localStorage.paperAtm),
+        'revid': USER_ID,
+        'evaluation': (eval),
+        'contribution': parseInt(cont),
+        'strengths': strengths.value,
+        'weakness': weakness.value 
+    }
+
+    for (let radio of evaluation) {
+		if (radio.checked) {
+			console.log(radio.value);
+		}
+	}
+    console.log(reviewedPaper);
+        e.stopPropagation();
+
 }
