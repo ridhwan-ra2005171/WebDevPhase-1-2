@@ -62,6 +62,7 @@ async function loadPage(pageUrl,paperId) {
   // mainContent.innerHTML = pageHTMLContent;
 }
 
+//This is for card template html replacement
 function cardTemplate(paper) {
   // return `<div class="card">
   //         <a href="#" onclick="loadPage('../reviewPaper/reviewPaper.html',this.id)">
