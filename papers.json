@@ -1,53 +1,126 @@
 [
   {
-    "pid": 1,
+    "paperID": 1,
     "title": "The Security",
     "abstract": "the paper talks about ... and the ... to see if the.. and.",
     "authors": [14, 15, 16],
-    "presenter": 14,
-    "reviewers": [7,11],
-    "date": "2023-3-16"
-    
+    "presenterID": 14,
+    "pdfLink": null,
+    "review": [
+      {
+        "reviewerID": 7,
+        "evaluation": null,
+        "contribution": null,
+        "strengths": null,
+        "waknesses": null
+      },
+      {
+        "reviewerID": 11,
+        "evaluation": null,
+        "contribution": null,
+        "strengths": null,
+        "waknesses": null
+      }
+    ]
   },
 
   {
-    "pid": 2,
+    "paperID": 2,
     "title": "The Web",
     "abstract": "the paper talks about ... and the ... to see if the.. and.",
     "authors": [14, 17, 20],
-    "presenter": 17,
-    "reviewers": [9,7],
-    "date": "2023-2-25"
-
+    "presenterID": 17,
+    "pdfLink": null,
+    "review": [
+      {
+        "reviewerID": 9,
+        "evaluation": null,
+        "contribution": null,
+        "strengths": null,
+        "waknesses": null
+      },
+      {
+        "reviewerID": 7,
+        "evaluation": null,
+        "contribution": null,
+        "strengths": null,
+        "waknesses": null
+      }
+    ]
   },
 
   {
-    "pid": 3,
+    "paperID": 3,
     "title": "The Effect of Div",
     "abstract": "the paper talks about ... and the ... to see if the.. and.",
     "authors": [18, 15],
-    "presenter": 15,
-    "reviewers": [5,6],
-    "date": "2023-4-5"
+    "presenterID": 15,
+    "pdfLink": null,
+    "review": [
+      {
+        "reviewerID": 5,
+        "evaluation": null,
+        "contribution": null,
+        "strengths": null,
+        "waknesses": null
+      },
+      {
+        "reviewerID": 6,
+        "evaluation": null,
+        "contribution": null,
+        "strengths": null,
+        "waknesses": null
+      }
+    ]
   },
 
   {
-    "pid": 4,
+    "paperID": 4,
     "title": "The Master of ML",
     "abstract": "the paper talks about ... and the ... to see if the.. and.",
     "authors": [16, 20, 19],
-    "presenter": 19,
-    "reviewers": [10,12],
-    "date": "2023-4-4"
+    "presenterID": 19,
+    "pdfLink": null,
+    "review": [
+      {
+        "reviewerID": 10,
+        "evaluation": null,
+        "contribution": null,
+        "strengths": null,
+        "waknesses": null
+      },
+      {
+        "reviewerID": 12,
+        "evaluation": null,
+        "contribution": null,
+        "strengths": null,
+        "waknesses": null
+      }
+    ]
   },
 
   {
-    "pid": 5,
+    "paperID": 5,
     "title": "The Human Eye",
     "abstract": "the paper talks about ... and the ... to see if the.. and.",
     "authors": [19, 18],
-    "presenter": 18,
-    "reviewers": [8,12],
-    "date": "2023-3-25"
+    "presenterID": 18,
+    "pdfLink": null,
+    "review": [
+      {
+        "reviewerID": 8,
+        "evaluation": null,
+        "contribution": null,
+        "strengths": null,
+        "waknesses": null
+      },
+      {
+        "reviewerID": 12,
+        "evaluation": null,
+        "contribution": null,
+        "strengths": null,
+        "waknesses": null
+      }
+    ]
   }
 ]
