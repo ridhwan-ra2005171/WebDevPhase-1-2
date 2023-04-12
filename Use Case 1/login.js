@@ -70,15 +70,25 @@ async function findUser(userTocheck) {
     const users  = await (await fetch(usersJson)).json();
     // console.log(users);
     const user = users.find(user=> user['email']==userTocheck.email)
+    if (user!== undefined) {
+        
+    
     if (user.password==userTocheck.password) {
         
         console.log(user.id);
         return user.id
-    } else {
-        //better if it's an html response
-        password.value=null
-        prompt("No email and password combination found, please try again")
-    }
+    } 
+    // else {
+    //     //better if it's an html response
+    //     password.value=null
+    //     prompt("No email and password combination found, please try again")
+    // }
+}
+else {
+    //better if it's an html response
+    password.value=null
+    prompt("No email and password combination found, please try again")
+}
 }
 //load paper data into page
 // async function getPapers(){

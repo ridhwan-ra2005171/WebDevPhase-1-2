@@ -39,7 +39,7 @@
                     <fieldset class="authorsList">
                         <legend for="authors">Authors</legend>
 
-                        <fieldset class="author">
+                        <div class="author" id="1">
                             <legend for="author1">Author 1</legend>
 
                             <label for="authorFirstName"> First name:</label>
@@ -53,16 +53,17 @@
 
                             <label for="institutions"> Affiliation:</label>
                             <select name="institutions" id="institutions">
+                            <option value="" disabled selected>Select your institution</option>
                                 <!-- here to uplaod the institutions -->
                             </select>
                             <br>
 
                             <div class="endButtons">
-                                <input id="addAuthorBt" type="button" class="btn submit-btn" name="addAuthorBt" value="Add Author">
-                                <input id="DeleteAuthorBt" type="button" class="btn submit-btn" name="DeleteAuthorBt" value="Remove Author">
+                                <input id="addButton-1" type="button" class="btn submit-btn addAuthorBt" onclick="addAuthor()" name="addAuthorBt" value="Add Author">
+                                <input id="deleteButton-1" type="button" class="btn submit-btn DeleteAuthorBt" onclick="deleteAuthor(1)"  name="DeleteAuthorBt" value="Remove Author">
                             </div>
                             
-                        </fieldset>
+                        </div>
                         <!-- <fieldset class="author">
                             <legend for="author1">Author 1</legend>
 
@@ -94,6 +95,8 @@
                     <div class="paperDetails"></div>
                     <label for="presenter"> Presenter:</label>
                     <select name="presenter" id="presenter">
+                         <option value="" disabled selected>Choose a presenter</option>
+
                         <!-- here to load the authors from above in a dropdown -->
                     </select>
                     
@@ -114,7 +117,7 @@
     </main>
 
 
-    <script src="login.js"></script>
+    <script src="submit.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
