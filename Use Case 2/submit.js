@@ -1,6 +1,7 @@
 // // Imports
 // const papersUrl = "../../papers.json"; 
 const usersJson = "users.json";
+const institutionsJson = './json/institutions.json'
 
 let papersloc = null;
 let usersloc = null;
@@ -8,15 +9,26 @@ let usersloc = null;
 let currentLogedIn
 
 
-const form = document.querySelector("#loginForm");
-const email = document.querySelector("#email");
-const password = document.querySelector("#password");
-const loginButton = document.querySelector("#login");
+const form = document.querySelector("#submitForm");
+const institutionsList = document.querySelector("#institutions");
 
-form.addEventListener('submit',login)
+// const password = document.querySelector("#password");
+// const loginButton = document.querySelector("#login");
 
+form.addEventListener('submit',submit)
 
+institutionsList.addEventListener('click',loadInstitutions)
 const mainContent = document.getElementById('main-content');
+
+
+
+async function loadInstitutions() {
+    const institutions  = await fetch(institutionsJson).json();
+console.log(institutions);
+
+}
+
+
 
 //to Edit
 async function loadPage(pageUrl) {
@@ -44,26 +56,27 @@ function getFormData(form) {
     return Object.fromEntries(formData.entries());
 }
 
-function login(event) {
-    event.preventDefault()
-    const userTocheck = getFormData(form)
-    currentLogedIn =  findUser(userTocheck)
+// function login(event) {
+//     event.preventDefault()
+//     const userTocheck = getFormData(form)
+//     currentLogedIn =  findUser(userTocheck)
       
-    switch (currentLogedIn.role) {
-        case 'reviewer':
-            loadPage('review.html')
-            break;
-        case 'organizer':
-            loadPage('scheduleEdit.html')
-            break;
-        default://author
-            loadPage('submit.html')
-            break;
-    }
-}
+//     switch (currentLogedIn.role) {
+//         case 'reviewer':
+//             loadPage('review.html')
+//             break;
+//         case 'organizer':
+//             loadPage('scheduleEdit.html')
+//             break;
+//         default://author
+//             loadPage('submit.html')
+//             break;
+//     }
+// }
 
 //gets name about user > returns its id
 //should check also password
+
 async function findUser(userTocheck) {
     // const users = await getData(usersJson);
     // console.log(email);
@@ -80,6 +93,13 @@ async function findUser(userTocheck) {
         prompt("No email and password combination found, please try again")
     }
 }
+
+//insert html data of institution
+
+
+
+
+
 //load paper data into page
 // async function getPapers(){
 //     const papers = await getData(papersUrl);
