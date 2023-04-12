@@ -67,7 +67,7 @@ main {
     flex-direction: column;
 }
 
-main h2 {
+main > h1 {
     padding: 1rem 2rem;
     align-self: center;
     color: #663399;
@@ -85,10 +85,10 @@ main h2 {
     /* display: flex; */
     /* flex-wrap: wrap; */
     /* overflow: scroll; */
-    /* display: grid; */
-    /* grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); */
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    /* display: flex; */
+    /* flex-direction: column; */
     gap: .5rem;
     padding: 0rem 2rem 2rem;
     /* background-color: aliceblue; */
@@ -97,19 +97,19 @@ main h2 {
 
 .card {
     display: flex;
-    /* flex-direction: column; */
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    /* align-items: center; */
     gap: 1rem;
     background-color: white;
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     /* border: indigo 0.2rem solid; */
     /* overflow: hidden; */
     /* text-overflow: ellipsis; */
     /* width: clamp(10rem, 100%, 25rem); */
     /* height: 10rem; */
-    width: 100%;
+    /* width: 100%; */
     box-shadow: rgba(61, 71, 94, 0.1) 0px 4px 12px;
     transition: ease .2s;
 
@@ -125,21 +125,23 @@ main h2 {
 
 .card * {
     /* outline: salmon solid; */
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    /* overflow: hidden; */
+    /* white-space: nowrap; */
+    /* text-overflow: ellipsis; */
     /* width: fit-content; */
 }
 
-.abstract-container {
+.abstract-container p{
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: normal;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    /* -webkit-line-clamp: 10; */
     -webkit-box-orient: vertical;
 }
 
-.card h4 {
-    font-size: 2rem;
+.card h3 {
+    /* font-size: 1rem; */
 }
 
 .card a:hover {

@@ -1,14 +1,34 @@
 // Commonly used URLS 
-let usersUrl = "../../users.json";
-
+let usersUrl = "../../json/users.json";
 // assuming we have the gloabl variable USER_ID
 // we set it to 7 for testing sake only
-const USER_ID = 12;
+const USER_ID = 7;
 
 // Elements from html
 const cardList = document.querySelector("#card-list");
-const body = document.querySelector("body-content")
+const body = document.querySelector("body-content");
+const abstractLinks = document.querySelectorAll("#abstract-link");
 
+console.log(abstractLinks);
+abstractLinks.forEach(e => e.addEventListener('click', function test(event) {
+
+  console.log('box clicked', e);
+  e.setAttribute('style', 'color: yellow;')}));
+
+// abstractContents.forEach(element => {
+//       console.log(element);
+//     if (element.style.display === "none") {
+//       element.style.display = "block";
+//       // caretIcon.className = "fa fa-caret-up";
+//     } else {
+//       element.style.display = "none";
+//       // caretIcon.className = "fa fa-caret-down";
+//     }
+//   });
+
+
+// event listeners
+// abstractLinks.forEach(link => link.addEventListener('click',showAbstract));
 
 // console.log(cardList);
 async function displayPapers(papersUrl) {
@@ -29,9 +49,9 @@ async function displayPapers(papersUrl) {
 
   localStorage.setItem("assignedPapers", JSON.stringify(assignedPapers));
   assignedPapers = JSON.parse(localStorage.assignedPapers);
-  cardList.innerHTML = assignedPapers
-    .map((paper) => cardTemplate(paper))
-    .join("");
+  // cardList.innerHTML = assignedPapers
+  //   .map((paper) => cardTemplate(paper))
+  //   .join("");
 
   // } else {
   // recipe array exists in the local storage, retrieve it
@@ -44,7 +64,7 @@ async function displayPapers(papersUrl) {
 }
 
 function getPaperOfReviewer(paper, reviewerId) {
-  if (paper.reviewers.find((id) => id === reviewerId))
+  if (paper.review.find((elem) => elem.reviewerID === reviewerId))
     // console.log(paper.reviewers.find(id => id===7 ));
     return paper;
 }
@@ -62,6 +82,23 @@ async function loadPage(pageUrl,paperId) {
   // mainContent.innerHTML = pageHTMLContent;
 }
 
+ function showAbstract(e) {
+  // e.preventdefault();
+  const abstractContents =  document.querySelectorAll("#abstract-content");
+  // const caretIcons =  document.querySelectorAll("#caret-icon");
+
+//   abstractContents.forEach(element => {
+//     console.log(element);
+//   if (element.style.display === "none") {
+//     element.style.display = "block";
+//     // caretIcon.className = "fa fa-caret-up";
+//   } else {
+//     element.style.display = "none";
+//     // caretIcon.className = "fa fa-caret-down";
+//   }
+// });
+}
+
 //This is for card template html replacement
 function cardTemplate(paper) {
   // return `<div class="card">
@@ -77,7 +114,7 @@ function cardTemplate(paper) {
   return `
   <div class="card">
       <a href="#" onclick="loadPage('../reviewPaper/reviewPaper.html',${paper.pid})">
-          <h3 id="paper-title">${paper.title}</h3>
+          <h2 id="paper-title">${paper.title}</h2>
       </a>
       <!-- <p class="abstract-container">Abstract Abstract Abstract Abstract
           Abstract Abstract Abstract Abstract
