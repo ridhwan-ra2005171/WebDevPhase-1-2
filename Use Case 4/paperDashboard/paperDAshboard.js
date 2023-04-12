@@ -43,10 +43,10 @@ async function displayPapers(papersUrl) {
   // get only papers that belong to the current reviewer using the global USER_ID
   // console.log(papers);
   assignedPapers = papers.filter((paper) => getPaperOfReviewer(paper, USER_ID));
-  assignedPapers.forEach((p) => console.log(p.authors));
+  // assignedPapers.forEach((p) => console.log(p.authors));
 
-  localStorage.setItem("assignedPapers", JSON.stringify(assignedPapers));
-  assignedPapers = JSON.parse(localStorage.assignedPapers);
+  // localStorage.setItem("assignedPapers", JSON.stringify(assignedPapers));
+  // assignedPapers = JSON.parse(localStorage.assignedPapers);
   cardList.innerHTML = assignedPapers
     .map((paper) => cardTemplate(paper))
     .join("");
