@@ -13,7 +13,7 @@ const abstractLinks = document.querySelectorAll("#abstract-link");
 // console.log(abstractLinks);
 // abstractLinks.forEach(e => e.addEventListener('click', function test(event) {
 
-// console.log('box clicked', e);
+// console.log('box clicked', e);  
 // e.setAttribute('style', 'color: yellow;')}));
 
 // abstractContents.forEach(element => {
