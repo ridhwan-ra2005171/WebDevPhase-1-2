@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "date": "12/3/23",
+    "session": {
+      "id": 1,
+      "title": "myTitle",
+      "location": "BCR",
+      "paperID": "1",
+      "presenterID": "1",
+      "fromTime": "12:00",
+      "endTime": "14:00"
+    }
+  },
+  {
+    "id": 2,
+    "date": "12/3/23",
+    "session": {
+      "id": 1,
+      "title": "myTitle",
+      "location": "BCR",
+      "paperID": "1",
+      "presenterID": "1",
+      "fromTime": "12:00",
+      "endTime": "14:00"
+    }
+  },
+  {
+    "id": 3,
+    "date": "12/3/23",
+    "session": {
+      "id": 1,
+      "title": "myTitle",
+      "location": "BCR",
+      "paperID": "1",
+      "presenterID": "1",
+      "fromTime": "12:00",
+      "endTime": "14:00"
+    }
+  }
+]
