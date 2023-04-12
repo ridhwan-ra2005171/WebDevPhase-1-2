@@ -27,8 +27,10 @@ async function loadPage(){
 //===========================================================================
 //loadSchedules:
 async function loadSchedules() {
-  mySchedules = await (await fetch("../json/schedules.json")).json();
-    localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
+  // mySchedules = await (await fetch("../json/schedules.json")).json();
+ mySchedules = await fetch("../json/schedules.json").then(response => response.json())
+
+  localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
     schedulesContainer.innerHTML = mySchedules
       .map((scheduleId) => scheduleToHTML(scheduleId))
       .join("");
