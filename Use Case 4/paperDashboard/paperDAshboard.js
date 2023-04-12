@@ -2,18 +2,19 @@
 let usersUrl = "../../json/users.json";
 // assuming we have the gloabl variable USER_ID
 // we set it to 7 for testing sake only
-const USER_ID = 7;
-
+const USER_ID = 12;
+// global variables
+// const users = [];
 // Elements from html
 const cardList = document.querySelector("#card-list");
 const body = document.querySelector("body-content");
 const abstractLinks = document.querySelectorAll("#abstract-link");
 
-console.log(abstractLinks);
-abstractLinks.forEach(e => e.addEventListener('click', function test(event) {
+// console.log(abstractLinks);
+// abstractLinks.forEach(e => e.addEventListener('click', function test(event) {
 
-  console.log('box clicked', e);
-  e.setAttribute('style', 'color: yellow;')}));
+  // console.log('box clicked', e);
+  // e.setAttribute('style', 'color: yellow;')}));
 
 // abstractContents.forEach(element => {
 //       console.log(element);
@@ -41,17 +42,18 @@ async function displayPapers(papersUrl) {
   // if the papers dont exist in the local storage,
   papers = await (await fetch(papersUrl)).json();
   // get only papers that belong to the current reviewer using the global USER_ID
-  console.log(papers);
+  // console.log(papers);
   assignedPapers = papers.filter((paper) =>
     getPaperOfReviewer(paper, USER_ID)
   );
-  console.log(assignedPapers);
+  assignedPapers.forEach(p => console.log(p.authors));
 
   localStorage.setItem("assignedPapers", JSON.stringify(assignedPapers));
   assignedPapers = JSON.parse(localStorage.assignedPapers);
-  // cardList.innerHTML = assignedPapers
-  //   .map((paper) => cardTemplate(paper))
-  //   .join("");
+  cardList.innerHTML = assignedPapers
+    .map((paper) => cardTemplate(paper))
+    .join("");
+
 
   // } else {
   // recipe array exists in the local storage, retrieve it
@@ -62,6 +64,7 @@ async function displayPapers(papersUrl) {
   //   .join("");
   // }
 }
+
 
 function getPaperOfReviewer(paper, reviewerId) {
   if (paper.review.find((elem) => elem.reviewerID === reviewerId))
@@ -101,29 +104,29 @@ async function loadPage(pageUrl,paperId) {
 
 //This is for card template html replacement
 function cardTemplate(paper) {
-  // return `<div class="card">
-  //         <a href="#" onclick="loadPage('../reviewPaper/reviewPaper.html',this.id)">
-  //             <h4 id="title-cont">${paper.title}</h4>
-  //         </a>
-  //         <p id="abstract-container" class="abstract-container">
-  //           ${paper.abstract}
-  //         </p>
-  //         <p>${paper.filter()}</p>
-  //         <p>dd-MM-yyyy . HH:MM</p>
-  //       </div>`;
+
   return `
   <div class="card">
-      <a href="#" onclick="loadPage('../reviewPaper/reviewPaper.html',${paper.pid})">
+      <a href="#" onclick="loadPage('../reviewPaper/reviewPaper.html',${paper.paperID})">
           <h2 id="paper-title">${paper.title}</h2>
       </a>
-      <!-- <p class="abstract-container">Abstract Abstract Abstract Abstract
-          Abstract Abstract Abstract Abstract
-          Abstract Abstract Abstract Abstract
-          Abstract Abstract Abstract Abstract
-          Abstract Abstract Abstract Abstract
-      </p> -->
-      <p id="paper-authors">${paper.authors.filter(auth => {auth}).join(";")}</p>
-      <p id="paper-date">${paper.date}</p>
-      <!-- <i class="fa fa-"></i> -->
+      
+      <section class="abstract-container">
+        <a id="abstract-link" href="#" >
+          <h3>Abstract <i id="caret-icon" class="fa fa-caret-up"></i></h3>  
+        </a>
+      </section>
+        <p id="abstract-content" class="abstract-content">${paper.abstract}</p>
+        <p id="paper-authors">${paper.authors.map(authorID => getAuthorName(authorID)).join(",&nbsp &nbsp")}</p> 
+
   </div>`;
 }
+
+
+function getAuthorName(authorID) {
+  const users = JSON.parse(localStorage.usersloc);
+  const foundAuthor = users.find(user=> user.id === authorID)
+  return `${foundAuthor.first_name} ${foundAuthor.last_name}`;
+}
+
+console.log(getAuthorName(17));
