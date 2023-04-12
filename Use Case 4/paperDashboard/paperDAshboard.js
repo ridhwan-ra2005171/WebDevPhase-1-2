@@ -50,7 +50,6 @@ async function displayPapers(papersUrl) {
   cardList.innerHTML = assignedPapers
     .map((paper) => cardTemplate(paper))
     .join("");
-
   // } else {
   // recipe array exists in the local storage, retrieve it
   // papersloc = JSON.parse(localStorage.papersloc);
