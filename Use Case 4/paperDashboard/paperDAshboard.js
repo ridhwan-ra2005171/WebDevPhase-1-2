@@ -1,4 +1,4 @@
-// Commonly used URLS 
+// Commonly used URLS
 let usersUrl = "../../json/users.json";
 // assuming we have the gloabl variable USER_ID
 // we set it to 7 for testing sake only
@@ -13,8 +13,8 @@ const abstractLinks = document.querySelectorAll("#abstract-link");
 // console.log(abstractLinks);
 // abstractLinks.forEach(e => e.addEventListener('click', function test(event) {
 
-  // console.log('box clicked', e);
-  // e.setAttribute('style', 'color: yellow;')}));
+// console.log('box clicked', e);
+// e.setAttribute('style', 'color: yellow;')}));
 
 // abstractContents.forEach(element => {
 //       console.log(element);
@@ -27,15 +27,14 @@ const abstractLinks = document.querySelectorAll("#abstract-link");
 //     }
 //   });
 
-
 // event listeners
 // abstractLinks.forEach(link => link.addEventListener('click',showAbstract));
 
 // console.log(cardList);
 async function displayPapers(papersUrl) {
   // window.location = "../reviewPaper/reviewPaper.html";
-  users  = await (await fetch(usersUrl)).json();
-  localStorage.setItem('usersloc',JSON.stringify(users));
+  users = await (await fetch(usersUrl)).json();
+  localStorage.setItem("usersloc", JSON.stringify(users));
   // console.log(localStorage.usersloc);
   // check if papers belonging to this current reviewer are in local storage
   // if (!localStorage.papersloc || (parseInt(localStorage.papersloc[0].pid) !== parseInt(USER_ID))) {
@@ -43,17 +42,14 @@ async function displayPapers(papersUrl) {
   papers = await (await fetch(papersUrl)).json();
   // get only papers that belong to the current reviewer using the global USER_ID
   // console.log(papers);
-  assignedPapers = papers.filter((paper) =>
-    getPaperOfReviewer(paper, USER_ID)
-  );
-  assignedPapers.forEach(p => console.log(p.authors));
+  assignedPapers = papers.filter((paper) => getPaperOfReviewer(paper, USER_ID));
+  assignedPapers.forEach((p) => console.log(p.authors));
 
   localStorage.setItem("assignedPapers", JSON.stringify(assignedPapers));
   assignedPapers = JSON.parse(localStorage.assignedPapers);
   cardList.innerHTML = assignedPapers
     .map((paper) => cardTemplate(paper))
     .join("");
-
 
   // } else {
   // recipe array exists in the local storage, retrieve it
@@ -65,67 +61,75 @@ async function displayPapers(papersUrl) {
   // }
 }
 
-
 function getPaperOfReviewer(paper, reviewerId) {
   if (paper.review.find((elem) => elem.reviewerID === reviewerId))
     // console.log(paper.reviewers.find(id => id===7 ));
     return paper;
 }
 
-async function loadPage(pageUrl,paperId) {
-  localStorage.setItem('paperAtm',String(paperId))
+async function loadPage(pageUrl, paperId) {
+  localStorage.setItem("paperAtm", String(paperId));
   console.log(localStorage.paperAtm);
   window.location.href = pageUrl;
   // const page = await fetch(pageUrl);
   // body.innerHTML = page.text();
-
 
   // const mainContent = document.querySelector("#main-content");
   // const pageHTMLContent = await page.text();
   // mainContent.innerHTML = pageHTMLContent;
 }
 
- function showAbstract(e) {
+function showAbstract(e) {
   // e.preventdefault();
-  const abstractContents =  document.querySelectorAll("#abstract-content");
+  const abstractContents = document.querySelectorAll("#abstract-content");
   // const caretIcons =  document.querySelectorAll("#caret-icon");
 
-//   abstractContents.forEach(element => {
-//     console.log(element);
-//   if (element.style.display === "none") {
-//     element.style.display = "block";
-//     // caretIcon.className = "fa fa-caret-up";
-//   } else {
-//     element.style.display = "none";
-//     // caretIcon.className = "fa fa-caret-down";
-//   }
-// });
+  //   abstractContents.forEach(element => {
+  //     console.log(element);
+  //   if (element.style.display === "none") {
+  //     element.style.display = "block";
+  //     // caretIcon.className = "fa fa-caret-up";
+  //   } else {
+  //     element.style.display = "none";
+  //     // caretIcon.className = "fa fa-caret-down";
+  //   }
+  // });
 }
 
 //This is for card template html replacement
 function cardTemplate(paper) {
-
   return `
   <div class="card">
-      <a href="#" onclick="loadPage('../reviewPaper/reviewPaper.html',${paper.paperID})">
+      <a href="#" onclick="loadPage('../reviewPaper/reviewPaper.html',${
+        paper.paperID
+      })" 
+      class="link">
           <h2 id="paper-title">${paper.title}</h2>
       </a>
       
+      <section class="authors-container">
+      <h3>Authors:</h3>
+      <p id="paper-authors">${paper.authors
+        .map((authorID) => getAuthorName(authorID))
+        .join(",&nbsp &nbsp")}</p> 
+    </section>
+    
       <section class="abstract-container">
-        <a id="abstract-link" href="#" >
+        <a id="abstract-link" href="#" class="link">
           <h3>Abstract <i id="caret-icon" class="fa fa-caret-up"></i></h3>  
         </a>
-      </section>
         <p id="abstract-content" class="abstract-content">${paper.abstract}</p>
-        <p id="paper-authors">${paper.authors.map(authorID => getAuthorName(authorID)).join(",&nbsp &nbsp")}</p> 
+      </section>
+      
+     
+
 
   </div>`;
 }
 
-
 function getAuthorName(authorID) {
   const users = JSON.parse(localStorage.usersloc);
-  const foundAuthor = users.find(user=> user.id === authorID)
+  const foundAuthor = users.find((user) => user.id === authorID);
   return `${foundAuthor.first_name} ${foundAuthor.last_name}`;
 }
 

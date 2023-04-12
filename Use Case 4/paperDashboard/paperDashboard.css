@@ -123,12 +123,12 @@ main > h1 {
     box-shadow: rgba(61, 71, 94, 0.1) 0px 10px 15px;
 }
 
-.card * {
-    /* outline: salmon solid; */
-    /* overflow: hidden; */
-    /* white-space: nowrap; */
-    /* text-overflow: ellipsis; */
-    /* width: fit-content; */
+#paper-title {
+    text-decoration: underline;
+}
+
+.card h3 {
+    font-weight: 500;
 }
 
 .abstract-container p{
@@ -140,8 +140,12 @@ main > h1 {
     -webkit-box-orient: vertical;
 }
 
-.card h3 {
-    /* font-size: 1rem; */
+#abstract-link {
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #9432be;
 }
 
 .card a:hover {
