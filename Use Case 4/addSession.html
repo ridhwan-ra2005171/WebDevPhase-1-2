@@ -1,15 +1,64 @@
-<form id="add-conference-form" >
-    <link rel="stylesheet" href="addSession.css">
+<form id="add-conference-form">
+  <link rel="stylesheet" href="addSession.css" />
 
+  <fieldset id="schedForm">
+    <legend><strong>Create Schedule</strong></legend>
 
-    <fieldset>
-        <legend><strong>Create Session</strong></legend>
+    <div class="conf-date">
+      <label for="cDate">Conference Date:</label>
+      <select name="cDate" id="cDa" aria-placeholder="Hello" onchange="">
+        <option value="" selected disabled>-Select Conference Date-</option>
+      </select>
+    </div>
+    <br />
+    <form id="session-form">
+        <fieldset id="sessionform1">
+            <legend>Create Sessions</legend>
+            <div class="session-form">
+              <label>Select Paper:</label>
+              <select name="paper" id="paper" onchange="">
+                <option value="" selected disabled>-Select Paper-</option>
+              </select>
+              <br />
+      
+              <label>Select Presenter:</label>
+              <select name="presenter" id="presenter" onchange="">
+                <option value="" selected disabled>-Select Presenter-</option>
+              </select>
+              <br />
+      
+              <label>Select Location:</label>
+              <select
+                name="location"
+                id="location"
+                aria-placeholder="Hello"
+                onchange=""
+              >
+                <option value="" selected disabled>-Select Presenter-</option>
+              </select>
+              <br />
+              <br />
+              <div class="timeform">
+                <label for="fromTime"
+                  >Start Time: <input type="time" name="fromTime" id="fromTime"
+                /></label>
+      
+                <label for="endTime"
+                  >End Time: <input type="time" name="endTime" id="endTime" />
+                </label>
+              </div>
+            </div>
+          </fieldset>
+    </form>
     
-    <div class="titlename">
-        <label for="tName">Name of Conference:</label>
-                    <input type="text" name="tName" id="tName" placeholder="Conference Name" required><br><br>    
-    </div>    
-    <div class="form-group">
+    <script src="addSession.js"></script>
+
+  </fieldset>
+  <button class="addMore" onclick="addMoreSession()">Add More Sessions</button>
+  <input type="submit" id="add-recipe-btn" value="Submit Conference Schedule" />
+</form>
+
+<!-- <div class="form-group">
             <label>Select Paper:</label>
             <select name="country" 
             id="country" 
@@ -38,15 +87,7 @@
     
 </div>
 <br>
-    <div class="formgroup">
-        <label for="date">Date of Event:</label>
-        <input type="date" id="date" name="date" required>
-    <br>
-
     <div class="titlename">
         <label for="tName">Location:</label>
                     <input type="text" name="locName" id="locName" placeholder="Enter Location" required><br><br>    
-    </div>
-</fieldset>
-<input type="submit" id="add-recipe-btn" value="Submit Conference Schedule">
-</form>
+    </div> -->

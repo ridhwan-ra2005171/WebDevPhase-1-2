@@ -62,7 +62,7 @@ ul {
 /* confrence navigation */
 
 
-.conference-card{
+.conference-card, .schedules{
     display: grid;
     width: clamp(10rem, 85vw, 60rem);
     max-height: 10rem;    

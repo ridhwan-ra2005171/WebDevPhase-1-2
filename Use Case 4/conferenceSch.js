@@ -2,7 +2,7 @@
 //also the conference
 
 let mySchedules= [];
-const schedulesContainer = document.querySelector("#schedules");
+const schedulesContainer = document.querySelector(".conf-card");
 
 
 //to check if i can fetch the schedules: =====================================
@@ -50,6 +50,7 @@ function loadSessions(session){
 }
 
 function scheduleToHTML(schedule){
+  console.log("sched: ", schedule);
   return `
   <div class="conf-card">
   <a href="#"><h4>${schedule.date}</h4></a>
@@ -64,7 +65,7 @@ function scheduleToHTML(schedule){
         </tr>
       </thead>
       <tbody>
-      ${schedule.map(session => loadSessions(session))}
+      ${schedule.sessions.map(session => loadSessions(session)).join("")}
       </tbody>
       </table>
 </div>
