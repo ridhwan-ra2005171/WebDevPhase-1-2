@@ -1,6 +1,4 @@
 
-//=========================
-//THIS IS JUST TO ADD MORE SESSION INSIDE SCHEDULE
 var counter= 1;
 async function addMoreSession(){
     counter+=1
@@ -37,7 +35,7 @@ async function addMoreSession(){
         </label>\
       </div>\
     </div>\
-  </fieldset>\<br />\<br />\
+  </fieldset>\
     '
    
     var form = await document.getElementById('schedForm')
