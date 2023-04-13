@@ -10,6 +10,7 @@ fetch("../json/schedules.json").then(response => response.json()).then(data => s
 
 function showInfo(data){
   console.table(data)
+  console.log(data[0].sessions[1].title)
 }
 //============================================================================
 
@@ -32,14 +33,26 @@ async function loadSchedules() {
 
   localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
     schedulesContainer.innerHTML = mySchedules
-      .map((scheduleId) => scheduleToHTML(scheduleId))
+      .map((schedule) => scheduleToHTML(schedule))
       .join("");
+}
+
+function loadSessions(session){
+  return `
+  <tr>
+          <td>${session.fromTime}-${session.endTime}</td>
+          <td>${session.title}</td>
+          <td>${session.presenterID}</td>
+          <!-- <td>PaperTrusting Decentralised Knowledge Graphs and Web Data</td> -->
+          <td>${session.location}</td>
+        </tr>
+  `
 }
 
 function scheduleToHTML(schedule){
   return `
   <div class="conf-card">
-  <a href="#"><h4>${schedule.Date}</h4></a>
+  <a href="#"><h4>${schedule.date}</h4></a>
   <table style="text-align: center;">
       <thead>
         <tr>
@@ -51,13 +64,7 @@ function scheduleToHTML(schedule){
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>12:00 -14:00</td>
-          <td>${schedule.sessions.title}</td>
-          <td>${schedule.sessions.presenterID}</td>
-          <!-- <td>PaperTrusting Decentralised Knowledge Graphs and Web Data</td> -->
-          <td>${schedule.sessions.location}</td>
-        </tr>
+      ${schedule.map(session => loadSessions(session))}
       </tbody>
       </table>
 </div>

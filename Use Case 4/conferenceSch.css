@@ -129,6 +129,10 @@ main h2 {
     font-size: 2rem;
 }
 
+table{
+    font-size: 0.75em;
+}
+
 /* .card a:hover {
     text-decoration: underline;
 } */
