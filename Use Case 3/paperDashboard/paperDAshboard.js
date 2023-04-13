@@ -111,12 +111,12 @@ function getAuthorName(authorID) {
 // HTML for the paper card
 function cardTemplate(paper) {
 
+  const link = "https://www.africau.edu/images/default/sample.pdf";
   return `
 <div class="card">
-  <a href="#"  class="link">
-    <h2 id="paper-title">${paper.title}</h2>
-  </a>
-
+  
+  <h2 id="paper-title">${paper.title}</h2>
+  
   <section class="authors-container">
     <h3>Authors:</h3>
     <p id="paper-authors">
@@ -132,7 +132,7 @@ function cardTemplate(paper) {
     <p id="abstract-content" class="abstract-content">${paper.abstract}</p>
   </section>
   <footer id="card-footer" class="card-footer">
-    <a id="download-link" class="download-link link">Download Paper &nbsp<i class="fa fa-arrow-down"></i></a>
+    <a href="${link}" id="download-link" class="download-link link" download >Download Paper &nbsp<i class="fa fa-arrow-down"></i></a>
     <button id="reviewButton" class="btn reviewButton" onclick="loadPage('../reviewPaper/reviewPaper.html','${paper.paperID}')">Review</button>
   </footer>
 </div>`;

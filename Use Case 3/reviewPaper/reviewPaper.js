@@ -1,10 +1,14 @@
 // Imports
+// import * as fs from 'fs';
+
 const papersUrl = "../../papers.json";
 const usersUrl = "../../users.json";
 
 // assuming we have the global variable USER_ID
 // we set it to 12 for testing purpose only
+// global variables
 const USER_ID = 12;
+let submitClicked = false; // this is to check if the submit button was clicked
 
 // elements
 const paperCont = document.querySelector("#paper-cont");
@@ -15,9 +19,9 @@ const paperTitle = document.querySelector("#title");
 const paperAuthors = document.querySelector("#authors");
 const paperPresenter = document.querySelector("#presenter");
 const paperAbstract = document.querySelector("#abstract");
+
 // Form
 const form = document.querySelector("#myForm");
-// console.log(form);
 
 // buttons
 const backBtn = document.querySelector("#go-back");
@@ -26,6 +30,8 @@ const submitBtn = document.querySelector("#submit");
 // Event listeners for buttons
 backBtn.addEventListener("click", returnToPrevPage);
 form.addEventListener("submit", storeForm);
+// check if the submit button was clicked, this will be used in returnToPrevPage() function
+submitBtn.addEventListener("click", function(){submitClicked = true;}) 
 
 //load paper
 // async function laodPaper() {
@@ -64,46 +70,35 @@ form.addEventListener("submit", storeForm);
 // return to previous page
 
 // Alerts using sweet alert ==================================
-async function returnToPrevPage(e) {
-  e.preventDefault();
-  let result = await swal({
-    title: "Your changes will not be saved!",
-    dangerMode: true,
-    icon: "error",
-    buttons: ["Cancel", "Proceed"],
-  });
-  if (result === true) {
-    location.href = "../paperDashboard/paperDashboard.html";
-  }
-}
 
-async function cancelReview(e) {
-  e.preventDefault();
-  // alert("Are you sure you want to cancel?")
-  let result = await swal({
-    title: "Are you sure you want to cancel?",
-    icon: "warning",
-    buttons: ["No, stay", "Yes, cancel"],
-  });
-  if (result === true) {
-    location.href = "../paperDashboard/paperDashboard.html";
-  }
-}
+
+// async function cancelReview(e) {
+//   e.preventDefault();
+//   // alert("Are you sure you want to cancel?")
+//   let result = await swal({
+//     title: "Are you sure you want to cancel?",
+//     icon: "warning",
+//     buttons: ["No, stay", "Yes, cancel"],
+//   });
+//   if (result === true) {
+//     location.href = "../paperDashboard/paperDashboard.html";
+//   }
+// }
 
 // Dealing with the form
 async function storeForm(e) {
   e.stopPropagation();
   e.preventDefault();
+
+  // form inputs retrieval 
+  const reviewerID = USER_ID;
   const evaluation = document.querySelector('input[name="evaluation"]:checked').value;
   const contribution = document.querySelector('input[name="contribution"]:checked').value;
   const strengths = document.querySelector("#paper-strengths").value;
   const weaknesses = document.querySelector("#paper-weakness").value;
 
-  console.log("Eval: ", evaluation);
-  console.log("Cont: ", contribution)
-
   const reviewedPaper = {
-      "reviewerID": USER_ID,
+      "reviewerID": reviewerID,
       "evaluation": evaluation,
       "contribution": contribution,
       "strengths": strengths,
@@ -111,15 +106,26 @@ async function storeForm(e) {
   };
 
   // store the reviewPaper in the papers.json
-  console.log(reviewedPaper);
-  const papers = localStorage.papersloc;
+  const papers = JSON.parse(localStorage.papersloc);
 
   // get the paper ID from local storage
-  const paperID = parseInt(JSON.parse(localStorage.paperAtm));
-  console.log(paperID);
-  console.log(parseInt(paperID));
+  const targetPaperID = parseInt(JSON.parse(localStorage.paperAtm));
+  console.log(targetPaperID);
   
-  // find the index inside the review array that exists in paper object
+  // find the index of paper first
+  const paperIndex = papers.findIndex(paper => paper.paperID === targetPaperID);
+  console.log(papers[paperIndex]);
+
+  // find the index inside the review array that exists in targetPaper, so that we can replace the old review with the new one
+  const reviewIndex = papers[paperIndex].review.findIndex(elem => elem.reviewerID === reviewerID)
+  console.log(papers[paperIndex].review[reviewIndex]);
+
+  // now replace the old review with the new review aka reviewedPaper
+  papers[paperIndex].review[reviewIndex] = reviewedPaper;
+
+  //save into localStorage
+  localStorage.papersloc = JSON.stringify(papers);
+
 
   // Confirmation of review submission
     // let result = await swal({
@@ -183,3 +189,23 @@ async function storeForm(e) {
 
 // const test = papers[0].authors;
 // console.log(papers);
+
+
+async function returnToPrevPage(e) {
+  e.preventDefault();
+  if (submitClicked === false) {
+    let result = await swal({
+      title: "Your changes will not be saved!",
+      dangerMode: true,
+      icon: "error",
+      buttons: ["Cancel", "Proceed"],
+    });
+    if (result === true) {
+      location.href = "../paperDashboard/paperDashboard.html";
+    }
+  } else {
+    location.href = "../paperDashboard/paperDashboard.html";
+  }
+  
+}
+
