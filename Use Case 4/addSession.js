@@ -6,7 +6,6 @@ async function addMoreSession(){
     counter+=1
     html= '<fieldset id="sessionform1">\
     <legend>Create Sessions</legend>\
-    <div class="session-form'+counter+'>\
       <label>Select Paper:</label>\
       <select name="paper'+counter+'" id="paper" onchange="">\
         <option value="" selected disabled>-Select Paper-</option>\
@@ -21,7 +20,6 @@ async function addMoreSession(){
       <select\
         name="location'+counter+'"\
         id="location"\
-        aria-placeholder="Hello"\
         onchange=""\
       >\
         <option value="" selected disabled>-Select Presenter-</option>\
