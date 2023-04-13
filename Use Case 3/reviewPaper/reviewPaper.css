@@ -34,13 +34,12 @@ ul {
 }
 
 .nav-bar {
-    /* font-family: inherit; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     /* to make the nav bar stick to the top of the page on scroll ++++++++++ */
-    /* position: -webkit-sticky; */
-    /* position: sticky; */
+    position: -webkit-sticky;
+    position: sticky;
     top: 0;
     z-index: 5; /*T o make sure that the nav bar is always the top most element*/
     /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -58,100 +57,124 @@ ul {
 
 /*========= End of navigation content ============*/
 
-.grey {
-    color: grey;
-    font-weight: 400;
+
+body {
+    background-color: #f4f4f4;
 }
 
 main {
-    padding: 2rem;
-}
-
-article {
     display: flex;
     flex-direction: column;
 }
 
- .btn{
-    color: white;
-    font-family: inherit;
-    /* display: block; */
-    padding: 0.6rem 1rem;
-    border: none;
-    border-radius: .7rem;
-    background-color: rebeccapurple;
-    /* cursor:pointer; */
-
+main > h1 {
+    padding: 1rem 2rem;
+    align-self: center;
+    color: #663399;
+    color: #4d0099;
 }
 
-.btn:hover {
-    background-color: rgb(172, 117, 226);
-    border: 0.2rem solid rebeccapurple;
-    font-weight: 1000;
-    color: rebeccapurple;
-    padding: 0.4rem 0.8rem;
+.break-line {
+    border-bottom: solid #D6C5E5;
+    width: 90vw;
+    place-self: center;
+    /* margin: 2rem 0rem; */
 }
-/* 
-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: solid ;
-} */
 
-fieldset {
+.card-list {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* overflow: scroll; */
     display: grid;
-    /* grid-template-columns: 1fr 1fr; */
-    /* grid-template-rows: 1fr 1fr auto; */
-    
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* display: flex; */
     /* flex-direction: column; */
-    gap: 1rem;
-    padding:1rem;
-    border-radius: 1rem;
-    border: solid 2px #D6C5E5;
-    /* max-width: 100vw; */
-}
-
-fieldset legend {
-    /* margin: 1rem; */
-    padding: 0rem 1rem ;
-}
-
-fieldset textarea {
-    /* margin-bottom: .3rem; */
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    margin-top: 1rem;
-    padding: .3rem;
-    width: 100%;
-    border-radius: .7rem;
-    border: solid 2px #D6C5E5;
+    gap: .5rem;
+    padding: 0rem 2rem 2rem;
+    /* background-color: aliceblue; */
 
 }
 
-.buttons {
+.card {
     display: flex;
-    gap: 10%;
-    /* place-items: center; */
-    /* place-content: center; */
-    justify-content: center;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    gap: 1rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    /* border: indigo 0.2rem solid; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* width: clamp(10rem, 100%, 25rem); */
+    /* height: 10rem; */
+    /* width: 100%; */
+    box-shadow: rgba(61, 71, 94, 0.1) 0px 4px 12px;
+    transition: ease .2s;
+
 }
 
-.buttons * {
-    /* width: fit-content; */
-    width: 9rem;
+.card:hover {
+    /* transform: translateY(-10px); */
+    transform: scale(102%);
+    /* background-color: #f2f9fe; */
+    /* border: solid rebeccapurple 1px; */
+    box-shadow: rgba(61, 71, 94, 0.1) 0px 10px 15px;
 }
 
-input[type="reset"] {
-    background-color: #D6C5E5;
-    color: rebeccapurple;
-    font-weight: 800;
+#paper-title {
+    text-decoration: underline;
 }
-button, input[type="submit"], input[type="radio"], input[type="reset"] {
-    cursor:pointer;
+
+.card h3 {
+    font-weight: 500;
+}
+
+.abstract-container p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    /* -webkit-line-clamp: 10; */
+    -webkit-box-orient: vertical;
 }
 
 
-@media screen and (min-width: 700px) {
-    
+.card-footer {
+    border-top: #e2cdf7 solid ;
+    padding-top: .7rem;
+    /* background-color: #663399; */
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
+
+.reviewButton {
+    background-color: #663399;
+    color: #f4f4f4;
+    padding: .5rem 2rem;
+    border-radius: .5rem;
+    border: none;
+    /* width:; */
+}
+
+.reviewButton:hover {
+    cursor: pointer;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #9432be;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+

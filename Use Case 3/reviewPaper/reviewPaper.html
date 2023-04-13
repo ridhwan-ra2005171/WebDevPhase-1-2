@@ -5,98 +5,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review Paper</title>
+    <title>Conf Plus</title>
+
     <!-- New Google font: Roboto Slab --> <!--FONT-->
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <!-- // link  to CSS -->
+
     <link rel="stylesheet" href="reviewPaper.css">
+
 </head>
 
-<body id="review-container">
+<body id="body-content" onload="displayPapers('../../json/papers.json')">
     <header>
         <nav class="nav-bar">
             <div class="logo">
                 <img src="../../img/ConfPlus logo.png" alt="Conf Plus Logo">
+
             </div>
-            <button id="go-back" class="btn">Go Back</button>
+            <ul>
+                <li><a class="nav-link grey" href="#">Home</a></li>
+                <li><a class="nav-link grey" href="#">Review</a></li>
+                <li><a class="nav-link grey" href="#">Help</a></li>
+            </ul>
+            <a href="#">username</a>
         </nav>
     </header>
 
-    <main>
-        <!-- <article id="paper-cont"> -->
+    <!-- <header></header> -->
 
-            <!-- <div class="title-cont">
-                <h3 class="grey">Title: </h3>
-                <h2 id="title"></h2>
-            </div>
-            <br>
+    <main id="main-content">
+        <h1>Papers to Review</h1>
+        <div id="for-review-list" class="card-list" >
+        </div> 
 
-            <div class="author-cont">
-                <h3 class="grey">Authors: </h3>
-                <p id="authors"></p>
-            </div>
-            <br> -->
+        <div class="break-line"></div>        
 
-            <!-- <div class="presenter-cont">
-                <h3>Presenter: </h3>
-                <p id="presenter"></p>
-            </div> -->
-            <!-- <br> -->
-            <div class="abstract-cont">
-                <!-- <h3 class="grey">Abstract</h3>
-                <p id="abstract"></p>
-            </div>
-            <br> -->
-        <!-- </article> -->
-        <!-- // =========================================================================== -->
-        <form id="myForm">
-            <fieldset>
-                <legend>Review</legend>
-
-                <h3>Overall Evaluation: </h3>
-                <label for="evaluation">
-                    <input type="radio" name="evaluation" value="2" required> Strong Accept
-                    <br><input type="radio" name="evaluation" value="1"> Accept
-                    <br><input type="radio" name="evaluation" value="0"> Borderline
-                    <br><input type="radio" name="evaluation" value="-1"> Reject
-                    <br><input type="radio" name="evaluation" value="-2"> Strong Reject
-                </label>
-
-                <h3>Paper contribution: </h3>
-                <label for="">
-                    <input type="radio" id="contribution" name="contribution" value="5" required> major and significant
-                    contribution
-                    <br><input type="radio" id="contribution" name="contribution" value="4" > clear contribution
-                    <br><input type="radio" id="contribution" name="contribution" value="3"> minor contribution
-                    <br><input type="radio" id="contribution" name="contribution" value="2"> no obvious contribution
-                    <br><input type="radio" id="contribution" name="contribution" value="1"> no contribution
-                </label>
-
-                <label for="strnegths">
-                    <h3>Paper strengths: </h3>
-                    <textarea name="paper-strengths" id="paper-strengths" cols="50" rows="5" required></textarea>
-                </label>
-
-                <label for="weakness">
-                    <h3>Paper weaknesses: </h3>
-                    <textarea name="paper-weakness" id="paper-weakness" cols="50" rows="5" required></textarea>
-                </label>
-
-                <div class="buttons">
-                        <input id="submit" type="submit" class="btn submit-btn" name="submit" value="Submit">
-                        <input id="reset" type="reset" class="btn reset-btn" name="reset" value="Reset">
-                </div>
-
-
-            </fieldset>
-        </form>
+        <!-- <h1>Submitted Reviews</h1>
+        <div id="reviewed-list" class="card-list" >
+        </div>  -->
     </main>
 
-
-    <script type="module" src="reviewPaper.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <script src="reviewPaper.js"></script>
+    <!-- Load the script of review papers so it can be used in loadPaper() function -->
+    <!-- <script src="../reviewPaper/reviewPaper.js"></script> -->
 
 </body>
 

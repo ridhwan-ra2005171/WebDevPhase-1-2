@@ -11,7 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <!-- // link  to CSS -->
-    <link rel="stylesheet" href="reviewPaper.css">
+    <link rel="stylesheet" href="reviewForm.css">
 </head>
 
 <body id="review-container">
@@ -65,7 +65,7 @@
                 </label>
 
                 <h3>Paper contribution: </h3>
-                <label for="contribution">
+                <label for="">
                     <input type="radio" id="contribution" name="contribution" value="5" required> major and significant
                     contribution
                     <br><input type="radio" id="contribution" name="contribution" value="4" > clear contribution
@@ -79,19 +79,14 @@
                     <textarea name="paper-strengths" id="paper-strengths" cols="50" rows="5" required></textarea>
                 </label>
 
-                <label for="weakness">
-                    <h3>Paper weakness: </h3>
-                    <textarea name="paper-weakness" id="paper-weakness" cols="50" rows="5" required></textarea>
+                <label for="weaknesses">
+                    <h3>Paper weaknesses: </h3>
+                    <textarea name="paper-weaknesses" id="paper-weaknesses" cols="50" rows="5" required></textarea>
                 </label>
 
                 <div class="buttons">
-                    <div class="primary">
                         <input id="submit" type="submit" class="btn submit-btn" name="submit" value="Submit">
-                    </div>
-                    <div class="secondary">
                         <input id="reset" type="reset" class="btn reset-btn" name="reset" value="Reset">
-                        <button id="cancel" class="btn">Cancel</button>
-                    </div>
                 </div>
 
 
@@ -100,7 +95,7 @@
     </main>
 
 
-    <script src="reviewPaper.js"></script>
+    <script type="module" src="reviewForm.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>

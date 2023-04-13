@@ -8,18 +8,10 @@
     "pdfLink": null,
     "review": [
       {
-        "reviewerID": 7,
-        "evaluation": null,
-        "contribution": null,
-        "strengths": null,
-        "waknesses": null
+        "reviewerID": 7
       },
       {
-        "reviewerID": 11,
-        "evaluation": null,
-        "contribution": null,
-        "strengths": null,
-        "waknesses": null
+        "reviewerID": 11
       }
     ]
   },
@@ -33,18 +25,10 @@
     "pdfLink": null,
     "review": [
       {
-        "reviewerID": 9,
-        "evaluation": null,
-        "contribution": null,
-        "strengths": null,
-        "waknesses": null
+        "reviewerID": 9
       },
       {
-        "reviewerID": 7,
-        "evaluation": null,
-        "contribution": null,
-        "strengths": null,
-        "waknesses": null
+        "reviewerID": 7
       }
     ]
   },
@@ -58,18 +42,10 @@
     "pdfLink": null,
     "review": [
       {
-        "reviewerID": 5,
-        "evaluation": null,
-        "contribution": null,
-        "strengths": null,
-        "waknesses": null
+        "reviewerID": 5
       },
       {
-        "reviewerID": 6,
-        "evaluation": null,
-        "contribution": null,
-        "strengths": null,
-        "waknesses": null
+        "reviewerID": 6
       }
     ]
   },
@@ -83,18 +59,10 @@
     "pdfLink": null,
     "review": [
       {
-        "reviewerID": 10,
-        "evaluation": null,
-        "contribution": null,
-        "strengths": null,
-        "waknesses": null
+        "reviewerID": 10
       },
       {
-        "reviewerID": 12,
-        "evaluation": null,
-        "contribution": null,
-        "strengths": null,
-        "waknesses": null
+        "reviewerID": 12
       }
     ]
   },
@@ -108,11 +76,7 @@
     "pdfLink": null,
     "review": [
       {
-        "reviewerID": 8,
-        "evaluation": null,
-        "contribution": null,
-        "strengths": null,
-        "waknesses": null
+        "reviewerID": 8
       },
       {
         "reviewerID": 12
