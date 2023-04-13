@@ -86,7 +86,7 @@ main > h1 {
     /* flex-wrap: wrap; */
     /* overflow: scroll; */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     /* display: flex; */
     /* flex-direction: column; */
     gap: .5rem;
@@ -140,14 +140,41 @@ main > h1 {
     -webkit-box-orient: vertical;
 }
 
-#abstract-link {
+
+.card-footer {
+    border-top: #e2cdf7 solid ;
+    padding-top: .7rem;
+    /* background-color: #663399; */
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.reviewButton {
+    background-color: #663399;
+    color: #f4f4f4;
+    padding: .5rem 2rem;
+    border-radius: .5rem;
+    border: none;
+    /* width:; */
+}
+
+.reviewButton:hover {
+    cursor: pointer;
+}
+
+.link {
     text-decoration: none;
 }
 
 .link:hover {
     color: #9432be;
+    cursor: pointer;
+    text-decoration: none;
+
 }
 
 .card a:hover {
     text-decoration: underline;
 }
+

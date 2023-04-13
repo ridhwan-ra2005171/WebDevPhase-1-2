@@ -87,6 +87,8 @@ article {
 .btn:hover {
     background-color: rgb(172, 117, 226);
     border: 0.2rem solid rebeccapurple;
+    font-weight: 1000;
+    color: rebeccapurple;
     padding: 0.4rem 0.8rem;
 }
 /* 
@@ -132,23 +134,24 @@ fieldset textarea {
     gap: 10%;
     /* place-items: center; */
     /* place-content: center; */
-    /* justify-content: center; */
+    justify-content: center;
 }
 
+.buttons * {
+    /* width: fit-content; */
+    width: 9rem;
+}
+
+input[type="reset"] {
+    background-color: #D6C5E5;
+    color: rebeccapurple;
+    font-weight: 800;
+}
 button, input[type="submit"], input[type="radio"], input[type="reset"] {
     cursor:pointer;
 }
 
 
-.secondary {
-    display: flex;
-    gap: 1rem;
-    justify-content: right;
-    /* justify-self: right; */
-    /* align-items: end; */
-    /* outline: salmon solid; */
-    width: 100%;
-}
 @media screen and (min-width: 700px) {
     
 }

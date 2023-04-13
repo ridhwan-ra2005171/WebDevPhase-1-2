@@ -65,7 +65,7 @@
                 </label>
 
                 <h3>Paper contribution: </h3>
-                <label for="">
+                <label for="contribution">
                     <input type="radio" id="contribution" name="contribution" value="5" required> major and significant
                     contribution
                     <br><input type="radio" id="contribution" name="contribution" value="4" > clear contribution
@@ -80,13 +80,18 @@
                 </label>
 
                 <label for="weakness">
-                    <h3>Paper weaknesses: </h3>
+                    <h3>Paper weakness: </h3>
                     <textarea name="paper-weakness" id="paper-weakness" cols="50" rows="5" required></textarea>
                 </label>
 
                 <div class="buttons">
+                    <div class="primary">
                         <input id="submit" type="submit" class="btn submit-btn" name="submit" value="Submit">
+                    </div>
+                    <div class="secondary">
                         <input id="reset" type="reset" class="btn reset-btn" name="reset" value="Reset">
+                        <button id="cancel" class="btn">Cancel</button>
+                    </div>
                 </div>
 
 
