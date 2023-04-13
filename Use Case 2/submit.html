@@ -43,16 +43,16 @@
                             <legend for="author1">Author 1</legend>
 
                             <label for="authorFirstName"> First name:</label>
-                            <input type="text" name="author1FirN" id="author1FirN">
+                            <input type="text" name="author1FirN" id="author1FirN" required>
 
                             <label for="authorLastName"> Last name:</label>
-                            <input type="text" name="author1LasN" id="author1LasN">
+                            <input type="text" name="author1LasN" id="author1LasN"required>
 
                             <label for="email"> Email:</label>
-                            <input type="email" name="auth1Email" id="auth1Email">
+                            <input type="email" name="auth1Email" id="auth1Email"required>
 
                             <label for="institutions"> Affiliation:</label>
-                            <select name="institutions" id="institutions">
+                            <select name="institutions" id="institutions"required>
                             <option value="" disabled selected>Select your institution</option>
                                 <!-- here to uplaod the institutions -->
                             </select>
@@ -94,7 +94,7 @@
                     
                     <div class="paperDetails"></div>
                     <label for="presenter"> Presenter:</label>
-                    <select name="presenter" id="presenter">
+                    <select name="presenter" id="presenter" required>
                          <option value="" disabled selected>Choose a presenter</option>
 
                         <!-- here to load the authors from above in a dropdown -->
@@ -111,7 +111,7 @@
                         <input type="checkbox" id="conditions" required> 
                         <label for="conditions">I hereby accept the terms and conditions</label> 
                     </div>
-                    <input id="login" type="submit" class="btn submit-btn" name="submit" value="Submit paper">
+                    <input id="submitButton" type="submit" class="btn submit-btn" name="submit" value="Submit paper">
             </fieldset>
         </form>
     </main>
