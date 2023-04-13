@@ -3,10 +3,12 @@ let usersUrl = "../../json/users.json";
 // assuming we have the gloabl variable USER_ID
 // we set it to 12 for testing sake only
 const USER_ID = 12;
+const reviewerID = USER_ID;
 // global variables
 // const users = [];
 // Elements from html
-const cardList = document.querySelector("#card-list");
+const forReviewList = document.querySelector("#for-review-list")
+// const reviewdList = document.querySelector("#reviewed-list");
 const body = document.querySelector("body-content");
 const abstractLinks = document.querySelectorAll("#abstract-link");
 
@@ -37,34 +39,86 @@ async function displayPapers(papersUrl) {
 
   // check if papers belonging to this current reviewer are in local storage
   // if (!localStorage.papersloc || (parseInt(localStorage.papersloc[0].pid) !== parseInt(USER_ID))) {
-  if (!localStorage.papersloc) {
-    console.log("The papers are nt in lcoal storge");
+  // if (!localStorage.papersloc) {
+    // console.log("The papers are nt in lcoal storge");
+
     // if the papers dont exist in the local storage,
-    papers = await (await fetch(papersUrl)).json(); // fetch the papers
-    localStorage.setItem("papersloc", JSON.stringify(papers)); // add papers to local storage
+    if (!localStorage.papersloc) { // if local storage doesn't have papers.json
+      papers = await (await fetch(papersUrl)).json(); // fetch the papers
+      localStorage.setItem("papersloc", JSON.stringify(papers)); // add papers to local storage
+    }
 
-    console.log("papers", papers);
+    // get the papers from local storage
+    papersloc = JSON.parse(localStorage.papersloc)
+    // console.log("papers", papersloc);
 
-    // get only papers that belong to the current reviewer using the global USER_ID
-    // console.log(papers);
-    assignedPapers = papers.filter((paper) =>
-      getPaperOfReviewer(paper, USER_ID)
-    );
-    // assignedPapers.forEach((p) => console.log(p.authors));
+    // get the papers that belong to the current reviewer, using the global variable USER_ID
 
-    localStorage.setItem("assignedPapers", JSON.stringify(assignedPapers));
+
+    assignedPapers = null;
+    // check if the lcoal stoarge has assigned papers or not
+    if (!localStorage.assignedPapers) {
+      assignedPapers = papersloc.filter((paper) => getPaperOfReviewer(paper, USER_ID));
+      localStorage.setItem("assignedPapers", JSON.stringify(assignedPapers));
+    } else {
+      assignedPapers = JSON.parse(localStorage.assignedPapers);
+    }
+
+    console.log('Assigned papers: ',assignedPapers);
+
+    //load the papers that need reviewing
+    // forReviewArray = assignedPapers.map(rev => (rev))
+    // forReviewList.innerHTML = forReviewArray
+    //   .map((paper) => cardTemplate(paper))
+    //   .join("");
+
     assignedPapers = JSON.parse(localStorage.assignedPapers);
-    cardList.innerHTML = assignedPapers
+    forReviewList.innerHTML = assignedPapers
       .map((paper) => cardTemplate(paper))
       .join("");
-  } else {
+
+
+  // } else {
+    
     // papersloc array exists in the local storage, retrieve it
-    assignedPapers = JSON.parse(await localStorage.assignedPapers);
-    cardList.innerHTML = assignedPapers
-      .map((paper) => cardTemplate(paper))
-      .join("");
-  }
+    // assignedPapers = JSON.parse(await localStorage.assignedPapers);
+    // console.log(loc);
+    // forReviewList.innerHTML = assignedPapers
+    //   .map((paper) => cardTemplate(paper))
+    //   .join("");
+
+    //  displayNoneReviewedPapers(assignedPapers);
+  // }
 }
+
+// async function displayNoneReviewedPapers(assignedPapers) {
+//     // forReviewList.innerHTML = assignedPapers
+
+
+
+//     let  reviews = assignedPapers.map((paper) => 
+//     {return paper.review.find(review => review.reviewerID === reviewerID)}
+//     );
+
+    
+//     // console.log(Object.keys(reviews[0]).length );
+//     console.log("MEEE " , reviews);
+// }
+
+// function displayReviewedPapers(assignedPapers) {
+  
+//   console.log(4);
+// }
+
+
+// function checkReviewd(review) {
+//   console.log(review);
+//   if (Object.keys(review).length > 1) {
+//     console.log(Object.keys(review).length);
+//     return review;
+//   }
+// }
+
 
 function getPaperOfReviewer(paper, reviewerId) {
   if (paper.review.find((elem) => elem.reviewerID === reviewerId)) return paper;

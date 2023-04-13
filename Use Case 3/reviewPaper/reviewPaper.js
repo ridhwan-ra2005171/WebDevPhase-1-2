@@ -8,6 +8,7 @@ const usersUrl = "../../users.json";
 // we set it to 12 for testing purpose only
 // global variables
 const USER_ID = 12;
+const reviewerID = USER_ID;
 let submitClicked = false; // this is to check if the submit button was clicked
 
 // elements
@@ -31,7 +32,9 @@ const submitBtn = document.querySelector("#submit");
 backBtn.addEventListener("click", returnToPrevPage);
 form.addEventListener("submit", storeForm);
 // check if the submit button was clicked, this will be used in returnToPrevPage() function
-submitBtn.addEventListener("click", function(){submitClicked = true;}) 
+// submitBtn.addEventListener("click", function(){submitClicked = true;})
+
+// Only load to form when the paper has been reviewed
 
 //load paper
 // async function laodPaper() {
@@ -65,12 +68,10 @@ submitBtn.addEventListener("click", function(){submitClicked = true;})
 
 // laodPaper();
 
-
 // The event listener functions :::::::::::::::::::::::::::::::::::
 // return to previous page
 
 // Alerts using sweet alert ==================================
-
 
 // async function cancelReview(e) {
 //   e.preventDefault();
@@ -90,34 +91,44 @@ async function storeForm(e) {
   e.stopPropagation();
   e.preventDefault();
 
-  // form inputs retrieval 
-  const reviewerID = USER_ID;
-  const evaluation = document.querySelector('input[name="evaluation"]:checked').value;
-  const contribution = document.querySelector('input[name="contribution"]:checked').value;
+  // form inputs retrieval
+  // const reviewerID = USER_ID;
+  const evaluation = document.querySelector(
+    'input[name="evaluation"]:checked'
+  ).value;
+  const contribution = document.querySelector(
+    'input[name="contribution"]:checked'
+  ).value;
   const strengths = document.querySelector("#paper-strengths").value;
   const weaknesses = document.querySelector("#paper-weakness").value;
 
   const reviewedPaper = {
-      "reviewerID": reviewerID,
-      "evaluation": evaluation,
-      "contribution": contribution,
-      "strengths": strengths,
-      "waknesses": weaknesses
+    reviewerID: reviewerID,
+    evaluation: evaluation,
+    contribution: contribution,
+    strengths: strengths,
+    weaknesses: weaknesses,
   };
 
   // store the reviewPaper in the papers.json
+
+  //First get the papers list from local storage
   const papers = JSON.parse(localStorage.papersloc);
 
   // get the paper ID from local storage
   const targetPaperID = parseInt(JSON.parse(localStorage.paperAtm));
   console.log(targetPaperID);
-  
+
   // find the index of paper first
-  const paperIndex = papers.findIndex(paper => paper.paperID === targetPaperID);
+  const paperIndex = papers.findIndex(
+    (paper) => paper.paperID === targetPaperID
+  );
   console.log(papers[paperIndex]);
 
   // find the index inside the review array that exists in targetPaper, so that we can replace the old review with the new one
-  const reviewIndex = papers[paperIndex].review.findIndex(elem => elem.reviewerID === reviewerID)
+  const reviewIndex = papers[paperIndex].review.findIndex(
+    (review) => review.reviewerID === reviewerID
+  );
   console.log(papers[paperIndex].review[reviewIndex]);
 
   // now replace the old review with the new review aka reviewedPaper
@@ -126,29 +137,66 @@ async function storeForm(e) {
   //save into localStorage
   localStorage.papersloc = JSON.stringify(papers);
 
-
   // Confirmation of review submission
-    // let result = await swal({
-    //   title: "Your Review has been Submitted Successfully!",
-    //   icon: "success",
-    //   buttons: "Ok",
-    //   closeOnClickOutside: false,
-    // });
-  
-    // if (result === true) {
-    //   // location.href = "../paperDashboard/paperDashboard.html";
-    // }
+  let result = await swal({
+    title: "Your Review has been Submitted Successfully!",
+    icon: "success",
+    buttons: "Ok",
+    closeOnClickOutside: false,
+  });
 
+  if (result === true) {
+    location.href = "../paperDashboard/paperDashboard.html";
+  }
 
-  // The storing objects in json file is for testing only!
-  // the objects should be stored in localStorage
-//   const reviewedPapers = localStorage.reviewedPapers;
-//   if (!localStorage.reviewedPapers) {
-//     localStorage.setItem('reviewedPapers')
-//   } else {
-//   }
-//   localStorage.setItem("reviewedPapers");
+  //   localStorage.setItem("reviewedPapers");
 }
+
+function loadToForm() {
+  // First find the review from local storage
+
+  //get the papers list from local storage
+  const papers = JSON.parse(localStorage.papersloc);
+
+  // get the paper ID from local storage
+  const targetPaperID = parseInt(JSON.parse(localStorage.paperAtm));
+  console.log(targetPaperID);
+
+  // find the index of paper first
+  const paperIndex = papers.findIndex(
+    (paper) => paper.paperID === targetPaperID
+  );
+  console.log(papers[paperIndex]);
+
+  // find the index inside the review array that exists in targetPaper, so that we can replace the old review with the new one
+  const reviewIndex = papers[paperIndex].review.findIndex(
+    (review) => review.reviewerID === reviewerID
+  );
+  console.log(papers[paperIndex].review[reviewIndex]);
+
+  // now replace the old review with the new review aka reviewedPaper
+  const currentReview = papers[paperIndex].review[reviewIndex];
+
+  console.log("Current Review: ", currentReview);
+
+  // Only load data when the paper was reviewed, by using the length of the keys:
+  // if the number of keys is 1 which is the reviewerID, this means that the review object has not been initialized yet
+  // if the number of keys is greater than 1, this means we have added (or the user has reviewed the paper) the evaluation, contribution, strengths... attributes
+  if (Object.keys(currentReview).length > 1) {
+    // Add the data to the form
+    const evaluation = (document.querySelector(
+      `input[value="${currentReview.evaluation}"]`
+    ).checked = true);
+    const contribution = (document.querySelector(
+      `input[value="${currentReview.contribution}"]`
+    ).checked = true);
+    const strengths = (document.querySelector("#paper-strengths").value =
+      currentReview.strengths);
+    const weaknesses = (document.querySelector("#paper-weakness").value =
+      currentReview.weaknesses);
+  }
+}
+loadToForm();
 
 //||||||||||||||||||||||"""""""""""":::::::::::::::::::::::::::::::::::::::::
 
@@ -190,22 +238,19 @@ async function storeForm(e) {
 // const test = papers[0].authors;
 // console.log(papers);
 
-
 async function returnToPrevPage(e) {
   e.preventDefault();
-  if (submitClicked === false) {
-    let result = await swal({
-      title: "Your changes will not be saved!",
-      dangerMode: true,
-      icon: "error",
-      buttons: ["Cancel", "Proceed"],
-    });
-    if (result === true) {
-      location.href = "../paperDashboard/paperDashboard.html";
-    }
-  } else {
+  // if (submitClicked === false) {
+  let result = await swal({
+    title: "Your changes will not be saved!",
+    dangerMode: true,
+    icon: "error",
+    buttons: ["Cancel", "Proceed"],
+  });
+  if (result === true) {
     location.href = "../paperDashboard/paperDashboard.html";
   }
-  
+  // } else {
+  //   location.href = "../paperDashboard/paperDashboard.html";
+  // }
 }
-
