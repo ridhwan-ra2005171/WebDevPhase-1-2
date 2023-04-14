@@ -2,7 +2,7 @@
 var counter= 1;
 async function addMoreSession(){
     counter+=1
-    html= '<fieldset id="sessionform1">\
+    html= '<fieldset id="sessionform'+counter+'" class="sessionform1">\
     <legend>Create Sessions</legend>\
         <label>Select Paper:</label>\
       <select name="paper'+counter+'" id="paper" onchange="">\
@@ -49,13 +49,19 @@ async function addMoreSession(){
 
 function deleteSession(sessionNumber) {
   console.log("deleteSession called", sessionNumber); //the ID works but the innerHTML doesnt
-  const currentSession = Array.from(document.querySelectorAll('#sessionform1'))
+  // const currentSession = Array.from(document.querySelectorAll('#sessionform1'))
+  const currentSession = document.getElementsByClassName('sessionform1')
+  console.log(currentSession.length);
+  console.log(currentSession);
+
   //Since a schedule can't have 0 sessions
   if (currentSession.length>1) {
+    console.log('aaa');
       const toDeleteSession = currentSession.filter(author=>author.id==(sessionNumber).toString())
-      toDeleteSession[0].innerHTML=''
+      console.log('YES: ',toDeleteSession);
+      // toDeleteSession[0].innerHTML=''
   }
-  // else{
-  //     console.log("NOP");
-  // }
+  else{
+      console.log("NOP");
+  }
 }

@@ -1,57 +1,72 @@
+// Commonly used URLs
+let usersUrl = "../../json/users.json";
+
 //Here we will import json file for presenter + paper
 //also the conference
-
-let mySchedules= [];
+let mySchedules = [];
+let usersloc = [];
 const schedulesContainer = document.querySelector(".schedules");
 
-
 //to check if i can fetch the schedules: =====================================
-fetch("../json/schedules.json").then(response => response.json()).then(data => showInfo(data));
+fetch("../json/schedules.json")
+  .then((response) => response.json())
+  .then((data) => showInfo(data));
 
-function showInfo(data){
-  console.table(data)
-  console.log(data[0].sessions[1].title)
+function showInfo(data) {
+  console.table(data);
+  console.log(data[0].sessions[1].title);
 }
 //============================================================================
 
-async function loadPage(){
-    const mainContent = document.querySelector("main-content");
-    const page = await fetch("../json/schedules.json");
-    const pageHTMLContent =  await page.text();
-    mainContent.innerHTML = pageHTMLContent;
+async function loadPage() {
+  const mainContent = document.querySelector("main-content");
+  const page = await fetch("../json/schedules.json");
+  const pageHTMLContent = await page.text();
+  mainContent.innerHTML = pageHTMLContent;
 
+  // form= document.querySelector("#add-schedule-form");
 
-    // form= document.querySelector("#add-schedule-form");
-
-    // form.addEventListert("submit", addSchedule)
+  // form.addEventListert("submit", addSchedule)
 }
 //===========================================================================
 //loadSchedules:
 async function loadSchedules() {
   // mySchedules = await (await fetch("../json/schedules.json")).json();
- mySchedules = await fetch("../json/schedules.json").then(response => response.json())
+  users = await (await fetch(usersUrl)).json();
+  localStorage.setItem("usersloc", JSON.stringify(users));
+
+  usersloc = JSON.parse(localStorage.usersloc);
+
+  mySchedules = await fetch("../json/schedules.json").then((response) =>
+    response.json()
+  );
 
   localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
-    schedulesContainer.innerHTML = mySchedules
-      .map((schedule) => scheduleToHTML(schedule))
-      .join("");
+  schedulesContainer.innerHTML = mySchedules
+    .map((schedule) => scheduleToHTML(schedule))
+    .join("");
+
+  // Add if statement to check if mySchedules exist in local Storage
 }
 
 //this is to load each session objects, since it is an array itself inside the json
-function loadSessions(session){
+function loadSessions(session) {
+  // find presenter from usersloc in local Storage
+  const presenter = usersloc.find((pres) => pres.id === parseInt(session.presenterID));
+  const presenterDetails = `${presenter.first_name} ${presenter.last_name}` // a stringf of presenter's full name
   return `
   <tr>
           <td>${session.fromTime}-${session.endTime}</td>
           <td>${session.title}</td>
-          <td>${session.presenterID}</td>
+          <td>${presenterDetails}</td>
           <!-- <td>PaperTrusting Decentralised Knowledge Graphs and Web Data</td> -->
           <td>${session.location}</td>
         </tr>
-  `
+  `;
 }
 
-function scheduleToHTML(schedule){
-  console.log("sched: ", schedule);
+function scheduleToHTML(schedule) {
+  // console.log("sched: ", schedule);
   return `
   <div class="conf-card">
   <a href="#"><h4>${schedule.date}</h4></a>
@@ -66,39 +81,37 @@ function scheduleToHTML(schedule){
         </tr>
       </thead>
       <tbody>
-      ${schedule.sessions.map(session => loadSessions(session)).join("")}
+      ${schedule.sessions.map((session) => loadSessions(session)).join("")}
       </tbody>
       </table>
   </div>  
-  `
+  `;
 }
 
-
 //Add schedule:
-function addSchedule(e){
-    e.preventDefault();
-    const newSchedule = formToObject(e.target);
-    newSchedule.id = Date.now();
-    mySchedules.push(newSchedule);
-    //to check:
-    console.log(mySchedules);
+function addSchedule(e) {
+  e.preventDefault();
+  const newSchedule = formToObject(e.target);
+  newSchedule.id = Date.now();
+  mySchedules.push(newSchedule);
+  //to check:
+  console.log(mySchedules);
 
-    localStorage.mySchedules = JSON.stringify(mySchedules);//just to store in the local storage
+  localStorage.mySchedules = JSON.stringify(mySchedules); //just to store in the local storage
 
-    window.location.href = "conferenceSch.html";
-  
+  window.location.href = "conferenceSch.html";
 }
 
 //Add Session:
 
 //from todoList app, we used this in the addSchedule
 function formToObject(form) {
-    const formData = new FormData(form);
-    console.log(formData);
-    const data = {}; //data object
-    for (const [key, value] of formData) {
-      data[key] = value;
-    }
-    console.log(data);
-    return data;
+  const formData = new FormData(form);
+  console.log(formData);
+  const data = {}; //data object
+  for (const [key, value] of formData) {
+    data[key] = value;
   }
+  console.log(data);
+  return data;
+}
