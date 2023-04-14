@@ -1,5 +1,5 @@
 // Commonly used URLs
-let usersUrl = "../../json/users.json";
+let usersUrl = "../../json/users.json"; //so we can get the presenters
 
 //Here we will import json file for presenter + paper
 //also the conference
@@ -59,7 +59,6 @@ function loadSessions(session) {
           <td>${session.fromTime}-${session.endTime}</td>
           <td>${session.title}</td>
           <td>${presenterDetails}</td>
-          <!-- <td>PaperTrusting Decentralised Knowledge Graphs and Web Data</td> -->
           <td>${session.location}</td>
         </tr>
   `;

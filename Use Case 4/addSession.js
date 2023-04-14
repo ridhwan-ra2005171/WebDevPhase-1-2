@@ -1,3 +1,4 @@
+let myLocations= [];
 // Go-back button
 const backBtn = document.querySelector("#go-back");
 
@@ -36,8 +37,7 @@ async function loadSessionForm(counter) {
       <select 
         name="location-${counter}" 
         id="location" 
-        aria-placeholder="Hello" 
-        onchange=""> 
+        onchange="handleLocationChange()"> 
         <option value="" selected disabled>-Select Location-</option> 
       </select> 
       <div class="timeform"> 
@@ -69,13 +69,13 @@ addSessionBtn.addEventListener("click", addMoreSession);
 
 function addMoreSession(e) {
   e.preventDefault();
-  loadSessionForm((counter += 1));
+  loadSessionForm((counter += 1)); //this is where we increment, so we can move to the next session
 }
 //----------------------------------------------------------------
 
 function deleteSession(sessionFormID) {
   // console.log("deleteSession called", sessionFormID); //the ID works but the innerHTML doesnt
-  const currentSession = document.querySelector("#session-form");
+  const currentSession = document.querySelector("#location");
   //   console.log("SESS-ID: ", sessionFormID);
   //   console.log("CURR-SESS: ", currentSession.childNodes.length);
 
@@ -90,6 +90,41 @@ function deleteSession(sessionFormID) {
 }
 
 
+//load Location==========================================
+
+// checking if i can fetch location:-----
+fetch("../json/locations.json")
+  .then((response) => response.json())
+  .then((data) => showInfo(data));
+
+function showInfo(data) {
+  console.table(data);
+  console.log(data[0].building ,"-",data[0].room) //should return female engineering c07-145
+}
+//================
+const locationJson = '../json/locations.json';
+const locationList = document.querySelector('#locations')
+locationList.addEventListener('click', handleLocationChange)
+
+
+async function handleLocationChange(){
+  
+  const locations  = await (await fetch(locationJson)).json();
+    let instHTML=''
+
+
+    locations.forEach(inst=>
+        instHTML+=`
+        <option value="${inst.id}">${inst.building}-${inst.room}</option>
+        `
+        )
+        locationList.innerHTML=instHTML
+
+
+}
+
+
+
 //load paper========================================
 //we need to filter accepted papers here
 
@@ -99,26 +134,3 @@ function deleteSession(sessionFormID) {
 
 
 
-
-//load Location==========================================
-const locationJson = '../json/locations.json';
-
-const locationList = document.querySelector("#location");
-locationList.addEventListener('click',locationList)
-
-async function loadLocation() {
-  console.log("location drop clicked");
-  const institutions  = await (await fetch(locationJson)).json();
-  // console.log(institutions);
-  let locHTML=''
-  // let instNames = institutions.map(inst=> inst.name)
-  // console.log(instNames);
-
-  institutions.forEach(loc=>
-    locHTML+=`
-      <option value="${loc.code}">${loc.name}</option>
-      `
-      )
-      locationList.innerHTML=instHTML
-
-}
