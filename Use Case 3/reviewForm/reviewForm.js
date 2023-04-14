@@ -117,19 +117,19 @@ async function storeForm(e) {
 
   // get the paper ID from local storage
   const targetPaperID = parseInt(JSON.parse(localStorage.paperAtm));
-  console.log(targetPaperID);
+  // console.log(targetPaperID);
 
   // find the index of paper first
   const paperIndex = papers.findIndex(
     (paper) => paper.paperID === targetPaperID
   );
-  console.log(papers[paperIndex]);
+  // console.log(papers[paperIndex]);
 
   // find the index inside the review array that exists in targetPaper, so that we can replace the old review with the new one
   const reviewIndex = papers[paperIndex].review.findIndex(
     (review) => review.reviewerID === reviewerID
   );
-  console.log(papers[paperIndex].review[reviewIndex]);
+  // console.log(papers[paperIndex].review[reviewIndex]);
 
   // now replace the old review with the new review aka reviewedPaper
   papers[paperIndex].review[reviewIndex] = reviewedPaper;
@@ -160,40 +160,37 @@ function loadToForm() {
 
   // get the paper ID from local storage
   const targetPaperID = parseInt(JSON.parse(localStorage.paperAtm));
-  console.log(targetPaperID);
+  // console.log(targetPaperID);
 
   // find the index of paper first
   const paperIndex = papers.findIndex(
     (paper) => paper.paperID === targetPaperID
   );
-  console.log(papers[paperIndex]);
+  // console.log(papers[paperIndex]);
 
   // find the index inside the review array that exists in targetPaper, so that we can replace the old review with the new one
   const reviewIndex = papers[paperIndex].review.findIndex(
     (review) => review.reviewerID === reviewerID
   );
-  console.log(papers[paperIndex].review[reviewIndex]);
+  // console.log(papers[paperIndex].review[reviewIndex]);
 
   // now replace the old review with the new review aka reviewedPaper
   const currentReview = papers[paperIndex].review[reviewIndex];
 
-  console.log("Current Review: ", currentReview);
+  // console.log("Current Review: ", currentReview);
 
   // Only load data when the paper was reviewed, by using the length of the keys:
   // if the number of keys is 1 which is the reviewerID, this means that the review object has not been initialized yet
   // if the number of keys is greater than 1, this means we have added (or the user has reviewed the paper) the evaluation, contribution, strengths... attributes
   if (Object.keys(currentReview).length > 1) {
     // Add the data to the form
-    document.querySelector(
-      `input[value="${currentReview.evaluation}"]`
-    ).checked = true;
-    document.querySelector(
-      `input[value="${currentReview.contribution}"]`
-    ).checked = true;
+    document.querySelector(`input[value="${currentReview.evaluation}"][name="evaluation"]`).checked = true;
+    document.querySelector(`input[value="${currentReview.contribution}"][name="contribution"]`).checked = true;
     document.querySelector("#paper-strengths").value =
       currentReview.strengths;
     document.querySelector("#paper-weaknesses").value =
       currentReview.weaknesses;
+
   }
 }
 loadToForm();
