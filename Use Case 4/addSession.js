@@ -59,3 +59,38 @@ function deleteSession(sessionNumber) {
   //     console.log("NOP");
   // }
 }
+
+
+
+//load paper========================================
+//we need to filter accepted papers here
+
+
+
+//load presenter========================================
+
+
+
+
+//load Location==========================================
+const locationJson = '../json/locations.json';
+
+const locationList = document.querySelector("#location");
+locationList.addEventListener('click',locationList)
+
+async function loadLocation() {
+  console.log("location drop clicked");
+  const institutions  = await (await fetch(locationJson)).json();
+  // console.log(institutions);
+  let locHTML=''
+  // let instNames = institutions.map(inst=> inst.name)
+  // console.log(instNames);
+
+  institutions.forEach(loc=>
+    locHTML+=`
+      <option value="${loc.code}">${loc.name}</option>
+      `
+      )
+      locationList.innerHTML=instHTML
+
+}
