@@ -146,7 +146,7 @@ async function storeForm(e) {
   });
 
   if (result === true) {
-    location.href = "../reviewPaper/reviewPaper.html";
+    location.href = "../reviewPapers/reviewPapesr.html";
   }
 
   //   localStorage.setItem("reviewedPapers");
@@ -245,9 +245,9 @@ async function returnToPrevPage(e) {
     buttons: ["Cancel", "Proceed"],
   });
   if (result === true) {
-    location.href = "../reviewPaper/reviewPaper.html";
+    location.href = "../reviewPapers/reviewPapers.html";
   }
   // } else {
-    // location.href = "../reviewPaper/reviewPaper.html";
+    // location.href = "../reviewPapers/reviewPapers.html";
   // }
 }

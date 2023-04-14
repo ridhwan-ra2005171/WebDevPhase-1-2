@@ -26,8 +26,8 @@ html * {
     /* margin: auto 0; */
 }
 
-a,
-ul {
+.nav-bar a,
+.nav-bar ul {
     text-decoration: none;
     list-style: none;
     color: black;
@@ -103,9 +103,9 @@ main > h1 {
 }
 
 .card:hover {
-    /* transform: translateY(-10px); */
-    /* transform: scale(102%); */
-    box-shadow: rgba(61, 71, 94, 0.1) 0px 10px 15px;
+    transform: translateY(-5px);
+    /* transform: scale(100.2%); */
+    box-shadow: #3d475e1a 0px 10px 15px;
 }
 
 .static {
@@ -121,11 +121,7 @@ main > h1 {
     border-top: #e2cdf7 solid ;
     padding-top: .7rem;
     width: 100%;
-    justify-self: right;
-    /* position : absolute; */
-    /* bottom : 0; */
-    /* position: sticky; */
-
+    margin-top: auto;
   }
 
 .reviewButton {
@@ -143,12 +139,15 @@ main > h1 {
 
 .link {
     text-decoration: none;
+    color: #da1fb2;
+    font-weight: 600;
 }
 
 .link:hover {
-    color: #9432be;
+    /* color: #9432be; */
     cursor: pointer;
-    text-decoration: none;
+    color: rgb(255, 141, 238);
+    /* font-weight: 800; */
 }
 
 

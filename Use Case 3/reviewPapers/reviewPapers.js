@@ -17,6 +17,7 @@ const body = document.querySelector("body-content");
 
 // console.log(1);
 
+// Hide and Unhide the abstract body
 async function hide(e) {
   e.preventDefault();
   const sectionTag = e.target.parentElement.parentElement; // find the parent/container that has a tag
@@ -33,9 +34,9 @@ async function hide(e) {
     abstractBody.style.display = "none";
     caretIcon.className = "fa fa-caret-down";
   }
-  console.log("LINKS: ", await sectionTag);
-  console.log(caretIcon);
-  console.log(abstractBody);
+  // console.log("LINKS: ", await sectionTag);
+  // console.log(caretIcon);
+  // console.log(abstractBody);
 }
 
 // hide()
@@ -193,13 +194,13 @@ function cardTemplate(paper) {
 
   <section class="abstract-container">
     <a id="abstract-links" href="#" class="link">
-      <h3 class="static">Abstract <i id="caret-icon" class="fa fa-caret-up"></i></h3>
+      <h3 class="static">Abstract <i id="caret-icon" class="fa fa-caret-down"></i></h3>
     </a>
-    <p id="abstract-content" class="abstract-content">${paper.abstract}</p>
+    <p id="abstract-content" class="abstract-content smalldesc" style="display: none;">${paper.abstract}</p>
   </section>
 
   <footer id="card-footer" class="card-footer">
-    <a href="${link}" id="download-link" class="download-link link" download >Download Paper &nbsp<i class="fa fa-arrow-down"></i></a>
+    <a href="https://www.ijraset.com/best-journal/web-development-technologies-a-review" id="download-link" class="link" download="hi" >Download Paper &nbsp<i class="fa fa-arrow-down"></i></a>
     <button id="reviewButton" class="btn reviewButton" onclick="loadPage('../reviewForm/reviewForm.html','${
       paper.paperID
     }')">Review</button>
@@ -207,3 +208,4 @@ function cardTemplate(paper) {
 
 </div>`;
 }
+
