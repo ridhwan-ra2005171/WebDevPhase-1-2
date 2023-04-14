@@ -25,18 +25,15 @@ async function loadSessionForm(counter) {
   const html = `<fieldset id="sessionform-${counter}" class="sessionform"> 
     <legend>Create Sessions</legend> 
         <label>Select Paper:</label> 
-      <select name="paper-${counter}" id="paper" onchange=""> 
+      <select name="paper-${counter}" id="paper-${counter}" onchange=""> 
         <option value="" selected disabled>-Select Paper-</option> 
       </select> 
       <label>Select Presenter:</label> 
-      <select name="presenter-${counter}" id="presenter" onchange=""> 
+      <select name="presenter-${counter}" id="presenter-${counter}" onchange=""> 
         <option value="" selected disabled>-Select Presenter-</option> 
       </select> 
       <label>Select Location:</label> 
-      <select 
-        name="location-${counter}" 
-        id="location-${counter}" 
-        onload="handleLocationChange(location-${counter})"> 
+      <select name="location-${counter}" id="location-${counter}"> 
       </select> 
       <div class="timeform"> 
         <label for="fromTime" 
@@ -56,7 +53,7 @@ async function loadSessionForm(counter) {
   // Convert the html text to DOM element
   let sessForm = new DOMParser().parseFromString(html, "text/html");
   sessForm = sessForm.body.firstChild; // get the session filedset
-  console.log(sessForm);
+  // console.log(sessForm);
   // add the html to the form
 
   form.appendChild(sessForm);
@@ -65,6 +62,7 @@ async function loadSessionForm(counter) {
   // const locationList = document.querySelectorAll('#location-1')
   // locationList.addEventListener('load', handleLocationChange)
   handleLocationChange(`location-${counter}`);
+  loadAcceptedPapers(`paper-${counter}`)
 }
 
 // Event listener to the add more sessions button ---------------
@@ -102,8 +100,8 @@ fetch("../json/locations.json")
   .then((data) => showInfo(data));
 
 function showInfo(data) {
-  console.table(data);
-  console.log(data[0].building, "-", data[0].room); //should return female engineering c07-145
+  // console.table(data);
+  // console.log(data[0].building, "-", data[0].room); //should return female engineering c07-145
 }
 //================
 
@@ -128,9 +126,37 @@ async function handleLocationChange(locationListID) {
 //load paper========================================
 //we need to filter accepted papers here
 function loadAcceptedPapers(paperListID) {
-  const paperList = document.querySelector(`#${paperListID}`); // find the list
+  // Get all papers from local storage
+  papersloc = JSON.parse(localStorage.papersloc)
+  console.log("1: ",papersloc);
+  // Find the reviewed papers only
+  reviewedPapers = papersloc.filter(paper => {if (Object.keys(paper.review).length > 1) return paper;})
+  console.log("2: ",reviewedPapers);
 
+  if (reviewedPapers.length === 0) { // if there is no reviews, break outta the function
+    console.log("There are no reviewed papers");
+    // return;
+  }
+
+  // find accepeted papers
+  acceptedPapers = reviewedPapers.filter(paper => paper.review.forEach(rev => rev.))
+
+  const paperList = document.querySelector(`#${paperListID}`); // find the list
+  console.log("SMTH: ", paperList);
+  let listHTML = `<option value="" selected disabled>-Select Paper-</option>`;
+
+  reviewedPapers.forEach(
+    (paper) =>
+      (listHTML += `
+        <option value="${paper.title}">${paper.title}</option>
+        `)
+  );
+  paperList.innerHTML = listHTML;
+  console.log(listHTML);
+  // array of papers which have 2 reviews submitted
+  // reviewedPapers = paperReviewsArray.filter()
+  // console.log("3: ",reviewedPapers);
 }
 
-
+loadAcceptedPapers()
 //load presenter========================================
