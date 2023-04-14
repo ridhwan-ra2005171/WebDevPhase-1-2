@@ -7,7 +7,7 @@
     /* outline: red solid; */
 }
 
-html {
+html * {
     font-family: 'Roboto Slab', serif;
 }
 
@@ -82,34 +82,21 @@ main > h1 {
 }
 
 .card-list {
-    /* display: flex; */
-    /* flex-wrap: wrap; */
-    /* overflow: scroll; */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    /* display: flex; */
-    /* flex-direction: column; */
-    gap: .5rem;
+    gap: 1rem;
     padding: 0rem 2rem 2rem;
-    /* background-color: aliceblue; */
 
 }
 
 .card {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
-    /* align-items: center; */
     gap: 1rem;
     background-color: white;
     padding: 1rem;
     border-radius: 1.5rem;
-    /* border: indigo 0.2rem solid; */
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
-    /* width: clamp(10rem, 100%, 25rem); */
-    /* height: 10rem; */
-    /* width: 100%; */
+    border: solid #e2cdf7;
     box-shadow: rgba(61, 71, 94, 0.1) 0px 4px 12px;
     transition: ease .2s;
 
@@ -117,46 +104,37 @@ main > h1 {
 
 .card:hover {
     /* transform: translateY(-10px); */
-    transform: scale(102%);
-    /* background-color: #f2f9fe; */
-    /* border: solid rebeccapurple 1px; */
+    /* transform: scale(102%); */
     box-shadow: rgba(61, 71, 94, 0.1) 0px 10px 15px;
 }
 
-#paper-title {
-    text-decoration: underline;
-}
-
-.card h3 {
-    font-weight: 500;
-}
-
-.abstract-container p{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    display: -webkit-box;
-    /* -webkit-line-clamp: 10; */
-    -webkit-box-orient: vertical;
+.static {
+    color: rebeccapurple;
+    
 }
 
 
 .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-top: #e2cdf7 solid ;
     padding-top: .7rem;
-    /* background-color: #663399; */
-    display: flex;
     width: 100%;
-    justify-content: space-between;
-}
+    justify-self: right;
+    /* position : absolute; */
+    /* bottom : 0; */
+    /* position: sticky; */
+
+  }
 
 .reviewButton {
+    /* font-style: ; */
     background-color: #663399;
     color: #f4f4f4;
     padding: .5rem 2rem;
-    border-radius: .5rem;
+    border-radius: .7rem;
     border: none;
-    /* width:; */
 }
 
 .reviewButton:hover {
@@ -171,10 +149,6 @@ main > h1 {
     color: #9432be;
     cursor: pointer;
     text-decoration: none;
-
 }
 
-.card a:hover {
-    text-decoration: underline;
-}
 

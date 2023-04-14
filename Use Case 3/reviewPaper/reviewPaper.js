@@ -11,7 +11,6 @@ const forReviewList = document.querySelector("#for-review-list");
 // const reviewdList = document.querySelector("#reviewed-list");
 const body = document.querySelector("body-content");
 
-
 // waitForLinks();
 
 // console.log(abstractLinks);
@@ -167,7 +166,6 @@ async function loadPage(pageUrl, paperId) {
   mainContent.innerHTML = pageHTMLContent;
 }
 
-
 // function to get names of authors using their IDs. This function is used in cardTemplate()
 function getAuthorName(authorID) {
   const users = JSON.parse(localStorage.usersloc);
@@ -182,11 +180,11 @@ function cardTemplate(paper) {
 
   return `
 <div class="card">
-  
-  <h2 id="paper-title">${paper.title}</h2>
+
+  <h2 class="static">${paper.title}</h2>
   
   <section class="authors-container">
-    <h3>Authors:</h3>
+    <h3 class="static">Authors:</h3>
     <p id="paper-authors">
       ${paper.authors
         .map((authorID) => getAuthorName(authorID))
@@ -195,15 +193,17 @@ function cardTemplate(paper) {
 
   <section class="abstract-container">
     <a id="abstract-links" href="#" class="link">
-      <h3 >Abstract <i id="caret-icon" class="fa fa-caret-up"></i></h3>
+      <h3 class="static">Abstract <i id="caret-icon" class="fa fa-caret-up"></i></h3>
     </a>
     <p id="abstract-content" class="abstract-content">${paper.abstract}</p>
   </section>
+
   <footer id="card-footer" class="card-footer">
     <a href="${link}" id="download-link" class="download-link link" download >Download Paper &nbsp<i class="fa fa-arrow-down"></i></a>
     <button id="reviewButton" class="btn reviewButton" onclick="loadPage('../reviewForm/reviewForm.html','${
       paper.paperID
     }')">Review</button>
   </footer>
+
 </div>`;
 }
