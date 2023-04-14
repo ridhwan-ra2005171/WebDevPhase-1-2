@@ -7,7 +7,7 @@ const usersUrl = "../../users.json";
 // assuming we have the global variable USER_ID
 // we set it to 12 for testing purpose only
 // global variables
-const USER_ID = 12;
+const USER_ID = 8;
 const reviewerID = USER_ID;
 let submitClicked = false; // this is to check if the submit button was clicked
 
@@ -146,7 +146,7 @@ async function storeForm(e) {
   });
 
   if (result === true) {
-    location.href = "../reviewPapers/reviewPapesr.html";
+    location.href = "../reviewPapers/reviewPapers.html";
   }
 
   //   localStorage.setItem("reviewedPapers");
@@ -245,7 +245,7 @@ async function returnToPrevPage(e) {
     buttons: ["Cancel", "Proceed"],
   });
   if (result === true) {
-    location.href = "../reviewPapers/reviewPapers.html";
+    location.href = "../reviewPapers/eviewPapers.html";
   }
   // } else {
     // location.href = "../reviewPapers/reviewPapers.html";

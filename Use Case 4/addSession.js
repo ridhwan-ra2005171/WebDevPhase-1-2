@@ -130,33 +130,47 @@ function loadAcceptedPapers(paperListID) {
   papersloc = JSON.parse(localStorage.papersloc)
   console.log("1: ",papersloc);
   // Find the reviewed papers only
-  reviewedPapers = papersloc.filter(paper => {if (Object.keys(paper.review).length > 1) return paper;})
+  reviewedPapers = papersloc.filter(paper => {if ((paper.review.map(rev => Object.keys(rev).length)).reduce(rev => rev > 1)) return paper;})
   console.log("2: ",reviewedPapers);
+  // console.log("P5: ", (papersloc[4].review.map(rev => Object.keys(rev).length)).reduce(rev => rev > 1));
 
   if (reviewedPapers.length === 0) { // if there is no reviews, break outta the function
     console.log("There are no reviewed papers");
     // return;
   }
 
-  // find accepeted papers
-  acceptedPapers = reviewedPapers.filter(paper => paper.review.forEach(rev => rev.))
+  // acceptedPapers = reviewedPapers.map(paper => [paper,paper.review.map(rev => rev.evaluation)])
+  // acceptedPapers = reviewedPapers.map(paper => paper.review.map(rev => rev.evaluation))
+  // Find the each papers' average evaluation and store the paper and avg eval in an array [paper, avg]
+  papersEvaluationAvg = reviewedPapers.map(paper => (paper.review.map(rev => rev.evaluation)).reduce((a,b) => [paper,((parseInt(a) + parseInt(b)) / 2)]))
+  console.log("3: ",papersEvaluationAvg);
+
+  // Find accepted papers 
+  // HINT change the 2 to 0 to see if it works ---------------------^
+  acceptedPapers = papersEvaluationAvg.filter(paper => (paper[1] >= 2)).map(paper => paper[0])
+  console.log("4: ",acceptedPapers);
 
   const paperList = document.querySelector(`#${paperListID}`); // find the list
-  console.log("SMTH: ", paperList);
+  // console.log("SMTH: ", paperList);
   let listHTML = `<option value="" selected disabled>-Select Paper-</option>`;
 
-  reviewedPapers.forEach(
+  
+  if (acceptedPapers.length === 0) { // if there is no accepted papers, break outta the function
+    console.log("There are no accpeted papers");
+    return;
+  }
+  acceptedPapers.forEach(p => console.log(p))
+  acceptedPapers.forEach(
     (paper) =>
       (listHTML += `
         <option value="${paper.title}">${paper.title}</option>
         `)
   );
   paperList.innerHTML = listHTML;
-  console.log(listHTML);
+  // console.log(listHTML);
   // array of papers which have 2 reviews submitted
   // reviewedPapers = paperReviewsArray.filter()
   // console.log("3: ",reviewedPapers);
 }
 
-loadAcceptedPapers()
 //load presenter========================================

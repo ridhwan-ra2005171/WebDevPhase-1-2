@@ -2,7 +2,7 @@
 let usersUrl = "../../json/users.json";
 // assuming we have the gloabl variable USER_ID
 // we set it to 12 for testing sake only
-const USER_ID = 12;
+const USER_ID = 8;
 const reviewerID = USER_ID;
 // global variables
 // const users = [];
@@ -80,14 +80,14 @@ async function displayPapers(papersUrl) {
 
   assignedPapers = null;
   // check if the lcoal stoarge has assigned papers or not
-  if (!localStorage.assignedPapers) {
+  // if (!localStorage.assignedPapers) {
     assignedPapers = papersloc.filter((paper) =>
       getPaperOfReviewer(paper, USER_ID)
     );
     localStorage.setItem("assignedPapers", JSON.stringify(assignedPapers));
-  } else {
-    assignedPapers = JSON.parse(localStorage.assignedPapers);
-  }
+  // } else {
+    // assignedPapers = JSON.parse(localStorage.assignedPapers);
+  // }
 
   // console.log('Assigned papers: ',assignedPapers);
 
