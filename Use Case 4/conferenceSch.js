@@ -118,7 +118,7 @@ function formToObject(form) {
 
 //===USE CASE 5 date filter:
 const dateJson = '../json/conference-dates.json';
-const dateDL= document.querySelector("#sortBy");
+const dateDL= document.querySelector("#sortByDate");
 dateDL.addEventListener('click',dateLoader)
 
 async function dateLoader(){
@@ -126,9 +126,14 @@ async function dateLoader(){
   let instHTML='<option value="all" disabled selected>Select Conference Date</option>'
   dates.forEach(date=>
     instHTML+=`
-    <option value="${date.id}">${date.confDate}</option>
+    <option value="${date.confDate}">${date.confDate}</option>
     `
     )
     dateDL.innerHTML=instHTML
 
+}
+
+function handleSortDate(){
+  var selectedDate = document.getElementById("sortByDate").value;
+  console.log(selectedDate); //its returning the selected date, we can use it to compare.
 }
