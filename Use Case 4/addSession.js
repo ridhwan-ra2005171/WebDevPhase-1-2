@@ -33,6 +33,9 @@ async function addMoreSession(){
           >End Time: <input type="time" name="endTime'+counter+'" id="endTime" />\
         </label>\
       </div>\
+      <input \
+            id="deleteButton-'+counter+'" \
+            type="button" class="btn submit-btn DeleteAuthorBt" onclick="deleteSession('+counter+')" name="deleteSessBtn" value="Remove Session">\
     </div>\
   </fieldset>\
   <br />\
@@ -41,4 +44,18 @@ async function addMoreSession(){
     var form = await document.getElementById('schedForm')
     form.innerHTML+=html;
     console.log(counter);
+}
+
+
+function deleteSession(sessionNumber) {
+  console.log("deleteSession called", sessionNumber); //the ID works but the innerHTML doesnt
+  const currentSession = Array.from(document.querySelectorAll('#sessionform1'))
+  //Since a schedule can't have 0 sessions
+  if (currentSession.length>1) {
+      const toDeleteSession = currentSession.filter(author=>author.id==(sessionNumber).toString())
+      toDeleteSession[0].innerHTML=''
+  }
+  // else{
+  //     console.log("NOP");
+  // }
 }
