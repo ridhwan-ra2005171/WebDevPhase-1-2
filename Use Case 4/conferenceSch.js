@@ -114,3 +114,21 @@ function formToObject(form) {
   console.log(data);
   return data;
 }
+
+
+//===USE CASE 5 date filter:
+const dateJson = '../json/conference-dates.json';
+const dateDL= document.querySelector("#sortBy");
+dateDL.addEventListener('click',dateLoader)
+
+async function dateLoader(){
+  const dates  = await (await fetch(dateJson)).json();
+  let instHTML=''
+  dates.forEach(date=>
+    instHTML+=`
+    <option value="${date.id}">${date.confDate}</option>
+    `
+    )
+    dateDL.innerHTML=instHTML
+
+}

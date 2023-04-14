@@ -28,9 +28,21 @@
     <main id="main-content" class="main-content">
             <!-- <div class="card-list"> -->
             <h2>Conference Schedules</h2>
-            
+                        
             <!-- WE NEED TO HAVE FILTER DATE HERE -->
-            <!-- <input type="search" placeholder="Search Book By Date" id="search" oninput=""> -->
+            <div class="date-filter">
+              <label for="sortBy">Select Date:</label>
+              <select name="sort-by" id="sortBy" class="sortBy" onchange="handleSort()">
+                <option value="all" disabled selected>Select Conference Date</option>
+                <!-- <option value="Genre">Genre</option>
+                <option value="Price">Price</option>
+                <option value="Author">Author</option> -->
+            </select>
+            </div>
+            
+
+
+          
             <!-- Card 1 example -->
             <div class="schedules" id="schedules">
               <div class="conf-card">

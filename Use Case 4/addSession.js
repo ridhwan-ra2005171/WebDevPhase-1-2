@@ -113,9 +113,9 @@ async function handleLocationChange(){
     let instHTML=''
 
 
-    locations.forEach(inst=>
-        instHTML+=`
-        <option value="${inst.id}">${inst.building}-${inst.room}</option>
+    locations.forEach(loc=>
+        locHTML+=`
+        <option value="${loc.id}">${loc.building}-${loc.room}</option>
         `
         )
         locationList.innerHTML=instHTML
