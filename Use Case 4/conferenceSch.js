@@ -123,7 +123,7 @@ dateDL.addEventListener('click',dateLoader)
 
 async function dateLoader(){
   const dates  = await (await fetch(dateJson)).json();
-  let instHTML=''
+  let instHTML='<option value="all" disabled selected>Select Conference Date</option>'
   dates.forEach(date=>
     instHTML+=`
     <option value="${date.id}">${date.confDate}</option>
