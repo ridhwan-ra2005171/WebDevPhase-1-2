@@ -119,7 +119,7 @@ function formToObject(form) {
 //===USE CASE 5 date filter:
 const dateJson = '../json/conference-dates.json';
 const dateDL= document.querySelector("#sortByDate");
-dateDL.addEventListener('click',dateLoader)
+// dateDL.addEventListener('click',dateLoader)
 
 async function dateLoader(){
   const dates  = await (await fetch(dateJson)).json();
@@ -130,8 +130,9 @@ async function dateLoader(){
     `
     )
     dateDL.innerHTML=instHTML
-
 }
+
+dateLoader()
 
 function handleSortDate(){
   var selectedDate = document.getElementById("sortByDate").value;
