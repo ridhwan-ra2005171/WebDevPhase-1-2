@@ -1,4 +1,4 @@
-let myLocations= [];
+let myLocations = [];
 // Go-back button
 const backBtn = document.querySelector("#go-back");
 
@@ -18,7 +18,6 @@ async function returnToPrevPage(e) {
   }
 }
 
-
 // load session form first. WE CALL THIS FUNCTION IN THE HTML body TAG in THE HTML FILE
 let counter = 1;
 // loadSessionForm(counter);
@@ -36,9 +35,8 @@ async function loadSessionForm(counter) {
       <label>Select Location:</label> 
       <select 
         name="location-${counter}" 
-        id="location" 
-        onchange="handleLocationChange()"> 
-        <option value="" selected disabled>-Select Location-</option> 
+        id="location-${counter}" 
+        onload="handleLocationChange(location-${counter})"> 
       </select> 
       <div class="timeform"> 
         <label for="fromTime" 
@@ -60,7 +58,13 @@ async function loadSessionForm(counter) {
   sessForm = sessForm.body.firstChild; // get the session filedset
   console.log(sessForm);
   // add the html to the form
+
   form.appendChild(sessForm);
+
+  // We have to call the function that populate the dropdown list here (in loadSession function)
+  // const locationList = document.querySelectorAll('#location-1')
+  // locationList.addEventListener('load', handleLocationChange)
+  handleLocationChange(`location-${counter}`);
 }
 
 // Event listener to the add more sessions button ---------------
@@ -75,9 +79,9 @@ function addMoreSession(e) {
 
 function deleteSession(sessionFormID) {
   // console.log("deleteSession called", sessionFormID); //the ID works but the innerHTML doesnt
-  const currentSession = document.querySelector("#location");
-  //   console.log("SESS-ID: ", sessionFormID);
-  //   console.log("CURR-SESS: ", currentSession.childNodes.length);
+  const currentSession = document.querySelector("#session-form");
+  // console.log("SESS-ID: ", sessionFormID);
+  // console.log("CURR-SESS: ", currentSession.childNodes.length);
 
   //Since a schedule can't have 0 sessions, check if the schedule has more than 1 session
   if (currentSession.childNodes.length > 1) {
@@ -85,10 +89,10 @@ function deleteSession(sessionFormID) {
     const toDeleteSession = document.querySelector(`#${sessionFormID}`);
     // remove the session form from the html
     currentSession.removeChild(toDeleteSession);
+    // console.log(11);
     // console.log("SESS TO DELETE: ", toDeleteSession);
   }
 }
-
 
 //load Location==========================================
 
@@ -99,38 +103,34 @@ fetch("../json/locations.json")
 
 function showInfo(data) {
   console.table(data);
-  console.log(data[0].building ,"-",data[0].room) //should return female engineering c07-145
+  console.log(data[0].building, "-", data[0].room); //should return female engineering c07-145
 }
 //================
-const locationJson = '../json/locations.json';
-const locationList = document.querySelector('#locations')
-locationList.addEventListener('click', handleLocationChange)
 
+const locationJson = "../json/locations.json";
 
-async function handleLocationChange(){
-  
-  const locations  = await (await fetch(locationJson)).json();
-    let instHTML=''
+async function handleLocationChange(locationListID) {
+  const locations = await (await fetch(locationJson)).json();
 
+  const locationList = document.querySelector(`#${locationListID}`); // find the list
+  // console.log("SMTH: ", locationList);
+  let locHTML = `<option value="" selected disabled>-Select Location-</option>`;
 
-    locations.forEach(loc=>
-        locHTML+=`
+  locations.forEach(
+    (loc) =>
+      (locHTML += `
         <option value="${loc.id}">${loc.building}-${loc.room}</option>
-        `
-        )
-        locationList.innerHTML=instHTML
-
-
+        `)
+  );
+  locationList.innerHTML = locHTML;
 }
-
-
 
 //load paper========================================
 //we need to filter accepted papers here
+function loadAcceptedPapers(paperListID) {
+  const paperList = document.querySelector(`#${paperListID}`); // find the list
 
+}
 
 
 //load presenter========================================
-
-
-
