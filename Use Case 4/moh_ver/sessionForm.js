@@ -1,5 +1,7 @@
 // Now getting accepted papers
-
+function findAcceptedPapers() {
+    const papersloc = JSON.parse(localStorage.papersloc)    
+}
 
 
 
