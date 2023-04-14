@@ -2,7 +2,7 @@
 //also the conference
 
 let mySchedules= [];
-const schedulesContainer = document.querySelector(".conf-card");
+const schedulesContainer = document.querySelector(".schedules");
 
 
 //to check if i can fetch the schedules: =====================================
@@ -37,6 +37,7 @@ async function loadSchedules() {
       .join("");
 }
 
+//this is to load each session objects, since it is an array itself inside the json
 function loadSessions(session){
   return `
   <tr>
@@ -68,8 +69,7 @@ function scheduleToHTML(schedule){
       ${schedule.sessions.map(session => loadSessions(session)).join("")}
       </tbody>
       </table>
-</div>
-  
+  </div>  
   `
 }
 

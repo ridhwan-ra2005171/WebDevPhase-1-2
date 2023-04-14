@@ -4,8 +4,7 @@ async function addMoreSession(){
     counter+=1
     html= '<fieldset id="sessionform1">\
     <legend>Create Sessions</legend>\
-    <div class="session-form'+counter+'>\
-      <label>Select Paper:</label>\
+        <label>Select Paper:</label>\
       <select name="paper'+counter+'" id="paper" onchange="">\
         <option value="" selected disabled>-Select Paper-</option>\
       </select>\
@@ -36,6 +35,7 @@ async function addMoreSession(){
       </div>\
     </div>\
   </fieldset>\
+  <br />\
     '
    
     var form = await document.getElementById('schedForm')

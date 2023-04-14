@@ -57,16 +57,15 @@ ul {
 
 /*========= End of navigation content ============*/
 
-
 body {
     background-color: #f4f4f4;
 }
 
+
 main{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    align-content: center;
+    align-items: center;
 }
 
 
@@ -100,14 +99,11 @@ main h2 {
     background-color: white;
     padding: 1rem;
     border-radius: 1rem;
-    /* border: indigo 0.2rem solid; */
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
-    width: clamp(10rem, 100%, 60rem);
+    width: clamp(20rem, 100%, 60rem);
     /* height: 10rem; */
     box-shadow: rgba(61, 71, 94, 0.1) 0px 4px 12px;
     transition: ease .2s;
-
+    margin: 1rem;
 }
 
 .conf-card:hover {
@@ -115,22 +111,24 @@ main h2 {
     box-shadow: rgba(61, 71, 94, 0.1) 0px 10px 15px;
 }
 
-.conf-card * {
-    /* outline: salmon solid; */
+/* .conf-card * {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    /* width: fit-content; */
+} */
+
+.card-list{
+    display: flex;
+    justify-content: center;
 }
-
-
 
 .conf-card h4 {
     font-size: 2rem;
 }
 
 table{
-    font-size: 1em;
+    font-size: 1rem;
+    padding: 1rem;
 }
 
 /* .card a:hover {
