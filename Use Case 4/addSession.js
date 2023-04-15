@@ -7,7 +7,7 @@ backBtn.addEventListener("click", returnToPrevPage);
 async function returnToPrevPage(e) {
   e.preventDefault();
   // if (submitClicked === false) {
-  let result = await swal({
+  let result = await swal({ //just using sweet alert
     title: "Your changes will not be saved!",
     dangerMode: true,
     icon: "error",
