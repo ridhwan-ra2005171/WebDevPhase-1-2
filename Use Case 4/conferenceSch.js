@@ -123,7 +123,7 @@ const dateDL= document.querySelector("#sortByDate");
 
 async function dateLoader(){
   const dates  = await (await fetch(dateJson)).json();
-  let instHTML='<option value="all" disabled selected>Select Conference Date</option>'
+  let instHTML='<option value="all" selected disabled >Select Conference Date</option> <option value="all" >Any</option>'
   dates.forEach(date=>
     instHTML+=`
     <option value="${date.confDate}">${date.confDate}</option>
@@ -137,4 +137,21 @@ dateLoader()
 function handleSortDate(){
   var selectedDate = document.getElementById("sortByDate").value;
   console.log(selectedDate); //its returning the selected date, we can use it to compare.
+  //I will try comparing the dates string:
+
+  
+      const customDate = mySchedules.filter(schedule => schedule.date.includes(selectedDate));
+
+      //to check if filtering work:
+      console.log("custom date: ",customDate);
+      if(selectedDate == 'all'){
+        loadSchedules();
+      }else{
+        schedulesContainer.innerHTML = customDate
+    .map((schedule) => scheduleToHTML(schedule))
+    .join("");
+      }
+      
+      
+      // showBooks(customDate);
 }
