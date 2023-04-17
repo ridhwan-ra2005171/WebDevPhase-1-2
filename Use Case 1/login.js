@@ -74,15 +74,22 @@ async function findUser(userTocheck) {
         
     
     if (user.password==userTocheck.password) {
-        
+          // Added my Mohamad - store the user ID in local storage to be accessed by other js files
+        localStorage.setItem("currUserID",JSON.stringify(user.id));
+        console.log(localStorage.currUSerID);
+        //---------------------------------------------------------
         console.log(user.id);
         return user.id
+
+
     } 
     // else {
     //     //better if it's an html response
     //     password.value=null
     //     prompt("No email and password combination found, please try again")
     // }
+
+  
 }
 else {
     //better if it's an html response
