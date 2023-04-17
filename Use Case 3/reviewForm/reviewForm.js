@@ -7,7 +7,7 @@ const usersUrl = "../../users.json";
 // assuming we have the global variable USER_ID
 // we set it to 12 for testing purpose only
 // global variables
-const USER_ID = 8;
+const USER_ID = 12;
 const reviewerID = USER_ID;
 let submitClicked = false; // this is to check if the submit button was clicked
 

@@ -45,7 +45,7 @@ async function loadSessionForm(counter) {
       </div> 
       <input  
             id="deleteButton-${counter}"  
-            type="button" class="btn submit-btn DeleteAuthorBt" onclick="deleteSession('sessionform-${counter}')" name="deleteSessBtn" value="Remove Session">
+            type="button" class="btn delete-btn submit-btn" onclick="deleteSession('sessionform-${counter}')" name="deleteSessBtn" value="Remove Session">
     </div>
   </fieldset>`;
 

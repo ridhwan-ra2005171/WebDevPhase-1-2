@@ -2,7 +2,7 @@
 let usersUrl = "../../json/users.json";
 // assuming we have the gloabl variable USER_ID
 // we set it to 12 for testing sake only
-const USER_ID = 8;
+const USER_ID = 12;
 const reviewerID = USER_ID;
 // global variables
 // const users = [];

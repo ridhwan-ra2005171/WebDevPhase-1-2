@@ -151,6 +151,10 @@ button, input[type="submit"], input[type="radio"], input[type="reset"] {
     cursor:pointer;
 }
 
+.delete-btn {
+ background-color: rgb(178, 15, 36);
+}
+
 
 @media screen and (min-width: 700px) {
     
