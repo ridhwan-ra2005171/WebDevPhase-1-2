@@ -123,7 +123,7 @@ const dateDL= document.querySelector("#sortByDate");
 
 async function dateLoader(){
   const dates  = await (await fetch(dateJson)).json();
-  let instHTML='<option value="all" selected disabled >Select Conference Date</option> <option value="all" >Any</option>'
+  let instHTML='<option value="all" selected disabled >Select Conference Date</option> <option value="all" >Show All</option>'
   dates.forEach(date=>
     instHTML+=`
     <option value="${date.confDate}">${date.confDate}</option>

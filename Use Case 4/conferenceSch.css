@@ -82,6 +82,20 @@ main h2 {
     margin: 2rem 0rem;
 } */
 
+.date-filter *{
+    font-size: 1rem;
+    font-weight: bolder;
+}
+
+.sortByDate{
+    background-color: rgba(137, 43, 226, 0.26);
+    border: solid;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+
+/* ========================================= */
 .card-list {
     display: flex;
     flex-wrap: wrap;
