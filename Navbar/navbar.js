@@ -1,6 +1,6 @@
 const usersJson = "../../json/users.json";
-const currUserID = JSON.parse(localStorage.currUserID);
-
+// let currUserID = JSON.parse(localStorage.currUserID);
+// currUserID = 2;
 // add the style sheet of the navbar to the html files
 const styleLink = '<link rel="stylesheet" href="/Navbar/navbar.css">';
 document.head.insertAdjacentHTML("beforeend", styleLink);

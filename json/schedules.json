@@ -46,5 +46,29 @@
       "endTime": "14:04"
     }
   ]
+  },
+  {
+    "schID": 3,
+    "date": "14/06/2023",
+    "sessions": [
+      {
+      "sesID": 5,
+      "title": "myTitle5",
+      "location": "BCR5",
+      "paperID": "3",
+      "presenterID": "3",
+      "fromTime": "12:03",
+      "endTime": "14:03"
+    }	,
+    {
+      "sesID": 6,
+      "title": "myTitle6",
+      "location": "BCR6",
+      "paperID": "4",
+      "presenterID": "4",
+      "fromTime": "12:04",
+      "endTime": "14:04"
+    }
+  ]
   }
 ]

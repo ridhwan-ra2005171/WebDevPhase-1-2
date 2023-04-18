@@ -31,29 +31,60 @@ async function loadPage() {
 //===========================================================================
 //loadSchedules:
 async function loadSchedules() {
-  // mySchedules = await (await fetch("../json/schedules.json")).json();
+  mySchedules = await (await fetch("../json/schedules.json")).json();
   users = await (await fetch(usersUrl)).json();
   localStorage.setItem("usersloc", JSON.stringify(users));
 
   usersloc = JSON.parse(localStorage.usersloc);
 
-  mySchedules = await fetch("../json/schedules.json").then((response) =>
-    response.json()
-  );
 
-  localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
-  schedulesContainer.innerHTML = mySchedules
+  if  (!localStorage.mySchedules) { //if the recipes dont exist in local storage, load from the URL
+    mySchedules = await (await fetch("../json/schedules.json")).json();
+    localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
+    schedulesContainer.innerHTML = mySchedules
+      .map((sch) => scheduleToHTML(sch))
+      .join("");
+  } else { // else display the recipes cards in the main using localStorage myRecipes array
+    mySchedules = JSON.parse(localStorage.mySchedules); //make from string to object
+    console.log("sc: ", mySchedules);
+   schedulesContainer.innerHTML = mySchedules
     .map((schedule) => scheduleToHTML(schedule))
-    .join("");
+    .join(""); // join('') is used to get rid of comma that appears between the objects
+  }
+  // console.log(schedulesContainer.innerHTML);
+
+
+  // if (localStorage.mySchedules) {
+  //   mySchedules = await fetch("../json/schedules.json").then((response) =>
+  //   response.json()
+  // );
+  // localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
+  // // console.log(localStorage.mySchedules);
+  // // mySchedules = JSON.parse(localStorage.mySchedules);
+  // // schedulesContainer.innerHTML = mySchedules
+  //   // .map((schedule) => scheduleToHTML(schedule))
+  //   // .join("");
+  // }
+
+  // mySchedules = JSON.parse(localStorage.mySchedules);
+  // schedulesContainer.innerHTML = mySchedules
+  //   .map((schedule) => scheduleToHTML(schedule))
+  //   .join("");
+
+  //   console.log(mySchedules);
 
   // Add if statement to check if mySchedules exist in local Storage
 }
 
 //this is to load each session objects, since it is an array itself inside the json
 function loadSessions(session) {
+  // console.log("ses: ",session);
   // find presenter from usersloc in local Storage
-  const presenter = usersloc.find((pres) => pres.id === parseInt(session.presenterID));
-  const presenterDetails = `${presenter.first_name} ${presenter.last_name}` // a stringf of presenter's full name
+  const presenter = usersloc.find(
+    (pres) => pres.id === parseInt(session.presenterID)
+  );
+  console.log("users: ", usersloc);
+  const presenterDetails = `${presenter.first_name} ${presenter.last_name}`; // a stringf of presenter's full name
   return `
   <tr>
           <td>${session.fromTime}-${session.endTime}</td>
@@ -68,7 +99,11 @@ function scheduleToHTML(schedule) {
   // console.log("sched: ", schedule);
   return `
   <div class="conf-card">
-  <a href="#"><h4>${schedule.date}</h4></a>
+    <div class="card-header">
+      <a href="#"><h4>${schedule.date}</h4></a>
+      <button id="delete-btn" class="delete-btn" onclick="handleDeleteSchedule(${schedule.schID})"> <i class="fa fa-trash"></i></button>
+
+    </div>
   <table style="text-align: center;">
       <thead>
         <tr>
@@ -87,21 +122,20 @@ function scheduleToHTML(schedule) {
   `;
 }
 
-//Add schedule:
+//Add schedule: ===========================================
 function addSchedule(e) {
   e.preventDefault();
   const newSchedule = formToObject(e.target);
   newSchedule.id = Date.now();
   mySchedules.push(newSchedule);
   //to check:
-  console.log(mySchedules);
+  console.log("NEW: ",newSchedule);
 
   localStorage.mySchedules = JSON.stringify(mySchedules); //just to store in the local storage
 
-  window.location.href = "conferenceSch.html";
+  // window.location.href = "conferenceSch.html";
 }
-
-//Add Session:
+// addSchedule();
 
 //from todoList app, we used this in the addSchedule
 function formToObject(form) {
@@ -116,42 +150,56 @@ function formToObject(form) {
 }
 
 
-//===USE CASE 5 date filter:
-const dateJson = '../json/conference-dates.json';
-const dateDL= document.querySelector("#sortByDate");
-// dateDL.addEventListener('click',dateLoader)
 
-async function dateLoader(){
-  const dates  = await (await fetch(dateJson)).json();
-  let instHTML='<option value="all" >Show All Conferences</option>'
-  dates.forEach(date=>
-    instHTML+=`
-    <option value="${date.confDate}">${date.confDate}</option>
-    `
-    )
-    dateDL.innerHTML=instHTML
+//=============================================
+//DeleteButton
+function handleDeleteSchedule(schedID){
+  console.log("Delete called "); // The '+' here is to parse the string to number
+  const index = mySchedules.findIndex((sch) => +sch.id === schedID);
+  //using splice to delete, go index and delete 1 element
+  mySchedules.splice(index, 1);
+  // console.log("Secret: ",mySchedules);
+  localStorage.mySchedules = JSON.stringify(mySchedules); //updates the localstorage array myRecipes
+  loadSchedules();
 }
 
-dateLoader()
+//====
 
-function handleSortDate(){
+//===USE CASE 5 date filter:
+const dateJson = "../json/conference-dates.json";
+const dateDL = document.querySelector("#sortByDate");
+// dateDL.addEventListener('click',dateLoader)
+
+async function dateLoader() {
+  const dates = await (await fetch(dateJson)).json();
+  let instHTML = '<option value="all" >Show All Conferences</option>';
+  dates.forEach(
+    (date) =>
+      (instHTML += `
+    <option value="${date.confDate}">${date.confDate}</option>
+    `)
+  );
+  dateDL.innerHTML = instHTML;
+}
+
+dateLoader();
+
+function handleSortDate() {
   var selectedDate = document.getElementById("sortByDate").value;
   console.log(selectedDate); //its returning the selected date, we can use it to compare.
   //I will try comparing the dates string:
 
-  
-      const customDate = mySchedules.filter(schedule => schedule.date.includes(selectedDate));
+  const customDate = mySchedules.filter((schedule) =>
+    schedule.date.includes(selectedDate)
+  );
 
-      //to check if filtering work:
-      console.log("custom date: ",customDate);
-      if(selectedDate == 'all'){
-        loadSchedules();
-      }else{
-        schedulesContainer.innerHTML = customDate
-    .map((schedule) => scheduleToHTML(schedule))
-    .join("");
-      }
-      
-      
-      // showBooks(customDate);
+  //to check if filtering work:
+  console.log("custom date: ", customDate);
+  if (selectedDate == "all") {
+    loadSchedules();
+  } else {
+    schedulesContainer.innerHTML = customDate
+      .map((schedule) => scheduleToHTML(schedule))
+      .join("");
+  }
 }

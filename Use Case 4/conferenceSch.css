@@ -106,6 +106,19 @@ main h2 {
 
 }
 
+.card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-btn {
+    height: fit-content;
+    background-color: pink;
+    padding: .5rem;
+    cursor: pointer;
+    border-radius: 100%;
+}
+
 .conf-card {
     display: flex;
     flex-direction: column;

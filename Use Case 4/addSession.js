@@ -7,7 +7,8 @@ backBtn.addEventListener("click", returnToPrevPage);
 async function returnToPrevPage(e) {
   e.preventDefault();
   // if (submitClicked === false) {
-  let result = await swal({ //just using sweet alert
+  let result = await swal({
+    //just using sweet alert
     title: "Your changes will not be saved!",
     dangerMode: true,
     icon: "error",
@@ -58,11 +59,17 @@ async function loadSessionForm(counter) {
 
   form.appendChild(sessForm);
 
+  // get paper value
+  // const paperTitle = document.querySelector(`#paper-${counter}`);
+  
+  // console.log("i like men:",paperTitle.value);
+
   // We have to call the function that populate the dropdown list here (in loadSession function)
   // const locationList = document.querySelectorAll('#location-1')
   // locationList.addEventListener('load', handleLocationChange)
   handleLocationChange(`location-${counter}`);
-  loadAcceptedPapers(`paper-${counter}`)
+  loadAcceptedPapers(`paper-${counter}`);
+  loadPresenters(`presenter-${counter}`,`#paper-${counter}`);
 }
 
 // Event listener to the add more sessions button ---------------
@@ -127,39 +134,53 @@ async function handleLocationChange(locationListID) {
 //we need to filter accepted papers here
 function loadAcceptedPapers(paperListID) {
   // Get all papers from local storage
-  papersloc = JSON.parse(localStorage.papersloc)
-  console.log("1: ",papersloc);
+  papersloc = JSON.parse(localStorage.papersloc);
+  console.log("1: ", papersloc);
   // Find the reviewed papers only
-  reviewedPapers = papersloc.filter(paper => {if ((paper.review.map(rev => Object.keys(rev).length)).reduce(rev => rev > 1)) return paper;})
-  console.log("2: ",reviewedPapers);
+  reviewedPapers = papersloc.filter((paper) => {
+    if (
+      paper.review
+        .map((rev) => Object.keys(rev).length)
+        .reduce((rev) => rev > 1)
+    )
+      return paper;
+  });
+  console.log("2: ", reviewedPapers);
   // console.log("P5: ", (papersloc[4].review.map(rev => Object.keys(rev).length)).reduce(rev => rev > 1));
 
-  if (reviewedPapers.length === 0) { // if there is no reviews, break outta the function
+  if (reviewedPapers.length === 0) {
+    // if there is no reviews, break outta the function
     console.log("There are no reviewed papers");
-    // return;
+    return;
   }
 
   // acceptedPapers = reviewedPapers.map(paper => [paper,paper.review.map(rev => rev.evaluation)])
   // acceptedPapers = reviewedPapers.map(paper => paper.review.map(rev => rev.evaluation))
   // Find the each papers' average evaluation and store the paper and avg eval in an array [paper, avg]
-  papersEvaluationAvg = reviewedPapers.map(paper => (paper.review.map(rev => rev.evaluation)).reduce((a,b) => [paper,((parseInt(a) + parseInt(b)) / 2)]))
-  console.log("3: ",papersEvaluationAvg);
+  papersEvaluationAvg = reviewedPapers.map((paper) =>
+    paper.review
+      .map((rev) => rev.evaluation)
+      .reduce((a, b) => [paper, (parseInt(a) + parseInt(b)) / 2])
+  );
+  console.log("3: ", papersEvaluationAvg);
 
-  // Find accepted papers 
+  // Find accepted papers
   // HINT change the 2 to 0 to see if it works ---------------------^
-  acceptedPapers = papersEvaluationAvg.filter(paper => (paper[1] >= 2)).map(paper => paper[0])
-  console.log("4: ",acceptedPapers);
+  acceptedPapers = papersEvaluationAvg
+    .filter((paper) => paper[1] >= 2)
+    .map((paper) => paper[0]);
+  console.log("4: ", acceptedPapers);
 
   const paperList = document.querySelector(`#${paperListID}`); // find the list
   // console.log("SMTH: ", paperList);
   let listHTML = `<option value="" selected disabled>-Select Paper-</option>`;
 
-  
-  if (acceptedPapers.length === 0) { // if there is no accepted papers, break outta the function
+  if (acceptedPapers.length === 0) {
+    // if there is no accepted papers, break outta the function
     console.log("There are no accpeted papers");
     return;
   }
-  acceptedPapers.forEach(p => console.log(p))
+  acceptedPapers.forEach((p) => console.log(p));
   acceptedPapers.forEach(
     (paper) =>
       (listHTML += `
@@ -174,3 +195,40 @@ function loadAcceptedPapers(paperListID) {
 }
 
 //load presenter========================================
+
+async function loadPresenters(presenterListID,paperListID) {
+  //try to get authors to be loaded in select presenter
+
+
+  // Get all users from local storage
+  usersloc = JSON.parse(localStorage.usersloc);
+  // Get all papers from local storage
+  // load the file reviewPapers.html first to get access to the papersloc
+  papersloc = JSON.parse(localStorage.papersloc);
+  console.log("1: ", papersloc);
+
+  // find the presenters IDs from the paper objects
+  // const presentersIDs = papersloc.map(paper => paper.presenterID);
+  // console.log("PRES IDS: ",presentersIDs);
+
+  // const authors = usersloc.authors;
+  // console.log(authors);
+
+  // find the presenters objects from presentersIDs
+  const presenters = presentersIDs.map(presID => usersloc.find(user => +user.id === +presID))
+
+  console.log("PRES: ",presenters);
+
+  const presenterList = document.querySelector(`#${presenterListID}`) 
+  // const locationList = document.querySelector(`#${locationListID}`); // find the list
+  // console.log("SMTH: ", locationList);
+  let presHTML = `<option value="" selected disabled>-Select Presenter-</option>`;
+
+  presenters.forEach(
+    (pres) =>
+      (presHTML += `
+        <option value="${pres.id}">${pres.first_name}-${pres.last_name}</option>
+        `)
+  );
+  presenterList.innerHTML = presHTML;
+}
