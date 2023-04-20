@@ -1,22 +1,18 @@
 // Commonly used URLS
-let usersUrl = "../../json/users.json";
-// assuming we have the gloabl variable USER_ID
+let usersUrl = "/json/users.json";
+
+// assuming we have the global variable USER_ID
 // we set it to 12 for testing sake only
 const USER_ID = 8;
 localStorage.setItem("USER_ID",USER_ID);
 const reviewerID = USER_ID;
+
 // global variables
 // const users = [];
+
 // Elements from html
 const forReviewList = document.querySelector("#for-review-list");
-// const reviewdList = document.querySelector("#reviewed-list");
 const body = document.querySelector("body-content");
-
-// waitForLinks();
-
-// console.log(abstractLinks);
-
-// console.log(1);
 
 // Hide and Unhide the abstract body
 async function hide(e) {
@@ -24,10 +20,6 @@ async function hide(e) {
   const sectionTag = e.target.parentElement.parentElement; // find the parent/container that has a tag
   const caretIcon = sectionTag.querySelector("#caret-icon"); // find the i tag from the parent
   const abstractBody = sectionTag.querySelector("p"); // find the p tag from the parent
-  // aLink.preventDefault()
-  // const abstractLinks =  document.querySelectorAll(".abstract-links");
-  // abstractLinks.
-  // const element = e.target
   if (abstractBody.style.display === "none") {
     abstractBody.style.display = "block";
     caretIcon.className = "fa fa-caret-up";
@@ -35,28 +27,9 @@ async function hide(e) {
     abstractBody.style.display = "none";
     caretIcon.className = "fa fa-caret-down";
   }
-  // console.log("LINKS: ", await sectionTag);
-  // console.log(caretIcon);
-  // console.log(abstractBody);
 }
 
-// hide()
 
-// abstractContents.forEach(element => {
-// console.log(element);
-// if (element.style.display === "none") {
-// element.style.display = "block";
-// // caretIcon.className = "fa fa-caret-up";
-// } else {
-// element.style.display = "none";
-// // caretIcon.className = "fa fa-caret-down";
-// }})
-// }
-
-// event listeners
-// abstractLinks.forEach(link => link.addEventListener('click',showAbstract));
-
-// console.log(cardList);
 async function displayPapers(papersUrl) {
   users = await (await fetch(usersUrl)).json();
   localStorage.setItem("usersloc", JSON.stringify(users));
@@ -66,9 +39,9 @@ async function displayPapers(papersUrl) {
   // if (!localStorage.papersloc) {
   // console.log("The papers are nt in lcoal storge");
 
-  // if the papers dont exist in the local storage,
+  // if the papers don't exist in the local storage,
   if (!localStorage.papersloc) {
-    // if local storage doesn't have papers.json
+    // if local storage doesn't have papersloc
     papers = await (await fetch(papersUrl)).json(); // fetch the papers
     localStorage.setItem("papersloc", JSON.stringify(papers)); // add papers to local storage
   }

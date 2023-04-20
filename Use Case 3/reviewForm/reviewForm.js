@@ -1,6 +1,3 @@
-// Imports
-// import * as fs from 'fs';
-
 const papersUrl = "../../papers.json";
 const usersUrl = "../../users.json";
 
