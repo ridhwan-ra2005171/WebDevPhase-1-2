@@ -205,10 +205,10 @@ async function loadPresenters(presenterListID,paperListID) {
   // Get all papers from local storage
   // load the file reviewPapers.html first to get access to the papersloc
   papersloc = JSON.parse(localStorage.papersloc);
-  console.log("1: ", papersloc);
+  // console.log("1: ", papersloc);
 
   // find the presenters IDs from the paper objects
-  // const presentersIDs = papersloc.map(paper => paper.presenterID);
+  const presentersIDs = papersloc.map(paper => paper.presenterID);
   // console.log("PRES IDS: ",presentersIDs);
 
   // const authors = usersloc.authors;
@@ -217,7 +217,7 @@ async function loadPresenters(presenterListID,paperListID) {
   // find the presenters objects from presentersIDs
   const presenters = presentersIDs.map(presID => usersloc.find(user => +user.id === +presID))
 
-  console.log("PRES: ",presenters);
+  // console.log("PRES: ",presenters);
 
   const presenterList = document.querySelector(`#${presenterListID}`) 
   // const locationList = document.querySelector(`#${locationListID}`); // find the list
