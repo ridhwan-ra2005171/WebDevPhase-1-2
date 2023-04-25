@@ -61,7 +61,7 @@ async function loadSessionForm(counter) {
 
   // get paper value
   // const paperTitle = document.querySelector(`#paper-${counter}`);
-  
+
   // console.log("i like men:",paperTitle.value);
 
   // We have to call the function that populate the dropdown list here (in loadSession function)
@@ -69,8 +69,28 @@ async function loadSessionForm(counter) {
   // locationList.addEventListener('load', handleLocationChange)
   handleLocationChange(`location-${counter}`);
   loadAcceptedPapers(`paper-${counter}`);
-  loadPresenters(`presenter-${counter}`,`#paper-${counter}`);
+  loadPresenters(`presenter-${counter}`, `#paper-${counter}`);
 }
+
+//event listerner to get conference date-------->
+// Get the date input element
+var dateInput = document.getElementById("cDate");
+
+// Add an input event listener to the date input
+dateInput.addEventListener("input", function () {
+  // Get the selected date value
+  var selectedDate = dateInput.value;
+
+  // Split the date string by hyphens
+  var parts = selectedDate.split("-"); //by default its separated by --
+
+  // Rearrange the parts to form the desired date format
+  //we want to match it with the json file like dd/mm/yyyy
+  var formattedDate = parts[2] + "/" + parts[1] + "/" + parts[0];
+
+  // Output the formatted date to the console
+  console.log("Formatted date:", formattedDate);
+});
 
 // Event listener to the add more sessions button ---------------
 const addSessionBtn = document.querySelector("#addSessionBtn");
@@ -196,9 +216,9 @@ function loadAcceptedPapers(paperListID) {
 
 //load presenter========================================
 
-async function loadPresenters(presenterListID,paperListID) {z
+async function loadPresenters(presenterListID, paperListID) {
+  z;
   //try to get authors to be loaded in select presenter
-
 
   // Get all users from local storage
   usersloc = JSON.parse(localStorage.usersloc);
@@ -208,18 +228,20 @@ async function loadPresenters(presenterListID,paperListID) {z
   // console.log("1: ", papersloc);
 
   // find the presenters IDs from the paper objects
-  const presentersIDs = papersloc.map(paper => paper.presenterID);
+  const presentersIDs = papersloc.map((paper) => paper.presenterID);
   // console.log("PRES IDS: ",presentersIDs);
 
   // const authors = usersloc.authors;
   // console.log(authors);
 
   // find the presenters objects from presentersIDs
-  const presenters = presentersIDs.map(presID => usersloc.find(user => +user.id === +presID))
+  const presenters = presentersIDs.map((presID) =>
+    usersloc.find((user) => +user.id === +presID)
+  );
 
   // console.log("PRES: ",presenters);
 
-  const presenterList = document.querySelector(`#${presenterListID}`) 
+  const presenterList = document.querySelector(`#${presenterListID}`);
   // const locationList = document.querySelector(`#${locationListID}`); // find the list
   // console.log("SMTH: ", locationList);
   let presHTML = `<option value="" selected disabled>-Select Presenter-</option>`;
