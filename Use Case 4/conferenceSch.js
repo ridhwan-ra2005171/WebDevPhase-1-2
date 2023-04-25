@@ -5,6 +5,8 @@ let usersUrl = "../../json/users.json"; //so we can get the presenters
 //also the conference
 let mySchedules = [];
 let usersloc = [];
+let schDates =[];
+// export default schDates;
 const schedulesContainer = document.querySelector(".schedules");
 
 //to check if i can fetch the schedules: =====================================
@@ -170,10 +172,14 @@ const dateJson = "../json/conference-dates.json";
 const dateDL = document.querySelector("#sortByDate");
 // dateDL.addEventListener('click',dateLoader)
 
+
+
 async function dateLoader() {
-  const dates = await (await fetch(dateJson)).json();
+  // const dates = await (await fetch(dateJson)).json(); //dont delete this we need for web api
+  schDates = await(await fetch(dateJson)).json();
+  localStorage.setItem("schDates",JSON.stringify(schDates))
   let instHTML = '<option value="all" >Show All Conferences</option>';
-  dates.forEach(
+  schDates.forEach(
     (date) =>
       (instHTML += `
     <option value="${date.confDate}">${date.confDate}</option>
@@ -195,6 +201,8 @@ function handleSortDate() {
 
   //to check if filtering work:
   console.log("custom date: ", customDate);
+  // console.log("all date locale:", schDates)
+
   if (selectedDate == "all") {
     loadSchedules();
   } else {
@@ -202,4 +210,6 @@ function handleSortDate() {
       .map((schedule) => scheduleToHTML(schedule))
       .join("");
   }
+
+
 }

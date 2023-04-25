@@ -1,4 +1,5 @@
 let myLocations = [];
+schDates = JSON.parse(localStorage.schDates); //fetching my localstorage for dates
 // Go-back button
 const backBtn = document.querySelector("#go-back");
 
@@ -75,6 +76,7 @@ async function loadSessionForm(counter) {
 //event listerner to get conference date-------->
 // Get the date input element
 var dateInput = document.getElementById("cDate");
+let formattedDate;//we store date selected here
 
 // Add an input event listener to the date input
 dateInput.addEventListener("input", function () {
@@ -86,11 +88,14 @@ dateInput.addEventListener("input", function () {
 
   // Rearrange the parts to form the desired date format
   //we want to match it with the json file like dd/mm/yyyy
-  var formattedDate = parts[2] + "/" + parts[1] + "/" + parts[0];
+  formattedDate = parts[2] + "/" + parts[1] + "/" + parts[0];
 
   // Output the formatted date to the console
   console.log("Formatted date:", formattedDate);
+
+  // console.log("testing deez dates:",schDates)
 });
+
 
 // Event listener to the add more sessions button ---------------
 const addSessionBtn = document.querySelector("#addSessionBtn");
@@ -253,4 +258,13 @@ async function loadPresenters(presenterListID, paperListID) {
         `)
   );
   presenterList.innerHTML = presHTML;
+
+  //Here will be for the button: 'Submit Conference Schedule'
+  const submitButton = document.querySelector('buttons input[type="submit"]');
+  submitButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log('Submit button clicked!');
+    //FIRST WE STORE NEW DATES:==============================================
+    
+  });
 }
