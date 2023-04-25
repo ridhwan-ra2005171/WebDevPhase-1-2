@@ -10,13 +10,15 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="reviewPapers.css">
-    <link rel="stylesheet" href="/Navbar/navbar.css">
+    <!-- <link rel="stylesheet" href="/Navbar/navbar.css"> -->
+    <script src="/Navbar/navbar.js"></script>
+
 
 </head>
 
-<body id="body-content" onload="displayPapers('/json/papers.json')">
-    <header>
-        <nav class="nav-bar">
+<body onload="displayPapers('/json/papers.json')">
+    <!-- <header> -->
+        <!-- <nav class="nav-bar">
             <div class="logo">
                 <img src="/img/ConfPlus logo.png" alt="Conf Plus Logo">
 
@@ -24,11 +26,11 @@
             <ul>
                 <li><a class="nav-link grey" href="/Use Case 4/conferenceSch.html">Home</a></li>
                 <li><a class="nav-link grey" href="/Use Case 3/reviewPapers/reviewPapers.html">Review</a></li>
-                <li><a class="nav-link grey" href="#">Help</a></li>
+                <li><a class="nav-link grey" id="help" href="#">Help</a></li>
             </ul>
             <a href="#">username</a>
-        </nav>
-    </header>
+        </nav> -->
+    <!-- </header> -->
 
     <main id="main-content">
         <h1>Papers to Review</h1>
@@ -36,9 +38,8 @@
         </div>
         <div class="break-line"></div>
     </main>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
-
     <script src="/Use Case 3/reviewPapers/reviewPapers.js"></script>
-    <!-- <script src="/Navbar/navbar.js"></script> -->
 </body>
 </html>

@@ -36,9 +36,17 @@
 
 ul {
     display: flex;
-    gap: 2rem;
-    /* margin: 0rem 2rem; */
-    /* font-weight: 700; */
+    gap: .3rem;
+    font-weight: 500;
+}
+
+ul:not(.nav-link) {
+    color: pink;
+}
+
+#username {
+    font-weight: 700;
+    color: rgb(106, 34, 183);
 }
 
 /*========= End of navigation content ============*/
