@@ -26,7 +26,7 @@ async function loadSessionForm(counter) {
   const html = `<fieldset id="sessionform-${counter}" class="sessionform"> 
     <legend>Create Sessions</legend> 
         <label>Select Paper:</label> 
-      <select name="paper-${counter}" id="paper-${counter}" onchange=""> 
+      <select name="paper-${counter}" id="paper-${counter}" onchange="loadPresenters('presenter-${counter}','#paper-${counter}')"> 
         <option value="" selected disabled>-Select Paper-</option> 
       </select> 
       <label>Select Presenter:</label> 
@@ -69,7 +69,7 @@ async function loadSessionForm(counter) {
   // locationList.addEventListener('load', handleLocationChange)
   handleLocationChange(`location-${counter}`);
   loadAcceptedPapers(`paper-${counter}`);
-  loadPresenters(`presenter-${counter}`,`#paper-${counter}`);
+  
 }
 
 // Event listener to the add more sessions button ---------------
@@ -184,7 +184,7 @@ function loadAcceptedPapers(paperListID) {
   acceptedPapers.forEach(
     (paper) =>
       (listHTML += `
-        <option value="${paper.title}">${paper.title}</option>
+        <option value="${paper.paperID}">${paper.title}</option>
         `)
   );
   paperList.innerHTML = listHTML;
@@ -197,28 +197,25 @@ function loadAcceptedPapers(paperListID) {
 //load presenter========================================
 
 async function loadPresenters(presenterListID,paperListID) {
+  // get the selected paper ID from the dropdown menu
+  const selectedPaperID = await document.querySelector(paperListID).value;
+  // console.log("PAPER: ",selectedPaperID); 
+  // get all papers from local storage
+  papersloc = JSON.parse(localStorage.papersloc);
+  // get the selected paper object
+  const selectedPaper = papersloc.find(paper => paper.paperID == selectedPaperID)
+  // console.log(selectedPaper.authors);
+
   //try to get authors to be loaded in select presenter
-
-
+  const presentersIDs = selectedPaper.authors;
+  
   // Get all users from local storage
   usersloc = JSON.parse(localStorage.usersloc);
-  // Get all papers from local storage
-  // load the file reviewPapers.html first to get access to the papersloc
-  papersloc = JSON.parse(localStorage.papersloc);
-  // console.log("1: ", papersloc);
-
-  // find the presenters IDs from the paper objects
-  const presentersIDs = papersloc.map(paper => paper.presenterID);
-  // console.log("PRES IDS: ",presentersIDs);
-
-  // const authors = usersloc.authors;
-  // console.log(authors);
-
   // find the presenters objects from presentersIDs
   const presenters = presentersIDs.map(presID => usersloc.find(user => +user.id === +presID))
 
   // console.log("PRES: ",presenters);
-
+  
   const presenterList = document.querySelector(`#${presenterListID}`) 
   // const locationList = document.querySelector(`#${locationListID}`); // find the list
   // console.log("SMTH: ", locationList);
@@ -232,3 +229,15 @@ async function loadPresenters(presenterListID,paperListID) {
   );
   presenterList.innerHTML = presHTML;
 }
+
+
+async function lol(paperListID) {
+  // get the selected paper
+  // const selectedPaperID = await document.querySelector(paperListID).value;
+  // console.log("PAPER: ", await selectedPaperID); 
+  // papersloc = JSON.parse(localStorage.papersloc);
+  // const selectedPaper = papersloc.find(paper => paper.paperID == selectedPaperID)
+  // console.log(selectedPaper);
+  //try to get authors to be lo
+}
+
