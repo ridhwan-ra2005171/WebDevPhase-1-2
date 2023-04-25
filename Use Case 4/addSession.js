@@ -1,5 +1,6 @@
 let myLocations = [];
 schDates = JSON.parse(localStorage.schDates); //fetching my localstorage for dates
+
 // Go-back button
 const backBtn = document.querySelector("#go-back");
 
@@ -16,7 +17,7 @@ async function returnToPrevPage(e) {
     buttons: ["Cancel", "Proceed"],
   });
   if (result === true) {
-    location.href = "./conferenceSch.html";
+    location.href = "/Use Case 4/conferenceSch.html";
   }
 }
 
@@ -27,7 +28,7 @@ async function loadSessionForm(counter) {
   const html = `<fieldset id="sessionform-${counter}" class="sessionform"> 
     <legend>Create Sessions</legend> 
         <label>Select Paper:</label> 
-      <select name="paper-${counter}" id="paper-${counter}" onchange=""> 
+      <select name="paper-${counter}" id="paper-${counter}" onchange="loadPresenters('presenter-${counter}','#paper-${counter}')"> 
         <option value="" selected disabled>-Select Paper-</option> 
       </select> 
       <label>Select Presenter:</label> 
@@ -70,13 +71,12 @@ async function loadSessionForm(counter) {
   // locationList.addEventListener('load', handleLocationChange)
   handleLocationChange(`location-${counter}`);
   loadAcceptedPapers(`paper-${counter}`);
-  loadPresenters(`presenter-${counter}`, `#paper-${counter}`);
 }
 
 //event listerner to get conference date-------->
 // Get the date input element
 var dateInput = document.getElementById("cDate");
-let formattedDate;//we store date selected here
+let formattedDate; //we store date selected here
 
 // Add an input event listener to the date input
 dateInput.addEventListener("input", function () {
@@ -88,14 +88,12 @@ dateInput.addEventListener("input", function () {
 
   // Rearrange the parts to form the desired date format
   //we want to match it with the json file like dd/mm/yyyy
-  formattedDate = parts[2] + "/" + parts[1] + "/" + parts[0];
+  var formattedDate = parts[2] + "/" + parts[1] + "/" + parts[0];
 
   // Output the formatted date to the console
   console.log("Formatted date:", formattedDate);
-
   // console.log("testing deez dates:",schDates)
 });
-
 
 // Event listener to the add more sessions button ---------------
 const addSessionBtn = document.querySelector("#addSessionBtn");
@@ -137,9 +135,9 @@ function showInfo(data) {
 }
 //================
 
-const locationJson = "../json/locations.json";
 
 async function handleLocationChange(locationListID) {
+  const locationJson = "/json/locations.json";
   const locations = await (await fetch(locationJson)).json();
 
   const locationList = document.querySelector(`#${locationListID}`); // find the list
@@ -160,7 +158,7 @@ async function handleLocationChange(locationListID) {
 function loadAcceptedPapers(paperListID) {
   // Get all papers from local storage
   papersloc = JSON.parse(localStorage.papersloc);
-  console.log("1: ", papersloc);
+  // console.log("1: ", papersloc);
   // Find the reviewed papers only
   reviewedPapers = papersloc.filter((paper) => {
     if (
@@ -170,7 +168,7 @@ function loadAcceptedPapers(paperListID) {
     )
       return paper;
   });
-  console.log("2: ", reviewedPapers);
+  // console.log("2: ", reviewedPapers);
   // console.log("P5: ", (papersloc[4].review.map(rev => Object.keys(rev).length)).reduce(rev => rev > 1));
 
   if (reviewedPapers.length === 0) {
@@ -187,14 +185,14 @@ function loadAcceptedPapers(paperListID) {
       .map((rev) => rev.evaluation)
       .reduce((a, b) => [paper, (parseInt(a) + parseInt(b)) / 2])
   );
-  console.log("3: ", papersEvaluationAvg);
+  // console.log("3: ", papersEvaluationAvg);
 
   // Find accepted papers
   // HINT change the 2 to 0 to see if it works ---------------------^
   acceptedPapers = papersEvaluationAvg
     .filter((paper) => paper[1] >= 2)
     .map((paper) => paper[0]);
-  console.log("4: ", acceptedPapers);
+  // console.log("4: ", acceptedPapers);
 
   const paperList = document.querySelector(`#${paperListID}`); // find the list
   // console.log("SMTH: ", paperList);
@@ -205,11 +203,11 @@ function loadAcceptedPapers(paperListID) {
     console.log("There are no accpeted papers");
     return;
   }
-  acceptedPapers.forEach((p) => console.log(p));
+  // acceptedPapers.forEach((p) => console.log(p));
   acceptedPapers.forEach(
     (paper) =>
       (listHTML += `
-        <option value="${paper.title}">${paper.title}</option>
+        <option value="${paper.paperID}">${paper.title}</option>
         `)
   );
   paperList.innerHTML = listHTML;
@@ -222,23 +220,22 @@ function loadAcceptedPapers(paperListID) {
 //load presenter========================================
 
 async function loadPresenters(presenterListID, paperListID) {
-  z;
+  // get the selected paper ID from the dropdown menu
+  const selectedPaperID = await document.querySelector(paperListID).value;
+  // console.log("PAPER: ",selectedPaperID);
+  // get all papers from local storage
+  papersloc = JSON.parse(localStorage.papersloc);
+  // get the selected paper object
+  const selectedPaper = papersloc.find(
+    (paper) => paper.paperID == selectedPaperID
+  );
+  // console.log(selectedPaper.authors);
+
   //try to get authors to be loaded in select presenter
+  const presentersIDs = selectedPaper.authors;
 
   // Get all users from local storage
   usersloc = JSON.parse(localStorage.usersloc);
-  // Get all papers from local storage
-  // load the file reviewPapers.html first to get access to the papersloc
-  papersloc = JSON.parse(localStorage.papersloc);
-  // console.log("1: ", papersloc);
-
-  // find the presenters IDs from the paper objects
-  const presentersIDs = papersloc.map((paper) => paper.presenterID);
-  // console.log("PRES IDS: ",presentersIDs);
-
-  // const authors = usersloc.authors;
-  // console.log(authors);
-
   // find the presenters objects from presentersIDs
   const presenters = presentersIDs.map((presID) =>
     usersloc.find((user) => +user.id === +presID)
@@ -258,17 +255,13 @@ async function loadPresenters(presenterListID, paperListID) {
         `)
   );
   presenterList.innerHTML = presHTML;
-
-  //Here will be for the button: 'Submit Conference Schedule'
-  const submitButton = document.querySelector('buttons input[type="submit"]');
-  submitButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    console.log('Submit button clicked!');
-    //FIRST WE STORE NEW DATES:==============================================
-    
-    
-  });
-
-
-
 }
+
+
+//Here will be for the button: 'Submit Conference Schedule'
+const submitButton = document.querySelector('#submitConfBtn');
+submitButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  console.log("Submit button clicked!");
+  //FIRST WE STORE NEW DATES:==============================================
+});
