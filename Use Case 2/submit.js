@@ -1,6 +1,7 @@
+import {fs} from '/fs-extra'
 // // Imports
 // const papersUrl = "../../papers.json"; 
-const usersJson = "users.json";
+const usersJson = '../json/users.json';
 const institutionsJson = '../json/institutions.json';
 const papersJson = '../json/papers.json';
 
@@ -42,38 +43,45 @@ let currentLogedIn
 
 
 const form = document.querySelector("#submitForm");
-const institutionsList = document.querySelector("#institutions");
+let institutionsList = document.querySelectorAll(".institutions");
 const addButton = document.querySelector('.addAuthorBt')
 const authorsList = document.querySelector('.authorsList')
 // addButton.addEventListener('click',addAuthor)
 // const password = document.querySelector("#password");
 // const loginButton = document.querySelector("#login");
 
-// form.addEventListener('submit',submit)
 
-institutionsList.addEventListener('click',loadInstitutions)
+//Loop event listener for all authors (through the institutionsList)
+institutionsList.forEach(institution => institution.addEventListener('focus',loadInstitutions))
+document.querySelector(".institutions").addEventListener('focus',loadInstitutions)
+
 const mainContent = document.getElementById('main-content');
 const presenterList = document.querySelector('#presenter')
-presenterList.addEventListener('click',loadPresenters)
+presenterList.addEventListener('focus',loadPresenters)
 // const submitButton = document.querySelector('#submitButton')
 form.addEventListener('submit', submitForm)
 
+
+//PERFECTO
 async function loadInstitutions() {
+    //gotta take into consideration if one author or multiple >> by default consider multiple
+
     const institutions  = await (await fetch(institutionsJson)).json();
     // console.log(institutions);
     let instHTML=''
     // let instNames = institutions.map(inst=> inst.name)
-    // console.log(instNames);
-
+    
     institutions.forEach(inst=>
         instHTML+=`
         <option value="${inst.code}">${inst.name}</option>
         `
         )
-    institutionsList.innerHTML=instHTML
+        //loop through all authors & give each one full list of institutions
+        institutionsList.forEach( each =>each.innerHTML=instHTML)
 
 }
 
+//PERFECTO
 function addAuthor() {
     const authorNumber = document.querySelectorAll('.author').length+1
     let authorHTML =`
@@ -87,11 +95,11 @@ function addAuthor() {
         <input type="text" name="author${authorNumber}LasN" id="author${authorNumber}LasN">
 
         <label for="email"> Email:</label>
-        <input type="email" name="auth${authorNumber}Email" id="auth${authorNumber}Email">
+        <input type="email" class="email" name="auth${authorNumber}Email" id="auth${authorNumber}Email">
 
         <label for="institutions"> Affiliation:</label>
-        <select name="institutions" id="institutions">
-        <option value="" disabled selected>Select your institution</option>
+        <select name="institutions" class="institutions">
+        <option value="" disabled selected >Select your institution</option>
             <!-- here to uplaod the institutions -->
         </select>
         <br>
@@ -108,8 +116,15 @@ function addAuthor() {
     </div>
     `
     authorsList.innerHTML+=authorHTML
+
+    //should update the institutionsList to "observe" the new added author & addEventListener
+    //PERFECTO
+    institutionsList = document.querySelectorAll(".institutions");
+    institutionsList.forEach(institution => institution.addEventListener('focus',loadInstitutions))
+
 }
 
+//PERFECTO, but blem when deleting a previous one > number not re-set
 function deleteAuthor(authorNumber) {
     const currentauthors = Array.from(document.querySelectorAll('.author'))
     //Since a paper can't have 0 authors
@@ -122,6 +137,7 @@ function deleteAuthor(authorNumber) {
     // }
 }
 
+//PERFECTO
 function loadPresenters() {
     const authorsNumber = document.querySelectorAll('.author').length
     let testPresenters=[]
@@ -161,34 +177,82 @@ function loadPresenters() {
 
 async function submitForm(event) {
     event.preventDefault()
-    const papers  = await (await fetch(institutionsJson)).json();
+    //why this papers??? what's the relation with institutionsJson
+    const papers  = await (await fetch(papersJson)).json();
     console.log(papers.length);
-
     const paperTitle=document.querySelector('#title')
     const paperAbstract = document.querySelector('#paper-abstract')
     const paperPresenterID = document.querySelector('#presenter')
     const paperPdfLink = document.querySelector('#file')
+    console.log(paperPdfLink.value);
     
     //save authors in paperAuthors (only their id???)
-    saveAuthors()
-
+    const authorsID= await (saveAuthors())
+    console.log(authorsID);
     let newPaper = {
         paperID: papers.length+1,
         title: paperTitle.value,
         abstract: paperAbstract.value,
+        authors: authorsID,
         //authors
         presenterID: paperPresenterID.value,
         pdfLink: paperPdfLink.value
-        //reviews are added on the fly when done
-
+        //reviews are added on the fly when done, no need to include them now
+        
     }
     //save this new paper in the JSON file
 
-    //display confirmation message
+    // const fs = require('fs')
+    const paper = JSON.stringify(newPaper)
+    await fs.writeJSON('papersJson',newPaper)
+    // => {
+    //     if (err) {
+    //       throw err
+    //     }
+    //     //display confirmation message
+    //     console.log('JSON data is saved.')
+    //   })
 
+      
 }
 
-function saveAuthors() {
+//PERFECTO
+//in typical scenario, would check: full name & email
+async function saveAuthors() {
+    //get the number of authors
+    const authorEmail = document.querySelectorAll('.email')
+    const authorsEmails = []
+    for (let index = 0; index < authorEmail.length; index++) {
+        authorsEmails[index]= authorEmail[index].value  
+    }
+    console.log(authorsEmails);
+    const users  = await (await fetch(usersJson)).json();//users is an array
+
+    let authorsID =[]
+
+    //looping for each email
+    for (let index = 0; index < authorsEmails.length; index++) {
+        let id=0
+        let userIndex=0
+       
+        //loop through all authors & save them in an array: only their IDs >> should 
+        while (userIndex<users.length) {
+            // compare submitted email with users.json's emails
+            if (users[userIndex].email==authorsEmails[index]) {
+                //check if users is an array (starting from 0)
+                id = userIndex+1
+                authorsID[index]=id
+            }
+            userIndex+=1
+        }
+
+        if (id==0) {
+            console.log("email not found");
+            return false
+        }
+    }
+    return authorsID
+
     
 }
 
