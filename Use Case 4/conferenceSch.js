@@ -156,12 +156,16 @@ function formToObject(form) {
 //=============================================
 //DeleteButton
 function handleDeleteSchedule(schedID){
-  console.log("Delete called "); // The '+' here is to parse the string to number
-  const index = mySchedules.findIndex((sch) => +sch.id === schedID);
-  //using splice to delete, go index and delete 1 element
-  mySchedules.splice(index, 1);
-  // console.log("Secret: ",mySchedules);
-  localStorage.mySchedules = JSON.stringify(mySchedules); //updates the localstorage array myRecipes
+  e.preventDefault()
+  console.log("SEDEA: ",schedID);
+  const schedules = JSON.parse(localStorage.mySchedules);
+  // Index of schedule to be deleted
+  const schedIndex = schedules.findIndex(sched => sched.schID == schedID )
+  // delete schedule from array
+  schedules.splice(schedIndex,1);
+  // store in local storage updated array
+  localStorage.setItem("mySchedules",JSON.stringify(schedules))
+  // load page again
   loadSchedules();
 }
 

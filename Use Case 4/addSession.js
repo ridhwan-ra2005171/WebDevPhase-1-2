@@ -1,6 +1,9 @@
 let myLocations = [];
 schDates = JSON.parse(localStorage.schDates); //fetching my localstorage for dates
 
+let mySchedules = JSON.parse(localStorage.mySchedules); //fetching my localstorage for schedules
+
+
 // Go-back button
 const backBtn = document.querySelector("#go-back");
 
@@ -40,12 +43,12 @@ async function loadSessionForm(counter) {
       </select> 
       <div class="timeform"> 
         <label for="fromTime" 
-          >Start Time: <input type="time" name="fromTime-${counter}" id="fromTime" 
+          >Start Time: <input type="time" name="fromTime-${counter}" id="fromTime-${counter}" 
         /></label> 
         <label for="endTime" 
-          >End Time: <input type="time" name="endTime-${counter}" id="endTime" /> 
+          >End Time: <input type="time" name="endTime-${counter}" id="endTime-${counter}" /> 
         </label> 
-      </div> 
+      </div>  
       <input  
             id="deleteButton-${counter}"  
             type="button" class="btn delete-btn submit-btn" onclick="deleteSession('sessionform-${counter}')" name="deleteSessBtn" value="Remove Session">
@@ -78,7 +81,7 @@ async function loadSessionForm(counter) {
 var dateInput = document.getElementById("cDate");
 let formattedDate; //we store date selected here
 //This function will return date
-function getDateFiltered(){
+function getDateFiltered() {
   var selectedDate = dateInput.value;
 
   // Split the date string by hyphens
@@ -149,7 +152,6 @@ function showInfo(data) {
   // console.log(data[0].building, "-", data[0].room); //should return female engineering c07-145
 }
 //================
-
 
 async function handleLocationChange(locationListID) {
   const locationJson = "/json/locations.json";
@@ -283,38 +285,105 @@ function formToObject(form) {
   return data;
 }
 
-
-
 //here to add new dates to localstorage (later to json)
-function addDateSch(dateSelected){
+function addDateSch(dateSelected) {
   console.log("addDate called");
   // console.log(dateSelected);
-  console.log(schDates);
+  // console.log(schDates);
   // e.preventDefault();
-  const newDateObject = {id: Date.now(),confDate: dateSelected}
+  const newDateObject = { id: Date.now(), confDate: dateSelected };
   schDates.push(newDateObject);
-  localStorage.setItem('schDates', JSON.stringify(schDates)); //to save it again to local storage.
+  localStorage.setItem("schDates", JSON.stringify(schDates)); //to save it again to local storage.
 
-  console.log('After:',schDates);
+  // console.log("After:", schDates);
 
   // const newDate = formToObject(e.target)
   // newDate.id = Date.now(); //new id for date
   // newDate.confDate = dateSelected;
   // schDates.push(newDate);
   // console.log("after: ",schDates); //this is to see if added
+}
 
+//---------------------------------------------------------------------------------
+//THESE WILL BE USED TO ADD SCHEDULE
+async function addSession(counterParam) {
+  console.log("addSession is called");
+
+  
+  const myPaperSelect = await document.querySelector(`#paper-${counterParam}`);
+  const paperSelected = myPaperSelect.value;
+  // console.log("selected paper= ", paperSelected);
+
+  const myPresenterSelect = await document.querySelector(
+    `#presenter-${counterParam}`
+  );
+  const presenterSelected = myPresenterSelect.value;
+  // console.log("selected presenter= ", presenterSelected);
+
+  const myLocationSelect = await document.querySelector(`#location-${counterParam}`);
+  const locationSelected = myLocationSelect.value;
+  // console.log("selected location= ", locationSelected);
+
+  const myStartTime = await document.querySelector(`#fromTime-${counterParam}`);
+  const startTimeSelected = myStartTime.value;
+  // console.log("selected ST= ", startTimeSelected);
+
+
+  const myEndTime = await document.querySelector(`#endTime-${counterParam}`);
+  const endTimeSelected = myEndTime.value;
+  // console.log("selected ET= ", endTimeSelected);
+
+
+  sessionObj = {"sesID": Date.now(),
+  "title": "myTitle6",
+  "location": locationSelected,
+  "paperID": paperSelected,
+  "presenterID": presenterSelected,
+  "fromTime": startTimeSelected,
+  "endTime": endTimeSelected};
+console.log("SESS obj: ",sessionObj);
+
+
+
+
+  // console.log("mysession function: ",mySessions);
+  return sessionObj;
+}
+
+async function collectSessions(){
+  let mySessions = [];
+
+  for (let index = 1; index <= counter; index++) {
+  const sess = await addSession(index);
+  mySessions[index] = sess;
+    console.log("SESS: ",sess);
+  }
+
+
+  return mySessions;
 }
 
 
-
 //Here will be for the button: 'Submit Conference Schedule'
-const submitButton = document.querySelector('#submitConfBtn');
-submitButton.addEventListener("click", function (event) {
+const submitButton = document.querySelector("#submitConfBtn");
+submitButton.addEventListener("click", async function (event) {
   event.preventDefault();
   console.log("Submit button clicked!");
   //FIRST WE STORE NEW DATES:==============================================
-  console.log(getDateFiltered()); //to see if i can get date
+  // console.log(getDateFiltered()); //to see if i can get date
   addDateSch(getDateFiltered());
+
+  // console.log(counter);
+  //Now we try to store the whole schedule:
   
+  // console.log("monkey session: ",addSession);
+  
+  let tempCounter = counter;
+  
+  const newScheduleObject = { schID: Date.now(), date: getDateFiltered(),sessions: await collectSessions()};
+
+  mySchedules.push(newScheduleObject);
+  localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to 
+
 
 });
