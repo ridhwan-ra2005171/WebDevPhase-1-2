@@ -85,7 +85,7 @@ function loadSessions(session) {
   const presenter = usersloc.find(
     (pres) => pres.id === parseInt(session.presenterID)
   );
-  console.log("users: ", usersloc);
+  // console.log("users: ", usersloc);
   const presenterDetails = `${presenter.first_name} ${presenter.last_name}`; // a stringf of presenter's full name
   return `
   <tr>
@@ -156,7 +156,8 @@ function formToObject(form) {
 //=============================================
 //DeleteButton
 function handleDeleteSchedule(schedID){
-  e.preventDefault()
+  // e.preventDefault()
+
   console.log("SEDEA: ",schedID);
   const schedules = JSON.parse(localStorage.mySchedules);
   // Index of schedule to be deleted
