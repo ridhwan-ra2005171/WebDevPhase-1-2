@@ -1,101 +1,100 @@
 // // Imports
-// const papersUrl = "../../papers.json"; 
+// const papersUrl = "../../papers.json";
 const usersJson = "users.json";
 
 let papersloc = null;
 let usersloc = null;
 
-let currentLogedIn
-
+let currentLogedIn;
 
 const form = document.querySelector("#loginForm");
 const email = document.querySelector("#email");
 const password = document.querySelector("#password");
 const loginButton = document.querySelector("#login");
 
-form.addEventListener('submit',login)
+form.addEventListener("submit", login);
 
-
-const mainContent = document.getElementById('main-content');
+const mainContent = document.getElementById("main-content");
 
 //to Edit
 async function loadPage(pageUrl) {
-    let page = await fetch(pageUrl)
-    let pageHTMLContent = await page.text()
-    mainContent.innerHTML=pageHTMLContent
-    
-    if (pageUrl=='/Use Case 4/reviewPaper/reviewPaper.html') {
-        divRecipes = document.querySelector('#recipes')
-        loadRecipes()    
-    }
-    
-    if(pageUrl=='edit_page.html') {
-        form  = document.querySelector('#add-recipe-form')
-        form.addEventListener('submit',addRecipe)
-    }
-    
+  let page = await fetch(pageUrl);
+  let pageHTMLContent = await page.text();
+  mainContent.innerHTML = pageHTMLContent;
+
+  if (pageUrl == "/Use Case 4/reviewPaper/reviewPaper.html") {
+    divRecipes = document.querySelector("#recipes");
+    loadRecipes();
+  }
+
+  if (pageUrl == "edit_page.html") {
+    form = document.querySelector("#add-recipe-form");
+    form.addEventListener("submit", addRecipe);
+  }
 }
 
-
-
 function getFormData(form) {
-    const formData = new FormData(form);
-    console.log(Object.fromEntries(formData.entries()));
-    return Object.fromEntries(formData.entries());
+  const formData = new FormData(form);
+  console.log(Object.fromEntries(formData.entries()));
+  return Object.fromEntries(formData.entries());
 }
 
 function login(event) {
-    event.preventDefault()
-    const userTocheck = getFormData(form)
-    currentLogedIn =  findUser(userTocheck)
-      
-    switch (currentLogedIn.role) {
-        case 'reviewer':
-            loadPage('review.html')
-            break;
-        case 'organizer':
-            loadPage('scheduleEdit.html')
-            break;
-        default://author
-            loadPage('submit.html')
-            break;
-    }
+  event.preventDefault();
+  const userTocheck = getFormData(form);
+  currentLogedIn = findUser(userTocheck);
+
+  switch (currentLogedIn.role) {
+    case "reviewer":
+      loadPage("review.html");
+      break;
+    case "organizer":
+      loadPage("scheduleEdit.html");
+      break;
+    default: //author
+      loadPage("submit.html");
+      break;
+  }
 }
 
 //gets name about user > returns its id
 //should check also password
 async function findUser(userTocheck) {
-    // const users = await getData(usersJson);
-    // console.log(email);
-    const users  = await (await fetch(usersJson)).json();
-    // console.log(users);
-    const user = users.find(user=> user['email']==userTocheck.email)
-    if (user!== undefined) {
-        
-    
-    if (user.password==userTocheck.password) {
-          // Added my Mohamad - store the user ID in local storage to be accessed by other js files
-        localStorage.setItem("currUserID",JSON.stringify(user.id));
-        console.log(localStorage.currUSerID);
-        //---------------------------------------------------------
-        console.log(user.id);
-        return user.id
-
-
-    } 
-    // else {
-    //     //better if it's an html response
-    //     password.value=null
-    //     prompt("No email and password combination found, please try again")
-    // }
-
-  
-}
-else {
+  // const users = await getData(usersJson);
+  // console.log(email);
+  const users = await (await fetch(usersJson)).json();
+  // console.log(users);
+  const user = users.find((user) => user["email"] == userTocheck.email);
+  if (user !== undefined) {
+    if (user.password == userTocheck.password) {
+      // Added my Mohamad Allaham - store the user ID in local storage to be accessed by other js files
+      localStorage.setItem("currUserID", JSON.stringify(user.id));
+      console.log("loc: ", localStorage.currUserID);
+      //---------------------------------------------------------
+      console.log(user.id);
+      return user.id;
+    } else {
+      //better if it's an html response
+      password.value = null;
+      swal({
+        title: "No email and password combination found, please try again",
+        icon: "error",
+        buttons: "Ok",
+        closeOnClickOutside: false,
+      });
+    //   prompt("No email and password combination found, please try again");
+    }
+  } else {
     //better if it's an html response
-    password.value=null
-    prompt("No email and password combination found, please try again")
-}
+    password.value = null;
+    swal({
+        title: "No email and password combination found, please try again",
+        icon: "error",
+        buttons: "Ok",
+        closeOnClickOutside: false,
+      });
+    // prompt("No email and password combination found, please try again");
+  }
 }
 //load paper data into page
 // async function getPapers(){
@@ -136,10 +135,9 @@ else {
 //         icon:"warning",
 //         buttons: ["No, stay", "Yes, cancel"],
 //       });
-      
+
 //     // console.log(result);
 //     if (result === true) {
 //         location.href = "../paperDashboard/paperDashboard.html"
-//     } 
+//     }
 // }
-
