@@ -77,10 +77,8 @@ async function loadSessionForm(counter) {
 // Get the date input element
 var dateInput = document.getElementById("cDate");
 let formattedDate; //we store date selected here
-
-// Add an input event listener to the date input
-dateInput.addEventListener("input", function () {
-  // Get the selected date value
+//This function will return date
+function getDateFiltered(){
   var selectedDate = dateInput.value;
 
   // Split the date string by hyphens
@@ -91,9 +89,26 @@ dateInput.addEventListener("input", function () {
   var formattedDate = parts[2] + "/" + parts[1] + "/" + parts[0];
 
   // Output the formatted date to the console
-  console.log("Formatted date:", formattedDate);
-  // console.log("testing deez dates:",schDates)
-});
+  // console.log("Formatted date:", formattedDate);
+  return formattedDate;
+}
+
+// Add an input event listener to the date input
+// dateInput.addEventListener("input", function () {
+//   // Get the selected date value
+//   var selectedDate = dateInput.value;
+
+//   // Split the date string by hyphens
+//   var parts = selectedDate.split("-"); //by default its separated by --
+
+//   // Rearrange the parts to form the desired date format
+//   //we want to match it with the json file like dd/mm/yyyy
+//   var formattedDate = parts[2] + "/" + parts[1] + "/" + parts[0];
+
+//   // Output the formatted date to the console
+//   console.log("Formatted date:", formattedDate);
+//   // console.log("testing deez dates:",schDates)
+// });
 
 // Event listener to the add more sessions button ---------------
 const addSessionBtn = document.querySelector("#addSessionBtn");
@@ -200,7 +215,7 @@ function loadAcceptedPapers(paperListID) {
 
   if (acceptedPapers.length === 0) {
     // if there is no accepted papers, break outta the function
-    console.log("There are no accpeted papers");
+    console.log("There are no accepted papers");
     return;
   }
   // acceptedPapers.forEach((p) => console.log(p));
@@ -257,6 +272,40 @@ async function loadPresenters(presenterListID, paperListID) {
   presenterList.innerHTML = presHTML;
 }
 
+function formToObject(form) {
+  const formData = new FormData(form);
+  console.log(formData);
+  const data = {}; //data object
+  for (const [key, value] of formData) {
+    data[key] = value;
+  }
+  console.log(data);
+  return data;
+}
+
+
+
+//here to add new dates to localstorage (later to json)
+function addDateSch(dateSelected){
+  console.log("addDate called");
+  // console.log(dateSelected);
+  console.log(schDates);
+  // e.preventDefault();
+  const newDateObject = {id: Date.now(),confDate: dateSelected}
+  schDates.push(newDateObject);
+  localStorage.setItem('schDates', JSON.stringify(schDates)); //to save it again to local storage.
+
+  console.log('After:',schDates);
+
+  // const newDate = formToObject(e.target)
+  // newDate.id = Date.now(); //new id for date
+  // newDate.confDate = dateSelected;
+  // schDates.push(newDate);
+  // console.log("after: ",schDates); //this is to see if added
+
+}
+
+
 
 //Here will be for the button: 'Submit Conference Schedule'
 const submitButton = document.querySelector('#submitConfBtn');
@@ -264,4 +313,8 @@ submitButton.addEventListener("click", function (event) {
   event.preventDefault();
   console.log("Submit button clicked!");
   //FIRST WE STORE NEW DATES:==============================================
+  console.log(getDateFiltered()); //to see if i can get date
+  addDateSch(getDateFiltered());
+  
+
 });
