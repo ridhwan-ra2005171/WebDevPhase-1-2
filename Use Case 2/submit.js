@@ -1,10 +1,12 @@
-import {fs} from '/fs-extra'
+// import {fs} from '/fs-extra'
 // // Imports
 // const papersUrl = "../../papers.json"; 
 const usersJson = '../json/users.json';
 const institutionsJson = '../json/institutions.json';
 const papersJson = '../json/papers.json';
 
+let papers=[]
+localStorage.setItem("papers",JSON.stringify(papers))
 
 let papersloc = null;
 let usersloc = null;
@@ -53,7 +55,7 @@ const authorsList = document.querySelector('.authorsList')
 
 //Loop event listener for all authors (through the institutionsList)
 institutionsList.forEach(institution => institution.addEventListener('focus',loadInstitutions))
-document.querySelector(".institutions").addEventListener('focus',loadInstitutions)
+// document.querySelector(".institutions").addEventListener('focus',loadInstitutions)
 
 const mainContent = document.getElementById('main-content');
 const presenterList = document.querySelector('#presenter')
@@ -65,7 +67,7 @@ form.addEventListener('submit', submitForm)
 //PERFECTO
 async function loadInstitutions() {
     //gotta take into consideration if one author or multiple >> by default consider multiple
-
+// console.log("check");
     const institutions  = await (await fetch(institutionsJson)).json();
     // console.log(institutions);
     let instHTML=''
@@ -138,7 +140,7 @@ function deleteAuthor(authorNumber) {
 }
 
 //PERFECTO
-function loadPresenters() {
+async function loadPresenters() {
     const authorsNumber = document.querySelectorAll('.author').length
     let testPresenters=[]
     for (let index = 1; index <= authorsNumber; index++) {
@@ -151,6 +153,10 @@ function loadPresenters() {
         }
         testPresenters[index-1]=pres
     }
+
+    //adding the id of the presenter
+
+
     // console.log("test", testPresenters);
     //save actual authors in the paperAuthors
 
@@ -159,11 +165,17 @@ function loadPresenters() {
     //but gotta make sure to change paperAuthor if any change occurs (so don't validate a presenter that has been deleted)
     //maybe include it as a check statement when submitting
     //if false reset presenter to null
-    const presenters  = testPresenters
+    const presentersID  = await (findUserByName(testPresenters) )
+    let presenters=[]
+    for (let index = 0; index < testPresenters.length; index++) {
+       presenters[index]=testPresenters[index]
+       presenters[index].id=presentersID[index]
+        
+    }
     let presentHTML=''
     // let presentNames = presentitutions.map(present=> present.name)
     // console.log(presentNames);
-
+console.log("presenters: ",presenters);
     presenters.forEach(present=>
         presentHTML+=`
         <option value="${present.id}">${present.first_name} ${present.last_name}</option>
@@ -172,7 +184,35 @@ function loadPresenters() {
         presenterList.innerHTML=presentHTML
 }
 
+//gets an array of user obj{fname,lname}
+async function findUserByName(array) {
+    const users  = await (await fetch(usersJson)).json();//users is an array
 
+    let authorsID =[]
+
+    //looping for each email
+    for (let index = 0; index < array.length; index++) {
+        let id=0
+        let userIndex=0
+       
+        //loop through all authors & save them in an array: only their IDs >> should 
+        while (userIndex<users.length) {
+            // compare submitted email with users.json's emails
+            if (users[userIndex]["first_name"]==array[index].first_name) {
+                //check if users is an array (starting from 0)
+                id = userIndex+1
+                authorsID[index]=id
+            }
+            userIndex+=1
+        }
+
+        if (id==0) {
+            console.log("email not found");
+            return false
+        }
+    }
+    return authorsID
+}
 
 
 async function submitForm(event) {
@@ -195,16 +235,27 @@ async function submitForm(event) {
         abstract: paperAbstract.value,
         authors: authorsID,
         //authors
-        presenterID: paperPresenterID.value,
+        presenterID: paperPresenterID.options[paperPresenterID.selectedIndex].value,
         pdfLink: paperPdfLink.value
         //reviews are added on the fly when done, no need to include them now
         
     }
+
+    console.log(paperPresenterID);
+    //can add a checker to check if these authors already submitted a paper before, or any other constraint (title name...etc)
+    //save paper in localStorage
+    let papersArray = JSON.parse(localStorage.getItem("papers"))
+    console.log(papersArray);
+    papersArray.push(newPaper)
+    localStorage.setItem("papers",JSON.stringify(papersArray))
+
     //save this new paper in the JSON file
 
+
+
     // const fs = require('fs')
-    const paper = JSON.stringify(newPaper)
-    await fs.writeJSON('papersJson',newPaper)
+    // const paper = JSON.stringify(newPaper)
+    // await fs.writeJSON('papersJson',newPaper)
     // => {
     //     if (err) {
     //       throw err
@@ -218,6 +269,7 @@ async function submitForm(event) {
 
 //PERFECTO
 //in typical scenario, would check: full name & email
+//can make it dynamic to accept email or name as parameters
 async function saveAuthors() {
     //get the number of authors
     const authorEmail = document.querySelectorAll('.email')
