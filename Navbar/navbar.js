@@ -5,7 +5,7 @@ console.log(currUserID);
 // add the style sheet of the navbar to the html files
 const styleLink = '<link rel="stylesheet" href="/Navbar/navbar.css">';
 document.head.insertAdjacentHTML("beforeend", styleLink);
-
+// console.log(document.head.innerHTML);
 // variables 
 let users = [];
 let currUser = null;
