@@ -96,13 +96,15 @@ function loadSessions(session) {
         </tr>
   `;
 }
+// onclick="handleUpdateSchedule(${schedule.schID})"
 
 function scheduleToHTML(schedule) {
   // console.log("sched: ", schedule);
   return `
   <div class="conf-card">
     <div class="card-header">
-      <a href="#"><h4>${schedule.date}</h4></a>
+      <a href="#" class="confDateLabel"><h4>${schedule.date}</h4></a>
+      <button id="update-btn" class="update-btn" onclick="handleUpdateSchedule(${schedule.schID})">Update Schedule</i></button>
       <button id="delete-btn" class="delete-btn" onclick="handleDeleteSchedule(${schedule.schID})"> <i class="fa fa-trash"></i></button>
 
     </div>
@@ -170,7 +172,7 @@ function handleDeleteSchedule(schedID){
   loadSchedules();
 }
 
-//====
+//=============================================
 
 //===USE CASE 5 date filter:
 const dateJson = "../json/conference-dates.json";
@@ -218,38 +220,131 @@ function handleSortDate() {
 
 
 
-  //----------------------------------------------------------------------------
+  //------------------------------------------------------------------------------------------------------
   //Update Conference is triggered here and will be passed to addSession
-  function loadObjectToForm(obj) {
-    // Populate form fields
-    document.getElementById('name').value = obj.name;
-    document.getElementById('email').value = obj.email;
+
+//This section is for the update
+// updateSchedule()
+
+async function handleUpdateSchedule(schedID){
+
+
+  const schedules = JSON.parse(localStorage.mySchedules);
+  // Index of schedule to be deleted
+  const schedIndex = schedules.findIndex(sched => sched.schID == schedID )
+  // delete schedule from array
+  console.log("index of selected schedule:", schedIndex);
+  // store in local storage updated array
+  // load page again
+}
+
+
+
+// async function updateSchedule(scheduleID) {
+//   //so when updateRecipe is called, the state = update will be passed to loadPage
+//   await loadPage("edit_page.html", "update"); //calls loadpage, w state = 'update'
+
+//   // Change the add button to update
+//   const buttonToBeUpdated = document.querySelector("#add-recipe-btn");
+//   buttonToBeUpdated.value = "Update Recipe";
+//   console.log(buttonToBeUpdated);
+  
+//   // finding object via matching ID
+//   const index = myRecipes.findIndex((recipe) => +recipe.id === recipeId);
+//   let recipe = myRecipes[index];
+//   loadToForm(recipe);// to call loadform and load selected recipe to the form(using object to form method)
+// }
+
+
+
+
+// //this is basically turning the object recipe to form, so it autofills the form so we can update it
+// function loadToForm(object) {
+//   console.log(form);
+//   const entries = Object.entries(object);  //entries is an array of 2D array
+//   for (const [key, value] of entries) {
+//     if (key === "id") {
+//       document.querySelector("#id").value = value;
+//     } else if (key === "name") {
+//       document.querySelector("#name").value = value;
+//       console.log(value);
+//     } else if (key === "image") document.querySelector("#image").value = value;
+//     else if (key === "ingredients")
+//       document.querySelector("#ingredients").value = value;
+//     else if (key === "instructions")
+//       document.querySelector("#instructions").value = value;
+//   }
+// }
+
+// function saveUpdate(e) {
+//   e.preventDefault();
+//   const updatedRecipe = formToObject(e.target);
+
+//   // first find the object from its ID
+//   const index = myRecipes.findIndex((r) => r.id === updatedRecipe.id);
+//   myRecipes[index] = updatedRecipe;
+
+//   localStorage.myRecipes = JSON.stringify(myRecipes); // store the myRecipes in local storage
+//   window.location.href = "index.html"; // return back to the home after submitting
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // function loadObjectToForm(obj) {
+  //   // Populate form fields
+  //   document.getElementById('name').value = obj.name;
+  //   document.getElementById('email').value = obj.email;
     
-    // Select appropriate option in dropdown list
-    let statusDropdown = document.getElementById('status');
-    let options = statusDropdown.options;
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].value === obj.status) {
-        options[i].selected = true;
-        break;
-      }
-    }
+  //   // Select appropriate option in dropdown list
+  //   let statusDropdown = document.getElementById('status');
+  //   let options = statusDropdown.options;
+  //   for (let i = 0; i < options.length; i++) {
+  //     if (options[i].value === obj.status) {
+  //       options[i].selected = true;
+  //       break;
+  //     }
+  //   }
   
-    document.getElementById('recordId').value = obj.id;
+  //   document.getElementById('recordId').value = obj.id;
   
-    // Show form
-    document.getElementById('myForm').style.display = 'block';
-  }
+  //   // Show form
+  //   document.getElementById('myForm').style.display = 'block';
+  // }
   
-  // Example object
-  let exampleObj = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    status: 'inactive',
-    id: 123
-  };
+  // // Example object
+  // let exampleObj = {
+  //   name: 'John Doe',
+  //   email: 'john.doe@example.com',
+  //   status: 'inactive',
+  //   id: 123
+  // };
   
-  // Load object to form
-  loadObjectToForm(exampleObj);
+  // // Load object to form
+  // loadObjectToForm(exampleObj);
+
+
+
+
 
 }
