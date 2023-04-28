@@ -217,4 +217,39 @@ function handleSortDate() {
   }
 
 
+
+  //----------------------------------------------------------------------------
+  //Update Conference is triggered here and will be passed to addSession
+  function loadObjectToForm(obj) {
+    // Populate form fields
+    document.getElementById('name').value = obj.name;
+    document.getElementById('email').value = obj.email;
+    
+    // Select appropriate option in dropdown list
+    let statusDropdown = document.getElementById('status');
+    let options = statusDropdown.options;
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].value === obj.status) {
+        options[i].selected = true;
+        break;
+      }
+    }
+  
+    document.getElementById('recordId').value = obj.id;
+  
+    // Show form
+    document.getElementById('myForm').style.display = 'block';
+  }
+  
+  // Example object
+  let exampleObj = {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    status: 'inactive',
+    id: 123
+  };
+  
+  // Load object to form
+  loadObjectToForm(exampleObj);
+
 }
