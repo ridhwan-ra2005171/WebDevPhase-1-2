@@ -1,5 +1,7 @@
 // Commonly used URLs
 let usersUrl = "../../json/users.json"; //so we can get the presenters
+// import { loadToForm } from "./addSession";
+
 
 //Here we will import json file for presenter + paper
 //also the conference
@@ -220,7 +222,7 @@ function handleSortDate() {
 }
 
 
-  //------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------
   //Update Conference is triggered here and will be passed to addSession
 
 //This section is for the update
@@ -234,47 +236,16 @@ async function handleUpdateSchedule(schedID){
   const schedIndex = schedules.findIndex(sched => sched.schID == schedID )
   // delete schedule from array
   console.log("index of selected schedule:", schedIndex);
-  // store in local storage updated array
-  // load page again
+  console.log(mySchedules[schedIndex]);
+  //we will pass this object from array selected
+  
+  loadToForm(mySchedules[schedIndex]); //we load this object to the form
+
+
 }
 
 
 
-// async function updateSchedule(scheduleID) {
-//   //so when updateRecipe is called, the state = update will be passed to loadPage
-//   await loadPage("edit_page.html", "update"); //calls loadpage, w state = 'update'
-
-//   // Change the add button to update
-//   const buttonToBeUpdated = document.querySelector("#add-recipe-btn");
-//   buttonToBeUpdated.value = "Update Recipe";
-//   console.log(buttonToBeUpdated);
-  
-//   // finding object via matching ID
-//   const index = myRecipes.findIndex((recipe) => +recipe.id === recipeId);
-//   let recipe = myRecipes[index];
-//   loadToForm(recipe);// to call loadform and load selected recipe to the form(using object to form method)
-// }
-
-
-
-
-// //this is basically turning the object recipe to form, so it autofills the form so we can update it
-// function loadToForm(object) {
-//   console.log(form);
-//   const entries = Object.entries(object);  //entries is an array of 2D array
-//   for (const [key, value] of entries) {
-//     if (key === "id") {
-//       document.querySelector("#id").value = value;
-//     } else if (key === "name") {
-//       document.querySelector("#name").value = value;
-//       console.log(value);
-//     } else if (key === "image") document.querySelector("#image").value = value;
-//     else if (key === "ingredients")
-//       document.querySelector("#ingredients").value = value;
-//     else if (key === "instructions")
-//       document.querySelector("#instructions").value = value;
-//   }
-// }
 
 // function saveUpdate(e) {
 //   e.preventDefault();
@@ -311,37 +282,7 @@ async function handleUpdateSchedule(schedID){
 
 
 
-  // function loadObjectToForm(obj) {
-  //   // Populate form fields
-  //   document.getElementById('name').value = obj.name;
-  //   document.getElementById('email').value = obj.email;
-    
-  //   // Select appropriate option in dropdown list
-  //   let statusDropdown = document.getElementById('status');
-  //   let options = statusDropdown.options;
-  //   for (let i = 0; i < options.length; i++) {
-  //     if (options[i].value === obj.status) {
-  //       options[i].selected = true;
-  //       break;
-  //     }
-  //   }
-  
-  //   document.getElementById('recordId').value = obj.id;
-  
-  //   // Show form
-  //   document.getElementById('myForm').style.display = 'block';
-  // }
-  
-  // // Example object
-  // let exampleObj = {
-  //   name: 'John Doe',
-  //   email: 'john.doe@example.com',
-  //   status: 'inactive',
-  //   id: 123
-  // };
-  
-  // // Load object to form
-  // loadObjectToForm(exampleObj);
+
 
 
 
