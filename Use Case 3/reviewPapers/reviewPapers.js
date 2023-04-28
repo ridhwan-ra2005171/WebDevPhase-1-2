@@ -6,7 +6,7 @@ let usersUrl = "/json/users.json";
 
 // assuming we have the global variable USER_ID
 // we set it to 12 for testing sake only
-const USER_ID = 8;
+const USER_ID = 12;
 localStorage.setItem("USER_ID",USER_ID);
 
 
@@ -191,14 +191,14 @@ function cardTemplate(paper) {
   </section>
 
   <section class="abstract-container">
-    <a id="abstract-links" href="#" class="link">
+    <a id="abstract-links" href="#" class="purple-link link">
       <h3 class="static">Abstract <i id="caret-icon" class="fa fa-caret-down"></i></h3>
     </a>
     <p id="abstract-content" class="abstract-content smalldesc" style="display: none;">${paper.abstract}</p>
   </section>
 
   <footer id="card-footer" class="card-footer">
-    <a href="${paper.pdfLink}" id="download-link" class="link" title="Right-click and hit Save to download PDF" download target="_blank">Download Paper &nbsp<i class="fa fa-arrow-down"></i></a>
+    <a href="${paper.pdfLink}" id="download-link" class="pink-link link" title="Right-click and hit Save to download PDF" download target="_blank">Download Paper &nbsp<i class="fa fa-arrow-down"></i></a>
     <button id="reviewButton" class="btn reviewButton" onclick="loadPage('../reviewForm/reviewForm.html','${
       paper.paperID
     }')">Review</button>
