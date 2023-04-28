@@ -217,7 +217,7 @@ function handleSortDate() {
       .map((schedule) => scheduleToHTML(schedule))
       .join("");
   }
-
+}
 
 
   //------------------------------------------------------------------------------------------------------
@@ -347,4 +347,3 @@ async function handleUpdateSchedule(schedID){
 
 
 
-}
