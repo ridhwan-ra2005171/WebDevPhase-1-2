@@ -1,3 +1,8 @@
+
+html * {
+  font-family: 'Roboto Slab', serif;
+}
+
 #add-conference-form label{
     font-weight: bolder;
 }
