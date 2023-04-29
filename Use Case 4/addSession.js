@@ -8,6 +8,7 @@ const backBtn = document.querySelector("#go-back");
 
 backBtn.addEventListener("click", returnToPrevPage);
 
+//This method is to return to the main page after modifying/ adding
 async function returnToPrevPage(e) {
   e.preventDefault();
   // if (submitClicked === false) {
@@ -29,6 +30,8 @@ let counter = 1;
 async function loadSessionForm(counter) {
   const html = `<fieldset id="sessionform-${counter}" class="sessionform"> 
     <legend>Create Sessions</legend> 
+    <label>Enter Session Title:</label> 
+      <input type="text" name="title-${counter}" id="title-${counter}" placeholder="ENTER SESSION TITLE">  
         <label>Select Paper:</label> 
       <select name="paper-${counter}" id="paper-${counter}" onchange="loadPresenters('presenter-${counter}','#paper-${counter}')"> 
         <option value="" selected disabled>-Select Paper-</option> 
@@ -308,6 +311,9 @@ function addDateSch(dateSelected) {
 async function addSession(counterParam) {
   console.log("addSession is called");
 
+  const myTitleText = await document.querySelector(`#title-${counterParam}`);
+  const myTitleSelected = myTitleText.value;
+
   const myPaperSelect = await document.querySelector(`#paper-${counterParam}`);
   const paperSelected = myPaperSelect.value;
   // console.log("selected paper= ", paperSelected);
@@ -334,7 +340,7 @@ async function addSession(counterParam) {
 
   sessionObj = {
     sesID: Date.now(),
-    title: paperSelected, //we assume paper is the title
+    title: myTitleSelected, //we assume paper is the title
     location: locationSelected,
     paperID: paperSelected,
     presenterID: presenterSelected,
@@ -350,9 +356,12 @@ async function addSession(counterParam) {
 async function collectSessions() {
   let mySessions = [];
 
-  for (let index = 1; index <= counter; index++) {
+  //we start from 0
+  for (let index = 1, i=0; index <= counter; index++,i++) {
     const sess = await addSession(index);
-    mySessions[index] = sess;
+    //the index points to the (form session number)
+    //whereas the i points to the array in the sessions
+    mySessions[i] = sess;
     console.log("SESS: ", sess);
   }
 
@@ -383,44 +392,45 @@ submitButton.addEventListener("click", async function (event) {
 
   mySchedules.push(newScheduleObject);
   localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to
+  // loadSchedules();
 });
 
 
 
 //THERE IS ISSUE HERE!!!!
 //this is basically turning the schedule object to form, so it autofills the form so we can update it
-export default async function loadToForm(scheduleObj,counterParam) {
-  // console.log(form);
+// export default async function loadToForm(scheduleObj,counterParam) {
+//   // console.log(form);
 
-    let dateInput = document.querySelector('#cDate')
-    dateInput.value = scheduleObj.schID;
+//     let dateInput = document.querySelector('#cDate')
+//     dateInput.value = scheduleObj.schID;
 
-    const myPaperSelect = await document.querySelector(`#paper-${counterParam}`);
-  myPaperSelect.value = scheduleObj.paperID;
-  // console.log("selected paper= ", paperSelected);
+//     const myPaperSelect = await document.querySelector(`#paper-${counterParam}`);
+//   myPaperSelect.value = scheduleObj.paperID;
+//   // console.log("selected paper= ", paperSelected);
 
-  const myPresenterSelect = await document.querySelector(
-    `#presenter-${counterParam}`
-  );
-  myPresenterSelect.value = scheduleObj.presenterID;
-  // const presenterSelected = myPresenterSelect.value;
-  // console.log("selected presenter= ", presenterSelected);
+//   const myPresenterSelect = await document.querySelector(
+//     `#presenter-${counterParam}`
+//   );
+//   myPresenterSelect.value = scheduleObj.presenterID;
+//   // const presenterSelected = myPresenterSelect.value;
+//   // console.log("selected presenter= ", presenterSelected);
 
-  const myLocationSelect = await document.querySelector(
-    `#location-${counterParam}`
-  );
-  myLocationSelect.value = scheduleObj.location;
-  // const locationSelected = myLocationSelect.value;
-  // console.log("selected location= ", locationSelected);
+//   const myLocationSelect = await document.querySelector(
+//     `#location-${counterParam}`
+//   );
+//   myLocationSelect.value = scheduleObj.location;
+//   // const locationSelected = myLocationSelect.value;
+//   // console.log("selected location= ", locationSelected);
 
-  const myStartTime = await document.querySelector(`#fromTime-${counterParam}`);
-  myStartTime.value = scheduleObj.fromTime;
-  // const startTimeSelected = myStartTime.value;
-  // console.log("selected ST= ", startTimeSelected);
+//   const myStartTime = await document.querySelector(`#fromTime-${counterParam}`);
+//   myStartTime.value = scheduleObj.fromTime;
+//   // const startTimeSelected = myStartTime.value;
+//   // console.log("selected ST= ", startTimeSelected);
 
-  const myEndTime = await document.querySelector(`#endTime-${counterParam}`);
-  myEndTime.value = scheduleObj.endTime
-  // const endTimeSelected = myEndTime.value;
-  // console.log("selected ET= ", endTimeSelected);
+//   const myEndTime = await document.querySelector(`#endTime-${counterParam}`);
+//   myEndTime.value = scheduleObj.endTime
+//   // const endTimeSelected = myEndTime.value;
+//   // console.log("selected ET= ", endTimeSelected);
 
-}
+// }
