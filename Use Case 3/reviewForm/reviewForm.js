@@ -33,6 +33,7 @@ const submitBtn = document.querySelector("#submit");
 // Event listeners for buttons
 backBtn.addEventListener("click", returnToPrevPage);
 form.addEventListener("submit", storeForm);
+
 // check if the submit button was clicked, this will be used in returnToPrevPage() function
 // submitBtn.addEventListener("click", function(){submitClicked = true;})
 

@@ -151,11 +151,29 @@ button, input[type="submit"], input[type="radio"], input[type="reset"] {
     cursor:pointer;
 }
 
+input[type="radio"] {
+    margin: .5rem;
+
+}
+
+
+input[type="radio"] + label{
+    /* background-color: #D6C5E5; */
+    /* color: rebeccapurple; */
+    /* font-weight: 800; */
+    /* width: 10rem; */
+    cursor:pointer;
+
+    /* aspect-ratio: 1/1; */
+}
 .delete-btn {
  background-color: rgb(178, 15, 36);
 }
 
 
-@media screen and (min-width: 700px) {
-    
+
+@media  screen and (min-width: 700px){
+    body {
+        /* background-color: #663399; */
+    }
 }
