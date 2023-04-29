@@ -3,6 +3,10 @@ schDates = JSON.parse(localStorage.schDates); //fetching my localstorage for dat
 
 let mySchedules = JSON.parse(localStorage.mySchedules); //fetching my localstorage for schedules
 
+let tempSchdule= JSON.parse(localStorage.tempSchdule); //fetching local for update
+
+// console.log("fetched sch;", tempSchdule)
+
 // Go-back button
 const backBtn = document.querySelector("#go-back");
 
@@ -76,6 +80,7 @@ async function loadSessionForm(counter) {
   // locationList.addEventListener('load', handleLocationChange)
   handleLocationChange(`location-${counter}`);
   loadAcceptedPapers(`paper-${counter}`);
+  loadToForm(tempSchdule,counter);
 }
 
 //event listerner to get conference date-------->
@@ -399,38 +404,59 @@ submitButton.addEventListener("click", async function (event) {
 
 //THERE IS ISSUE HERE!!!!
 //this is basically turning the schedule object to form, so it autofills the form so we can update it
-// export default async function loadToForm(scheduleObj,counterParam) {
-//   // console.log(form);
+async function loadToForm(date,session,counterParam) {
+  // console.log(form);
 
-//     let dateInput = document.querySelector('#cDate')
-//     dateInput.value = scheduleObj.schID;
+    let dateInput = document.querySelector('#cDate')
+    dateInput.value = date;
 
-//     const myPaperSelect = await document.querySelector(`#paper-${counterParam}`);
-//   myPaperSelect.value = scheduleObj.paperID;
-//   // console.log("selected paper= ", paperSelected);
+    const myTitleText = await document.querySelector(`#title-${counterParam}`);
+    myTitleText.value = session.title;
+    const myPaperSelect = await document.querySelector(`#paper-${counterParam}`);
+  myPaperSelect.value = session.paperID;
+  
+  // console.log(myPaperSelect.value);
 
-//   const myPresenterSelect = await document.querySelector(
-//     `#presenter-${counterParam}`
-//   );
-//   myPresenterSelect.value = scheduleObj.presenterID;
-//   // const presenterSelected = myPresenterSelect.value;
-//   // console.log("selected presenter= ", presenterSelected);
+  // console.log("selected paper= ", paperSelected);
 
-//   const myLocationSelect = await document.querySelector(
-//     `#location-${counterParam}`
-//   );
-//   myLocationSelect.value = scheduleObj.location;
-//   // const locationSelected = myLocationSelect.value;
-//   // console.log("selected location= ", locationSelected);
+  const myPresenterSelect = await document.querySelector(
+    `#presenter-${counterParam}`
+  );
+  myPresenterSelect.value = session.presenterID;
+  // const presenterSelected = myPresenterSelect.value;
+  // console.log("selected presenter= ", presenterSelected);
 
-//   const myStartTime = await document.querySelector(`#fromTime-${counterParam}`);
-//   myStartTime.value = scheduleObj.fromTime;
-//   // const startTimeSelected = myStartTime.value;
-//   // console.log("selected ST= ", startTimeSelected);
+  const myLocationSelect = await document.querySelector(
+    `#location-${counterParam}`
+  );
+  myLocationSelect.value = session.location;
+  // const locationSelected = myLocationSelect.value;
+  // console.log("selected location= ", locationSelected);
 
-//   const myEndTime = await document.querySelector(`#endTime-${counterParam}`);
-//   myEndTime.value = scheduleObj.endTime
-//   // const endTimeSelected = myEndTime.value;
-//   // console.log("selected ET= ", endTimeSelected);
+  const myStartTime = await document.querySelector(`#fromTime-${counterParam}`);
+  myStartTime.value = session.fromTime;
+  // const startTimeSelected = myStartTime.value;
+  // console.log("selected ST= ", startTimeSelected);
 
-// }
+  const myEndTime = await document.querySelector(`#endTime-${counterParam}`);
+  myEndTime.value = session.endTime
+  // const endTimeSelected = myEndTime.value;
+  // console.log("selected ET= ", endTimeSelected);
+
+}
+ 
+function countSession(){
+  const SessCounter = tempSchdule.sessions.length;
+  const date = tempSchdule.date;
+  console.log("LENGTH: ",SessCounter);
+  for (let index = 1; index < SessCounter; index++) {
+    loadSessionForm(index)
+    const tempSession = tempSchdule.sessions[index-1];
+    console.log("tempSess: ",tempSession + "Count: "+index);
+    loadToForm(date,tempSession,index);
+  
+  }
+
+}
+
+countSession()

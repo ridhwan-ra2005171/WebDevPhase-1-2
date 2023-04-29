@@ -230,16 +230,20 @@ function handleSortDate() {
 
 async function handleUpdateSchedule(schedID){
 
-
   const schedules = JSON.parse(localStorage.mySchedules);
   // Index of schedule to be deleted
   const schedIndex = schedules.findIndex(sched => sched.schID == schedID )
   // delete schedule from array
   console.log("index of selected schedule:", schedIndex);
   console.log(mySchedules[schedIndex]);
+  // let tempObj = mySchedules[schedIndex];
+  //store to localstorage
+  localStorage.setItem("tempSchdule",JSON.stringify(mySchedules[schedIndex]))
+
+  window.location.href = "/Use Case 4/addSession.html"
   //we will pass this object from array selected
   
-  loadToForm(mySchedules[schedIndex]); //we load this object to the form
+  // loadToForm(mySchedules[schedIndex]); //we load this object to the form
 
 
 }
