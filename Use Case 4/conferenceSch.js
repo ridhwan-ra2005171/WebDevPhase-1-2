@@ -129,6 +129,8 @@ function scheduleToHTML(schedule) {
 }
 
 //Add schedule: ===========================================
+
+
 function addSchedule(e) {
   e.preventDefault();
   const newSchedule = formToObject(e.target);
@@ -181,12 +183,24 @@ const dateJson = "../json/conference-dates.json";
 const dateDL = document.querySelector("#sortByDate");
 // dateDL.addEventListener('click',dateLoader)
 
+// let schDates = JSON.parse(localStorage.schDates);
 
 
 async function dateLoader() {
   // const dates = await (await fetch(dateJson)).json(); //dont delete this we need for web api
-  schDates = await(await fetch(dateJson)).json();
+    
+  // schDates = await(await fetch(dateJson)).json();
+  // localStorage.setItem("schDates",JSON.stringify(schDates))  
+
+  if(!localStorage.schDates){//get from json file
+    schDates = await(await fetch(dateJson)).json();
   localStorage.setItem("schDates",JSON.stringify(schDates))
+
+  }else{ //get from local storage if exist
+    schDates = JSON.parse(localStorage.schDates);
+  }
+  console.log("lcl dates:",schDates)
+
   let instHTML = '<option value="all" >Show All Conferences</option>';
   schDates.forEach(
     (date) =>

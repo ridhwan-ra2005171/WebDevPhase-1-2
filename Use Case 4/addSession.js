@@ -90,7 +90,7 @@ let formattedDate; //we store date selected here
 //This function will return date
 function getDateFiltered() {
   var selectedDate = dateInput.value;
-
+  // console.log("original date", selectedDate)
   // Split the date string by hyphens
   var parts = selectedDate.split("-"); //by default its separated by --
 
@@ -407,7 +407,7 @@ submitButton.addEventListener("click", async function (event) {
 async function loadToForm(date,session,counterParam) {
   // console.log(form);
 
-    let dateInput = document.querySelector('#cDate')
+    const dateInput = await document.querySelector('#cDate')
     dateInput.value = date;
 
     const myTitleText = await document.querySelector(`#title-${counterParam}`);
@@ -445,18 +445,26 @@ async function loadToForm(date,session,counterParam) {
 
 }
  
-function countSession(){
+ function countSession(){
   const SessCounter = tempSchdule.sessions.length;
-  const date = tempSchdule.date;
-  console.log("LENGTH: ",SessCounter);
+  const date = tempSchdule.date; //we need to convert this date to the original format
+  var parts = date.split("/"); //by default its separated by --
+
+  // Rearrange the parts to form the desired date format
+  //we want to match it original date format yyyy-mm-dd
+  var formattedDate = parts[2] + "-" + parts[1] + "-" + parts[0];
+  // console.log("conf date:",formattedDate);
+
+  console.log("LENGTH: ",SessCounter); //counting no of sessions
   for (let index = 1; index < SessCounter; index++) {
     loadSessionForm(index)
     const tempSession = tempSchdule.sessions[index-1];
     console.log("tempSess: ",tempSession + "Count: "+index);
-    loadToForm(date,tempSession,index);
+    loadToForm(formattedDate,tempSession,index);
   
   }
 
 }
 
+//If u uncomment this u need to reset the create session
 countSession()
