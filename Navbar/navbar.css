@@ -30,6 +30,7 @@
     background-color: white;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 1px 30px 0px;
     padding: 1rem;
+    text-align: center;
 }
 
 .nav-bar ul {
@@ -48,7 +49,6 @@
 .nav-link {
     transition: ease-in .1s;
 }
-
 
 .nav-link:hover  {
     color: #ff8dee;

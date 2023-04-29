@@ -16,16 +16,15 @@ body {
     background-color: #f4f4f4;
 }
 
-main {
+main{
     display: flex;
     flex-direction: column;
 }
 
 main > h1 {
+    text-align: center;
     padding: 1rem 2rem;
-    align-self: center;
-    color: #663399;
-    color: #4d0099;
+    color: rebeccapurple;
 }
 
 .break-line {
@@ -40,7 +39,6 @@ main > h1 {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1rem;
     padding: 0rem 2rem 2rem;
-
 }
 
 .card {
@@ -105,6 +103,7 @@ main > h1 {
 a, button,input[type="reset"], input[type="submit"] {
     cursor: pointer;
 }
+
 
 
 

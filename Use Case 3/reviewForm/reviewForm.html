@@ -56,31 +56,30 @@
             <fieldset>
                 <legend>Review</legend>
 
-                <h3>Overall Evaluation: </h3>
-                <label for="evaluation">
-                    <input type="radio" name="evaluation" value="2" required> Strong Accept
-                    <br><input type="radio" name="evaluation" value="1"> Accept
-                    <br><input type="radio" name="evaluation" value="0"> Borderline
-                    <br><input type="radio" name="evaluation" value="-1"> Reject
-                    <br><input type="radio" name="evaluation" value="-2"> Strong Reject
+                <label>
+                    <h3>Overall Evaluation: </h3>
+                        <input type="radio"  id="2" name="evaluation" value="2" required>Strong Accept
+                    <br><input type="radio"  id="1" name="evaluation" value="1">Accept
+                    <br><input type="radio"  id="0" name="evaluation" value="0">Borderline
+                    <br><input type="radio"  id="-1" name="evaluation" value="-1">Reject
+                    <br><input type="radio"  id="-2" name="evaluation" value="-2">Strong Reject
                 </label>
 
-                <h3>Paper contribution: </h3>
-                <label for="">
-                    <input type="radio" id="contribution" name="contribution" value="5" required> major and significant
-                    contribution
-                    <br><input type="radio" id="contribution" name="contribution" value="4"> clear contribution
-                    <br><input type="radio" id="contribution" name="contribution" value="3"> minor contribution
-                    <br><input type="radio" id="contribution" name="contribution" value="2"> no obvious contribution
-                    <br><input type="radio" id="contribution" name="contribution" value="1"> no contribution
+                <label>
+                    <h3>Paper contribution: </h3>
+                        <input type="radio" id="5" name="contribution" value="5" required><label for="5">major and significantcontribution</label>
+                    <br><input type="radio" id="4" name="contribution" value="4"><label for="4">clear contribution</label>
+                    <br><input type="radio" id="3" name="contribution" value="3"><label for="3">minor contribution</label>
+                    <br><input type="radio" id="2" name="contribution" value="2"><label for="2">no obvious contribution</label>
+                    <br><input type="radio" id="1" name="contribution" value="1"><label for="1">no contribution</label>
                 </label>
 
-                <label for="strnegths">
+                <label for="paper-strengths">
                     <h3>Paper strengths: </h3>
                     <textarea name="paper-strengths" id="paper-strengths" cols="50" rows="5" required></textarea>
                 </label>
 
-                <label for="weaknesses">
+                <label for="paper-weaknesses">
                     <h3>Paper weaknesses: </h3>
                     <textarea name="paper-weaknesses" id="paper-weaknesses" cols="50" rows="5" required></textarea>
                 </label>

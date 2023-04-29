@@ -26,7 +26,7 @@ async function loadNav() {
             </div>
             <ul>
                 <li><a id="home" class="nav-link grey" href="/Use Case 4/conferenceSch.html">Home</a></li>
-                |<li>${getNavLink(currUser)}</li>|
+                |<li id="middle">${getNavLink(currUser)}</li>|
                 <li><a id="help" class="nav-link grey" href="#">Help</a></li>
             </ul>
             <a id="username" href="#" onclick="getUserDetails()">${currUser.first_name} ${currUser.last_name}</a>

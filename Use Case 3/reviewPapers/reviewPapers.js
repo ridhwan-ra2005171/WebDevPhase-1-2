@@ -17,7 +17,6 @@ const reviewerID = USER_ID;
 
 // Elements from html
 const forReviewList = document.querySelector("#for-review-list");
-const helpButton = document.querySelector("#help")
 // const body = document.querySelector("body-content");
 
 async function displayPapers(papersUrl) {
@@ -84,6 +83,7 @@ async function displayPapers(papersUrl) {
   console.log(abstractLinks);
 
   let a = abstractLinks.forEach((a) => a.addEventListener("click", hideAbstract));
+  
 }
 
 // Hide and Unhide the abstract body
