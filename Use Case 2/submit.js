@@ -235,14 +235,14 @@ async function submitForm(event) {
 
     //in case reviewer1==reviewer2 
     while (reviewer1==reviewer2) {
-    reviewer2 = getRole("reviewers")[Math.floor(Math.random()*items.length)]
+    reviewer2 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
     }
     const reviewArr = [
         {
-            reviewerID: reviewer1
+            "reviewerID": reviewer1
         },
         {
-            reviewerID: reviewer2
+            "reviewerID": reviewer2
 
         }      
     ]
