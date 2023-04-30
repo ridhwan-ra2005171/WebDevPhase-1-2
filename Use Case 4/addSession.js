@@ -434,6 +434,7 @@ async function submitSession(event) {
 
   mySchedules.push(newScheduleObject);
   localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to
+  window.location.href = "/Use Case 4/conferenceSch.html"
   // loadSchedules();
 }
 
@@ -447,9 +448,7 @@ async function loadToForm(date,session,counterParam) {
   //  console.log("SES LOCACA: ",session.location);
 
     const myTitleText = await document.querySelector(`#title-${counterParam}`);
-    if ( myTitleText.value = session.title) {
-      console.log("adssdasdasd");
-    }
+    myTitleText.value = session.title
 
     const myPaperSelect = await document.querySelector(`#paper-${counterParam}`);
     myPaperSelect.value = session.paperID;
