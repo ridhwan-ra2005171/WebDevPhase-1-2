@@ -114,7 +114,8 @@ async function loadSessionForm(counter) {
   // loadPresenters('presenter-${counter}','#paper-${counter}')
   loadAcceptedPapers(`paper-${counter}`);
   handleLocationChange(`location-${counter}`);
-  if ( !tempSchdule) {
+  if (tempSchdule) {
+    console.log("CHECKKKKKK");
     loadToForm(tempSchdule,counter);
 
   }
@@ -408,6 +409,7 @@ async function collectSessions() {
   let mySessions = [];
 
   //we start from 0
+  console.log("INDEX: ",counter);
   for (let index = 1, i=0; index <= counter; index++,i++) {
     const sess = await addSession(index);
     //the index points to the (form session number)
@@ -532,9 +534,9 @@ function loadAllSessions(){
 async function updateSession(event) {
   // console.log("ISHAA: ",await collectSessions());
   // event.preventDefault();
-  console.log("Submit button clicked! FOR UPDATE");
+  // console.log("Submit button clicked! FOR UPDATE");
   //FIRST WE STORE NEW DATES:==============================================
-  console.log("NINJA: ",getDateFiltered()); //to see if i can get date
+  // console.log("NINJA: ",getDateFiltered()); //to see if i can get date
   // addDateSch(getDateFiltered());
 
   // console.log(counter);
@@ -545,7 +547,7 @@ async function updateSession(event) {
   let tempCounter = counter;
  
 
-  console.log("IAM HERE");
+  // console.log("IAM HERE");
 
   // const newSessions =  collectSessions();
   // console.log("asd: ", newSessions);
@@ -554,18 +556,22 @@ async function updateSession(event) {
     date: await getDateFiltered(),
     sessions: await collectSessions()
   }
-  console.log("IAM HERE 2");
+  // console.log("IAM HERE 2");
 
   // console.log("Look 3 times: ", newScheduleObject);
   const index = mySchedules.findIndex(sched => sched.schID ==  tempSchdule.schID);
-  console.log("index: ",index);
+  // console.log("index: ",index);
 
-  console.log("-=-=-=-=-=-=-=-=--=-=-=--=-=");
+  // console.log("-=-=-=-=-=-=-=-=--=-=-=--=-=");
   mySchedules[index] = newScheduleObject;
   // const temp = await  mySchedules[index].sessions;
-  console.log("HVVVVVVVV: ", mySchedules[index].sessions);
-  console.log("-=-=-=-=-=-=-=-=--=-=-=--=-=");
+  // console.log("HVVVVVVVV: ", await mySchedules[index].sessions);
+  // console.log("-=-=-=-=-=-=-=-=--=-=-=--=-=");
 
   localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to
+  localStorage.removeItem("updateState")
+  window.location.href = "/Use Case 4/conferenceSch.html"
+  console.log("NOT LOC WIND");
+
 }
 
