@@ -28,6 +28,20 @@ async function returnToPrevPage(e) {
   }
 }
 
+// We are gonna use this state variable to check if the update button was clicked 
+const state = localStorage.updateState
+console.log(state);
+if (state == "updateClicked") {
+ console.log("update clicked");
+ loadAllSessions()
+} else {
+  loadSessionForm(1);
+  
+}
+// clear the state from local storage
+localStorage.removeItem("updateState")
+
+
 // load session form first. WE CALL THIS FUNCTION IN THE HTML body TAG in THE HTML FILE
 let counter = 1;
 // loadSessionForm(counter);
@@ -445,11 +459,11 @@ async function loadToForm(date,session,counterParam) {
   console.log("COUNT: " ,counterParam);
 }
  
- function countSession(){
+ function loadAllSessions(){
   const SessCounter = tempSchdule.sessions.length;
+
   const date = tempSchdule.date; //we need to convert this date to the original format
   var parts = date.split("/"); //by default its separated by --
-
   // Rearrange the parts to form the desired date format
   //we want to match it original date format yyyy-mm-dd
   var formattedDate = parts[2] + "-" + parts[1] + "-" + parts[0];
@@ -458,20 +472,29 @@ async function loadToForm(date,session,counterParam) {
   dateInput.value =  formattedDate;
 
 
-  loadSessionForm(1)
-  const tempSession = tempSchdule.sessions[0];
-  loadToForm(formattedDate,tempSession,1);
-
   console.log("LENGTH: ",SessCounter); //counting no of sessions
   for (let index = 1; index <= SessCounter; index++) {
     // if (index > 1) 
+    loadSessionForm(index)
+    const tempSession = tempSchdule.sessions[index-1];    
     // const tempSession = tempSchdule.sessions[index-1];
-    // console.log("tempSess: ",tempSession + "Count: "+index);
+    loadToForm(formattedDate,tempSession,index);
+
+    console.log("tempSess: ",tempSession + "Count: "+index);
     // console.log(index);
   
   }
-
+  removeLastSess()
 }
 
 //If u uncomment this u need to reset the create session
-countSession()
+// loadAllSessions()
+
+
+async function removeLastSess() {
+  // const targetSess = await document.querySelectorAll("#session-form")
+  // console.log(await document.querySelector("#session-form"));
+  // console.log(targetSess.childNodes);
+  // targetSess[1].remove
+}
+
