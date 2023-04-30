@@ -229,8 +229,9 @@ async function submitForm(event) {
     //save authors in paperAuthors (only their id???)
     const authorsID= await (saveAuthors())
     console.log(authorsID);
-    const reviewer1 = getRole("reviewers")[Math.floor(Math.random()*items.length)]
-    let reviewer2 = getRole("reviewers")[Math.floor(Math.random()*items.length)]
+    const reviewersArray = getRole("reviewers")
+    const reviewer1 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
+    let reviewer2 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
 
     //in case reviewer1==reviewer2 
     while (reviewer1==reviewer2) {
