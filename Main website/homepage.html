@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conf Plus</title>
-    <link rel="stylesheet" href="conferenceSch.css">
+    <link rel="stylesheet" href="../Use Case 4/conferenceSch.css">
     <!-- New Google font: Roboto Slab --> <!--FONT-->
   <link
   href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -20,16 +20,16 @@
 <body onload="loadSchedules()">
     <nav class="nav-bar">
         <div class="logo">
-            <img src="Capture2.PNG" alt="Conf Plus Logo">
+            <img src="../img/Capture2.PNG" alt="Conf Plus Logo">
 
         </div>
         <ul>
             <li><a class="nav-link grey" href="#">Home</a></li>
-            <li><a class="nav-link grey" href="addSession.html">Create Session</a></li>
+            <!-- <li><a class="nav-link grey" href="addSession.html">Create Session</a></li> -->
             <li><a class="nav-link grey" href="#">Help</a></li>
         </ul>
-        <button id="loginBtn" onclick="location.href='../../Use Case 1/login.html'">Log Out</button>
-        <a href="#">username</a>
+        <button class="loginBtn" id="loginBtn" onclick="location.href='../../Use Case 1/login.html'">Login</button>
+        <!-- <a href="#">username</a> -->
     </nav>
     <!-- <header></header> -->
     
@@ -42,17 +42,12 @@
             <div class="date-filter">
               <label for="sortBy">Select Date:</label>
               <select name="sort-by" id="sortByDate" class="sortByDate" onchange="handleSortDate();">
-                
-                <!-- <option value="Genre">Genre</option>
-                <option value="Price">Price</option>
-                <option value="Author">Author</option> -->
             </select>
             </div>
             
 
 
           
-            <!-- Card 1 example -->
             <div class="schedules" id="schedules">
               <div class="conf-card">
               <!-- WE put innerHTML -->
@@ -88,50 +83,10 @@
 
     </main>
 
-    <script src="conferenceSch.js"></script>
+    <script src="homepage.js"></script>
     <!-- // once we combine please uncomment the below script ------------------------------------------ -->
     <!-- <script src="/Navbar/navbar.js"></script> -->
 
 </body>
 
 </html>
-
-
-
-<!-- 
-<a href="#"><h4>Conference Date</h4></a>
-                <table style="text-align: center;">
-                    <thead>
-                      <tr>
-                        <th>Time</th>
-                        <th>Title</th>
-                        <th>Presenter</th>
-                        <th>Paper</th>
-                        <th>Location</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>12:00 -14:00</td>
-                        <td>Trusting Decentralised Knowledge Graphs and Web Data</td>
-                        <td>Presenter Name</td>
-                        <td>PaperTrusting Decentralised Knowledge Graphs and Web Data</td>
-                        <td>BCR-E103</td>
-                      </tr>
-                      <tr>
-                        <td>12:00 -14:00</td>
-                        <td>Trusting Decentralised Knowledge Graphs and Web Data</td>
-                        <td>Presenter Name</td>
-                        <td>PaperTrusting Decentralised Knowledge Graphs and Web Data</td>
-                        <td>BCR-E103</td>
-                      </tr>
-                      <tr>
-                        <td>12:00 -14:00</td>
-                        <td>Trusting Decentralised Knowledge Graphs and Web Data</td>
-                        <td>Presenter Name</td>
-                        <td>PaperTrusting Decentralised Knowledge Graphs and Web Data</td>
-                        <td>BCR-E103</td>
-                      </tr>
-                    </tbody>
-                    </table>
-            </div> -->

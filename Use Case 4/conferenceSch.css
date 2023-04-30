@@ -162,6 +162,23 @@ table{
     padding: 1rem;
 }
 
+#loginBtn{
+    color: white;
+    font-family: inherit;
+    display: block;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: .7rem;
+    background-color: rebeccapurple;
+}
+
+#loginBtn:hover{
+    background-color: rgb(172, 117, 226);
+    border: 0.2rem solid rebeccapurple;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+}
+
 /* .card a:hover {
     text-decoration: underline;
 } */
