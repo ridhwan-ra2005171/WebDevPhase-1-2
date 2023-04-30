@@ -94,7 +94,7 @@ function loadSessions(session) {
           <td>${session.fromTime}-${session.endTime}</td>
           <td>${session.title}</td>
           <td>${presenterDetails}</td>
-          <td>${session.location}</td>
+          <td>${session.location.building} | ${session.location.room}</td>
         </tr>
   `;
 }
@@ -199,7 +199,7 @@ async function dateLoader() {
   }else{ //get from local storage if exist
     schDates = JSON.parse(localStorage.schDates);
   }
-  console.log("lcl dates:",schDates)
+  // console.log("lcl dates:",schDates)
 
   let instHTML = '<option value="all" >Show All Conferences</option>';
   schDates.forEach(
