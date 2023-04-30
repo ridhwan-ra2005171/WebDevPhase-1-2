@@ -12,9 +12,9 @@ let schDates =[];
 const schedulesContainer = document.querySelector(".schedules");
 
 //to check if i can fetch the schedules: =====================================
-fetch("../json/schedules.json")
-  .then((response) => response.json())
-  .then((data) => showInfo(data));
+// fetch("../json/schedules.json")
+//   .then((response) => response.json())
+//   .then((data) => showInfo(data));
 
 function showInfo(data) {
   console.table(data);
@@ -24,7 +24,9 @@ function showInfo(data) {
 
 async function loadPage() {
   const mainContent = document.querySelector("main-content");
-  const page = await fetch("../json/schedules.json");
+  // const page = await fetch("../json/schedules.json");
+  const page = mySchedules;
+  console.log("MY: ",mySchedules);
   const pageHTMLContent = await page.text();
   mainContent.innerHTML = pageHTMLContent;
 
@@ -35,7 +37,7 @@ async function loadPage() {
 //===========================================================================
 //loadSchedules:
 async function loadSchedules() {
-  mySchedules = await (await fetch("../json/schedules.json")).json();
+  // mySchedules = await (await fetch("../json/schedules.json")).json();
   users = await (await fetch(usersUrl)).json();
   localStorage.setItem("usersloc", JSON.stringify(users));
 
@@ -43,11 +45,11 @@ async function loadSchedules() {
 
 
   if  (!localStorage.mySchedules) { //if the recipes dont exist in local storage, load from the URL
-    mySchedules = await (await fetch("../json/schedules.json")).json();
+    // mySchedules = await (await fetch("../json/schedules.json")).json();
     localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
-    schedulesContainer.innerHTML = mySchedules
-      .map((sch) => scheduleToHTML(sch))
-      .join("");
+    // schedulesContainer.innerHTML = mySchedules
+      // .map((sch) => scheduleToHTML(sch))
+      // .join("");
   } else { // else display the recipes cards in the main using localStorage myRecipes array
     mySchedules = JSON.parse(localStorage.mySchedules); //make from string to object
     console.log("sc: ", mySchedules);
@@ -56,6 +58,7 @@ async function loadSchedules() {
     .join(""); // join('') is used to get rid of comma that appears between the objects
   }
   // console.log(schedulesContainer.innerHTML);
+  dateLoader();
 
 
   // if (localStorage.mySchedules) {
@@ -192,26 +195,28 @@ async function dateLoader() {
   // schDates = await(await fetch(dateJson)).json();
   // localStorage.setItem("schDates",JSON.stringify(schDates))  
 
-  if(!localStorage.schDates){//get from json file
-    schDates = await(await fetch(dateJson)).json();
-  localStorage.setItem("schDates",JSON.stringify(schDates))
+  // if(!localStorage.schDates){//get from json file
+  //   schDates = await(await fetch(dateJson)).json();
+  // localStorage.setItem("schDates",JSON.stringify(schDates))
 
-  }else{ //get from local storage if exist
+  // }else{ //get from local storage if exist
     schDates = JSON.parse(localStorage.schDates);
-  }
+  // }
   // console.log("lcl dates:",schDates)
 
+  const tempSchDates =   await  mySchedules.map(sch => sch.date);
+  console.log(await mySchedules);
+  // console.log("ASDASDS: ",tempSchDates);
   let instHTML = '<option value="all" >Show All Conferences</option>';
-  schDates.forEach(
+  tempSchDates.forEach(
     (date) =>
       (instHTML += `
-    <option value="${date.confDate}">${date.confDate}</option>
+    <option value="${date}">${date}</option>
     `)
   );
   dateDL.innerHTML = instHTML;
 }
 
-dateLoader();
 
 function handleSortDate() {
   var selectedDate = document.getElementById("sortByDate").value;

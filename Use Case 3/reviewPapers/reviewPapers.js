@@ -7,10 +7,10 @@ let usersUrl = "/json/users.json";
 // assuming we have the global variable USER_ID
 // we set it to 12 for testing sake only
 // const USER_ID = 8;
-const USER_ID = localStorage.currentUserID
+const USER_ID = parseInt(localStorage.currentUserID)
 
 // localStorage.setItem("USER_ID",USER_ID);
-
+console.log("USER_ID: ",USER_ID);
 
 const reviewerID = USER_ID;
 

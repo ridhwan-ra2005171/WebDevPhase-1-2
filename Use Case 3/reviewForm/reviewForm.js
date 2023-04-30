@@ -7,9 +7,8 @@ document.body.insertAdjacentHTML('beforebegin','<script src="https://unpkg.com/s
 // assuming we have the global variable USER_ID
 // we set it to 12 for testing purpose only
 // global variables
-// const USER_ID = 12;
-// const USER_ID = parseInt(localStorage.currentUserID);
-const USER_ID = localStorage.currentUserID;
+// const USER_ID = 8;
+const USER_ID = parseInt(localStorage.currentUserID);
 
 console.log("USER ID: ",USER_ID);
 const reviewerID = USER_ID;

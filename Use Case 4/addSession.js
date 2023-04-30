@@ -1,5 +1,6 @@
 let myLocations = [];
-schDates = JSON.parse(localStorage.schDates); //fetching my localstorage for dates
+// schDates = JSON.parse(localStorage.schDates); //fetching my localstorage for dates
+let schDates =[];
 
 let mySchedules = JSON.parse(localStorage.mySchedules); //fetching my localstorage for schedules
 
@@ -570,8 +571,10 @@ async function updateSession(event) {
 
   localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to
   localStorage.removeItem("updateState")
+    console.log("NOT LOC WIND");
+
   window.location.href = "/Use Case 4/conferenceSch.html"
-  console.log("NOT LOC WIND");
+  // console.log("NOT LOC WIND");
 
 }
 
