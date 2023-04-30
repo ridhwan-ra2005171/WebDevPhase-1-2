@@ -112,6 +112,7 @@ async function storeForm(e) {
     strengths: strengths,
     weaknesses: weaknesses,
   };
+  console.log("STORE: ",reviewedPaper);
 
   // store the reviewPaper in the papers.json
 
@@ -179,7 +180,7 @@ function loadToForm() {
 
   // now replace the old review with the new review aka reviewedPaper
   const currentReview = papers[paperIndex].review[reviewIndex];
-
+console.log("CURR PAPER: ",currentReview);
   // console.log("Current Review: ", currentReview);
 
   // Only load data when the paper was reviewed, by using the length of the keys:

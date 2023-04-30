@@ -3,7 +3,6 @@ schDates = JSON.parse(localStorage.schDates); //fetching my localstorage for dat
 
 let mySchedules = JSON.parse(localStorage.mySchedules); //fetching my localstorage for schedules
 
-let tempSchdule= JSON.parse(localStorage.tempSchdule); //fetching local for update
 
 // console.log("fetched sch;", tempSchdule)
 
@@ -36,17 +35,23 @@ let counter = 1;
 const submitButton = document.querySelector("#submitConfBtn");
 
 
-
+let tempSchdule;
 // We are gonna use this state variable to check if the update button was clicked 
 const state = localStorage.updateState
+
 console.log(state);
 if (state == "updateClicked") {
+  tempSchdule= JSON.parse(localStorage.tempSchdule); //fetching local for update
+  console.log("YES UPDATE");
+
 //  console.log("update clicked");
  loadAllSessions()
  submitButton.addEventListener("click",updateSession)
 
 } else {
+  console.log("NOT UPDATE");
   loadSessionForm(1);
+  
   submitButton.addEventListener("click",submitSession)  
 }
 // clear the state from local storage inside the go back function (line 27)
@@ -109,7 +114,10 @@ async function loadSessionForm(counter) {
   // loadPresenters('presenter-${counter}','#paper-${counter}')
   loadAcceptedPapers(`paper-${counter}`);
   handleLocationChange(`location-${counter}`);
-  loadToForm(tempSchdule,counter);
+  if ( !tempSchdule) {
+    loadToForm(tempSchdule,counter);
+
+  }
 }
 
 //event listerner to get conference date-------->
@@ -243,7 +251,7 @@ function loadAcceptedPapers(paperListID) {
   // Find accepted papers
   // HINT change the 2 to 0 to see if it works ---------------------^
   acceptedPapers = papersEvaluationAvg
-    .filter((paper) => paper[1] >= 2)
+    .filter((paper) => paper[1] >= 1)
     .map((paper) => paper[0]);
   // console.log("4: ", acceptedPapers);
 
