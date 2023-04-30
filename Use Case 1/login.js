@@ -106,7 +106,7 @@ async function findUser(userTocheck) {
         buttons: "Ok",
         closeOnClickOutside: false,
       });
-    //   prompt("No email and password combination found, please try again");
+      alert("No email and password combination found, please try again");
     }
   // } else {
   //   //better if it's an html response
@@ -120,6 +120,8 @@ async function findUser(userTocheck) {
   //   // prompt("No email and password combination found, please try again");
   // }
   }
+  alert("No email and password combination found, please try again");
+
 }
 //load paper data into page
 // async function getPapers(){

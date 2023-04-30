@@ -7,8 +7,9 @@ document.body.insertAdjacentHTML('beforebegin','<script src="https://unpkg.com/s
 // assuming we have the global variable USER_ID
 // we set it to 12 for testing purpose only
 // global variables
-// const USER_ID = 12;
-const USER_ID = parseInt(localStorage.currentUserID);
+const USER_ID = 12;
+// const USER_ID = parseInt(localStorage.currentUserID);
+
 console.log("USER ID: ",USER_ID);
 const reviewerID = USER_ID;
 let submitClicked = false; // this is to check if the submit button was clicked
@@ -112,6 +113,7 @@ async function storeForm(e) {
     strengths: strengths,
     weaknesses: weaknesses,
   };
+  console.log("STORE: ",reviewedPaper);
 
   // store the reviewPaper in the papers.json
 
@@ -163,23 +165,24 @@ function loadToForm() {
 
   // get the paper ID from local storage
   const targetPaperID = parseInt(JSON.parse(localStorage.paperAtm));
-  // console.log(targetPaperID);
+  // console.log("test:  ",targetPaperID);
 
   // find the index of paper first
   const paperIndex = papers.findIndex(
     (paper) => paper.paperID === targetPaperID
   );
-  // console.log(papers[paperIndex]);
+  console.log("test: " ,papers[paperIndex]);
 
   // find the index inside the review array that exists in targetPaper, so that we can replace the old review with the new one
   const reviewIndex = papers[paperIndex].review.findIndex(
-    (review) => review.reviewerID === reviewerID
+    (review) => review.reviewerID == reviewerID
   );
-  // console.log(papers[paperIndex].review[reviewIndex]);
+  console.log("ASDASD: ",papers[paperIndex].review.find(rev => rev.reviewerID == 12))
+  // console.log("index: ",papers[paperIndex].review[reviewIndex]);
 
   // now replace the old review with the new review aka reviewedPaper
   const currentReview = papers[paperIndex].review[reviewIndex];
-
+// console.log("CURR PAPER: ",currentReview);
   // console.log("Current Review: ", currentReview);
 
   // Only load data when the paper was reviewed, by using the length of the keys:

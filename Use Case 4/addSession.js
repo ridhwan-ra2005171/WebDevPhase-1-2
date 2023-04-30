@@ -3,7 +3,6 @@ schDates = JSON.parse(localStorage.schDates); //fetching my localstorage for dat
 
 let mySchedules = JSON.parse(localStorage.mySchedules); //fetching my localstorage for schedules
 
-let tempSchdule= JSON.parse(localStorage.tempSchdule); //fetching local for update
 
 // console.log("fetched sch;", tempSchdule)
 
@@ -36,17 +35,23 @@ let counter = 1;
 const submitButton = document.querySelector("#submitConfBtn");
 
 
-
+let tempSchdule;
 // We are gonna use this state variable to check if the update button was clicked 
 const state = localStorage.updateState
+
 console.log(state);
 if (state == "updateClicked") {
+  tempSchdule= JSON.parse(localStorage.tempSchdule); //fetching local for update
+  console.log("YES UPDATE");
+
 //  console.log("update clicked");
  loadAllSessions()
  submitButton.addEventListener("click",updateSession)
 
 } else {
+  console.log("NOT UPDATE");
   loadSessionForm(1);
+  
   submitButton.addEventListener("click",submitSession)  
 }
 // clear the state from local storage inside the go back function (line 27)
@@ -109,7 +114,11 @@ async function loadSessionForm(counter) {
   // loadPresenters('presenter-${counter}','#paper-${counter}')
   loadAcceptedPapers(`paper-${counter}`);
   handleLocationChange(`location-${counter}`);
-  loadToForm(tempSchdule,counter);
+  if (tempSchdule) {
+    console.log("CHECKKKKKK");
+    loadToForm(tempSchdule,counter);
+
+  }
 }
 
 //event listerner to get conference date-------->
@@ -243,7 +252,7 @@ function loadAcceptedPapers(paperListID) {
   // Find accepted papers
   // HINT change the 2 to 0 to see if it works ---------------------^
   acceptedPapers = papersEvaluationAvg
-    .filter((paper) => paper[1] >= 2)
+    .filter((paper) => paper[1] >= 1)
     .map((paper) => paper[0]);
   // console.log("4: ", acceptedPapers);
 
@@ -400,6 +409,7 @@ async function collectSessions() {
   let mySessions = [];
 
   //we start from 0
+  console.log("INDEX: ",counter);
   for (let index = 1, i=0; index <= counter; index++,i++) {
     const sess = await addSession(index);
     //the index points to the (form session number)
@@ -524,9 +534,9 @@ function loadAllSessions(){
 async function updateSession(event) {
   // console.log("ISHAA: ",await collectSessions());
   // event.preventDefault();
-  console.log("Submit button clicked! FOR UPDATE");
+  // console.log("Submit button clicked! FOR UPDATE");
   //FIRST WE STORE NEW DATES:==============================================
-  console.log("NINJA: ",getDateFiltered()); //to see if i can get date
+  // console.log("NINJA: ",getDateFiltered()); //to see if i can get date
   // addDateSch(getDateFiltered());
 
   // console.log(counter);
@@ -537,7 +547,7 @@ async function updateSession(event) {
   let tempCounter = counter;
  
 
-  console.log("IAM HERE");
+  // console.log("IAM HERE");
 
   // const newSessions =  collectSessions();
   // console.log("asd: ", newSessions);
@@ -546,18 +556,22 @@ async function updateSession(event) {
     date: await getDateFiltered(),
     sessions: await collectSessions()
   }
-  console.log("IAM HERE 2");
+  // console.log("IAM HERE 2");
 
   // console.log("Look 3 times: ", newScheduleObject);
   const index = mySchedules.findIndex(sched => sched.schID ==  tempSchdule.schID);
-  console.log("index: ",index);
+  // console.log("index: ",index);
 
-  console.log("-=-=-=-=-=-=-=-=--=-=-=--=-=");
+  // console.log("-=-=-=-=-=-=-=-=--=-=-=--=-=");
   mySchedules[index] = newScheduleObject;
   // const temp = await  mySchedules[index].sessions;
-  console.log("HVVVVVVVV: ", mySchedules[index].sessions);
-  console.log("-=-=-=-=-=-=-=-=--=-=-=--=-=");
+  // console.log("HVVVVVVVV: ", await mySchedules[index].sessions);
+  // console.log("-=-=-=-=-=-=-=-=--=-=-=--=-=");
 
   localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to
+  localStorage.removeItem("updateState")
+  window.location.href = "/Use Case 4/conferenceSch.html"
+  console.log("NOT LOC WIND");
+
 }
 
