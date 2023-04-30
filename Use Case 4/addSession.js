@@ -24,43 +24,57 @@ async function returnToPrevPage(e) {
     buttons: ["Cancel", "Proceed"],
   });
   if (result === true) {
+    localStorage.removeItem("updateState")
     location.href = "/Use Case 4/conferenceSch.html";
   }
 }
+
+
+let counter = 1;
+
+//Here will be for the button: 'Submit Conference Schedule'
+const submitButton = document.querySelector("#submitConfBtn");
+
+
 
 // We are gonna use this state variable to check if the update button was clicked 
 const state = localStorage.updateState
 console.log(state);
 if (state == "updateClicked") {
- console.log("update clicked");
+//  console.log("update clicked");
  loadAllSessions()
+ submitButton.addEventListener("click",updateSession)
+
 } else {
   loadSessionForm(1);
-  
+  submitButton.addEventListener("click",submitSession)  
 }
-// clear the state from local storage
-localStorage.removeItem("updateState")
+// clear the state from local storage inside the go back function (line 27)
 
 
 // load session form first. WE CALL THIS FUNCTION IN THE HTML body TAG in THE HTML FILE
-let counter = 1;
+
 // loadSessionForm(counter);
 async function loadSessionForm(counter) {
   const html = `<fieldset id="sessionform-${counter}" class="sessionform"> 
     <legend>Create Sessions</legend> 
-    <label>Enter Session Title:</label> 
+    <label>Enter Session Title:
       <input type="text" name="title-${counter}" id="title-${counter}" placeholder="ENTER SESSION TITLE">  
-        <label>Select Paper:</label> 
+    </label> 
+        <label>Select Paper:
       <select name="paper-${counter}" id="paper-${counter}" onchange="loadPresenters('presenter-${counter}','#paper-${counter}')"> 
         <option value="" selected disabled>-Select Paper-</option> 
       </select> 
-      <label>Select Presenter:</label> 
-      <select name="presenter-${counter}" id="presenter-${counter}" onchange=""> 
+      </label> 
+      <label>Select Presenter:
+      <select name="presenter-${counter}" id="presenter-${counter}"> 
         <option value="" selected disabled>-Select Presenter-</option> 
       </select> 
-      <label>Select Location:</label> 
+      </label> 
+      <label>Select Location:
       <select name="location-${counter}" id="location-${counter}"> 
       </select> 
+      </label> 
       <div class="timeform"> 
         <label for="fromTime" 
           >Start Time: <input type="time" name="fromTime-${counter}" id="fromTime-${counter}" 
@@ -92,6 +106,7 @@ async function loadSessionForm(counter) {
   // We have to call the function that populate the dropdown list here (in loadSession function)
   // const locationList = document.querySelectorAll('#location-1')
   // locationList.addEventListener('load', handleLocationChange)
+  // loadPresenters('presenter-${counter}','#paper-${counter}')
   loadAcceptedPapers(`paper-${counter}`);
   handleLocationChange(`location-${counter}`);
   loadToForm(tempSchdule,counter);
@@ -258,8 +273,13 @@ function loadAcceptedPapers(paperListID) {
 //load presenter========================================
 
 async function loadPresenters(presenterListID, paperListID) {
+  
+  console.log("loadPresenters called ");
   // get the selected paper ID from the dropdown menu
   const selectedPaperID = await document.querySelector(paperListID).value;
+  // if (!selectedPaper) {
+  //   return;
+  // }
   // console.log("PAPER: ",selectedPaperID);
   // get all papers from local storage
   papersloc = JSON.parse(localStorage.papersloc);
@@ -391,9 +411,8 @@ async function collectSessions() {
   return mySessions;
 }
 
-//Here will be for the button: 'Submit Conference Schedule'
-const submitButton = document.querySelector("#submitConfBtn");
-submitButton.addEventListener("click", async function (event) {
+
+async function submitSession(event) {
   event.preventDefault();
   console.log("Submit button clicked!");
   //FIRST WE STORE NEW DATES:==============================================
@@ -416,7 +435,7 @@ submitButton.addEventListener("click", async function (event) {
   mySchedules.push(newScheduleObject);
   localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to
   // loadSchedules();
-});
+}
 
 
 
@@ -425,13 +444,18 @@ submitButton.addEventListener("click", async function (event) {
 async function loadToForm(date,session,counterParam) {
   // console.log(form);
 
-   
+  //  console.log("SES LOCACA: ",session.location);
 
     const myTitleText = await document.querySelector(`#title-${counterParam}`);
-    myTitleText.value = session.title;
+    if ( myTitleText.value = session.title) {
+      console.log("adssdasdasd");
+    }
+
     const myPaperSelect = await document.querySelector(`#paper-${counterParam}`);
-  myPaperSelect.value = session.paperID;
-  
+    myPaperSelect.value = session.paperID;
+    loadPresenters(`presenter-${counterParam}`,`#paper-${counterParam}`)    
+    // console.log("PID: ",session.paperID);
+
   // console.log(myPaperSelect.value);
 
   // console.log("selected paper= ", paperSelected);
@@ -440,18 +464,20 @@ async function loadToForm(date,session,counterParam) {
     `#presenter-${counterParam}`
   );
   myPresenterSelect.value = session.presenterID;
+  // console.log("PRES: ", session.presenterID);
   // const presenterSelected = myPresenterSelect.value;
   // console.log("selected presenter= ", presenterSelected);
 
   const myLocationSelect = await document.querySelector(
     `#location-${counterParam}`
   );
-  
-  myLocationSelect.value = session.location.id;
-  console.log("Ses loc:",session.location.id);
-  console.log("select loc: ",myLocationSelect);
+  // myLocationSelect.value = '2';
+
+  // myLocationSelect.value = String(session.location.id);
+  // console.log("Ses loc:",String(session.location.id));
+  // console.log("select loc: ",myLocationSelect);
   // const locationSelected = myLocationSelect.value;
-  // console.log("selected location= ", locationSelected);
+  // console.log("selected location= ", myLocationSelect);
 
   const myStartTime = await document.querySelector(`#fromTime-${counterParam}`);
   myStartTime.value = session.fromTime;
@@ -463,12 +489,14 @@ async function loadToForm(date,session,counterParam) {
   // const endTimeSelected = myEndTime.value;
   // console.log("selected ET= ", endTimeSelected);
 
-  console.log("COUNT: " ,counterParam);
+  // console.log("COUNT: " ,counterParam);
 }
  
- function loadAllSessions(){
+function loadAllSessions(){
   const SessCounter = tempSchdule.sessions.length;
+  // console.log();
 
+  counter = SessCounter;
   const date = tempSchdule.date; //we need to convert this date to the original format
   var parts = date.split("/"); //by default its separated by --
   // Rearrange the parts to form the desired date format
@@ -479,29 +507,58 @@ async function loadToForm(date,session,counterParam) {
   dateInput.value =  formattedDate;
 
 
-  console.log("LENGTH: ",SessCounter); //counting no of sessions
+  // console.log("LENGTH: ",SessCounter); //counting no of sessions
   for (let index = 1; index <= SessCounter; index++) {
     // if (index > 1) 
     loadSessionForm(index)
     const tempSession = tempSchdule.sessions[index-1];    
     // const tempSession = tempSchdule.sessions[index-1];
     loadToForm(formattedDate,tempSession,index);
-
-    console.log("tempSess: ",tempSession + "Count: "+index);
+    // console.log("Ses Loc: ",tempSession.location);
+    // console.log("tempSess: ",tempSession + "Count: "+index);
     // console.log(index);
   
   }
-  removeLastSess()
+  // removeLastSess()
 }
 
-//If u uncomment this u need to reset the create session
-// loadAllSessions()
+async function updateSession(event) {
+  // console.log("ISHAA: ",await collectSessions());
+  // event.preventDefault();
+  console.log("Submit button clicked! FOR UPDATE");
+  //FIRST WE STORE NEW DATES:==============================================
+  console.log("NINJA: ",getDateFiltered()); //to see if i can get date
+  // addDateSch(getDateFiltered());
 
+  // console.log(counter);
+  //Now we try to store the whole schedule:
 
-async function removeLastSess() {
-  // const targetSess = await document.querySelectorAll("#session-form")
-  // console.log(await document.querySelector("#session-form"));
-  // console.log(targetSess.childNodes);
-  // targetSess[1].remove
+  // console.log("monkey session: ",addSession);
+
+  let tempCounter = counter;
+ 
+
+  console.log("IAM HERE");
+
+  // const newSessions =  collectSessions();
+  // console.log("asd: ", newSessions);
+  const newScheduleObject = await{
+    schID: tempSchdule.schID,
+    date: await getDateFiltered(),
+    sessions: await collectSessions()
+  }
+  console.log("IAM HERE 2");
+
+  // console.log("Look 3 times: ", newScheduleObject);
+  const index = mySchedules.findIndex(sched => sched.schID ==  tempSchdule.schID);
+  console.log("index: ",index);
+
+  console.log("-=-=-=-=-=-=-=-=--=-=-=--=-=");
+  mySchedules[index] = newScheduleObject;
+  // const temp = await  mySchedules[index].sessions;
+  console.log("HVVVVVVVV: ", mySchedules[index].sessions);
+  console.log("-=-=-=-=-=-=-=-=--=-=-=--=-=");
+
+  localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to
 }
 
