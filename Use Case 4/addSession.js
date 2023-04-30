@@ -407,8 +407,7 @@ submitButton.addEventListener("click", async function (event) {
 async function loadToForm(date,session,counterParam) {
   // console.log(form);
 
-    const dateInput = await document.querySelector('#cDate')
-    dateInput.value = date;
+   
 
     const myTitleText = await document.querySelector(`#title-${counterParam}`);
     myTitleText.value = session.title;
@@ -443,6 +442,7 @@ async function loadToForm(date,session,counterParam) {
   // const endTimeSelected = myEndTime.value;
   // console.log("selected ET= ", endTimeSelected);
 
+  console.log("COUNT: " ,counterParam);
 }
  
  function countSession(){
@@ -454,13 +454,20 @@ async function loadToForm(date,session,counterParam) {
   //we want to match it original date format yyyy-mm-dd
   var formattedDate = parts[2] + "-" + parts[1] + "-" + parts[0];
   // console.log("conf date:",formattedDate);
+  const dateInput =  document.querySelector('#cDate')
+  dateInput.value =  formattedDate;
+
+
+  loadSessionForm(1)
+  const tempSession = tempSchdule.sessions[0];
+  loadToForm(formattedDate,tempSession,1);
 
   console.log("LENGTH: ",SessCounter); //counting no of sessions
-  for (let index = 1; index < SessCounter; index++) {
-    loadSessionForm(index)
-    const tempSession = tempSchdule.sessions[index-1];
-    console.log("tempSess: ",tempSession + "Count: "+index);
-    loadToForm(formattedDate,tempSession,index);
+  for (let index = 1; index <= SessCounter; index++) {
+    // if (index > 1) 
+    // const tempSession = tempSchdule.sessions[index-1];
+    // console.log("tempSess: ",tempSession + "Count: "+index);
+    // console.log(index);
   
   }
 

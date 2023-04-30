@@ -29,7 +29,7 @@ async function loadNav() {
                 |<li id="middle">${getNavLink(currUser)}</li>|
                 <li><a id="help" class="nav-link grey" href="#">Help</a></li>
             </ul>
-            <a id="username" href="#" onclick="getUserDetails()">${currUser.first_name} ${currUser.last_name}</a>
+            <a id="username" href="#" onclick="getUserDetails()"><i class="fa fa-user"></i> ${currUser.first_name} ${currUser.last_name}</a>
         </nav>
     </header>`;
   // inject the navbar in the body of the html
