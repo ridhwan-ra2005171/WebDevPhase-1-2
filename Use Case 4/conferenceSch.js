@@ -254,11 +254,14 @@ async function handleUpdateSchedule(schedID){
   //store to localstorage
   localStorage.setItem("tempSchdule",JSON.stringify(mySchedules[schedIndex]))
 
+  // store a state variable that checks if the update button was clicked
+  // it will be used in addSession.js
+  localStorage.setItem("updateState","updateClicked")
+
   window.location.href = "/Use Case 4/addSession.html"
   //we will pass this object from array selected
   
   // loadToForm(mySchedules[schedIndex]); //we load this object to the form
-
 
 }
 

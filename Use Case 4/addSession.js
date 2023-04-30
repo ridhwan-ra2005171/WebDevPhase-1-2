@@ -92,8 +92,8 @@ async function loadSessionForm(counter) {
   // We have to call the function that populate the dropdown list here (in loadSession function)
   // const locationList = document.querySelectorAll('#location-1')
   // locationList.addEventListener('load', handleLocationChange)
-  handleLocationChange(`location-${counter}`);
   loadAcceptedPapers(`paper-${counter}`);
+  handleLocationChange(`location-${counter}`);
   loadToForm(tempSchdule,counter);
 }
 
@@ -185,7 +185,7 @@ async function handleLocationChange(locationListID) {
   locations.forEach(
     (loc) =>
       (locHTML += `
-        <option value="${loc.id}">${loc.building}-${loc.room}</option>
+        <option value="${loc.id}">${loc.building} - ${loc.room}</option>
         `)
   );
   locationList.innerHTML = locHTML;
@@ -346,7 +346,11 @@ async function addSession(counterParam) {
   const myLocationSelect = await document.querySelector(
     `#location-${counterParam}`
   );
-  const locationSelected = myLocationSelect.value;
+    // get location from the json file
+  const locations = await(await fetch("/json/locations.json")).json();
+  // console.log("Loc: ",locations);
+  const locationID = myLocationSelect.value;
+  const locationSelected = locations.find(loc => loc.id == locationID);
   // console.log("selected location= ", locationSelected);
 
   const myStartTime = await document.querySelector(`#fromTime-${counterParam}`);
@@ -442,7 +446,10 @@ async function loadToForm(date,session,counterParam) {
   const myLocationSelect = await document.querySelector(
     `#location-${counterParam}`
   );
-  myLocationSelect.value = session.location;
+  
+  myLocationSelect.value = session.location.id;
+  console.log("Ses loc:",session.location.id);
+  console.log("select loc: ",myLocationSelect);
   // const locationSelected = myLocationSelect.value;
   // console.log("selected location= ", locationSelected);
 
