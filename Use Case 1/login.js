@@ -11,8 +11,27 @@ const form = document.querySelector("#loginForm");
 const email = document.querySelector("#email");
 const password = document.querySelector("#password");
 const loginButton = document.querySelector("#login");
+const backBtn = document.querySelector("#go-back");
+backBtn.addEventListener("click", returnToPrevPage);
 
-form.addEventListener("submit", login);
+async function returnToPrevPage(e) {
+  e.preventDefault();
+  // if (submitClicked === false) {
+  let result = await swal({
+    title: "Your changes will not be saved!",
+    dangerMode: true,
+    icon: "error",
+    buttons: ["Cancel","Proceed"],
+  });
+  if (result === true) {
+    location.href = "/Main website/homepage.html";
+  }
+  // } else {
+    // location.href = "../reviewPapers/reviewPapers.html";
+  // }
+}
+
+loginButton.addEventListener("click", login);
 
 const mainContent = document.getElementById("main-content");
 
@@ -39,22 +58,27 @@ function getFormData(form) {
   return Object.fromEntries(formData.entries());
 }
 
-function login(event) {
+async function login(event) {
   event.preventDefault();
   const userTocheck = getFormData(form);
-  currentLogedIn = findUser(userTocheck);
-
-  switch (currentLogedIn.role) {
-    case "reviewer":
-      loadPage("review.html");
-      break;
-    case "organizer":
-      loadPage("scheduleEdit.html");
-      break;
-    default: //author
-      loadPage("submit.html");
-      break;
+  currentLogedIn = await findUser(userTocheck);
+  // console.log();
+  // localStorage.currentUserID = currentLogedIn
+  console.log("USER SSS: ",  currentLogedIn);
+  if (currentLogedIn != undefined) { 
+  window.location.href = "/Main website/homepage.html"
   }
+  // switch (currentLogedIn.role) {
+  //   case "reviewer":
+  //     loadPage("review.html");
+  //     break;
+  //   case "organizer":
+  //     loadPage("scheduleEdit.html");
+  //     break;
+  //   default: //author
+  //     loadPage("submit.html");
+  //     break;
+  // }
 }
 
 //gets name about user > returns its id

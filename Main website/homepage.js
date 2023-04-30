@@ -2,12 +2,11 @@
 let usersUrl = "../../json/users.json"; //so we can get the presenters
 // import { loadToForm } from "./addSession";
 
-
 //Here we will import json file for presenter + paper
 //also the conference
 let mySchedules = [];
 let usersloc = [];
-let schDates =[];
+let schDates = [];
 // export default schDates;
 const schedulesContainer = document.querySelector(".schedules");
 
@@ -20,6 +19,27 @@ function showInfo(data) {
   console.table(data);
   console.log(data[0].sessions[1].title);
 }
+
+const currentUserID = localStorage.currentUserID;
+
+function checkLoggedIn() {
+  if (currentUserID) {
+    console.log("USER IS LOGGED IN");
+
+    var script = document.createElement("script");
+    script.setAttribute("src", "/Navbar/navbar.js");
+    document.head.appendChild(script);
+    console.log("Head: ", document.head.innerHTML);
+    document.querySelector("#temp-nav").remove()
+
+  } else {
+    console.log("NOT LOGGED IN YET");
+    
+
+  }
+}
+checkLoggedIn();
+
 //============================================================================
 
 async function loadPage() {
@@ -41,22 +61,22 @@ async function loadSchedules() {
 
   usersloc = JSON.parse(localStorage.usersloc);
 
-
-  if  (!localStorage.mySchedules) { //if the recipes dont exist in local storage, load from the URL
+  if (!localStorage.mySchedules) {
+    //if the recipes dont exist in local storage, load from the URL
     mySchedules = await (await fetch("../json/schedules.json")).json();
     localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
     schedulesContainer.innerHTML = mySchedules
       .map((sch) => scheduleToHTML(sch))
       .join("");
-  } else { // else display the recipes cards in the main using localStorage myRecipes array
+  } else {
+    // else display the recipes cards in the main using localStorage myRecipes array
     mySchedules = JSON.parse(localStorage.mySchedules); //make from string to object
     console.log("sc: ", mySchedules);
-   schedulesContainer.innerHTML = mySchedules
-    .map((schedule) => scheduleToHTML(schedule))
-    .join(""); // join('') is used to get rid of comma that appears between the objects
+    schedulesContainer.innerHTML = mySchedules
+      .map((schedule) => scheduleToHTML(schedule))
+      .join(""); // join('') is used to get rid of comma that appears between the objects
   }
   // console.log(schedulesContainer.innerHTML);
-
 
   // if (localStorage.mySchedules) {
   //   mySchedules = await fetch("../json/schedules.json").then((response) =>
@@ -127,7 +147,6 @@ function scheduleToHTML(schedule) {
 
 //Add schedule: ===========================================
 
-
 // function addSchedule(e) {
 //   e.preventDefault();
 //   const newSchedule = formToObject(e.target);
@@ -153,8 +172,6 @@ function formToObject(form) {
   console.log(data);
   return data;
 }
-
-
 
 //=============================================
 //DeleteButton
@@ -182,21 +199,21 @@ const dateDL = document.querySelector("#sortByDate");
 
 // let schDates = JSON.parse(localStorage.schDates);
 
-
 async function dateLoader() {
   // const dates = await (await fetch(dateJson)).json(); //dont delete this we need for web api
-    
+
   // schDates = await(await fetch(dateJson)).json();
-  // localStorage.setItem("schDates",JSON.stringify(schDates))  
+  // localStorage.setItem("schDates",JSON.stringify(schDates))
 
-  if(!localStorage.schDates){//get from json file
-    schDates = await(await fetch(dateJson)).json();
-  localStorage.setItem("schDates",JSON.stringify(schDates))
-
-  }else{ //get from local storage if exist
+  if (!localStorage.schDates) {
+    //get from json file
+    schDates = await (await fetch(dateJson)).json();
+    localStorage.setItem("schDates", JSON.stringify(schDates));
+  } else {
+    //get from local storage if exist
     schDates = JSON.parse(localStorage.schDates);
   }
-  console.log("lcl dates:",schDates)
+  console.log("lcl dates:", schDates);
 
   let instHTML = '<option value="all" >Show All Conferences</option>';
   schDates.forEach(
@@ -231,35 +248,3 @@ function handleSortDate() {
       .join("");
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

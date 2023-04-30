@@ -8,7 +8,7 @@ document.body.insertAdjacentHTML('beforebegin','<script src="https://unpkg.com/s
 // we set it to 12 for testing purpose only
 // global variables
 // const USER_ID = 12;
-const USER_ID = parseInt(localStorage.USER_ID);
+const USER_ID = parseInt(localStorage.currentUserID);
 console.log("USER ID: ",USER_ID);
 const reviewerID = USER_ID;
 let submitClicked = false; // this is to check if the submit button was clicked

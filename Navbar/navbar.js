@@ -1,5 +1,5 @@
 const usersJson = "../../json/users.json";
-let currUserID = parseInt(localStorage.USER_ID);
+let currUserID = parseInt(localStorage.currentUserID);
 console.log(currUserID);
 
 // add the style sheet of the navbar to the html files
@@ -25,8 +25,8 @@ async function loadNav() {
                 <img src="../../img/ConfPlus logo.png" alt="Conf Plus Logo">
             </div>
             <ul>
-                <li><a id="home" class="nav-link grey" href="/Use Case 4/conferenceSch.html">Home</a></li>
-                |<li id="middle">${getNavLink(currUser)}</li>|
+                <li><a id="home" class="nav-link grey" href="/Main website/homepage.html">Home</a></li>
+                ${getNavLink(currUser)}
                 <li><a id="help" class="nav-link grey" href="#">Help</a></li>
             </ul>
             <a id="username" href="#" onclick="getUserDetails()"><i class="fa fa-user"></i> ${currUser.first_name} ${currUser.last_name}</a>
@@ -41,14 +41,16 @@ function getNavLink(currUser) {
   let link = null;
   switch (role) {
     case "organizer":
-        link = `<a class="nav-link grey" href="/Use Case 4/addSession.html">Create Schedule</a>`
+        link = `
+        |<li id="middle"><a class="nav-link grey" href="/Use Case 4/conferenceSch.html">Edit Schedules</a></li>
+        |<li id="middle"><a class="nav-link grey" href="/Use Case 4/addSession.html">Add Schedule</a></li>|`
       break;
     case "reviewer":
-        link = `<a class="nav-link grey" href="/Use Case 3/reviewPapers/reviewPapers.html">Review Papers</a>`
+        link = `|<li><a class="nav-link grey" href="/Use Case 3/reviewPapers/reviewPapers.html">Review Papers</a></li>|`
 
       break;
     case "author":
-        link = `<a class="nav-link grey" href="/Use Case 2/submit.html">Submit Paper</a>`
+        link = `|<li><a class="nav-link grey" href="/Use Case 2/submit.html">Submit Paper</a></li>|`
       break;
 
     default:
@@ -58,8 +60,25 @@ function getNavLink(currUser) {
 }
 
 async function getUserDetails() {
-  await swal({
+  let result = await swal({
       title: `Hi, ${currUser.first_name} ${currUser.last_name}!`,
       text: `Email: ${currUser.email}`,
-    }); 
+      buttons: "Log out",
+
+    });
+  // console.log("RES: ",result);
+  //   // Confirmation of review submission
+  //  = await swal({
+  //   title: "Your Review has been Submitted Successfully!",
+  //   icon: "success",
+  //   buttons: "Ok",
+  //   closeOnClickOutside: false,
+  // });
+
+  if (result === true) {
+    localStorage.removeItem("currentUserID")
+    location.href = "/Main website/homepage.html";
+  }
+
 }
+
