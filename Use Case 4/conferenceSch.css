@@ -123,6 +123,8 @@ main h2 {
     border-radius: 100%;
 }
 
+
+
 .conf-card {
     display: flex;
     flex-direction: column;
@@ -173,6 +175,24 @@ table{
 }
 
 #loginBtn:hover{
+    background-color: rgb(172, 117, 226);
+    border: 0.2rem solid rebeccapurple;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+}
+
+
+#update-btn{
+    color: white;
+    font-family: inherit;
+    display: block;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: .7rem;
+    background-color: rgb(67, 29, 105);
+}
+
+#update-btn:hover{
     background-color: rgb(172, 117, 226);
     border: 0.2rem solid rebeccapurple;
     padding: 0.4rem 0.8rem;
