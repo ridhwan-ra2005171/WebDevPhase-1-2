@@ -68,7 +68,7 @@ async function findUser(userTocheck) {
   if (user !== undefined) {
     if (user.password == userTocheck.password) {
       // Added my Mohamad Allaham - store the user ID in local storage to be accessed by other js files
-      localStorage.setItem("currUserID", JSON.stringify(user.id));
+      localStorage.setItem("currentUserID", JSON.stringify(user.id));
       console.log("loc: ", localStorage.currUserID);
       //---------------------------------------------------------
       console.log(user.id);
@@ -84,16 +84,17 @@ async function findUser(userTocheck) {
       });
     //   prompt("No email and password combination found, please try again");
     }
-  } else {
-    //better if it's an html response
-    password.value = null;
-    swal({
-        title: "No email and password combination found, please try again",
-        icon: "error",
-        buttons: "Ok",
-        closeOnClickOutside: false,
-      });
-    // prompt("No email and password combination found, please try again");
+  // } else {
+  //   //better if it's an html response
+  //   password.value = null;
+  //   swal({
+  //       title: "No email and password combination found, please try again",
+  //       icon: "error",
+  //       buttons: "Ok",
+  //       closeOnClickOutside: false,
+  //     });
+  //   // prompt("No email and password combination found, please try again");
+  // }
   }
 }
 //load paper data into page

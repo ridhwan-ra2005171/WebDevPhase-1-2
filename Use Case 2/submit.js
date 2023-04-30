@@ -229,6 +229,23 @@ async function submitForm(event) {
     //save authors in paperAuthors (only their id???)
     const authorsID= await (saveAuthors())
     console.log(authorsID);
+    const reviewer1 = getRole("reviewers")[Math.floor(Math.random()*items.length)]
+    let reviewer2 = getRole("reviewers")[Math.floor(Math.random()*items.length)]
+
+    //in case reviewer1==reviewer2 
+    while (reviewer1==reviewer2) {
+    reviewer2 = getRole("reviewers")[Math.floor(Math.random()*items.length)]
+    }
+    const reviewArr = [
+        {
+            reviewerID: reviewer1
+        },
+        {
+            reviewerID: reviewer2
+
+        }      
+    ]
+
     let newPaper = {
         paperID: papers.length+1,
         title: paperTitle.value,
@@ -236,8 +253,9 @@ async function submitForm(event) {
         authors: authorsID,
         //authors
         presenterID: paperPresenterID.options[paperPresenterID.selectedIndex].value,
-        pdfLink: paperPdfLink.value
+        pdfLink: paperPdfLink.value,
         //reviews are added on the fly when done, no need to include them now
+        review: reviewArr,
         
     }
 
@@ -307,4 +325,24 @@ async function saveAuthors() {
 
     
 }
+
+//PERFECTO
+//return an array or role's ID (more general)
+ async function getRole(role) {
+    const users  = await (await fetch(usersJson)).json();//users is an array
+
+    let roleID =[]
+    let roleIndex=0
+    //looping for each email
+    for (let index = 0; index < users.length; index++) {
+        
+            if (users[index]["role"]==role) {
+                // do so, so we don't have empty spaces
+                roleID[roleIndex]=users[index].id
+                roleIndex += 1
+            }
+        }
+            return roleID
+        
+    }
 
