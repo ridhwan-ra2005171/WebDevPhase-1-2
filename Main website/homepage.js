@@ -8,6 +8,8 @@ let mySchedules = [];
 let usersloc = [];
 let schDates = [];
 // export default schDates;
+// schDates = JSON.parse(localStorage.schDates); //make from string to object
+
 const schedulesContainer = document.querySelector(".schedules");
 
 //to check if i can fetch the schedules: =====================================
@@ -76,6 +78,7 @@ async function loadSchedules() {
     .join(""); // join('') is used to get rid of comma that appears between the objects
   }
   // console.log(schedulesContainer.innerHTML);
+  dateLoader();
 
   // if (localStorage.mySchedules) {
   //   mySchedules = await fetch("../json/schedules.json").then((response) =>
@@ -210,21 +213,22 @@ async function dateLoader() {
   //   localStorage.setItem("schDates", JSON.stringify(schDates));
   // } else {
     //get from local storage if exist
-    schDates = JSON.parse(localStorage.schDates);
+    // schDates = JSON.parse(localStorage.schDates);
   // }
-  console.log("lcl dates:", schDates);
+  // console.log("lcl dates:", schDates);
+  const tempSchDates =   await  mySchedules.map(sch => sch.date);
 
   let instHTML = '<option value="all" >Show All Conferences</option>';
-  schDates.forEach(
+  tempSchDates.forEach(
     (date) =>
       (instHTML += `
-    <option value="${date.confDate}">${date.confDate}</option>
+    <option value="${date}">${date}</option>
     `)
   );
   dateDL.innerHTML = instHTML;
 }
 
-dateLoader();
+// dateLoader();
 
 function handleSortDate() {
   var selectedDate = document.getElementById("sortByDate").value;
