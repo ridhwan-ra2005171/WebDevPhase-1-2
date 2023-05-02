@@ -2,11 +2,12 @@
 let usersUrl = "../../json/users.json"; //so we can get the presenters
 // import { loadToForm } from "./addSession";
 
+
 //Here we will import json file for presenter + paper
 //also the conference
 let mySchedules = [];
 let usersloc = [];
-let schDates = [];
+let schDates =[];
 // export default schDates;
 const schedulesContainer = document.querySelector(".schedules");
 
@@ -19,33 +20,13 @@ function showInfo(data) {
   console.table(data);
   console.log(data[0].sessions[1].title);
 }
-
-const currentUserID = localStorage.currentUserID;
-
-function checkLoggedIn() {
-  if (currentUserID) {
-    console.log("USER IS LOGGED IN");
-
-    var script = document.createElement("script");
-    script.setAttribute("src", "/Navbar/navbar.js");
-    document.head.appendChild(script);
-    console.log("Head: ", document.head.innerHTML);
-    document.querySelector("#temp-nav").remove()
-
-  } else {
-    console.log("NOT LOGGED IN YET");
-    
-
-  }
-}
-checkLoggedIn();
-
 //============================================================================
 
 async function loadPage() {
   const mainContent = document.querySelector("main-content");
   // const page = await fetch("../json/schedules.json");
   const page = mySchedules;
+  console.log("MY: ",mySchedules);
   const pageHTMLContent = await page.text();
   mainContent.innerHTML = pageHTMLContent;
 
@@ -62,6 +43,7 @@ async function loadSchedules() {
 
   usersloc = JSON.parse(localStorage.usersloc);
 
+
   if  (!localStorage.mySchedules) { //if the recipes dont exist in local storage, load from the URL
     // mySchedules = await (await fetch("../json/schedules.json")).json();
     localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
@@ -76,6 +58,8 @@ async function loadSchedules() {
     .join(""); // join('') is used to get rid of comma that appears between the objects
   }
   // console.log(schedulesContainer.innerHTML);
+  dateLoader();
+
 
   // if (localStorage.mySchedules) {
   //   mySchedules = await fetch("../json/schedules.json").then((response) =>
@@ -125,7 +109,7 @@ function scheduleToHTML(schedule) {
   <div class="conf-card">
     <div class="card-header">
       <a href="#" class="confDateLabel"><h4>${schedule.date}</h4></a>
-    </div>
+        </div>
   <table style="text-align: center;">
       <thead>
         <tr>
@@ -144,22 +128,6 @@ function scheduleToHTML(schedule) {
   `;
 }
 
-//Add schedule: ===========================================
-
-// function addSchedule(e) {
-//   e.preventDefault();
-//   const newSchedule = formToObject(e.target);
-//   newSchedule.id = Date.now();
-//   mySchedules.push(newSchedule);
-//   //to check:
-//   console.log("NEW: ",newSchedule);
-
-//   localStorage.mySchedules = JSON.stringify(mySchedules); //just to store in the local storage
-
-//   // window.location.href = "conferenceSch.html";
-// }
-// addSchedule();
-
 //from todoList app, we used this in the addSchedule
 function formToObject(form) {
   const formData = new FormData(form);
@@ -173,23 +141,6 @@ function formToObject(form) {
 }
 
 //=============================================
-//DeleteButton
-// function handleDeleteSchedule(schedID){
-//   // e.preventDefault()
-
-//   console.log("SEDEA: ",schedID);
-//   const schedules = JSON.parse(localStorage.mySchedules);
-//   // Index of schedule to be deleted
-//   const schedIndex = schedules.findIndex(sched => sched.schID == schedID )
-//   // delete schedule from array
-//   schedules.splice(schedIndex,1);
-//   // store in local storage updated array
-//   localStorage.setItem("mySchedules",JSON.stringify(schedules))
-//   // load page again
-//   loadSchedules();
-// }
-
-//=============================================
 
 //===USE CASE 5 date filter:
 const dateJson = "../json/conference-dates.json";
@@ -198,33 +149,35 @@ const dateDL = document.querySelector("#sortByDate");
 
 // let schDates = JSON.parse(localStorage.schDates);
 
+
 async function dateLoader() {
   // const dates = await (await fetch(dateJson)).json(); //dont delete this we need for web api
-
+    
   // schDates = await(await fetch(dateJson)).json();
+  // localStorage.setItem("schDates",JSON.stringify(schDates))  
+
+  // if(!localStorage.schDates){//get from json file
+  //   schDates = await(await fetch(dateJson)).json();
   // localStorage.setItem("schDates",JSON.stringify(schDates))
 
-  // if (!localStorage.schDates) {
-  //   //get from json file
-  //   schDates = await (await fetch(dateJson)).json();
-  //   localStorage.setItem("schDates", JSON.stringify(schDates));
-  // } else {
-    //get from local storage if exist
+  // }else{ //get from local storage if exist
     schDates = JSON.parse(localStorage.schDates);
   // }
-  console.log("lcl dates:", schDates);
+  // console.log("lcl dates:",schDates)
 
+  const tempSchDates =   await  mySchedules.map(sch => sch.date);
+  console.log(await mySchedules);
+  // console.log("ASDASDS: ",tempSchDates);
   let instHTML = '<option value="all" >Show All Conferences</option>';
-  schDates.forEach(
+  tempSchDates.forEach(
     (date) =>
       (instHTML += `
-    <option value="${date.confDate}">${date.confDate}</option>
+    <option value="${date}">${date}</option>
     `)
   );
   dateDL.innerHTML = instHTML;
 }
 
-dateLoader();
 
 function handleSortDate() {
   var selectedDate = document.getElementById("sortByDate").value;
@@ -247,3 +200,4 @@ function handleSortDate() {
       .join("");
   }
 }
+
