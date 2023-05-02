@@ -229,14 +229,17 @@ async function submitForm(event) {
     //save authors in paperAuthors (only their id???)
     const authorsID= await (saveAuthors())
     console.log(authorsID);
-    const reviewersArray = getRole("reviewers")
+    const reviewersArray = await getRole("reviewer")
+    console.log("reviewers",reviewersArray);
     const reviewer1 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
     let reviewer2 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
-
+console.log("rev1", reviewer1);
+console.log("rev2", reviewer2);
     //in case reviewer1==reviewer2 
     while (reviewer1==reviewer2) {
     reviewer2 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
-    }
+        // console.log("check");
+}
     const reviewArr = [
         {
             "reviewerID": reviewer1
@@ -267,7 +270,7 @@ async function submitForm(event) {
     console.log(papersArray);
     papersArray.push(newPaper)
     localStorage.setItem("papers",JSON.stringify(papersArray))
-
+window.location.href='../Main website/homepage.html'
     //save this new paper in the JSON file
 
 
@@ -329,15 +332,19 @@ async function saveAuthors() {
 
 //PERFECTO
 //return an array or role's ID (more general)
- async function getRole(role) {
+ async function getRole(userRole) {
     const users  = await (await fetch(usersJson)).json();//users is an array
-
+// console.log(userRole);
     let roleID =[]
     let roleIndex=0
     //looping for each email
     for (let index = 0; index < users.length; index++) {
-        
-            if (users[index]["role"]==role) {
+
+        // console.log("checkGET",users[index][role]);
+        // console.log("checkGET",users[index].role);
+        // console.log("checkGETid",users[index].id);
+            if (users[index].role==userRole) {
+                console.log("true");
                 // do so, so we don't have empty spaces
                 roleID[roleIndex]=users[index].id
                 roleIndex += 1
