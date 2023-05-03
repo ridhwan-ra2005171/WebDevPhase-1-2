@@ -200,7 +200,7 @@ async function dateLoader() {
   // localStorage.setItem("schDates",JSON.stringify(schDates))
 
   // }else{ //get from local storage if exist
-    schDates = JSON.parse(localStorage.schDates);
+    // schDates = JSON.parse(localStorage.schDates);
   // }
   // console.log("lcl dates:",schDates)
 
