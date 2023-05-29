@@ -1,0 +1,54 @@
+conf date:
+    "id": 1,
+    "confDate": "12/06/2023"
+
+//--------- DONT NEED DATE MAYBE COZ WE ALR HAVE DATE IN PRISMA
+
+institutions:
+	Institution ID
+      "code": "QU",
+      "name": "Qatar University",
+      "country": "Qatar"
+
+locations:
+    "id": 1,
+    "building": "Female Engineering",
+    "room": "C07-145"
+
+papers:
+ "paperID": 1,
+    "title": "Website Developmemt Technologies",
+    "abstract": "",
+    "authors": [14, 15, 16], //array of authors
+    "presenterID": 14,
+    "pdfLink": "https://www.ijraset.com/best-journal/web-development-technologies-a-review",
+     reviews : [array of reviews]
+
+review:
+	reviewID
+	overall evaluation: int
+	paper contribution: int
+	paper strength: string
+	paper weaknesses: string
+
+schedules:
+	sch id:
+	date: [object] maybe foreign key//  ----- INSTEAD USE DATE PRISMA
+	session : [array of sessions]
+
+sessions:
+	id:
+	"title": String,
+      	"location": location id,
+      	"paperID": int,
+      	"presenterID": int,
+      	"fromTime": Time,
+      	"endTime": Time
+
+users:
+    "id": 1,
+    "first_name": String,
+    "last_name": ,
+    "email": "johndoe@organizer.com",
+    "password": "password123",
+    "role": "organizer"
