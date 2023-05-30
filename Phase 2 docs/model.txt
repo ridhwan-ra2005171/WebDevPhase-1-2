@@ -5,27 +5,28 @@ conf date:
 //--------- DONT NEED DATE MAYBE COZ WE ALR HAVE DATE IN PRISMA
 
 institutions:
-	Institution ID
-      "code": "QU",
-      "name": "Qatar University",
-      "country": "Qatar"
+	
+	InstituteID: int
+      code: String,
+      name: String,
+      country: String,
 
 locations:
-    "id": 1,
-    "building": "Female Engineering",
-    "room": "C07-145"
+    "locationID": int,
+    "building": String,,
+    "room": String,
 
 papers:
  "paperID": 1,
-    "title": "Website Developmemt Technologies",
-    "abstract": "",
+    "title": String,,
+    "abstract": String,,
     "authors": [14, 15, 16], //array of authors
     "presenterID": 14,
-    "pdfLink": "https://www.ijraset.com/best-journal/web-development-technologies-a-review",
+    "pdfLink": String,,
      reviews : [array of reviews]
 
 review:
-	reviewID
+	reviewID : int
 	overall evaluation: int
 	paper contribution: int
 	paper strength: string
@@ -33,7 +34,7 @@ review:
 
 schedules:
 	sch id:
-	date: [object] maybe foreign key//  ----- INSTEAD USE DATE PRISMA
+	date: date
 	session : [array of sessions]
 
 sessions:
@@ -48,7 +49,7 @@ sessions:
 users:
     "id": 1,
     "first_name": String,
-    "last_name": ,
-    "email": "johndoe@organizer.com",
-    "password": "password123",
-    "role": "organizer"
+    "last_name": String,,
+    "email": String,
+    "password": String,
+    "role": String
