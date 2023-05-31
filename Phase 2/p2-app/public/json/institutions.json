@@ -1,0 +1,27 @@
+[
+    {
+      "code": "QU",
+      "name": "Qatar University",
+      "country": "Qatar"
+    }, 
+    {
+        "code": "UDST",
+        "name": "University of Doha of Science and Technology",
+        "country": "Qatar"
+    },
+    {
+        "code": "CMU",
+        "name": "Carnegie Mellon University",
+        "country": "USA"
+    },
+    {
+        "code": "AUB",
+        "name": "American University in Beirut",
+        "country": "Lebanon"
+    },
+    {
+    "code": "GUQ",
+    "name": "Georgetown University in Qatar",
+    "country": "Qatar"
+    }
+  ]

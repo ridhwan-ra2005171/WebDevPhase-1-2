@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conf Plus</title>
+    <link rel="stylesheet" href="conferenceSch.css">
+    <!-- New Google font: Roboto Slab --> <!--FONT-->
+  <link
+  href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+  rel="stylesheet">
+    <script
+      src="https://kit.fontawesome.com/2c36e9b7b1.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/Navbar/navbar.js"></script>
+
+</head>
+
+<body onload="loadSchedules()">
+    <!-- <nav class="nav-bar">
+        <div class="logo">
+            <img src="Capture2.PNG" alt="Conf Plus Logo">
+
+        </div>
+        <ul>
+            <li><a class="nav-link grey" href="#">Home</a></li>
+            <li><a class="nav-link grey" href="addSession.html">Create Session</a></li>
+            <li><a class="nav-link grey" href="#">Help</a></li>
+        </ul>
+        <button id="loginBtn" onclick="location.href='../../Use Case 1/login.html'">Log Out</button>
+        <a href="#">username</a>
+    </nav> -->
+    <!-- <header></header> -->
+    
+
+    <main id="main-content" class="main-content">
+            <!-- <div class="card-list"> -->
+            <h2>Conference Schedules</h2>
+                        
+            <!-- WE NEED TO HAVE FILTER DATE HERE -->
+            <div class="date-filter">
+              <label for="sortBy">Select Date:</label>
+              <select name="sort-by" id="sortByDate" class="sortByDate" onchange="handleSortDate();">
+                
+                <!-- <option value="Genre">Genre</option>
+                <option value="Price">Price</option>
+                <option value="Author">Author</option> -->
+            </select>
+            </div>
+            
+
+
+          
+            <!-- Card 1 example -->
+            <div class="schedules" id="schedules">
+              <div class="conf-card">
+              </div>
+            </div>
+            <!-- <div class="conf-card"> -->
+                
+            <!-- <div class="conf-card"> -->
+                <!-- <a href="#"><h4>Conference Date</h4></a>
+                <table style="text-align: center;">
+                    <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Title</th>
+                        <th>Presenter</th>
+                        <th>Location</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>12:00 -14:00</td>
+                        <td>Trusting Decentralised Knowledge Graphs and Web Data</td>
+                        <td>Presenter Name</td>
+                        <td>BCR-E103</td>
+                      </tr>
+                    </tbody>
+                    </table> -->
+            <!-- </div> -->
+            
+
+            </div>
+        </div>
+
+    </main>
+
+    <script src="conferenceSch.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+
+</html>
+
+
+
+<!-- 
+<a href="#"><h4>Conference Date</h4></a>
+                <table style="text-align: center;">
+                    <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Title</th>
+                        <th>Presenter</th>
+                        <th>Paper</th>
+                        <th>Location</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>12:00 -14:00</td>
+                        <td>Trusting Decentralised Knowledge Graphs and Web Data</td>
+                        <td>Presenter Name</td>
+                        <td>PaperTrusting Decentralised Knowledge Graphs and Web Data</td>
+                        <td>BCR-E103</td>
+                      </tr>
+                      <tr>
+                        <td>12:00 -14:00</td>
+                        <td>Trusting Decentralised Knowledge Graphs and Web Data</td>
+                        <td>Presenter Name</td>
+                        <td>PaperTrusting Decentralised Knowledge Graphs and Web Data</td>
+                        <td>BCR-E103</td>
+                      </tr>
+                      <tr>
+                        <td>12:00 -14:00</td>
+                        <td>Trusting Decentralised Knowledge Graphs and Web Data</td>
+                        <td>Presenter Name</td>
+                        <td>PaperTrusting Decentralised Knowledge Graphs and Web Data</td>
+                        <td>BCR-E103</td>
+                      </tr>
+                    </tbody>
+                    </table>
+            </div> -->

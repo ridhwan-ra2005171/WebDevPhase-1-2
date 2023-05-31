@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Schedule</title>
+  <!-- New Google font: Roboto Slab --> <!--FONT-->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <!-- // link  to CSS -->
+  <link rel="stylesheet" href="../../Use Case 3/reviewForm/reviewForm.css">
+  <link rel="stylesheet" href="./addSession.css" />
+
+</head>
+<!-- onload="loadSessionForm()" -->
+<body id="review-container" >
+  <header>
+    <nav id="nav-bar" class="nav-bar">
+      <div class="logo">
+        <img src="../../img/ConfPlus logo.png" alt="Conf Plus Logo">
+      </div>
+      <button id="go-back" class="btn">Go Back</button>
+    </nav>
+  </header>
+
+  <main>
+    <form id="myForm">
+
+      <fieldset id="schedForm">
+        <legend><strong>Create Schedule</strong></legend>
+
+        <div class="conf-date">
+          <label for="cDate">Conference Date:</label>
+          <!-- <select name="cDate" id="cDa" aria-placeholder="Hello" onchange="">
+            <option value="" selected disabled>-Select Conference Date-</option>
+          </select> -->
+          <input type="date" id="cDate" name="cDate" required>
+
+        </div>
+
+        <!-- // The session form here // -->
+        <div id="session-form"></div>
+
+      </fieldset>
+
+      <div class="buttons">
+        <button id="addSessionBtn" class="addMore btn">Add More Sessions</button>
+        <input type="submit" id="submitConfBtn" value="Submit Conference Schedule" class="btn" />
+      </div>
+    </form>
+  </main>
+
+  <script src="addSession.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>
+
+<!-- <form id="add-conference-form">
+  <link rel="stylesheet" href="addSession.css" />
+
+  <fieldset id="schedForm">
+    <legend><strong>Create Schedule</strong></legend>
+
+    <div class="conf-date">
+      <label for="cDate">Conference Date:</label>
+      <select name="cDate" id="cDa" aria-placeholder="Hello" onchange="">
+        <option value="" selected disabled>-Select Conference Date-</option>
+      </select>
+    </div>
+    <br />
+    <form id="session-form">
+      <fieldset id="sessionform1">
+        <legend>Create Sessions</legend>
+            <label>Select Paper:</label>
+          <select name="paper'+counter+'" id="paper" onchange="">
+            <option value="" selected disabled>-Select Paper-</option>
+          </select>
+          <br />
+          <label>Select Presenter:</label>
+          <select name="presenter'+counter+'" id="presenter" onchange="">
+            <option value="" selected disabled>-Select Presenter-</option>
+          </select>
+          <br />
+          <label>Select Location:</label>
+          <select
+            name="location'+counter+'"
+            id="location"
+            aria-placeholder="Hello"
+            onchange=""
+          >
+            <option value="" selected disabled>-Select Presenter-</option>
+          </select>
+          <br />
+          <br />
+          <div class="timeform">
+            <label for="fromTime"
+              >Start Time: <input type="time" name="fromTime'+counter+'" id="fromTime"
+            /></label>
+            <label for="endTime"
+              >End Time: <input type="time" name="endTime'+counter+'" id="endTime" />
+            </label>
+          </div>
+          <input 
+                id="deleteButton-1" 
+                type="button" class="btn submit-btn deleteSessBtn" onclick="deleteSession(1)" name="deleteSessBtn" value="Remove Session">
+        </div>
+      </fieldset>
+      <br />
+
+
+
+    </form>
+    
+    <script src="addSession.js"></script>
+
+  </fieldset>
+  <button class="addMore" onclick="addMoreSession()">Add More Sessions</button>
+  <input type="submit" id="add-recipe-btn" value="Submit Conference Schedule" />
+</form>
+
+
+
+
+
+ -->
+
+
+
+
+
+<!-- ======================== -->
+
+
+
+
+<!-- <div class="form-group">
+            <label>Select Paper:</label>
+            <select name="country" 
+            id="country" 
+            aria-placeholder="Hello"
+            onchange="">
+                <option value="" 
+                selected disabled> -Select Paper- </option>
+            </select>
+    </div>
+    
+    <br>
+    <div class="form-group">
+        <label>Select Presenter:</label>
+        <select name="country" 
+        id="country" 
+        aria-placeholder="Hello"
+        onchange="">
+            <option value="" 
+            selected disabled> -Select Presenter- </option>
+        </select>
+    </div>
+<br>
+<div class="time">
+    <label for="time">Presentation Time:</label>
+    <input type="time" name="time" id="time">
+    
+</div>
+<br>
+    <div class="titlename">
+        <label for="tName">Location:</label>
+                    <input type="text" name="locName" id="locName" placeholder="Enter Location" required><br><br>    
+    </div> -->

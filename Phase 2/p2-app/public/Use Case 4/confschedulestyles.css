@@ -1,0 +1,149 @@
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Inter", sans-serif;
+  font-size: var(0.85rem);
+  line-height: 1.8;
+}
+
+body{
+    /* display: flex;
+    flex-direction: column; */
+    align-items: center;
+}
+
+
+/*============== Navigation content================= */
+.logo img {
+  /* aspect-ratio: ; */
+  width: 100%;
+  /* size: ; */
+  height: auto;
+  /* width: 1rem; */
+}
+
+.logo {
+  width: 5rem;
+  /* margin: auto 0; */
+}
+
+a,
+ul {
+  text-decoration: none;
+  list-style: none;
+  color: black;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* to make the nav bar stick to the top of the page on scroll ++++++++++ */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 1px 30px 0px;
+  padding: 1rem;
+}
+
+ul {
+  display: flex;
+  gap: 2rem;
+  /* margin: 0rem 2rem; */
+  /* font-weight: 700; */
+}
+/* confrence navigation */
+
+
+.conference-card, .schedules{
+    display: grid;
+    width: clamp(10rem, 85vw, 60rem);
+    max-height: 10rem;    
+    grid-template-areas:
+    "card-date card-title"
+    "card-time card-presenter"
+    "card-location card-description"
+  ;
+  
+
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 0.5rem;
+  padding: 20px;
+  max-width: 600px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* .conference-info {
+  display: flex;
+  flex-direction: column;
+} */
+
+/* .date-time-location {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+} */
+
+.date {
+    grid-area: card-date;
+  font-size: 2vw;
+  font-weight: bold;
+}
+
+.time{
+  grid-area: card-time;
+  font-size: 2vw;
+  color: #666;
+}
+
+.location{
+    grid-area: card-location;
+    font-size: 2vw;
+    
+}
+
+
+.title {
+  grid-area: card-title;
+  font-size: 3vw;
+  font-weight: bold;
+  margin: auto;
+
+}
+
+/* .subtitle {
+
+  font-size: 2vw;
+  font-style: italic;
+  color: #666;
+  margin: 0 0 10px 0;
+} */
+
+.presenter {
+  grid-area: card-presenter;
+
+  font-size: 2vw;
+  font-weight: bold;
+  
+}
+
+.description {
+  grid-area: card-description;
+  font-size: 2vw;
+  
+}
+
+.loginBtn{
+background-color: red;
+}

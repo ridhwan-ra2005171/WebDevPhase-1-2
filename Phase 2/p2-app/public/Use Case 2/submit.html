@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Paper</title>
+    <!-- New Google font: Roboto Slab --> <!--FONT-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- // link  to CSS -->
+    <link rel="stylesheet" href="submit.css">
+
+</head>
+
+<body id="review-container">
+    <header>
+        <nav class="nav-bar">
+            <div class="logo">
+                <img src="../../img/ConfPlus logo.png" alt="Conf Plus Logo">
+            </div>
+            <button id="go-back" class="btn">Go Back</button>
+        </nav>
+    </header>
+
+    <main>
+        
+        <!-- // =========================================================================== -->
+        <form id="submitForm">
+            <fieldset>
+                <legend>Paper Submission</legend>
+               
+                <label for="paperTitle">
+                    <h3>Title: </h3></label>
+                    <input type='text' name="title" id="title" required></input>
+                    
+                    <fieldset class="authorsList">
+                        <legend for="authors">Authors</legend>
+
+                        <div class="author" id="1">
+                            <legend for="author1">Author 1</legend>
+
+                            <label for="authorFirstName"> First name:</label>
+                            <input type="text" name="author1FirN" id="author1FirN" required>
+
+                            <label for="authorLastName"> Last name:</label>
+                            <input type="text" name="author1LasN" id="author1LasN"required>
+
+                            <label for="email"> Email:</label>
+                            <input type="email" name="auth1Email" id="auth1Email" class="email" required>
+
+                            <label for="institutions"> Affiliation:</label>
+                            <select name="institutions" class="institutions"required >
+                            <option value="" disabled selected >Select your institution</option>
+                                <!-- here to uplaod the institutions -->
+                            </select>
+                            <br>
+
+                            <div class="endButtons">
+                                <input id="addButton-1" type="button" class="btn submit-btn addAuthorBt" onclick="addAuthor()" name="addAuthorBt" value="Add Author">
+                                <input id="deleteButton-1" type="button" class="btn submit-btn DeleteAuthorBt" onclick="deleteAuthor(1)"  name="DeleteAuthorBt" value="Remove Author">
+                            </div>
+                            
+                        </div>
+                        <!-- <fieldset class="author">
+                            <legend for="author1">Author 1</legend>
+
+                            <label for="authorFirstName"> First name:</label>
+                            <input type="text" name="author1FirN" id="author1FirN">
+
+                            <label for="authorLastName"> Last name:</label>
+                            <input type="text" name="author1LasN" id="author1LasN">
+                            
+                            <label for="email"> Email:</label>
+                            <input type="email" name="auth1Email" id="auth1Email">
+
+                            <label for="institutions"> Affiliation:</label>
+                            <select name="institutions" id="institutions">
+                             here to uplaod the institutions 
+                            </select>
+                            <br>
+
+                            <div class="endButtons">
+                                <input id="addAuthorBt" type="button" class="btn submit-btn" name="addAuthorBt" value="Add Author">
+                                <input id="DeleteAuthorBt" type="button" class="btn submit-btn" name="DeleteAuthorBt" value="Remove Author">
+                            </div> -->
+                            
+                        <!-- </fieldset> -->
+                        <!-- here to upload new authors when click on addAuthor button -->
+
+                    </fieldset>
+                    
+                    <div class="paperDetails"></div>
+                    <label for="presenter"> Presenter:</label>
+                    <select name="presenter" id="presenter" required>
+                         <option value="" disabled selected>Choose a presenter</option>
+
+                        <!-- here to load the authors from above in a dropdown -->
+                    </select>
+                    
+                    <label for="abstract"></label>
+                        <h3>Abstract: </h3>
+                        <textarea name="paper-abstract" id="paper-abstract" cols="50" rows="5" required></textarea>
+                    
+                    <label for="file">Upload the paper pdf file:</label>
+                    <input type="file" id="file" name="file" accept=".pdf">
+
+                    <div class="conditions">
+                        <input type="checkbox" id="conditions" required> 
+                        <label for="conditions">I hereby accept the terms and conditions</label> 
+                    </div>
+                    <input id="submitButton" type="submit" class="btn submit-btn" name="submit" value="Submit paper">
+            </fieldset>
+        </form>
+    </main>
+
+
+    <script src="submit.js" type="module"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+
+</html>

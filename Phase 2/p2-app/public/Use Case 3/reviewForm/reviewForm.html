@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Paper</title>
+    <!-- New Google font: Roboto Slab --> <!--FONT-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+        
+    <!-- // link  to CSS -->
+    <link rel="stylesheet" href="reviewForm.css">
+</head>
+
+<body id="review-container">
+    <header>
+        <nav class="nav-bar">
+            <div class="logo">
+                <img src="../../img/ConfPlus logo.png" alt="Conf Plus Logo">
+            </div>
+            <button id="go-back" class="btn">Go Back</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- <article id="paper-cont"> -->
+
+            <!-- <div class="title-cont">
+                <h3 class="grey">Title: </h3>
+                <h2 id="title"></h2>
+            </div>
+            <br>
+
+            <div class="author-cont">
+                <h3 class="grey">Authors: </h3>
+                <p id="authors"></p>
+            </div>
+            <br> -->
+
+            <!-- <div class="presenter-cont">
+                <h3>Presenter: </h3>
+                <p id="presenter"></p>
+            </div> -->
+            <!-- <br> -->
+            <div class="abstract-cont">
+                <!-- <h3 class="grey">Abstract</h3>
+                <p id="abstract"></p>
+            </div>
+            <br> -->
+        <!-- </article> -->
+        <!-- // =========================================================================== -->
+        <form id="myForm">
+            <fieldset>
+                <legend>Review</legend>
+
+                <label>
+                    <h3>Overall Evaluation: </h3>
+                        <input type="radio"  id="e2" name="evaluation" value="2" required><label for="e2">Strong Accept</label>
+                    <br><input type="radio"  id="e1" name="evaluation" value="1"><label for="e1">Accept</label>
+                    <br><input type="radio"  id="e0" name="evaluation" value="0"><label for="e0">Borderline</label>
+                    <br><input type="radio"  id="e-1" name="evaluation" value="-1"><label for="e-1">Reject</label>
+                    <br><input type="radio"  id="e-2" name="evaluation" value="-2"><label for="e-2">Strong Reject</label>
+                </label>
+
+                <label>
+                    <h3>Paper contribution: </h3>
+                        <input type="radio" id="c5" name="contribution" value="5" required><label for="c5">major and significantcontribution</label>
+                    <br><input type="radio" id="c4" name="contribution" value="4"><label for="c4">clear contribution</label>
+                    <br><input type="radio" id="c3" name="contribution" value="3"><label for="c3">minor contribution</label>
+                    <br><input type="radio" id="c2" name="contribution" value="2"><label for="c2">no obvious contribution</label>
+                    <br><input type="radio" id="c1" name="contribution" value="1"><label for="c1">no contribution</label>
+                </label>
+
+                <label for="paper-strengths">
+                    <h3>Paper strengths: </h3>
+                    <textarea name="paper-strengths" id="paper-strengths" cols="50" rows="5" required></textarea>
+                </label>
+
+                <label for="paper-weaknesses">
+                    <h3>Paper weaknesses: </h3>
+                    <textarea name="paper-weaknesses" id="paper-weaknesses" cols="50" rows="5" required></textarea>
+                </label>
+
+                <div class="buttons">
+                        <input id="submit" type="submit" class="btn submit-btn" name="submit" value="Submit">
+                        <input id="reset" type="reset" class="btn reset-btn" name="reset" value="Reset">
+                </div>
+
+
+            </fieldset>
+        </form>
+    </main>
+
+
+    <script src="reviewForm.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+
+</html>

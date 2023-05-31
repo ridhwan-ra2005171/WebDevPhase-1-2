@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Paper</title>
+    <!-- New Google font: Roboto Slab --> <!--FONT-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- // link  to CSS -->
+    <link rel="stylesheet" href="login.css">
+
+</head>
+
+<body id="review-container">
+    <header>
+        <nav class="nav-bar">
+            <div class="logo">
+                <img src="/img/ConfPlus logo.png" alt="Conf Plus Logo">
+            </div>
+            <button id="go-back" class="btn">Go Back</button>
+        </nav>
+    </header>
+    <main>
+        <!-- // =========================================================================== -->
+        <form id="loginForm">
+            <fieldset>
+                <legend>Login</legend>               
+                <label for="email">
+                    <h3>Email: </h3></label>
+                    <input required type='email' name="email" id="email" required></input>
+                <label for="Password">
+                    <h3>password: </h3></label>
+                    <input required name="password" id="password" type="password" required></input>
+                    <input id="login" type="submit" class="btn submit-btn" name="submit" value="Log in">
+            </fieldset>
+        </form>
+    </main>
+
+
+    <script src="login.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+
+</html>
