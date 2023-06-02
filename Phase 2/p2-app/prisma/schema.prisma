@@ -10,11 +10,75 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Recipe {
-  id           Int    @id @default(autoincrement())
+model Institution {
+  InstituteID  Int      @id @default(autoincrement())
+  code         String
   name         String
-  region       String
-  instructions String
-  image        String
-  ingredients  String
+  country      String
+}
+
+model Location {
+  locationID Int      @id @default(autoincrement())
+  building   String
+  room       String
+  sessions Session[]
+}
+
+model Paper {
+  paperID     Int        @id @default(autoincrement())
+  title       String
+  abstract    String
+  authors     User[]     @relation("PaperAuthors")
+  presenterID Int
+  pdfLink     String
+  reviews     Review[]
+  session   Session[]
+}
+
+model Review {
+  reviewID           Int      @id @default(autoincrement())
+  overallEvaluation  Int
+  paperContribution  Int
+  paperStrength      String
+  paperWeaknesses    String
+  paper              Paper    @relation(fields: [paperID], references: [paperID])
+  paperID            Int
+}
+
+model Schedule {
+  schID      Int       @id @default(autoincrement())
+  date       DateTime
+  sessions   Session[] 
+}
+
+model Session {
+  sesId           Int        @id @default(autoincrement())
+  title        String
+  location     Location   @relation(fields: [locationID], references: [locationID])
+  locationID   Int
+  paper        Paper      @relation(fields: [paperID], references: [paperID])
+  paperID      Int
+  presenter    User       @relation("PresenterSessions", fields: [presenterID], references: [id])
+  presenterID  Int
+  fromTime     DateTime
+  endTime      DateTime
+  schedule Schedule @relation(fields: [schID], references: [schID])
+  schID Int
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  first_name String
+  last_name  String
+  email      String   @unique
+  password   String
+  role       String
+  authoredPapers  Paper[]  @relation("PaperAuthors")
+  presentedSessions Session[] @relation("PresenterSessions")
+}
+
+model ConferenceDates{
+dateID Int @id @default(autoincrement())
+confDate String 
+
 }

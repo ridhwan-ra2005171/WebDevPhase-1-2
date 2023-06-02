@@ -1,27 +1,32 @@
 [
     {
+        "InstituteID": 1,
       "code": "QU",
       "name": "Qatar University",
       "country": "Qatar"
     }, 
     {
+        "InstituteID": 2,
         "code": "UDST",
         "name": "University of Doha of Science and Technology",
         "country": "Qatar"
     },
     {
+        "InstituteID": 3,
         "code": "CMU",
         "name": "Carnegie Mellon University",
         "country": "USA"
     },
     {
+        "InstituteID": 4,
         "code": "AUB",
         "name": "American University in Beirut",
         "country": "Lebanon"
     },
     {
-    "code": "GUQ",
-    "name": "Georgetown University in Qatar",
-    "country": "Qatar"
+        "InstituteID": 5,
+        "code": "GUQ",
+        "name": "Georgetown University in Qatar",
+        "country": "Qatar"
     }
   ]

@@ -1,16 +1,16 @@
 [
   {
-    "id": 1,
+    "locationID": 1,
     "building": "Female Engineering",
     "room": "C07-145"
   },
   {
-    "id": 2,
+    "locationID": 2,
     "building": "BCR Corridors",
     "room": "BCR-E104"
   },
   {
-    "id": 3,
+    "locationID": 3,
     "building": "QU library",
     "room": "B13-201"
   }
