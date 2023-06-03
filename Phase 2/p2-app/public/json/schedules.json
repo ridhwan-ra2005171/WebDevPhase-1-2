@@ -55,8 +55,8 @@
       "sesID": 5,
       "title": "myTitle5",
       "location": "BCR5",
-      "paperID": 5,
-      "presenterID": 5,
+      "paperID": 3,
+      "presenterID": 3,
       "fromTime": "2023-06-14T12:00:00.000Z",
       "endTime": "2023-06-14T14:00:00.000Z"
     }	,
@@ -64,8 +64,8 @@
       "sesID": 6,
       "title": "myTitle6",
       "location": "BCR6",
-      "paperID": 6,
-      "presenterID": 6,
+      "paperID": 4,
+      "presenterID": 4,
       "fromTime": "2023-06-14T12:00:00.000Z",
       "endTime": "2023-06-14T14:00:00.000Z"
     }
