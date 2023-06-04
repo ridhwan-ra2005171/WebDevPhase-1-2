@@ -15,10 +15,11 @@ generator dbml {
 }
 
 model Institution {
-  InstituteID Int    @id @default(autoincrement())
+  instituteID Int     @id @default(autoincrement())
   code        String
   name        String
   country     String
+  papers      Paper[]
 }
 
 model Location {
@@ -29,27 +30,29 @@ model Location {
 }
 
 model Paper {
-  paperID     Int      @id @default(autoincrement())
+  paperID     Int         @id @default(autoincrement())
   title       String
   abstract    String
-  authors     User[]   @relation("PaperAuthors")
-  presenterID Int
+  authors     User[]      @relation("PaperAuthors")
+  presenterID Int?
   pdfLink     String
   reviews     Review[]
-  session     Session  @relation(fields: [sesID], references: [sesID])
-  sesID       Int
+  session     Session?    @relation(fields: [sesID], references: [sesID])
+  sesID       Int?
+  institutes   Institution @relation(fields: [instituteID], references: [instituteID])
+  instituteID Int
 }
 
 model Session {
-  sesID      Int      @id @default(autoincrement())
-  title      String
-  location   Location @relation(fields: [locationID], references: [locationID])
-  locationID Int
+  sesID       Int      @id @default(autoincrement())
+  title       String
+  location    Location @relation(fields: [locationID], references: [locationID])
+  locationID  Int
   presenter   User     @relation("PresenterSessions", fields: [presenterID], references: [id])
   presenterID Int
   fromTime    DateTime
   endTime     DateTime
-  schedule    Schedule @relation(fields: [schID], references: [schID])
+  schedule    Schedule @relation(fields: [schID], references: [schID], onDelete: Cascade)
   schID       Int
   papers      Paper[]
 }
@@ -62,6 +65,9 @@ model Review {
   paperWeaknesses   String
   paper             Paper  @relation(fields: [paperID], references: [paperID])
   paperID           Int
+  user User @relation(fields: [reviewerID], references: [id], onDelete: Cascade)
+  reviewerID Int
+
 }
 
 model Schedule {
@@ -79,9 +85,10 @@ model User {
   role              String
   authoredPapers    Paper[]   @relation("PaperAuthors")
   presentedSessions Session[] @relation("PresenterSessions")
+  reviews Review[]
 }
 
-model ConferenceDates {
-  dateID   Int    @id @default(autoincrement())
-  confDate String
-}
+// model ConferenceDates {
+//   dateID   Int    @id @default(autoincrement())
+//   confDate String
+// }

@@ -10,6 +10,7 @@ const schedulesPath = path.join(process.cwd(), './public/json/schedules.json')
 const sessionsPath = path.join(process.cwd(), './public/json/sessions.json')
 const papersPath = path.join(process.cwd(), './public/json/papers.json')
 const confDatesPath = path.join(process.cwd(), './public/json/conference-dates.json')
+const reviewsPath = path.join(process.cwd(), './public/json/reviews.json')
 
 async function main() {
     try {
@@ -22,18 +23,16 @@ async function main() {
         const sessions = await fs.readJSON(sessionsPath)
         const papers = await fs.readJSON(papersPath)
         const confDates = await fs.readJSON(confDatesPath)
+        const reviews = await fs.readJSON(reviewsPath)
 
-
+        // fist populate the models until before session ---------
+        
         // users.forEach(async (user) => {
         //     await prisma.user.create({ data: user });
         // })
 
-        // institutions.forEach(async (inst) => {
-            // await prisma.institution.create({ data: inst });
-        // })
-
         // locations.forEach(async (loc) => {
-            // await prisma.location.create({ data: loc });
+        //     await prisma.location.create({ data: loc });
         // })
 
         // institutions.forEach(async (inst) => {
@@ -44,19 +43,25 @@ async function main() {
         //     await prisma.schedule.create({ data: schedule });
         // })
 
-        // sessions.forEach(async (session) => {
-        //     await prisma.session.create({ data: session });
-        // })
+        // until here ----------------------------------------
+        // Then Comment the above methods, uncomment session and run db seed again
+        
+        sessions.forEach(async (session) => {
+            await prisma.session.create({ data: session });
+        })
 
+        papers.forEach(async (paper) => {
+            await prisma.paper.create({ data: paper });
+        })
 
-        // papers.forEach(async (paper) => {
-        //     await prisma.paper.create({ data: paper });
-        // })
-
+        reviews.forEach(async (rev) => {
+            await prisma.review.create({ data: rev });
+        })
+        
+        //---------------------------------------------------
         // confDates.forEach(async (date) => {
         //     await prisma.conferenceDates.create({ data: date });
         // })
-
 
     } catch (error) {
         console.log(error);

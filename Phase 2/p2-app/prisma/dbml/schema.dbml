@@ -3,10 +3,11 @@
 //// ------------------------------------------------------
 
 Table Institution {
-  InstituteID Int [pk, increment]
+  instituteID Int [pk, increment]
   code String [not null]
   name String [not null]
   country String [not null]
+  papers Paper [not null]
 }
 
 Table Location {
@@ -21,11 +22,13 @@ Table Paper {
   title String [not null]
   abstract String [not null]
   authors User [not null]
-  presenterID Int [not null]
+  presenterID Int
   pdfLink String [not null]
   reviews Review [not null]
-  session Session [not null]
-  sesID Int [not null]
+  session Session
+  sesID Int
+  institutes Institution [not null]
+  instituteID Int [not null]
 }
 
 Table Session {
@@ -50,6 +53,8 @@ Table Review {
   paperWeaknesses String [not null]
   paper Paper [not null]
   paperID Int [not null]
+  user User [not null]
+  reviewerID Int [not null]
 }
 
 Table Schedule {
@@ -67,19 +72,19 @@ Table User {
   role String [not null]
   authoredPapers Paper [not null]
   presentedSessions Session [not null]
-}
-
-Table ConferenceDates {
-  dateID Int [pk, increment]
-  confDate String [not null]
+  reviews Review [not null]
 }
 
 Ref: Paper.sesID > Session.sesID
+
+Ref: Paper.instituteID > Institution.instituteID
 
 Ref: Session.locationID > Location.locationID
 
 Ref: Session.presenterID > User.id
 
-Ref: Session.schID > Schedule.schID
+Ref: Session.schID > Schedule.schID [delete: Cascade]
 
 Ref: Review.paperID > Paper.paperID
+
+Ref: Review.reviewerID > User.id [delete: Cascade]

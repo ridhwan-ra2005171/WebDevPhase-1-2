@@ -1,0 +1,38 @@
+[
+  {
+    "reviewID": 1,
+    "overallEvaluation": 2,
+    "paperContribution": 4,
+    "paperStrength": "Strong paper 1",
+    "paperWeaknesses": "No weaknesses 1",
+    "paperID": 4,
+    "reviewerID" : 10
+  },
+  {
+    "reviewID": 2,
+    "overallEvaluation": 1,
+    "paperContribution": 5,
+    "paperStrength": "Strong paper 1",
+    "paperWeaknesses": "No weaknesses 1",
+    "paperID": 4,
+    "reviewerID" : 12
+  },
+  {
+    "reviewID": 3,
+    "overallEvaluation": 1,
+    "paperContribution": 5,
+    "paperStrength": "Strong paper 2",
+    "paperWeaknesses": "No weaknesses 2",
+    "paperID": 5,
+    "reviewerID" : 8
+  },
+  {
+    "reviewID": 4,
+    "overallEvaluation": 2,
+    "paperContribution": 4,
+    "paperStrength": "Strong paper 2",
+    "paperWeaknesses": "No weaknesses 2",
+    "paperID": 5,
+    "reviewerID" : 12
+  }
+]
