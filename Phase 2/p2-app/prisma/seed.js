@@ -24,17 +24,17 @@ async function main() {
         const confDates = await fs.readJSON(confDatesPath)
 
 
-        users.forEach(async (user) => {
-            await prisma.user.create({ data: user });
-        })
+        // users.forEach(async (user) => {
+        //     await prisma.user.create({ data: user });
+        // })
 
-        institutions.forEach(async (inst) => {
-            await prisma.institution.create({ data: inst });
-        })
+        // institutions.forEach(async (inst) => {
+            // await prisma.institution.create({ data: inst });
+        // })
 
-        locations.forEach(async (loc) => {
-            await prisma.location.create({ data: loc });
-        })
+        // locations.forEach(async (loc) => {
+            // await prisma.location.create({ data: loc });
+        // })
 
         // institutions.forEach(async (inst) => {
         //     await prisma.institution.create({ data: inst });
