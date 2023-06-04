@@ -28,30 +28,34 @@ async function main() {
             await prisma.user.create({ data: user });
         })
 
-        locations.forEach(async (loc) => {
-            await prisma.location.create({ data: loc });
-        })
-
         institutions.forEach(async (inst) => {
             await prisma.institution.create({ data: inst });
         })
 
-        schedules.forEach(async (schedule) => {
-            await prisma.schedule.create({ data: schedule });
+        locations.forEach(async (loc) => {
+            await prisma.location.create({ data: loc });
         })
 
-        sessions.forEach(async (session) => {
-            await prisma.session.create({ data: session });
-        })
+        // institutions.forEach(async (inst) => {
+        //     await prisma.institution.create({ data: inst });
+        // })
+
+        // schedules.forEach(async (schedule) => {
+        //     await prisma.schedule.create({ data: schedule });
+        // })
+
+        // sessions.forEach(async (session) => {
+        //     await prisma.session.create({ data: session });
+        // })
 
 
-        papers.forEach(async (paper) => {
-            await prisma.paper.create({ data: paper });
-        })
+        // papers.forEach(async (paper) => {
+        //     await prisma.paper.create({ data: paper });
+        // })
 
-        confDates.forEach(async (date) => {
-            await prisma.conferenceDates.create({ data: date });
-        })
+        // confDates.forEach(async (date) => {
+        //     await prisma.conferenceDates.create({ data: date });
+        // })
 
 
     } catch (error) {

@@ -20,7 +20,7 @@
   },
   "type": "module",
   "devDependencies": {
-    "prisma": "^4.14.0"
+    "prisma": "^4.15.0"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
