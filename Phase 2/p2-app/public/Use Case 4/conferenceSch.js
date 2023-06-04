@@ -204,6 +204,7 @@ async function dateLoader() {
   // }
   // console.log("lcl dates:",schDates)
 
+  //this the tempdates, change it to grab prisma dates from the schedule object
   const tempSchDates =   await  mySchedules.map(sch => sch.date);
   console.log(await mySchedules);
   // console.log("ASDASDS: ",tempSchDates);
