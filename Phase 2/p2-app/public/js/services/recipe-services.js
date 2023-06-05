@@ -1,14 +1,16 @@
 // replace this with your own url that reads data from the data/recipes.json file
 // const BASE_URL = 'https://gist.githubusercontent.com/abdalabaaji/8ac1f0ff9c9e919c72c5f297a9b5266e/raw/a67887ba7445a6887be4c748fcfa0931f0dd165c/recipes'
-const API_URL = "/api/recipes";
+// const API_URL = "/api/recipes";
+const API_URL = '/api/schedules'
 
-export async function getRecipes(region) {
+//i made this so I can grab the date (line 7) from schedule object
+export async function getRecipes() {
     let response = [];
-    if (region === undefined || region === null || !region) {
+    // if (region === undefined || region === null || !region) {
         response = await  fetch(API_URL)
-    } else {
-         response = await  fetch(`${API_URL}?region=${region}`)
-    }
+    // } else {
+    //      response = await  fetch(`${API_URL}?region=${region}`)
+    // }
     const recipes = await response.json() 
     return recipes;
 }

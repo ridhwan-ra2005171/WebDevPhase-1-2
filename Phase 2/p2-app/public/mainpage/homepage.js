@@ -1,4 +1,5 @@
 import * as services from '../js/services/recipe-services.js';
+import * as schServices from '../js/services/schedule-services.js'
 
 // Commonly used URLs
 let usersUrl = "../../json/users.json"; //so we can get the presenters
@@ -15,7 +16,7 @@ document.body.addEventListener('load',loadSchedules())
 const schedulesContainer = document.querySelector(".schedules");
 
 
-
+//----------------------------------------------------------------------------
 // testing prisma DELETE LATER!!!
 document.querySelector("#button-test").addEventListener('click',async () => {
   document.querySelector("#div-test").innerHTML =await ok();
@@ -23,12 +24,14 @@ document.querySelector("#button-test").addEventListener('click',async () => {
 })
 
 async function ok() {
-  let recipes = await services.getRecipes();
+  // let recipes = await services.getRecipes();
+  let recipes = await schServices.getAllDates();
   console.log(recipes);
-  recipes = recipes.map((rec) => `<p>${rec.name} </p><hr><br>`).join('')
+  // recipes = recipes.map((rec) => `<p>${rec.name} </p><hr><br>`).join('')
   return recipes;}
 
 // schedulesContainer.innerHTML = "GI"
+//-------------------------------------------------------------------------------
 
 
 //to check if i can fetch the schedules: =====================================
@@ -221,21 +224,11 @@ const dateDL = document.querySelector("#sortByDate");
 // let schDates = JSON.parse(localStorage.schDates);
 
 async function dateLoader() {
-  // const dates = await (await fetch(dateJson)).json(); //dont delete this we need for web api
+  // const tempSchDates =   await  mySchedules.map(sch => sch.date);
+  const tempSchDates = await schServices.getAllDates();
 
-  // schDates = await(await fetch(dateJson)).json();
-  // localStorage.setItem("schDates",JSON.stringify(schDates))
-
-  // if (!localStorage.schDates) {
-  //   //get from json file
-  //   schDates = await (await fetch(dateJson)).json();
-  //   localStorage.setItem("schDates", JSON.stringify(schDates));
-  // } else {
-    //get from local storage if exist
-    // schDates = JSON.parse(localStorage.schDates);
-  // }
-  // console.log("lcl dates:", schDates);
-  const tempSchDates =   await  mySchedules.map(sch => sch.date);
+  // const tempSchDates =   await schedServices.getAllDates();
+  console.log("tempSchdates: ", tempSchDates);
 
   let instHTML = '<option value="all" >Show All Conferences</option>';
   tempSchDates.forEach(
@@ -249,7 +242,7 @@ async function dateLoader() {
 
 // dateLoader();
 
-function handleSortDate() {
+function sortdateHandler() {
   var selectedDate = document.getElementById("sortByDate").value;
   console.log(selectedDate); //its returning the selected date, we can use it to compare.
   //I will try comparing the dates string:
@@ -270,3 +263,8 @@ function handleSortDate() {
       .join("");
   }
 }
+
+function testhandler(){
+  console.log("I am called");
+}
+

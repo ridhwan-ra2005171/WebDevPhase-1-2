@@ -15,6 +15,8 @@
       src="https://kit.fontawesome.com/2c36e9b7b1.js"
       crossorigin="anonymous"
     ></script>
+
+    <script src="homepage.js" type="module" ></script>
     <!-- <script src="/Navbar/navbar.js"></script> -->
 </head>
 
@@ -42,7 +44,7 @@
             <!-- WE NEED TO HAVE FILTER DATE HERE -->
             <div class="date-filter">
               <label for="sortBy">Select Date:</label>
-              <select name="sort-by" id="sortByDate" class="sortByDate" onchange="handleSortDate();">
+              <select name="sort-by" id="sortByDate" class="sortByDate" onchange="sortdateHandler();">
             </select>
             </div>
             
@@ -82,7 +84,7 @@
 
     </main>
 
-    <script src="homepage.js" type="module"></script>
+    
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>

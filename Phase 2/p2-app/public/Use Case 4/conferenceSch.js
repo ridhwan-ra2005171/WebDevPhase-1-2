@@ -1,5 +1,9 @@
+// import * as schedServices from '../js/services/schedule-services';
 // Commonly used URLs
+
+
 let usersUrl = "../../json/users.json"; //so we can get the presenters
+
 // import { loadToForm } from "./addSession";
 
 
@@ -218,7 +222,7 @@ async function dateLoader() {
   dateDL.innerHTML = instHTML;
 }
 
-
+//this function handles the dropdown menu
 function handleSortDate() {
   var selectedDate = document.getElementById("sortByDate").value;
   console.log(selectedDate); //its returning the selected date, we can use it to compare.
