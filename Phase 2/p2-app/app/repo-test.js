@@ -1,4 +1,5 @@
 import scheduleRepo from "../app/api/schedules/schedule-repo.js"
+import locationRepo from "./api/locations/location-repo.js";
 //to use repo-test u need type:module in the package.Json
 async function main(){
 
@@ -7,6 +8,7 @@ async function main(){
         //try to get all the dates from the schedule object
         console.log(await scheduleRepo.getSchedules());
 
+        console.log(await locationRepo.getLocation(1))
 
     }catch(err){
         console.log(err);

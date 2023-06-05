@@ -8,26 +8,26 @@ class schedulesRepo{
     constructor(){
     }
 
-    async getSchedules(){
-      try {
-        const schedules = await prisma.schedule.findMany({
-          include: {
-            sessions: {
-              include: {
-                location: true,
-                presenter: true,
-                papers: true,
-              },
-            },
-          },
-        });
+    // async getSchedules(){
+    //   try {
+    //     const schedules = await prisma.schedule.findMany({
+    //       include: {
+    //         sessions: {
+    //           include: {
+    //             location: true,
+    //             presenter: true,
+    //             papers: true,
+    //           },
+    //         },
+    //       },
+    //     });
         
-        return schedules;
-      } catch (error) {
-        console.error('Error retrieving dates:', error);
-        throw new Error('Failed to retrieve dates');
-      }
-    }
+    //     return schedules;
+    //   } catch (error) {
+    //     console.error('Error retrieving dates:', error);
+    //     throw new Error('Failed to retrieve dates');
+    //   }
+    // }
 
 
     async getSchedules(){
