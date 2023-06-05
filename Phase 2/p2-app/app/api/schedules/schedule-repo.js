@@ -8,23 +8,17 @@ class schedulesRepo{
     constructor(){
     }
 
-    async getAllDates() {
-        try {
-          const schedules = await prisma.schedule.findMany();
-          const dates = schedules.map((schedule) => schedule.date);
-          return dates;
-        } catch (error) {
-          console.error('Error retrieving dates:', error);
-          throw new Error('Failed to retrieve dates');
-        }
-      }
-
-
     async getSchedules(){
       try {
         const schedules = await prisma.schedule.findMany({
           include: {
-            sessions: true,
+            sessions: {
+              include: {
+                location: true,
+                presenter: true,
+                papers: true,
+              },
+            },
           },
         });
         
@@ -35,7 +29,37 @@ class schedulesRepo{
       }
     }
 
+
+    async getSchedules(){
+      try {
+        const schedules = await prisma.schedule.findMany({
+          include: {
+            sessions: true
+            }
+        });
+        
+        return schedules;
+      } catch (error) {
+        console.error('Error retrieving dates:', error);
+        throw new Error('Failed to retrieve dates');
+      }
+    }
+
+
+
+        //might not need this
+        async getAllDates() {
+          try {
+            const schedules = await prisma.schedule.findMany();
+            const dates = schedules.map((schedule) => schedule.date);
+            return dates;
+          } catch (error) {
+            console.error('Error retrieving dates:', error);
+            throw new Error('Failed to retrieve dates');
+          }
+        }
 }
+
 
 export default new schedulesRepo();
 

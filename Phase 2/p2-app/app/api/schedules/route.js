@@ -1,5 +1,5 @@
 import scheduleRepo from "./schedule-repo";
-import {getAllDates} from "./schedule-repo";
+// import {getAllDates} from "./schedule-repo";
 
 //get all schedules [already tested with postman]
 export async function GET(request) {
