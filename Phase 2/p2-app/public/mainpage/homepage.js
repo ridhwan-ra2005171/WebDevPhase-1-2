@@ -247,6 +247,8 @@ function sortdateHandler() {
   console.log(selectedDate); //its returning the selected date, we can use it to compare.
   //I will try comparing the dates string:
 
+
+  //251 here just compare the schedule dates object with selected
   const customDate = mySchedules.filter((schedule) =>
     schedule.date.includes(selectedDate)
   );
