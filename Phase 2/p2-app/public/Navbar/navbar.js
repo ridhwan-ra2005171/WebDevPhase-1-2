@@ -1,9 +1,12 @@
+import * as userServ from '../js/services/user-services.js'
+
+
 const usersJson = "../../json/users.json";
 let currUserID = parseInt(localStorage.currentUserID);
-console.log(currUserID);
+console.log("Curr user:" ,currUserID);
 
 // add the style sheet of the navbar to the html files
-const styleLink = '<link rel="stylesheet" href="/public/Navbar/navbar.css">';
+const styleLink = '<link rel="stylesheet" href="/Navbar/navbar.css">';
 document.head.insertAdjacentHTML("beforeend", styleLink);
 // console.log(document.head.innerHTML);
 // variables 
@@ -14,26 +17,30 @@ let currUser = null;
 loadNav();
 async function loadNav() {
   // get the users from the json file
-  users = await (await fetch(usersJson)).json();
+  // users = await (await fetch(usersJson)).json();
+  users = await userServ.getUsers();
   // find the user from their id
   currUser = users.find((u) => u.id === currUserID);
-
-  html = `
+  console.log("Nav: Users: ",users);
+  const html = `
     <header>
         <nav class="nav-bar">
             <div class="logo">
-                <img src="../../img/ConfPlus logo.png" alt="Conf Plus Logo">
+                <img src="../img/ConfPlus logo.png" alt="Conf Plus Logo">
             </div>
             <ul>
                 <li><a id="home" class="nav-link grey" href="/mainpage/homepage.html">Home</a></li>
                 ${getNavLink(currUser)}
                 <li><a id="help" class="nav-link grey" href="#">Help</a></li>
             </ul>
-            <a id="username" href="#" onclick="getUserDetails()"><i class="fa fa-user"></i> ${currUser.first_name} ${currUser.last_name}</a>
+            <a id="username" href="#" ><i class="fa fa-user"></i> ${currUser.first_name} ${currUser.last_name}</a>
         </nav>
     </header>`;
   // inject the navbar in the body of the html
   document.body.insertAdjacentHTML("afterbegin", html);
+  const userLink = document.querySelector("#username");
+  // userLink.addEventListener('click',getUserDetails())
+
 }
 
 function getNavLink(currUser) {
@@ -42,15 +49,15 @@ function getNavLink(currUser) {
   switch (role) {
     case "organizer":
         link = `
-        |<li id="middle"><a class="nav-link grey" href="/Use Case 4/conferenceSch.html">Edit Schedules</a></li>
-        |<li id="middle"><a class="nav-link grey" href="/Use Case 4/addSession.html">Add Schedule</a></li>|`
+        |<li id="middle"><a class="nav-link grey" href="/public/Use Case 4/conferenceSch.html">Edit Schedules</a></li>
+        |<li id="middle"><a class="nav-link grey" href="/public/Use Case 4/addSession.html">Add Schedule</a></li>|`
       break;
     case "reviewer":
-        link = `|<li><a class="nav-link grey" href="/Use Case 3/reviewPapers/reviewPapers.html">Review Papers</a></li>|`
+        link = `|<li><a class="nav-link grey" href="/public/Use Case 3/reviewPapers/reviewPapers.html">Review Papers</a></li>|`
 
       break;
     case "author":
-        link = `|<li><a class="nav-link grey" href="/Use Case 2/submit.html">Submit Paper</a></li>|`
+        link = `|<li><a class="nav-link grey" href="/public/Use Case 2/submit.html">Submit Paper</a></li>|`
       break;
 
     default:
@@ -66,18 +73,10 @@ async function getUserDetails() {
       buttons: "Log out",
 
     });
-  // console.log("RES: ",result);
-  //   // Confirmation of review submission
-  //  = await swal({
-  //   title: "Your Review has been Submitted Successfully!",
-  //   icon: "success",
-  //   buttons: "Ok",
-  //   closeOnClickOutside: false,
-  // });
 
   if (result === true) {
     localStorage.removeItem("currentUserID")
-    location.href = "/mainpage/homepage.html";
+    location.href = "/public/mainpage/homepage.html";
   }
 
 }

@@ -51,23 +51,23 @@ function showInfo(data) {
 
 const currentUserID = localStorage.currentUserID;
 
-function checkLoggedIn() {
-  if (currentUserID) {
-    console.log("USER IS LOGGED IN");
+// function checkLoggedIn() {
+//   if (currentUserID) {
+//     console.log("USER IS LOGGED IN");
 
-    var script = document.createElement("script");
-    script.setAttribute("src", "/Navbar/navbar.js");
-    document.head.appendChild(script);
-    console.log("Head: ", document.head.innerHTML);
-    document.querySelector("#temp-nav").remove()
+//     var script = document.createElement("script");
+//     script.setAttribute("src", "../Navbar/navbar.js");
+//     document.head.appendChild(script);
+//     console.log("Head: ", document.head.innerHTML);
+//     document.querySelector("#temp-nav").remove()
 
-  } else {
-    console.log("NOT LOGGED IN YET");
+//   } else {
+//     console.log("NOT LOGGED IN YET");
     
 
-  }
-}
-checkLoggedIn();
+//   }
+// }
+// checkLoggedIn();
 
 //============================================================================
 

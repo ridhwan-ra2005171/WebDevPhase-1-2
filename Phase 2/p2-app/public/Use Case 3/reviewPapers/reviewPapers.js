@@ -1,5 +1,5 @@
 // Commonly used URLS
-let usersUrl = "/json/users.json";
+let usersUrl = "../json/users.json";
 // add sweet alert script to the body
 // document.body.appendChild('<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>')
 // console.log(document.body.innerHTML);

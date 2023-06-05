@@ -15,7 +15,7 @@ generator dbml {
 }
 
 model Institution {
-  instituteID Int     @id @default(autoincrement())
+  instituteID String  @id @default(cuid())
   code        String
   name        String
   country     String
@@ -23,14 +23,14 @@ model Institution {
 }
 
 model Location {
-  locationID Int       @id @default(autoincrement())
+  locationID String    @id @default(cuid())
   building   String
   room       String
   sessions   Session[]
 }
 
 model Paper {
-  paperID     Int         @id @default(autoincrement())
+  paperID     String      @id @default(cuid())
   title       String
   abstract    String
   authors     User[]      @relation("PaperAuthors")
@@ -38,41 +38,40 @@ model Paper {
   pdfLink     String
   reviews     Review[]
   session     Session?    @relation(fields: [sesID], references: [sesID])
-  sesID       Int?
-  institutes   Institution @relation(fields: [instituteID], references: [instituteID])
-  instituteID Int
+  sesID       String?
+  institutes  Institution @relation(fields: [instituteID], references: [instituteID])
+  instituteID String
 }
 
 model Session {
-  sesID       Int      @id @default(autoincrement())
+  sesID       String   @id @default(cuid())
   title       String
   location    Location @relation(fields: [locationID], references: [locationID])
-  locationID  Int
+  locationID  String
   presenter   User     @relation("PresenterSessions", fields: [presenterID], references: [id])
   presenterID Int
-  fromTime    DateTime
-  endTime     DateTime
+  fromTime    String
+  endTime     String
   schedule    Schedule @relation(fields: [schID], references: [schID], onDelete: Cascade)
-  schID       Int
+  schID       String
   papers      Paper[]
 }
 
 model Review {
-  reviewID          Int    @id @default(autoincrement())
+  reviewID          String @id @default(cuid())
   overallEvaluation Int
   paperContribution Int
   paperStrength     String
   paperWeaknesses   String
   paper             Paper  @relation(fields: [paperID], references: [paperID])
-  paperID           Int
-  user User @relation(fields: [reviewerID], references: [id], onDelete: Cascade)
-  reviewerID Int
-
+  paperID           String
+  user              User   @relation(fields: [reviewerID], references: [id], onDelete: Cascade)
+  reviewerID        Int
 }
 
 model Schedule {
-  schID    Int       @id @default(autoincrement())
-  date     DateTime
+  schID    String    @id @default(cuid())
+  date     String
   sessions Session[]
 }
 
@@ -85,10 +84,5 @@ model User {
   role              String
   authoredPapers    Paper[]   @relation("PaperAuthors")
   presentedSessions Session[] @relation("PresenterSessions")
-  reviews Review[]
+  reviews           Review[]
 }
-
-// model ConferenceDates {
-//   dateID   Int    @id @default(autoincrement())
-//   confDate String
-// }

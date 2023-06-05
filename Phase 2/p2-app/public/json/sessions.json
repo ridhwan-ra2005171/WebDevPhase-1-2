@@ -1,20 +1,20 @@
 [
   {
-    "sesID": 3,
+    "sesID": "3",
     "title": "myTitle3",
-    "locationID": 3,
+    "locationID": "3",
     "presenterID": 19,
-    "fromTime": "2023-06-13T12:00:00.000Z",
-    "endTime": "2023-06-13T14:00:00.000Z",
-    "schID" : 2
+    "fromTime": "12:00:00",
+    "endTime": "14:00:00",
+    "schID" : "2"
   },
   {
-    "sesID": 6,
+    "sesID": "6",
     "title": "myTitle6",
-    "locationID": 1,
+    "locationID": "1",
     "presenterID": 16,
-    "fromTime": "2023-06-14T12:00:00.000Z",
-    "endTime": "2023-06-14T14:00:00.000Z",
-    "schID" : 3
+    "fromTime": "12:00:00",
+    "endTime": "14:00:00",
+    "schID" : "3"
   }
 ]
