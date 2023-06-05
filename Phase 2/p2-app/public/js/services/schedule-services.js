@@ -2,10 +2,10 @@
 
 const API_URL ="/api/schedules";
 
-//i made this so I can grab the date (line 7) from schedule object
-export async function getAllDates() {
+//i made this so I can grab the schedules (line 7) from schedule object
+export async function getSchedules() {
     let response = [];
     response = await  fetch(API_URL)
-    const dates = await response.json() 
-    return dates;
+    const schedules = await response.json() 
+    return schedules;
 }

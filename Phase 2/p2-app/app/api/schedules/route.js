@@ -1,15 +1,14 @@
 import scheduleRepo from "./schedule-repo";
 import {getAllDates} from "./schedule-repo";
 
-//get all dates [already tested with postman]
+//get all schedules [already tested with postman]
 export async function GET(request) {
   try {
 
    
     try {
-      const dates = await scheduleRepo.getAllDates();
-
-      return Response.json(dates, { status: 200 });
+      const schedules = await scheduleRepo.getSchedules();
+      return Response.json(schedules, { status: 200 });
     } catch (e) {
       console.log(e);
     }

@@ -8,6 +8,12 @@ let usersUrl = "../../json/users.json"; //so we can get the presenters
 //Here we will import json file for presenter + paper
 //also the conference
 let mySchedules = [];
+const tempSch = await schServices.getSchedules(); //grabbing the schedules from prisma
+console.log("tempSch:",tempSch);
+const tempSession = await  tempSch.map(sch => sch.sessions);  //this just grabs the dates from the schedules
+console.log("sessions:", tempSession) //rn the sessions are undefined somehow
+
+
 let usersloc = [];
 let users = [];
 // export default schDates;
@@ -27,7 +33,6 @@ async function ok() {
   // let recipes = await services.getRecipes();
   let recipes = await schServices.getAllDates();
   console.log(recipes);
-  // recipes = recipes.map((rec) => `<p>${rec.name} </p><hr><br>`).join('')
   return recipes;}
 
 // schedulesContainer.innerHTML = "GI"
@@ -69,7 +74,9 @@ checkLoggedIn();
 async function loadPage() {
   const mainContent = document.querySelector("main-content");
   // const page = await fetch("../json/schedules.json");
-  const page = mySchedules;
+  // const page = mySchedules;
+  const page = tempSch;
+
   const pageHTMLContent = await page.text();
   mainContent.innerHTML = pageHTMLContent;
 
@@ -95,50 +102,51 @@ async function loadSchedules() {
   } else { // else display the recipes cards in the main using localStorage myRecipes array
     mySchedules = JSON.parse(localStorage.mySchedules); //make from string to object
     console.log("sc: ", mySchedules);
-   schedulesContainer.innerHTML = mySchedules
+    //---------------------------------------------------------------------------
+    //change mySchedules to tempSch later
+  //  schedulesContainer.innerHTML = mySchedules
+  //   .map((schedule) => scheduleToHTML(schedule))
+  //   .join(""); // join('') is used to get rid of comma that appears between the objects
+
+  schedulesContainer.innerHTML = tempSch
     .map((schedule) => scheduleToHTML(schedule))
     .join(""); // join('') is used to get rid of comma that appears between the objects
   }
   // console.log(schedulesContainer.innerHTML);
   dateLoader();
-
-  // if (localStorage.mySchedules) {
-  //   mySchedules = await fetch("../json/schedules.json").then((response) =>
-  //   response.json()
-  // );
-  // localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
-  // // console.log(localStorage.mySchedules);
-  // // mySchedules = JSON.parse(localStorage.mySchedules);
-  // // schedulesContainer.innerHTML = mySchedules
-  //   // .map((schedule) => scheduleToHTML(schedule))
-  //   // .join("");
-  // }
-
-  // mySchedules = JSON.parse(localStorage.mySchedules);
-  // schedulesContainer.innerHTML = mySchedules
-  //   .map((schedule) => scheduleToHTML(schedule))
-  //   .join("");
-
-  //   console.log(mySchedules);
-
-  // Add if statement to check if mySchedules exist in local Storage
 }
 
 //this is to load each session objects, since it is an array itself inside the json
 function loadSessions(session) {
-  // console.log("ses: ",session);
+  console.log("sessions passed: ",session);
+  const sesTitle = session.map(sch => sch.title);
+  // console.log(sesDate);
+
+  const sesfromTime = session.map(sch => sch.fromTime);
+
+
+  const sesendTime = session.map(sch => sch.endTime);
+
+
+  //for location, need to map or atleast get the locations list
+  const seslocation = session.map(sch => sch.location);
+  console.log(seslocation);
+
+  
   // find presenter from usersloc in local Storage
   const presenter = usersloc.find(
     (pres) => pres.id === parseInt(session.presenterID)
   );
-  // console.log("users: ", usersloc);
-  const presenterDetails = `${presenter.first_name} ${presenter.last_name}`; // a stringf of presenter's full name
+  // [we need to load presenters( do it later )]
+  //  <td>${presenterDetails}</td>    ADD THIS UNDER SESSION.TITLE
+  // const presenterDetails = `${presenter.first_name} ${presenter.last_name}`; // a stringf of presenter's full name
+
+  //   <td>${seslocation.building} | ${seslocation.room}</td>   ADD THIS UNDER SESSION.TITLE
+
   return `
   <tr>
-          <td>${session.fromTime}-${session.endTime}</td>
-          <td>${session.title}</td>
-          <td>${presenterDetails}</td>
-          <td>${session.location.building} | ${session.location.room}</td>
+          <td>${sesfromTime}-${sesendTime}</td>
+          <td>${sesTitle}</td>
         </tr>
   `;
 }
@@ -162,7 +170,7 @@ function scheduleToHTML(schedule) {
         </tr>
       </thead>
       <tbody>
-      ${schedule.sessions.map((session) => loadSessions(session)).join("")}
+      ${tempSession.map((session) => loadSessions(session)).join("")}
       </tbody>
       </table>
   </div>  
@@ -225,7 +233,8 @@ const dateDL = document.querySelector("#sortByDate");
 
 async function dateLoader() {
   // const tempSchDates =   await  mySchedules.map(sch => sch.date);
-  const tempSchDates = await schServices.getAllDates();
+  const tempSch = await schServices.getSchedules(); //grabbing the schedules from prisma
+  const tempSchDates = await  tempSch.map(sch => sch.date);  //this just grabs the dates from the schedules
 
   // const tempSchDates =   await schedServices.getAllDates();
   console.log("tempSchdates: ", tempSchDates);

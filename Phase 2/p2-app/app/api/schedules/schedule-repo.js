@@ -20,7 +20,20 @@ class schedulesRepo{
       }
 
 
-
+    async getSchedules(){
+      try {
+        const schedules = await prisma.schedule.findMany({
+          include: {
+            sessions: true,
+          },
+        });
+        
+        return schedules;
+      } catch (error) {
+        console.error('Error retrieving dates:', error);
+        throw new Error('Failed to retrieve dates');
+      }
+    }
 
 }
 
