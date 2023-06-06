@@ -1,4 +1,3 @@
-import * as services from '../js/services/recipe-services.js';
 import * as schServices from '../js/services/schedule-services.js'
 
 // Commonly used URLs

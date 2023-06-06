@@ -1,8 +1,13 @@
 // Commonly used URLS
-let usersUrl = "../json/users.json";
+// let usersUrl = "../json/users.json";
 // add sweet alert script to the body
 // document.body.appendChild('<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>')
 // console.log(document.body.innerHTML);
+
+// import  paperRepo  from "/app/api/paper/paper-repo.js";
+
+// import { getUsers } from "../../js/services/user-services.js";
+// import { getPapersOfReviewer } from "/js/services/review-services.js";
 
 // assuming we have the global variable USER_ID
 // we set it to 12 for testing sake only
@@ -15,15 +20,17 @@ console.log("USER_ID: ",USER_ID);
 const reviewerID = USER_ID;
 
 // global variables
-// const users = [];
 
 // Elements from html
 const forReviewList = document.querySelector("#for-review-list");
-// const body = document.querySelector("body-content");
 
-async function displayPapers(papersUrl) {
-  users = await (await fetch(usersUrl)).json();
-  localStorage.setItem("usersloc", JSON.stringify(users));
+// document.body.addEventListener('load',displayPapers())
+
+
+async function displayPapers() {
+
+  // users = await (await fetch(usersUrl)).json();
+  // localStorage.setItem("usersloc", JSON.stringify(users));
 
   // check if papers belonging to this current reviewer are in local storage
   // if (!localStorage.papersloc || (parseInt(localStorage.papersloc[0].pid) !== parseInt(USER_ID))) {
@@ -31,25 +38,24 @@ async function displayPapers(papersUrl) {
   // console.log("The papers are nt in lcoal storge");
 
   // if the papers don't exist in the local storage,
-  if (!localStorage.papersloc) {
-    // if local storage doesn't have papersloc
-    papers = await (await fetch(papersUrl)).json(); // fetch the papers
-    localStorage.setItem("papersloc", JSON.stringify(papers)); // add papers to local storage
-  }
+  // if (!localStorage.papersloc) {
+  //   // if local storage doesn't have papersloc
+  //   papers = await (await fetch(papersUrl)).json(); // fetch the papers
+  //   localStorage.setItem("papersloc", JSON.stringify(papers)); // add papers to local storage
+  // }
 
   // get the papers from local storage
-  papersloc = JSON.parse(localStorage.papersloc);
+  // papersloc = JSON.parse(localStorage.papersloc);
   // console.log("papers", papersloc);
 
   // get the papers that belong to the current reviewer, using the global variable USER_ID
 
-  assignedPapers = null;
+  const assignedPapers = await  (USER_ID);
+  // let test = paperRepo.getPaperOfReviewer(12);
+  // console.log("ADD: ",test);
   // check if the lcoal stoarge has assigned papers or not
   // if (!localStorage.assignedPapers) {
-    assignedPapers = papersloc.filter((paper) =>
-      getPaperOfReviewer(paper, USER_ID)
-    );
-    localStorage.setItem("assignedPapers", JSON.stringify(assignedPapers));
+   
   // } else {
     // assignedPapers = JSON.parse(localStorage.assignedPapers);
   // }
@@ -62,7 +68,6 @@ async function displayPapers(papersUrl) {
   //   .map((paper) => cardTemplate(paper))
   //   .join("");
 
-  assignedPapers = JSON.parse(localStorage.assignedPapers);
   forReviewList.innerHTML = assignedPapers
     .map((paper) => cardTemplate(paper))
     .join("");
@@ -87,7 +92,7 @@ async function displayPapers(papersUrl) {
   let a = abstractLinks.forEach((a) => a.addEventListener("click", hideAbstract));
   
 }
-
+displayPapers()
 // Hide and Unhide the abstract body
 async function hideAbstract(e) {
   e.preventDefault();
@@ -103,36 +108,12 @@ async function hideAbstract(e) {
   }
 }
 
-// async function displayNoneReviewedPapers(assignedPapers) {
-//     // forReviewList.innerHTML = assignedPapers
-
-//     let  reviews = assignedPapers.map((paper) =>
-//     {return paper.review.find(review => review.reviewerID === reviewerID)}
-//     );
-
-//     // console.log(Object.keys(reviews[0]).length );
-//     console.log("MEEE " , reviews);
-// }
-
-// function displayReviewedPapers(assignedPapers) {
-
-//   console.log(4);
-// }
-
-// function checkReviewd(review) {
-//   console.log(review);
-//   if (Object.keys(review).length > 1) {
-//     console.log(Object.keys(review).length);
-//     return review;
-//   }
-// }
-
 function getPaperOfReviewer(paper, reviewerId) {
   if (paper.review.find((elem) => elem.reviewerID === reviewerId)) return paper;
 }
 
 async function loadPage(pageUrl, paperId) {
-  // console.log("hiiiii  ",paperId);
+  console.log("hiiiii  ",paperId);
   localStorage.setItem("paperAtm", JSON.stringify(paperId));
 
   // console.log(localStorage.paperAtm);
@@ -148,15 +129,13 @@ async function loadPage(pageUrl, paperId) {
   // mainContent.innerHTML = pageHTMLContent;
 }
 
+
 // function to get names of authors using their IDs. This function is used in cardTemplate()
 function getAuthorName(authorID) {
   const users = JSON.parse(localStorage.usersloc);
   const foundAuthor = users.find((user) => user.id === authorID);
   return `${foundAuthor.first_name} ${foundAuthor.last_name}`;
 }
-
-// Help button 
-helpButton.addEventListener('click',helpHandler)
 
 async function helpHandler(e) {
   e.preventDefault;
@@ -208,10 +187,3 @@ function cardTemplate(paper) {
 
 </div>`;
 }
-
-// async function l(params) {
-  
-
-// console.log(await document.body.innerHTML);
-// }
-// l()

@@ -24,7 +24,7 @@ async function loadNav() {
 
   <nav class="nav-bar">
     <div class="logo">
-        <img src="../img/Capture2.PNG" alt="Conf Plus Logo">
+        <img src="/img/Capture2.PNG" alt="Conf Plus Logo">
 
     </div>
     <ul>
@@ -41,7 +41,7 @@ async function loadNav() {
     html = ` <header>
     <nav class="nav-bar">
         <div class="logo">
-            <img src="../img/ConfPlus logo.png" alt="Conf Plus Logo">
+            <img src="/img/ConfPlus logo.png" alt="Conf Plus Logo">
         </div>
         <ul>
             <li><a id="home" class="nav-link grey" href="/mainpage/homepage.html">Home</a></li>
