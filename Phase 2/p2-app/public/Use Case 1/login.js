@@ -24,7 +24,7 @@ async function returnToPrevPage(e) {
     buttons: ["Cancel","Proceed"],
   });
   if (result === true) {
-    location.href = "/public/mainpage/homepage.html";
+    location.href = "/mainpage/homepage.html";
   }
 }
 
@@ -38,7 +38,7 @@ async function loadPage(pageUrl) {
   let pageHTMLContent = await page.text();
   mainContent.innerHTML = pageHTMLContent;
 
-  if (pageUrl == "/public/Use Case 4/reviewPaper/reviewPaper.html") {
+  if (pageUrl == "/Use Case 4/reviewPaper/reviewPaper.html") {
     divRecipes = document.querySelector("#recipes");
     loadRecipes();
   }
@@ -64,7 +64,7 @@ async function login(event) {
   // localStorage.currentUserID = currentLogedIn
   console.log("USER SSS: ",  currentLogedIn);
   if (currentLogedIn != undefined) { 
-  window.location.href = "/public/mainpage/homepage.html"
+  window.location.href = "/mainpage/homepage.html"
   }
   // switch (currentLogedIn.role) {
   //   case "reviewer":

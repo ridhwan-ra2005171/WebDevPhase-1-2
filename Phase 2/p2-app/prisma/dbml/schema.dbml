@@ -47,10 +47,10 @@ Table Session {
 
 Table Review {
   reviewID String [pk]
-  overallEvaluation Int [not null]
-  paperContribution Int [not null]
-  paperStrength String [not null]
-  paperWeaknesses String [not null]
+  overallEvaluation Int
+  paperContribution Int
+  paperStrength String
+  paperWeaknesses String
   paper Paper [not null]
   paperID String [not null]
   user User [not null]
@@ -85,6 +85,6 @@ Ref: Session.presenterID > User.id
 
 Ref: Session.schID > Schedule.schID [delete: Cascade]
 
-Ref: Review.paperID > Paper.paperID
+Ref: Review.paperID > Paper.paperID [delete: Cascade]
 
 Ref: Review.reviewerID > User.id [delete: Cascade]

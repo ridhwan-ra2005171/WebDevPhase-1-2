@@ -36,7 +36,7 @@ model Paper {
   authors     User[]      @relation("PaperAuthors")
   presenterID Int?
   pdfLink     String
-  reviews     Review[]
+  reviews     Review[]    @relation("PaperReviews")
   session     Session?    @relation(fields: [sesID], references: [sesID])
   sesID       String?
   institutes  Institution @relation(fields: [instituteID], references: [instituteID])
@@ -59,13 +59,13 @@ model Session {
 
 model Review {
   reviewID          String @id @default(cuid())
-  overallEvaluation Int
-  paperContribution Int
-  paperStrength     String
-  paperWeaknesses   String
-  paper             Paper  @relation(fields: [paperID], references: [paperID])
+  overallEvaluation Int?
+  paperContribution Int? 
+  paperStrength     String? 
+  paperWeaknesses   String? 
+  paper             Paper  @relation("PaperReviews",fields: [paperID], references: [paperID], onDelete: Cascade)
   paperID           String
-  user              User   @relation(fields: [reviewerID], references: [id], onDelete: Cascade)
+  user              User   @relation("UserReviews",fields: [reviewerID], references: [id], onDelete: Cascade)
   reviewerID        Int
 }
 
@@ -84,5 +84,5 @@ model User {
   role              String
   authoredPapers    Paper[]   @relation("PaperAuthors")
   presentedSessions Session[] @relation("PresenterSessions")
-  reviews           Review[]
+  reviews           Review[] @relation("UserReviews")
 }

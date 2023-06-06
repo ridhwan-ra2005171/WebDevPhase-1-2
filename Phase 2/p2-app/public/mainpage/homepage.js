@@ -22,22 +22,6 @@ document.body.addEventListener('load',loadSchedules())
 const schedulesContainer = document.querySelector(".schedules");
 
 
-//----------------------------------------------------------------------------
-// testing prisma DELETE LATER!!!
-document.querySelector("#button-test").addEventListener('click',async () => {
-  document.querySelector("#div-test").innerHTML =await ok();
-
-})
-
-async function ok() {
-  // let recipes = await services.getRecipes();
-  let recipes = await schServices.getAllDates();
-  console.log(recipes);
-  return recipes;}
-
-// schedulesContainer.innerHTML = "GI"
-//-------------------------------------------------------------------------------
-
 
 //to check if i can fetch the schedules: =====================================
 // fetch("../json/schedules.json")
@@ -93,13 +77,13 @@ async function loadSchedules() {
 
   usersloc = JSON.parse(localStorage.usersloc);
 
-  if  (!localStorage.mySchedules) { //if the recipes dont exist in local storage, load from the URL
+  if  (!localStorage.mySchedules) { //if the users dont exist in local storage, load from the URL
     mySchedules = await (await fetch("../json/schedules.json")).json();
     localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
     // schedulesContainer.innerHTML = mySchedules
       // .map((sch) => scheduleToHTML(sch))
       // .join("");
-  } else { // else display the recipes cards in the main using localStorage myRecipes array
+  } else { // else display the users cards in the main using localStorage mySchedules array
     mySchedules = JSON.parse(localStorage.mySchedules); //make from string to object
     console.log("sc: ", mySchedules);
     //---------------------------------------------------------------------------
