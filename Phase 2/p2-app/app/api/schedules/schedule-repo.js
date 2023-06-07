@@ -34,7 +34,11 @@ class schedulesRepo{
       try {
         const schedules = await prisma.schedule.findMany({
           include: {
-            sessions: true
+            sessions:{
+              include:{
+                location : true
+              }
+            }
             }
         });
         

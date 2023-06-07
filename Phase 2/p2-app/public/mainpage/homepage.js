@@ -1,11 +1,17 @@
 import * as schServices from '../js/services/schedule-services.js'
 import * as statServices from '../js/services/stat-services.js';
+import * as locServices from '../js/services/location-services.js';
+
+// console.log("loc id 3", locServices.getLocation(1));
+const myloc = await locServices.getLocation(1);
+console.log(myloc.building + ' ' + myloc.room);
+
 console.log("statttss",statServices.getStats());
 const stats =  await statServices.getStats()
 
-console.log("Number of papers", stats[0]);
-console.log("Average Number of authors per paper", stats[1]);
-console.log("Number of sessions and average number of presenations and sessions", stats[2]);
+// console.log("Number of papers", stats[0]);
+// console.log("Average Number of authors per paper", stats[1]);
+// console.log("Number of sessions and average number of presenations and sessions", stats[2]);
 
 
 // Retrieve the HTML elements
@@ -28,7 +34,7 @@ let usersUrl = "../../json/users.json"; //so we can get the presenters
 let mySchedules = [];
 const tempSch = await schServices.getSchedules(); //grabbing the schedules from prisma
 console.log("tempSch:",tempSch);
-const tempSession = await  tempSch.map(sch => sch.sessions);  //this just grabs the dates from the schedules
+const tempSession = await  tempSch.map(sch => sch.sessions);  //this just grabsSessions from schedule
 console.log("sessions:", tempSession) //rn the sessions are undefined somehow
 
 
@@ -118,8 +124,9 @@ async function loadSchedules() {
   dateLoader();
 }
 
+
 //this is to load each session objects, since it is an array itself inside the json
-function loadSessions(session) {
+  function loadSessions(session) {
   console.log("sessions passed: ",session);
   const sesTitle = session.map(sch => sch.title);
   // console.log(sesDate);
@@ -131,8 +138,15 @@ function loadSessions(session) {
 
 
   //for location, need to map or atleast get the locations list
-  const seslocation = session.map(sch => sch.location);
-  console.log(seslocation);
+  const sesLocID = session.map(sch => sch.locationID); //each of these location, use getLocation
+  // const myloc = locServices.getLocation(parseInt(sesLocID));
+  const myloc = session.map(ses => ses.location)
+  console.log("nigabals",myloc);
+  const building = myloc.map(loc => loc.building);
+  const room = myloc.map(loc => loc.room);
+  console.log( building + ' | ' + room );
+  // const sesLoc = myloc.building + ' | ' + myloc.room;
+  console.log(parseInt(sesLocID));
 
   
   // find presenter from usersloc in local Storage
@@ -149,13 +163,16 @@ function loadSessions(session) {
   <tr>
           <td>${sesfromTime}-${sesendTime}</td>
           <td>${sesTitle}</td>
+          <td>PresenterName</td>
+          <td>${building} | ${room}</td>
         </tr>
   `;
 }
 // onclick="handleUpdateSchedule(${schedule.schID})"
 
-function scheduleToHTML(schedule) {
+ function scheduleToHTML(schedule) {
   // console.log("sched: ", schedule);
+
   return `
   <div class="conf-card">
     <div class="card-header">
@@ -234,9 +251,9 @@ const dateDL = document.querySelector("#sortByDate");
 // let schDates = JSON.parse(localStorage.schDates);
 
 async function dateLoader() {
-  // const tempSchDates =   await  mySchedules.map(sch => sch.date);
+  const tempSchDates =   await  mySchedules.map(sch => sch.date);
   const tempSch = await schServices.getSchedules(); //grabbing the schedules from prisma
-  const tempSchDates = await  tempSch.map(sch => sch.date);  //this just grabs the dates from the schedules
+  // const tempSchDates = await  tempSch.map(sch => sch.date);  //this just grabs the dates from the schedules
 
   // const tempSchDates =   await schedServices.getAllDates();
   console.log("tempSchdates: ", tempSchDates);
@@ -275,10 +292,6 @@ function sortdateHandler() {
       .map((schedule) => scheduleToHTML(schedule))
       .join("");
   }
-}
-
-function testhandler(){
-  console.log("I am called");
 }
 
 
