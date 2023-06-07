@@ -1,41 +1,36 @@
 [
   {
-    "paperID": "1",
+    "paperID" : "1",
     "title": "Website Developmemt Technologies",
     "abstract": "Service Science is that the basis of knowledge system and net services that judge to the provider/client model. This paper developments a technique which will be utilized in the event of net services like websites, net applications and eCommerce. The goal is to development a technique that may add structure to a extremely unstructured drawback to help within the development and success of net services. The new methodology projected are going to be referred to as {the net|the online|the net} Development Life Cycle (WDLC) and tailored from existing methodologies and applied to the context of web development. This paper can define well the projected phases of the WDLC.",
-    "pdfLink": "https://www.ijraset.com/best-journal/web-development-technologies-a-review",
-    "instituteID":"2"
+    "pdfLink": "https://www.ijraset.com/best-journal/web-development-technologies-a-review" 
   },
 
   {
-    "paperID": "2",
+    "paperID" : "2",
     "title": "Assessment of site classifications according to layout type in web development",
     "abstract": "This article discusses the theoretical part of creating an online store. At the beginning of this article, we looked at the benefits of using websites. We studied them in order to start creating a site, one needs to decide on its functions, because with the help of them one can select the means for writing it, which are in this article. Some types of tools for writing a website are described. We considered site classifications by purpose, such as business card site, corporate site, portal, catalogue site, online store, landing page. Based on the available data, a  table of the advantages and disadvantages of different types of websites is provided. The main stages of creating an online store were identified and described. These are a preparatory stage, preparation of technical specifications, marketing research, design, programming and layout, content filling, testing, domain and hosting selection. Conclusions were made about the conducted study, the advantages of an online store over conventional stores.",
-    "pdfLink": "https://iopscience.iop.org/article/10.1088/1742-6596/2032/1/012125/pdf",
-    "instituteID":"3"
+    "pdfLink": "https://iopscience.iop.org/article/10.1088/1742-6596/2032/1/012125/pdf"
   },
 
   {
-    "paperID": "3",
+    "paperID" : "3",
     "title": "Cognitive disabilities and web accessibility: a survey into the Brazilian web development community",
     "abstract": "Cognitive disabilities include a diversity of conditions related tocognitive functions, such asreading, understand-ing, learning, solvingproblems, memorization and speaking. They differ largely from each other, making them a heterogeneous complex set of disabilities. Although the awareness about cognitive disabilities has been increasing in  the  last  few  years,  it is  still less  than necessary  compared  to other  disabilities.  The  need  for an investigation about this issue is part of the agenda of the Challenge 2 (Accessibility and Digital Inclusion) from GranDIHC-Br. This paper describes the results of an online exploratory survey conducted with 105 web development profession-alsfrom different sectorsto understand their knowledge and barriers regarding accessibility for people with cog-nitive disabilities. The results evidenced three biases that potentially prevent those professionals from approaching cognitive disabilities: strong organizational barriers; difficulty to understand user needsrelated to cognitive disa-bilities; a knowledge gap about web accessibilityprinciples and guidelines. Our results confirmed that web devel-opment professionals are unawareabout cognitive disabilitiesmostly by a lack of knowledge about them, even if they understandwebaccessibility in a technical level.Therefore,we suggest that applied research studies focuson how to fill this knowledge gap before providing tools, artifacts or frameworks",
-    "pdfLink": "https://sol.sbc.org.br/journals/index.php/jis/article/view/982/1881",
-    "instituteID":"4"
+    "pdfLink": "https://sol.sbc.org.br/journals/index.php/jis/article/view/982/1881"
   },
 
   {
-    "paperID": "4",
+    "paperID" : "4",
     "title": "Website Developmemt Technologies: A Review",
     "abstract": "Service Science is that the basis of knowledge system and net services that judge to the provider/client model. This paper developments a technique which will be utilized in the event of net services like websites, net applications and eCommerce. The goal is to development a technique that may add structure to a extremely unstructured drawback to help within the development and success of net services. The new methodology projected are going to be referred to as {the net|the online|the net} Development Life Cycle (WDLC) and tailored from existing methodologies and applied to the context of web development. This paper can define well the projected phases of the WDLC",
-    "pdfLink": "https://www.ijraset.com/best-journal/web-development-technologies-a-review",
-    "instituteID":"5"
+    "pdfLink": "https://www.ijraset.com/best-journal/web-development-technologies-a-review"
   },
 
   {
-    "paperID": "5",
+    "paperID" : "5",
     "title": "Farming Assistant Web Services: Agricultor",
     "abstract": "Our farming assistant web services provides assistance to new as well as establish farmers to get the solutions to dayto-day problems faced in the field. A farmer gets to connect with other farmers throughout India to get more information about a particular crop which is popular in other states. Keywords: Farmers, Assistance, Web Development",
-    "pdfLink": "https://www.ijraset.com/best-journal/farming-assistant-web-services-agricultor",
-    "instituteID":"1"
+    "pdfLink": "https://www.ijraset.com/best-journal/farming-assistant-web-services-agricultor"
   }
 ]

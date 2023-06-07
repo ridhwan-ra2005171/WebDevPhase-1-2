@@ -19,7 +19,7 @@ model Institution {
   code        String
   name        String
   country     String
-  papers      Paper[]
+  authors      User[]
 }
 
 model Location {
@@ -33,14 +33,26 @@ model Paper {
   paperID     String      @id @default(cuid())
   title       String
   abstract    String
-  authors     User[]      @relation("PaperAuthors")
+  authors     User[]      @relation("PaperAuthor")
   presenterID Int?
   pdfLink     String
   reviews     Review[]    @relation("PaperReviews")
   session     Session?    @relation(fields: [sesID], references: [sesID])
   sesID       String?
-  institutes  Institution @relation(fields: [instituteID], references: [instituteID])
-  instituteID String
+  reviewers    User[]   @relation("PapersReview")
+  accepted  Boolean @default(false)
+}
+
+
+model Review {
+  reviewID          String @id @default(cuid())
+  overallEvaluation Int
+  paperContribution Int
+  paperStrength     String
+  paperWeaknesses   String 
+  paper             Paper  @relation("PaperReviews",fields: [paperID], references: [paperID], onDelete: Cascade)
+  paperID           String
+ 
 }
 
 model Session {
@@ -48,8 +60,8 @@ model Session {
   title       String
   location    Location @relation(fields: [locationID], references: [locationID])
   locationID  String
-  presenter   User     @relation("PresenterSessions", fields: [presenterID], references: [id])
-  presenterID Int
+  // presenter   User     @relation("PresenterSessions", fields: [presenterID], references: [id])
+  // presenterID Int   Cause related to paper not session    
   fromTime    String
   endTime     String
   schedule    Schedule @relation(fields: [schID], references: [schID], onDelete: Cascade)
@@ -57,17 +69,6 @@ model Session {
   papers      Paper[]
 }
 
-model Review {
-  reviewID          String @id @default(cuid())
-  overallEvaluation Int?
-  paperContribution Int? 
-  paperStrength     String? 
-  paperWeaknesses   String? 
-  paper             Paper  @relation("PaperReviews",fields: [paperID], references: [paperID], onDelete: Cascade)
-  paperID           String
-  user              User   @relation("UserReviews",fields: [reviewerID], references: [id], onDelete: Cascade)
-  reviewerID        Int
-}
 
 model Schedule {
   schID    String    @id @default(cuid())
@@ -82,7 +83,10 @@ model User {
   email             String    @unique
   password          String
   role              String
-  authoredPapers    Paper[]   @relation("PaperAuthors")
-  presentedSessions Session[] @relation("PresenterSessions")
-  reviews           Review[] @relation("UserReviews")
+  authoredPaper    Paper?   @relation("PaperAuthor", fields: [paperID], references: [paperID])//for authors
+  paperID String?
+  // presentedSession Session[] @relation("PresenterSessions")//actually it is only one session per presenter
+  reviewedPapers    Paper[] @relation("PapersReview")//for reviewers
+  institute  Institution? @relation(fields: [instituteID], references: [instituteID])
+  instituteID String?
 }

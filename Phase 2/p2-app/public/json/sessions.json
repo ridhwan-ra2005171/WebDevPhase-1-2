@@ -3,7 +3,6 @@
     "sesID": "3",
     "title": "myTitle3",
     "locationID": "3",
-    "presenterID": 19,
     "fromTime": "12:00:00",
     "endTime": "14:00:00",
     "schID" : "2"
@@ -12,9 +11,8 @@
     "sesID": "6",
     "title": "myTitle6",
     "locationID": "1",
-    "presenterID": 16,
     "fromTime": "12:00:00",
     "endTime": "14:00:00",
-    "schID" : "3"
+    "schID" : "1"
   }
 ]

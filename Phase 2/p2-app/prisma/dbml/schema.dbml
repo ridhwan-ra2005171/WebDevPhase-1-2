@@ -7,7 +7,7 @@ Table Institution {
   code String [not null]
   name String [not null]
   country String [not null]
-  papers Paper [not null]
+  authors User [not null]
 }
 
 Table Location {
@@ -27,8 +27,18 @@ Table Paper {
   reviews Review [not null]
   session Session
   sesID String
-  institutes Institution [not null]
-  instituteID String [not null]
+  reviewers User [not null]
+  accepted Boolean [not null, default: false]
+}
+
+Table Review {
+  reviewID String [pk]
+  overallEvaluation Int [not null]
+  paperContribution Int [not null]
+  paperStrength String [not null]
+  paperWeaknesses String [not null]
+  paper Paper [not null]
+  paperID String [not null]
 }
 
 Table Session {
@@ -36,25 +46,11 @@ Table Session {
   title String [not null]
   location Location [not null]
   locationID String [not null]
-  presenter User [not null]
-  presenterID Int [not null]
   fromTime String [not null]
   endTime String [not null]
   schedule Schedule [not null]
   schID String [not null]
   papers Paper [not null]
-}
-
-Table Review {
-  reviewID String [pk]
-  overallEvaluation Int
-  paperContribution Int
-  paperStrength String
-  paperWeaknesses String
-  paper Paper [not null]
-  paperID String [not null]
-  user User [not null]
-  reviewerID Int [not null]
 }
 
 Table Schedule {
@@ -70,21 +66,21 @@ Table User {
   email String [unique, not null]
   password String [not null]
   role String [not null]
-  authoredPapers Paper [not null]
-  presentedSessions Session [not null]
-  reviews Review [not null]
+  authoredPaper Paper
+  paperID String
+  reviewedPapers Paper [not null]
+  institute Institution
+  instituteID String
 }
 
 Ref: Paper.sesID > Session.sesID
 
-Ref: Paper.instituteID > Institution.instituteID
+Ref: Review.paperID > Paper.paperID [delete: Cascade]
 
 Ref: Session.locationID > Location.locationID
 
-Ref: Session.presenterID > User.id
-
 Ref: Session.schID > Schedule.schID [delete: Cascade]
 
-Ref: Review.paperID > Paper.paperID [delete: Cascade]
+Ref: User.paperID > Paper.paperID
 
-Ref: Review.reviewerID > User.id [delete: Cascade]
+Ref: User.instituteID > Institution.instituteID
