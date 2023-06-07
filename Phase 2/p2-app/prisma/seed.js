@@ -22,46 +22,56 @@ async function main() {
         const schedules = await fs.readJSON(schedulesPath)
         const sessions = await fs.readJSON(sessionsPath)
         const papers = await fs.readJSON(papersPath)
-        const confDates = await fs.readJSON(confDatesPath)
+        // const confDates = await fs.readJSON(confDatesPath)
         const reviews = await fs.readJSON(reviewsPath)
 
         // fist populate the models until before session ---------
         
-        // users.forEach(async (user) => {
-        //     await prisma.user.create({ data: user });
-        // })
+        users.forEach(async (user) => {
+            await prisma.user.create({ data: user });
+        })
 
-        // locations.forEach(async (loc) => {
-        //     await prisma.location.create({ data: loc });
-        // })
+        locations.forEach(async (loc) => {
+            await prisma.location.create({ data: loc });
+        })
 
-        // institutions.forEach(async (inst) => {
-        //     await prisma.institution.create({ data: inst });
-        // })
+        institutions.forEach(async (inst) => {
+            await prisma.institution.create({ data: inst });
+        })
 
-        // schedules.forEach(async (schedule) => {
-        //     await prisma.schedule.create({ data: schedule });
-        // })
+        schedules.forEach(async (schedule) => {
+            await prisma.schedule.create({ data: schedule });
+        })
 
         // until here ----------------------------------------
         // Then Comment the above methods, uncomment session and run db seed again
         
-        // sessions.forEach(async (session) => {
-        //     await prisma.session.create({ data: session });
-        // })
+        sessions.forEach(async (session) => {
+            await prisma.session.create({ data: session });
+        })
 
         // papers.forEach(async (paper) => {
         //     await prisma.paper.create({ data: paper });
         // })
 
-        // reviews.forEach(async (rev) => {
-        //     await prisma.review.create({ data: rev });
-        // })
+        reviews.forEach(async (rev) => {
+            await prisma.review.create({ data: rev });
+        })
         
         //---------------------------------------------------
         // confDates.forEach(async (date) => {
         //     await prisma.conferenceDates.create({ data: date });
         // })
+     
+            // await prisma.institution.deleteMany();
+            // await prisma.location.deleteMany();
+            // await prisma.conferenceDates.deleteMany();
+            // await prisma.paper.deleteMany();
+            // await prisma.user.deleteMany();
+            // await prisma.review.deleteMany();
+            // await prisma.session.deleteMany();
+            // await prisma.schedule.deleteMany();
+ 
 
     } catch (error) {
         console.log(error);
