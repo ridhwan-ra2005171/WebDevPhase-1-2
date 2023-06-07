@@ -57,9 +57,10 @@ async function loadNav() {
 
   // inject the navbar in the body of the html
   document.body.insertAdjacentHTML("afterbegin", html);
-
-  // const userLink = document.querySelector("#username");
-  // userLink.addEventListener('click',getUserDetails())
+  // event listener fot logout
+  const userLink = document.querySelector("#username");
+  if(userLink != null){
+    userLink.addEventListener('click',getUserDetails)}
 }
 
 function getNavLink(currUser) {
@@ -85,7 +86,8 @@ function getNavLink(currUser) {
   return link;
 }
 
-async function getUserDetails() {
+async function getUserDetails(e) {
+  e.preventDefault()
   let result = await swal({
     title: `Hi, ${currUser.first_name} ${currUser.last_name}!`,
     text: `Email: ${currUser.email}`,
@@ -98,3 +100,4 @@ async function getUserDetails() {
     location.href = "/mainpage/homepage.html";
   }
 }
+
