@@ -39,7 +39,7 @@ async function hideAbstract(e) {
 async function redirectReviewForm(e) {
   const paperIdParam = e.target.parentNode.parentNode.id;
   // console.log(paperIdParam);
-  localStorage.setItem("paperAtm", JSON.stringify(paperIdParam));
+  localStorage.setItem("paperAtm", paperIdParam);
   window.location.href = "../reviewForm/reviewForm.html";
 }
 

@@ -35,32 +35,11 @@ backBtn.addEventListener("click", returnToPrevPage);
 form.addEventListener("submit", storeForm);
 
 
-function loadToForm() {
-  // First find the review from local storage
-
-  //get the papers list from local storage
-  // const papers = JSON.parse(localStorage.papersloc);
-
-  // get the paper ID from local storage
-  // const targetPaperID = parseInt(JSON.parse(localStorage.paperAtm));
-  // console.log("test:  ",targetPaperID);
-
-  // find the index of paper first
-  // const paperIndex = papers.findIndex(
-    // (paper) => paper.paperID === targetPaperID
-  // );
-  // console.log("test: " ,papers[paperIndex]);
-
-  // find the index inside the review array that exists in targetPaper, so that we can replace the old review with the new one
-  // const reviewIndex = papers[paperIndex].review.findIndex(
-    // (review) => review.reviewerID == reviewerID
-  // );
-  // console.log("ASDASD: ",papers[paperIndex].review.find(rev => rev.reviewerID == 12))
-  // console.log("index: ",papers[paperIndex].review[reviewIndex]);
-
+async function loadToForm() {
   // now replace the old review with the new review aka reviewedPaper
   // const currentReview = papers[paperIndex].review[reviewIndex];
-  const currentReview = reviewServices.getReview(USER_ID,localStorage.paperAtm)
+  const currentReview = await reviewServices.getReview(USER_ID,localStorage.paperAtm)
+  console.log(localStorage.paperAtm);
   console.log("Current Review: ", currentReview);
 
   // Only load data when the paper was reviewed, by using the length of the keys:
@@ -142,7 +121,6 @@ async function storeForm(e) {
   e.preventDefault();
 
   // form inputs retrieval
-  // const reviewerID = USER_ID;
   const evaluation = document.querySelector(
     'input[name="evaluation"]:checked'
   ).value;

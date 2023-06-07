@@ -1,4 +1,8 @@
 export async function getReview(reviewerID, paperID) {
+  reviewerID = parseInt(reviewerID)
+  paperID = parseInt(paperID)
+  console.log(reviewerID+", "+paperID);
+
   const data = await fetch(`/api/users/${reviewerID}/papers/${paperID}/reviews/`);
   const review = await data.json();
   console.log("** Review Service: get review");

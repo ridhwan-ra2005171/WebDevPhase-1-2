@@ -11,11 +11,8 @@ import reviewRepo from "./review-repo.js";
 export async function GET(request, {params}) {
   try {
       let {id, paperID} = params
-      // convert to correct data type
-      const reviewerID = parseInt(id);
-      paperID = String(paperID);
       console.log(id + " "+ paperID);
-      const data = await reviewRepo.getReview(reviewerID,paperID);
+      const data = await reviewRepo.getReview(id,paperID);
       return Response.json(data, { status: 200 });
 
   } catch (e) {

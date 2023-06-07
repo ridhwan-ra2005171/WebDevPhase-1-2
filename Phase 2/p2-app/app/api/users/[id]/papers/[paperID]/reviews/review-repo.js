@@ -69,9 +69,10 @@ class reviewRepo{
         throw new Error('Failed to get papers to review');
       }
     }
-
-    
 }
 
-
 export default new reviewRepo();
+
+// const repo = new reviewRepo();
+
+// console.log(await repo.getReview(12,5));
