@@ -1,20 +1,20 @@
 [
   {
-    "reviewID": "3",
+   
     "overallEvaluation": 1,
     "paperContribution": 5,
     "paperStrength": "Strong paper 2",
     "paperWeaknesses": "No weaknesses 2",
     "paperID": "5",
-    "reviewerID" : 8
+    "reviewerId" : 8
   },
   {
-    "reviewID": "4",
+  
     "overallEvaluation": 2,
     "paperContribution": 4,
     "paperStrength": "Strong paper 2",
     "paperWeaknesses": "No weaknesses 2",
     "paperID": "5",
-    "reviewerID" : 12
+    "reviewerId" : 12
   }
 ]

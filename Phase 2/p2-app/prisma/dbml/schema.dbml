@@ -7,7 +7,7 @@ Table Institution {
   code String [not null]
   name String [not null]
   country String [not null]
-  authors User [not null]
+  authors Author [not null]
 }
 
 Table Location {
@@ -21,26 +21,25 @@ Table Paper {
   paperID String [pk]
   title String [not null]
   abstract String [not null]
-  authors User [not null]
+  authors Author [not null]
   presenterID Int
   pdfLink String [not null]
   reviews Review [not null]
   session Session
   sesID String
-  reviewers User [not null]
   accepted Boolean [not null, default: false]
 }
 
 Table Review {
   reviewID String [pk]
-  overallEvaluation Int [not null]
-  paperContribution Int [not null]
-  paperStrength String [not null]
-  paperWeaknesses String [not null]
+  overallEvaluation Int [not null, default: 0]
+  paperContribution Int [not null, default: 0]
+  paperStrength String [not null, default: '']
+  paperWeaknesses String [not null, default: '']
   paper Paper [not null]
   paperID String [not null]
-  reviewer User
-  reviewerID Int
+  reviewer Reviewer
+  reviewerId Int
 }
 
 Table Session {
@@ -68,11 +67,29 @@ Table User {
   email String [unique, not null]
   password String [not null]
   role String [not null]
+  paperID String
+}
+
+Table Author {
+  id Int [pk, increment]
+  first_name String [not null]
+  last_name String [not null]
+  email String [unique, not null]
+  password String [not null]
+  role String [not null]
   authoredPaper Paper
   paperID String
-  reviewedPapers Paper [not null]
   institute Institution
   instituteID String
+}
+
+Table Reviewer {
+  reviewerId Int [pk, increment]
+  first_name String [not null]
+  last_name String [not null]
+  email String [unique, not null]
+  password String [not null]
+  role String [not null]
   reviews Review [not null]
 }
 
@@ -80,12 +97,12 @@ Ref: Paper.sesID > Session.sesID
 
 Ref: Review.paperID > Paper.paperID [delete: Cascade]
 
-Ref: Review.reviewerID > User.id
+Ref: Review.reviewerId > Reviewer.reviewerId
 
 Ref: Session.locationID > Location.locationID
 
 Ref: Session.schID > Schedule.schID [delete: Cascade]
 
-Ref: User.paperID > Paper.paperID
+Ref: Author.paperID > Paper.paperID
 
-Ref: User.instituteID > Institution.instituteID
+Ref: Author.instituteID > Institution.instituteID

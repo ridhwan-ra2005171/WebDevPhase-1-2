@@ -1,0 +1,83 @@
+[
+  {
+    "id": 14,
+    "first_name": "Emma",
+    "last_name": "Walker",
+    "email": "emmawalker@author.com",
+    "password": "password123",
+    "role": "author",
+    "paperID" : "1",
+    "instituteID" : "1"
+
+  },
+  {
+    "id": 15,
+    "first_name": "Ethan",
+    "last_name": "Turner",
+    "email": "ethanturner@author.com",
+    "password": "password123",
+    "role": "author",
+    "paperID" : "2",
+    "instituteID" : "3"
+
+
+  },
+  {
+    "id": 16,
+    "first_name": "Chloe",
+    "last_name": "Parker",
+    "email": "chloeparker@author.com",
+    "password": "password123",
+    "role": "author",
+    "paperID" : "1",
+    "instituteID" : "3"
+
+
+  },
+  {
+    "id": 17,
+    "first_name": "William",
+    "last_name": "Hall",
+    "email": "williamhall@author.com",
+    "password": "password123",
+    "role": "author",
+    "paperID" : "2",
+    "instituteID" : "2"
+
+  },
+  {
+    "id": 18,
+    "first_name": "Grace",
+    "last_name": "Garcia",
+    "email": "gracegarcia@author.com",
+    "password": "password123",
+    "role": "author",
+    "paperID" : "5",
+    "instituteID" : "2"
+
+
+  },
+  {
+    "id": 19,
+    "first_name": "Daniel",
+    "last_name": "Young",
+    "email": "danielyoung@author.com",
+    "password": "password123",
+    "role": "author",
+    "paperID" : "5",
+    "instituteID" : "1"
+
+
+  },
+  {
+    "id": 20,
+    "first_name": "Zoe",
+    "last_name": "Allen",
+    "email": "zoeallen@author.com",
+    "password": "password123",
+    "role": "author",
+    "paperID" : "5",
+    "instituteID" : "1"
+
+  }
+]

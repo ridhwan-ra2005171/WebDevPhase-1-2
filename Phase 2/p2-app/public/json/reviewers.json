@@ -1,0 +1,91 @@
+[
+
+  {
+    "reviewerId": 3,
+    "first_name": "Bob",
+    "last_name": "Smith",
+    "email": "bobsmith@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  },
+  {
+    "reviewerId": 4,
+    "first_name": "Alice",
+    "last_name": "Johnson",
+    "email": "alicejohnson@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  },
+  {
+    "reviewerId": 5,
+    "first_name": "David",
+    "last_name": "Brown",
+    "email": "davidbrown@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  },
+  {
+    "reviewerId": 6,
+    "first_name": "Emily",
+    "last_name": "Davis",
+    "email": "emilydavis@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  },
+  {
+    "reviewerId": 7,
+    "first_name": "Oliver",
+    "last_name": "Martin",
+    "email": "olivermartin@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  },
+  {
+    "reviewerId": 8,
+    "first_name": "Sophie",
+    "last_name": "Miller",
+    "email": "sophiemiller@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  },
+  {
+    "reviewerId": 9,
+    "first_name": "Luke",
+    "last_name": "Harris",
+    "email": "lukeharris@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  },
+  {
+    "reviewerId": 10,
+    "first_name": "Mia",
+    "last_name": "Wilson",
+    "email": "miawilson@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  },
+  {
+    "reviewerId": 11,
+    "first_name": "Noah",
+    "last_name": "Thomas",
+    "email": "noahthomas@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  },
+  {
+    "reviewerId": 12,
+    "first_name": "Ava",
+    "last_name": "Lee",
+    "email": "avalee@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  },
+  {
+    "reviewerId": 13,
+    "first_name": "Jacob",
+    "last_name": "Clark",
+    "email": "jacobclark@reviewer.com",
+    "password": "password123",
+    "role": "reviewer"
+  }
+]

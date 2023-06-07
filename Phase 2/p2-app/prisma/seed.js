@@ -4,6 +4,8 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 const usersPath = path.join(process.cwd(), './public/json/users.json')
+const authorsPath = path.join(process.cwd(), './public/json/authors.json')
+const reviewersPath = path.join(process.cwd(), './public/json/reviewers.json')
 const locationsPath = path.join(process.cwd(), './public/json/locations.json')
 const institutionsPath = path.join(process.cwd(), './public/json/institutions.json')
 const schedulesPath = path.join(process.cwd(), './public/json/schedules.json')
@@ -15,7 +17,8 @@ const reviewsPath = path.join(process.cwd(), './public/json/reviews.json')
 async function main() {
     try {
 
-
+        const authors = await fs.readJSON(authorsPath)
+        const reviewers = await fs.readJSON(reviewersPath)
         const users = await fs.readJSON(usersPath)
         const locations = await fs.readJSON(locationsPath)
         const institutions = await fs.readJSON(institutionsPath)
