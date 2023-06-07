@@ -84,6 +84,10 @@ async function login(event) {
 async function findUser(userTocheck) {
   // const users = await getData(usersJson);
   // console.log(email);
+const url = '/api/users';
+    const response = await fetch(url);
+    return await response.json()
+
   const users = await (await fetch(usersJson)).json();
   console.log(users);
   const user = users.find((user) => user["email"] == userTocheck.email);
