@@ -10,6 +10,7 @@ export async function GET(request){
 
 
 export async function POST(request){
+    
     const paper = await request.json()
     const newPaper = await addPaper(paper)
     return Response.json(newPaper, {status:200})
