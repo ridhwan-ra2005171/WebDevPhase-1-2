@@ -1,5 +1,6 @@
 import * as schServices from '../js/services/schedule-services.js'
-
+import { countPapers, calculateAverageAuthorsPerPaper, calculateAveragePresentationsPerSession} from './paperStat.js';
+console.log("Homepage.js is being executed");
 // Commonly used URLs
 let usersUrl = "../../json/users.json"; //so we can get the presenters
 // import { loadToForm } from "./addSession";
@@ -262,3 +263,37 @@ function testhandler(){
   console.log("I am called");
 }
 
+
+async function updatePaperCount(count) {
+  const paperCountElement = document.getElementById('paperCount');
+  paperCountElement.textContent = count.toString();
+}
+
+// Call the countPapers function and update the HTML with the count
+countPapers()
+  .then(count => {
+    updatePaperCount(count);
+  })
+  .catch(error => {
+    console.error('Error counting papers:', error);
+  });
+
+
+async function updateAverages(averageAuthors, averagePresentations) {
+    const averageAuthorsElement = document.getElementById('averageAuthors');
+    averageAuthorsElement.textContent = averageAuthors.toString();
+  
+    const averagePresentationsElement = document.getElementById('averagePresentations');
+    averagePresentationsElement.textContent = averagePresentations.toString();
+  }
+
+  calculateAverageAuthorsPerPaper()
+  .then(averageAuthors => {
+    return calculateAveragePresentationsPerSession()
+      .then(({ presentationsPerSession }) => {
+        updateAverages(averageAuthors, presentationsPerSession);
+      });
+  })
+  .catch(error => {
+    console.error('Error calculating averages:', error);
+  });
