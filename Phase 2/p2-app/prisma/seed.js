@@ -27,12 +27,12 @@ async function main() {
 
         // fist populate the models until before session ---------
         //  papers.forEach(async (paper) => {
-            // await prisma.paper.create({ data: paper });
+        //     await prisma.paper.create({ data: paper });
         // })
 
-        users.forEach(async (user) => {
-            await prisma.user.create({ data: user });
-        })
+        // users.forEach(async (user) => {
+        //     await prisma.user.create({ data: user });
+        // })
 
         // locations.forEach(async (loc) => {
         //     await prisma.location.create({ data: loc });
@@ -54,9 +54,9 @@ async function main() {
         // })
 
        
-        // reviews.forEach(async (rev) => {
-        //     await prisma.review.create({ data: rev });
-        // })
+        reviews.forEach(async (rev) => {
+            await prisma.review.create({ data: rev });
+        })
         
         //---------------------------------------------------
         // confDates.forEach(async (date) => {
