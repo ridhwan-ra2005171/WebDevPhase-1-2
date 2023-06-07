@@ -51,6 +51,26 @@ class reviewRepo{
         throw new Error('Failed to update review');
       }
     }
+
+    async getPapersToReview(reviewerID) {
+      try {
+        reviewerID = parseInt(reviewerID)
+        console.log(reviewerID);
+        let data = await prisma.user.findMany({
+          where : {
+            id : reviewerID
+          },
+          select : {reviewedPapers : true}
+        });
+        data = data[0].reviewedPapers
+        console.log("* Prisma review-repo, get papers to review");
+        return data;
+      } catch (error) {
+        throw new Error('Failed to get papers to review');
+      }
+    }
+
+    
 }
 
 
