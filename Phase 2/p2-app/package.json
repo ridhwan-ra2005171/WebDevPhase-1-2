@@ -16,7 +16,8 @@
     "next": "^13.3.0",
     "prompt-sync": "^4.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "node-fetch": "^3.0.0"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
@@ -24,6 +25,10 @@
   "devDependencies": {
     "prisma": "^4.15.0",
     "prisma-dbml-generator": "^0.10.0"
+<<<<<<< HEAD
   },
   "type": "module"
+=======
+  }
+>>>>>>> f4c1025f172e664cc1507d1f4bd7200a2596c6e4
 }
