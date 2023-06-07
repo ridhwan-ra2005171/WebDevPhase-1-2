@@ -1,7 +1,10 @@
-import * as reviewServices from '../../js/services/review-services.js'
+import * as reviewServices from "../../js/services/review-services.js";
 
 // add sweet alert script to the body
-document.body.insertAdjacentHTML('beforebegin','<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>')
+document.body.insertAdjacentHTML(
+  "beforebegin",
+  '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>'
+);
 // console.log(document.body.innerHTML);
 // assuming we have the global variable USER_ID
 // we set it to 12 for testing purpose only
@@ -34,86 +37,31 @@ const submitBtn = document.querySelector("#submit");
 backBtn.addEventListener("click", returnToPrevPage);
 form.addEventListener("submit", storeForm);
 
-
 async function loadToForm() {
-  // now replace the old review with the new review aka reviewedPaper
-  // const currentReview = papers[paperIndex].review[reviewIndex];
-  const currentReview = await reviewServices.getReview(USER_ID,localStorage.paperAtm)
-  console.log(localStorage.paperAtm);
-  console.log("Current Review: ", currentReview);
+  // PRISMA ALERT
+  // get the review (if there is) from prisma
+  const currentReview = await reviewServices.getReview(
+    USER_ID,
+    localStorage.paperAtm
+  );
 
-  // Only load data when the paper was reviewed, by using the length of the keys:
-  // if the number of keys is 1 which is the reviewerID, this means that the review object has not been initialized yet
-  // if the number of keys is greater than 1, this means we have added (or the user has reviewed the paper) the evaluation, contribution, strengths... attributes
-  if (Object.keys(currentReview).length > 1) {
+  // check if there is previuos review for this paper
+  if (currentReview != null) {
     // Add the data to the form
-    document.querySelector(`input[value="${currentReview.evaluation}"][name="evaluation"]`).checked = true;
-    document.querySelector(`input[value="${currentReview.contribution}"][name="contribution"]`).checked = true;
+    document.querySelector(
+      `input[value="${currentReview.overallEvaluation}"][name="evaluation"]`
+    ).checked = true;
+    document.querySelector(
+      `input[value="${currentReview.paperContribution}"][name="contribution"]`
+    ).checked = true;
     document.querySelector("#paper-strengths").value =
-      currentReview.strengths;
+      currentReview.paperStrength;
     document.querySelector("#paper-weaknesses").value =
-      currentReview.weaknesses;
-
+      currentReview.paperWeaknesses;
   }
 }
+
 loadToForm();
-
-
-
-// check if the submit button was clicked, this will be used in returnToPrevPage() function
-// submitBtn.addEventListener("click", function(){submitClicked = true;})
-
-// Only load to form when the paper has been reviewed
-
-//load paper
-// async function laodPaper() {
-//   papers = await (await fetch(papersUrl)).json();
-//   users = await (await fetch(usersUrl)).json();
-
-//   // const reviewPaper = papers.find(
-//   //   (p) => p.paperID === parseInt(localStorage.paperAtm)
-//   // );
-
-//   // // getting authors names
-//   // const authObjects = users.filter((o1) =>
-//   //   reviewPaper.authors.find((o2) => parseInt(o1.id) === parseInt(o2))
-//   // );
-//   // let authNames = authObjects.map((author) => {
-//   //   return `${author.first_name} ${author.last_name}`;
-//   // });
-
-//   //getting presenter names
-//   //   const presObjects = users.filter((o1) => parseInt(o1.id) === parseInt(reviewPaper.presenter));
-//   //   let presName = presObjects.map((pres) => {
-//   //     return `${pres.first_name} ${pres.last_name}`;
-//   //   });
-
-//   // changing the HTML accordingly
-//   paperTitle.innerHTML = reviewPaper.title;
-//   paperAuthors.innerHTML = authNames.join("; ");
-//   paperAbstract.innerHTML = reviewPaper.abstract;
-// //   paperPresenter.innerHTML = presName;
-// }
-
-// laodPaper();
-
-// The event listener functions :::::::::::::::::::::::::::::::::::
-// return to previous page
-
-// Alerts using sweet alert ==================================
-
-// async function cancelReview(e) {
-//   e.preventDefault();
-//   // alert("Are you sure you want to cancel?")
-//   let result = await swal({
-//     title: "Are you sure you want to cancel?",
-//     icon: "warning",
-//     buttons: ["No, stay", "Yes, cancel"],
-//   });
-//   if (result === true) {
-  // location.href = "../reviewPaper/reviewPaper.html";
-  //   }
-// }
 
 // Dealing with the form
 async function storeForm(e) {
@@ -129,15 +77,16 @@ async function storeForm(e) {
   ).value;
   const strengths = document.querySelector("#paper-strengths").value;
   const weaknesses = document.querySelector("#paper-weaknesses").value;
-    console.log(weaknesses);
-  const reviewedPaper = {
+  // console.log(weaknesses);
+
+  const newReview = {
     reviewerID: reviewerID,
     evaluation: evaluation,
     contribution: contribution,
     strengths: strengths,
     weaknesses: weaknesses,
   };
-  console.log("STORE: ",reviewedPaper);
+  console.log("STORE: ", reviewedPaper);
 
   // store the reviewPaper in the papers.json
 
@@ -177,10 +126,7 @@ async function storeForm(e) {
   if (result === true) {
     location.href = "../reviewPapers/reviewPapers.html";
   }
-
-  //   localStorage.setItem("reviewedPapers");
 }
-
 
 //||||||||||||||||||||||"""""""""""":::::::::::::::::::::::::::::::::::::::::
 
@@ -229,12 +175,9 @@ async function returnToPrevPage(e) {
     title: "Your changes will not be saved!",
     dangerMode: true,
     icon: "error",
-    buttons: ["Cancel","Proceed"],
+    buttons: ["Cancel", "Proceed"],
   });
   if (result === true) {
     location.href = "../reviewPapers/reviewPapers.html";
   }
-  // } else {
-    // location.href = "../reviewPapers/reviewPapers.html";
-  // }
 }

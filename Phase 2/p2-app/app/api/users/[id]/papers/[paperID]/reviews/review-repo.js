@@ -7,7 +7,7 @@ class reviewRepo{
         // convert the id to the correct type if nessacery
         paperID = String(paperID);
         reviewerID = parseInt(reviewerID);
-        const data = await prisma.review.findMany({
+        const data = await prisma.review.findFirst({
           where : {
             reviewerID,
             paperID
