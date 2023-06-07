@@ -1,7 +1,10 @@
-import * as reviewServices from '../../js/services/review-services.js'
+import * as reviewServices from "../../js/services/review-services.js";
 
 // add sweet alert script to the body
-document.body.insertAdjacentHTML('beforebegin','<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>')
+document.body.insertAdjacentHTML(
+  "beforebegin",
+  '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>'
+);
 // console.log(document.body.innerHTML);
 // assuming we have the global variable USER_ID
 // we set it to 12 for testing purpose only
@@ -34,22 +37,27 @@ const submitBtn = document.querySelector("#submit");
 backBtn.addEventListener("click", returnToPrevPage);
 form.addEventListener("submit", storeForm);
 
-
 async function loadToForm() {
   // PRISMA ALERT
   // get the review (if there is) from prisma
-  const currentReview = await reviewServices.getReview(USER_ID,localStorage.paperAtm)
+  const currentReview = await reviewServices.getReview(
+    USER_ID,
+    localStorage.paperAtm
+  );
 
   // check if there is previuos review for this paper
-  if ((currentReview) != null) {
+  if (currentReview != null) {
     // Add the data to the form
-    document.querySelector(`input[value="${currentReview.overallEvaluation}"][name="evaluation"]`).checked = true;
-    document.querySelector(`input[value="${currentReview.paperContribution}"][name="contribution"]`).checked = true;
+    document.querySelector(
+      `input[value="${currentReview.overallEvaluation}"][name="evaluation"]`
+    ).checked = true;
+    document.querySelector(
+      `input[value="${currentReview.paperContribution}"][name="contribution"]`
+    ).checked = true;
     document.querySelector("#paper-strengths").value =
       currentReview.paperStrength;
     document.querySelector("#paper-weaknesses").value =
       currentReview.paperWeaknesses;
-
   }
 }
 
@@ -59,7 +67,7 @@ loadToForm();
 async function storeForm(e) {
   e.stopPropagation();
   e.preventDefault();
-  
+
   // form inputs retrieval
   const evaluation = document.querySelector(
     'input[name="evaluation"]:checked'
@@ -69,7 +77,8 @@ async function storeForm(e) {
   ).value;
   const strengths = document.querySelector("#paper-strengths").value;
   const weaknesses = document.querySelector("#paper-weaknesses").value;
-    console.log(weaknesses);
+  // console.log(weaknesses);
+
   const newReview = {
     reviewerID: reviewerID,
     evaluation: evaluation,
@@ -77,7 +86,7 @@ async function storeForm(e) {
     strengths: strengths,
     weaknesses: weaknesses,
   };
-  console.log("STORE: ",reviewedPaper);
+  console.log("STORE: ", reviewedPaper);
 
   // store the reviewPaper in the papers.json
 
@@ -118,7 +127,6 @@ async function storeForm(e) {
     location.href = "../reviewPapers/reviewPapers.html";
   }
 }
-
 
 //||||||||||||||||||||||"""""""""""":::::::::::::::::::::::::::::::::::::::::
 
@@ -167,7 +175,7 @@ async function returnToPrevPage(e) {
     title: "Your changes will not be saved!",
     dangerMode: true,
     icon: "error",
-    buttons: ["Cancel","Proceed"],
+    buttons: ["Cancel", "Proceed"],
   });
   if (result === true) {
     location.href = "../reviewPapers/reviewPapers.html";
