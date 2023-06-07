@@ -5,7 +5,8 @@
     "paperContribution": 5,
     "paperStrength": "Strong paper 2",
     "paperWeaknesses": "No weaknesses 2",
-    "paperID": "5"
+    "paperID": "5",
+    "reviewerID" : 8
   },
   {
     "reviewID": "4",
@@ -13,6 +14,7 @@
     "paperContribution": 4,
     "paperStrength": "Strong paper 2",
     "paperWeaknesses": "No weaknesses 2",
-    "paperID": "5"
+    "paperID": "5",
+    "reviewerID" : 12
   }
 ]

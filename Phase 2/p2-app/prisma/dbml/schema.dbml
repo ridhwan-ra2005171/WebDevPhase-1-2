@@ -39,6 +39,8 @@ Table Review {
   paperWeaknesses String [not null]
   paper Paper [not null]
   paperID String [not null]
+  reviewer User
+  reviewerID Int
 }
 
 Table Session {
@@ -71,11 +73,14 @@ Table User {
   reviewedPapers Paper [not null]
   institute Institution
   instituteID String
+  reviews Review [not null]
 }
 
 Ref: Paper.sesID > Session.sesID
 
 Ref: Review.paperID > Paper.paperID [delete: Cascade]
+
+Ref: Review.reviewerID > User.id
 
 Ref: Session.locationID > Location.locationID
 
