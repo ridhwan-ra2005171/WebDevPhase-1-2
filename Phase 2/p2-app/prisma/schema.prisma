@@ -34,13 +34,12 @@ model Paper {
   title       String
   abstract    String
   authors     User[]      @relation("PaperAuthor")
-  presenterID Int
+  presenterID Int?
   pdfLink     String
   reviews     Review[]    @relation("PaperReviews")
   session     Session?    @relation(fields: [sesID], references: [sesID])
   sesID       String?
-  reviewer    User   @relation("PapersReview",fields: [reviewerID], references: [id], onDelete: Cascade)
-  reviewerID  Int
+  reviewers    User[]   @relation("PapersReview")
   accepted  Boolean @default(false)
 }
 
@@ -84,8 +83,8 @@ model User {
   email             String    @unique
   password          String
   role              String
-  authoredPaper    Paper   @relation("PaperAuthor", fields: [paperID], references: [paperID])//for authors
-  paperID String
+  authoredPaper    Paper?   @relation("PaperAuthor", fields: [paperID], references: [paperID])//for authors
+  paperID String?
   // presentedSession Session[] @relation("PresenterSessions")//actually it is only one session per presenter
   reviewedPapers    Paper[] @relation("PapersReview")//for reviewers
   institute  Institution? @relation(fields: [instituteID], references: [instituteID])

@@ -25,10 +25,6 @@
   "devDependencies": {
     "prisma": "^4.15.0",
     "prisma-dbml-generator": "^0.10.0"
-<<<<<<< HEAD
   },
   "type": "module"
-=======
-  }
->>>>>>> f4c1025f172e664cc1507d1f4bd7200a2596c6e4
 }

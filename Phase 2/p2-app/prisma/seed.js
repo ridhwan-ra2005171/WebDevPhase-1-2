@@ -26,37 +26,37 @@ async function main() {
         const reviews = await fs.readJSON(reviewsPath)
 
         // fist populate the models until before session ---------
-        
+        //  papers.forEach(async (paper) => {
+            // await prisma.paper.create({ data: paper });
+        // })
+
         users.forEach(async (user) => {
             await prisma.user.create({ data: user });
         })
 
-        locations.forEach(async (loc) => {
-            await prisma.location.create({ data: loc });
-        })
+        // locations.forEach(async (loc) => {
+        //     await prisma.location.create({ data: loc });
+        // })
 
-        institutions.forEach(async (inst) => {
-            await prisma.institution.create({ data: inst });
-        })
+        // institutions.forEach(async (inst) => {
+        //     await prisma.institution.create({ data: inst });
+        // })
 
-        schedules.forEach(async (schedule) => {
-            await prisma.schedule.create({ data: schedule });
-        })
+        // schedules.forEach(async (schedule) => {
+        //     await prisma.schedule.create({ data: schedule });
+        // })
 
         // until here ----------------------------------------
         // Then Comment the above methods, uncomment session and run db seed again
         
-        sessions.forEach(async (session) => {
-            await prisma.session.create({ data: session });
-        })
-
-        // papers.forEach(async (paper) => {
-        //     await prisma.paper.create({ data: paper });
+        // sessions.forEach(async (session) => {
+        //     await prisma.session.create({ data: session });
         // })
 
-        reviews.forEach(async (rev) => {
-            await prisma.review.create({ data: rev });
-        })
+       
+        // reviews.forEach(async (rev) => {
+        //     await prisma.review.create({ data: rev });
+        // })
         
         //---------------------------------------------------
         // confDates.forEach(async (date) => {

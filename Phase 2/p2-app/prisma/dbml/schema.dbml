@@ -22,13 +22,12 @@ Table Paper {
   title String [not null]
   abstract String [not null]
   authors User [not null]
-  presenterID Int [not null]
+  presenterID Int
   pdfLink String [not null]
   reviews Review [not null]
   session Session
   sesID String
-  reviewer User [not null]
-  reviewerID Int [not null]
+  reviewers User [not null]
   accepted Boolean [not null, default: false]
 }
 
@@ -67,16 +66,14 @@ Table User {
   email String [unique, not null]
   password String [not null]
   role String [not null]
-  authoredPaper Paper [not null]
-  paperID String [not null]
+  authoredPaper Paper
+  paperID String
   reviewedPapers Paper [not null]
   institute Institution
   instituteID String
 }
 
 Ref: Paper.sesID > Session.sesID
-
-Ref: Paper.reviewerID - User.id
 
 Ref: Review.paperID > Paper.paperID [delete: Cascade]
 
