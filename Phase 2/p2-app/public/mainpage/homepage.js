@@ -1,6 +1,24 @@
 import * as schServices from '../js/services/schedule-services.js'
-import { countPapers, calculateAverageAuthorsPerPaper, calculateAveragePresentationsPerSession} from './paperStat.js';
-console.log("Homepage.js is being executed");
+import * as statServices from '../js/services/stat-services.js';
+console.log("statttss",statServices.getStats());
+const stats =  await statServices.getStats()
+
+console.log("Number of papers", stats[0]);
+console.log("Average Number of authors per paper", stats[1]);
+console.log("Number of sessions and average number of presenations and sessions", stats[2]);
+
+
+// Retrieve the HTML elements
+const paperCountElement = document.getElementById('paperCount');
+const averageAuthorsElement = document.getElementById('averageAuthors');
+const averagePresentationsElement = document.getElementById('averagePresentations');
+
+// Update the HTML elements with the values from stats
+paperCountElement.textContent = stats[0].toString();
+averageAuthorsElement.textContent = stats[1].toString();
+const { totalSessions, presentationsPerSession } = stats[2];
+averagePresentationsElement.textContent = `Number of Sessions: ${totalSessions}, Average Presentations per Session: ${presentationsPerSession}`;
+
 // Commonly used URLs
 let usersUrl = "../../json/users.json"; //so we can get the presenters
 // import { loadToForm } from "./addSession";
@@ -264,36 +282,3 @@ function testhandler(){
 }
 
 
-async function updatePaperCount(count) {
-  const paperCountElement = document.getElementById('paperCount');
-  paperCountElement.textContent = count.toString();
-}
-
-// Call the countPapers function and update the HTML with the count
-countPapers()
-  .then(count => {
-    updatePaperCount(count);
-  })
-  .catch(error => {
-    console.error('Error counting papers:', error);
-  });
-
-
-async function updateAverages(averageAuthors, averagePresentations) {
-    const averageAuthorsElement = document.getElementById('averageAuthors');
-    averageAuthorsElement.textContent = averageAuthors.toString();
-  
-    const averagePresentationsElement = document.getElementById('averagePresentations');
-    averagePresentationsElement.textContent = averagePresentations.toString();
-  }
-
-  calculateAverageAuthorsPerPaper()
-  .then(averageAuthors => {
-    return calculateAveragePresentationsPerSession()
-      .then(({ presentationsPerSession }) => {
-        updateAverages(averageAuthors, presentationsPerSession);
-      });
-  })
-  .catch(error => {
-    console.error('Error calculating averages:', error);
-  });
