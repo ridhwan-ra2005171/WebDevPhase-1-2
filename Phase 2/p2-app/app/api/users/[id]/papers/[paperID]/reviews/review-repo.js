@@ -7,7 +7,7 @@ class reviewRepo{
         // convert the id to the correct type if nessacery
         paperID = String(paperID);
         reviewerID = parseInt(reviewerID);
-        const data = await prisma.review.findFirst({
+        const data = await prisma.review.findMany({
           where : {
             reviewerID,
             paperID
@@ -44,22 +44,6 @@ class reviewRepo{
           data : {
             reviewData
           }
-        });
-        console.log("* Prisma review-repo, update review");
-        return data;
-      } catch (error) {
-        throw new Error('Failed to update review');
-      }
-    }
-
-    async getPapersToReview(reviewerID) {
-      try {
-        const data = await prisma.user.findMany({
-          where : {
-            reviewerID
-          },
-          include : {reviewedPapers : true}
-
         });
         console.log("* Prisma review-repo, update review");
         return data;

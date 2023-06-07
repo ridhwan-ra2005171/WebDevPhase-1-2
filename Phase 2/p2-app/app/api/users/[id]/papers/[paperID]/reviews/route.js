@@ -1,4 +1,4 @@
-import reviewRepo from "../review-repo.js";
+import reviewRepo from "./review-repo.js";
 
 
 // export async function GET(request, {params}) {
@@ -8,9 +8,12 @@ import reviewRepo from "../review-repo.js";
 //   return new Response("Paper Id: "+paperID+" Rev Id: "+reviewID+" Data: "+data)
 // }
 
-export async function GET(request) {
+export async function GET(request, {params}) {
   try {
-      const data = await reviewRepo.getReview(12,5);
+      const {id, paperID} = params
+      const reviewerID = id;
+      console.log(id + " "+ paperID);
+      const data = await reviewRepo.getReview(reviewerID,paperID);
       return Response.json(data, { status: 200 });
 
   } catch (e) {
