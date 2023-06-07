@@ -60,7 +60,7 @@ class reviewRepo{
           where : {
             id : reviewerID
           },
-          select : {reviewedPapers : true}
+          select : {reviewedPapers : {include : {authors: true}}}
         });
         data = data[0].reviewedPapers
         console.log("* Prisma review-repo, get papers to review");
