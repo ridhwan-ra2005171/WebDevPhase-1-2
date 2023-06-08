@@ -1,5 +1,6 @@
-// import * as schedServices from '../js/services/schedule-services';
 // Commonly used URLs
+import * as schServices from '../js/services/schedule-services.js'
+
 
 
 let usersUrl = "../../json/users.json"; //so we can get the presenters
@@ -10,6 +11,11 @@ let usersUrl = "../../json/users.json"; //so we can get the presenters
 //Here we will import json file for presenter + paper
 //also the conference
 let mySchedules = [];
+
+const tempSch = await schServices.getSchedules(); //grabbing the schedules from prisma
+console.log("tempSch:",tempSch);
+const tempSession = await  tempSch.map(sch => sch.sessions);  //this just grabsSessions from schedule
+
 let usersloc = [];
 let schDates =[];
 // export default schDates;
@@ -20,16 +26,16 @@ const schedulesContainer = document.querySelector(".schedules");
 //   .then((response) => response.json())
 //   .then((data) => showInfo(data));
 
-function showInfo(data) {
-  console.table(data);
-  console.log(data[0].sessions[1].title);
-}
+// function showInfo(data) {
+//   console.table(data);
+//   console.log(data[0].sessions[1].title);
+// }
 //============================================================================
 
 async function loadPage() {
   const mainContent = document.querySelector("main-content");
   // const page = await fetch("../json/schedules.json");
-  const page = mySchedules;
+  const page = mySchedules; // change to tempSch
   console.log("MY: ",mySchedules);
   const pageHTMLContent = await page.text();
   mainContent.innerHTML = pageHTMLContent;
@@ -40,6 +46,8 @@ async function loadPage() {
 }
 //===========================================================================
 //loadSchedules:
+//===========================================================================
+//loadSchedules:
 async function loadSchedules() {
   // mySchedules = await (await fetch("../json/schedules.json")).json();
   users = await (await fetch(usersUrl)).json();
@@ -47,61 +55,69 @@ async function loadSchedules() {
 
   usersloc = JSON.parse(localStorage.usersloc);
 
-
-  if  (!localStorage.mySchedules) { //if the recipes dont exist in local storage, load from the URL
-    // mySchedules = await (await fetch("../json/schedules.json")).json();
+  if  (!localStorage.mySchedules) { //if the users dont exist in local storage, load from the URL
+    mySchedules = await (await fetch("../json/schedules.json")).json();
     localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
     // schedulesContainer.innerHTML = mySchedules
       // .map((sch) => scheduleToHTML(sch))
       // .join("");
-  } else { // else display the recipes cards in the main using localStorage myRecipes array
+  } else { // else display the users cards in the main using localStorage mySchedules array
     mySchedules = JSON.parse(localStorage.mySchedules); //make from string to object
     console.log("sc: ", mySchedules);
-   schedulesContainer.innerHTML = mySchedules
+    //---------------------------------------------------------------------------
+    //change mySchedules to tempSch later
+  //  schedulesContainer.innerHTML = mySchedules
+  //   .map((schedule) => scheduleToHTML(schedule))
+  //   .join(""); // join('') is used to get rid of comma that appears between the objects
+
+  schedulesContainer.innerHTML = tempSch
     .map((schedule) => scheduleToHTML(schedule))
     .join(""); // join('') is used to get rid of comma that appears between the objects
   }
   // console.log(schedulesContainer.innerHTML);
   dateLoader();
-
-
-  // if (localStorage.mySchedules) {
-  //   mySchedules = await fetch("../json/schedules.json").then((response) =>
-  //   response.json()
-  // );
-  // localStorage.setItem("mySchedules", JSON.stringify(mySchedules));
-  // // console.log(localStorage.mySchedules);
-  // // mySchedules = JSON.parse(localStorage.mySchedules);
-  // // schedulesContainer.innerHTML = mySchedules
-  //   // .map((schedule) => scheduleToHTML(schedule))
-  //   // .join("");
-  // }
-
-  // mySchedules = JSON.parse(localStorage.mySchedules);
-  // schedulesContainer.innerHTML = mySchedules
-  //   .map((schedule) => scheduleToHTML(schedule))
-  //   .join("");
-
-  //   console.log(mySchedules);
-
-  // Add if statement to check if mySchedules exist in local Storage
 }
 
 //this is to load each session objects, since it is an array itself inside the json
 function loadSessions(session) {
-  // console.log("ses: ",session);
+  console.log("sessions passed: ",session);
+  const sesTitle = session.map(sch => sch.title);
+  // console.log(sesDate);
+
+  const sesfromTime = session.map(sch => sch.fromTime);
+
+
+  const sesendTime = session.map(sch => sch.endTime);
+
+
+  //for location, need to map or atleast get the locations list
+  const sesLocID = session.map(sch => sch.locationID); //each of these location, use getLocation
+  // const myloc = locServices.getLocation(parseInt(sesLocID));
+  const myloc = session.map(ses => ses.location)
+  console.log("nigabals",myloc);
+  const building = myloc.map(loc => loc.building);
+  const room = myloc.map(loc => loc.room);
+  console.log( building + ' | ' + room );
+  // const sesLoc = myloc.building + ' | ' + myloc.room;
+  console.log(parseInt(sesLocID));
+
+  
   // find presenter from usersloc in local Storage
   const presenter = usersloc.find(
     (pres) => pres.id === parseInt(session.presenterID)
   );
-  // console.log("users: ", usersloc);
-  const presenterDetails = `${presenter.first_name} ${presenter.last_name}`; // a stringf of presenter's full name
+  // [we need to load presenters( do it later )]
+  //  <td>${presenterDetails}</td>    ADD THIS UNDER SESSION.TITLE
+  // const presenterDetails = `${presenter.first_name} ${presenter.last_name}`; // a stringf of presenter's full name
+
+  //   <td>${seslocation.building} | ${seslocation.room}</td>   ADD THIS UNDER SESSION.TITLE
+
   return `
   <tr>
-          <td>${session.fromTime}-${session.endTime}</td>
-          <td>${session.title}</td>
-          <td>${presenterDetails}</td>
-          <td>${session.location.building} | ${session.location.room}</td>
+          <td>${sesfromTime}-${sesendTime}</td>
+          <td>${sesTitle}</td>
+          <td>PresenterName</td>
+          <td>${building} | ${room}</td>
         </tr>
   `;
 }
@@ -194,24 +210,13 @@ const dateDL = document.querySelector("#sortByDate");
 
 
 async function dateLoader() {
-  // const dates = await (await fetch(dateJson)).json(); //dont delete this we need for web api
-    
-  // schDates = await(await fetch(dateJson)).json();
-  // localStorage.setItem("schDates",JSON.stringify(schDates))  
-
-  // if(!localStorage.schDates){//get from json file
-  //   schDates = await(await fetch(dateJson)).json();
-  // localStorage.setItem("schDates",JSON.stringify(schDates))
-
-  // }else{ //get from local storage if exist
-    // schDates = JSON.parse(localStorage.schDates);
-  // }
-  // console.log("lcl dates:",schDates)
-
-  //this the tempdates, change it to grab prisma dates from the schedule object
   const tempSchDates =   await  mySchedules.map(sch => sch.date);
-  console.log(await mySchedules);
-  // console.log("ASDASDS: ",tempSchDates);
+  const tempSch = await schServices.getSchedules(); //grabbing the schedules from prisma
+  // const tempSchDates = await  tempSch.map(sch => sch.date);  //this just grabs the dates from the schedules
+
+  // const tempSchDates =   await schedServices.getAllDates();
+  console.log("tempSchdates: ", tempSchDates);
+
   let instHTML = '<option value="all" >Show All Conferences</option>';
   tempSchDates.forEach(
     (date) =>

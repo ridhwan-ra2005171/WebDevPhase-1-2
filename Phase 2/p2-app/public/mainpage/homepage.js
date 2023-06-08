@@ -52,10 +52,10 @@ const schedulesContainer = document.querySelector(".schedules");
 //   .then((response) => response.json())
 //   .then((data) => showInfo(data));
 
-function showInfo(data) {
-  console.table(data);
-  console.log(data[0].sessions[1].title);
-}
+// function showInfo(data) {
+//   console.table(data);
+//   console.log(data[0].sessions[1].title);
+// }
 
 const currentUserID = localStorage.currentUserID;
 
@@ -269,9 +269,9 @@ async function dateLoader() {
 }
 
 // dateLoader();
-
+  
 function sortdateHandler() {
-  var selectedDate = document.getElementById("sortByDate").value;
+  const selectedDate = document.getElementById("sortByDate").value;
   console.log(selectedDate); //its returning the selected date, we can use it to compare.
   //I will try comparing the dates string:
 
@@ -293,5 +293,10 @@ function sortdateHandler() {
       .join("");
   }
 }
+document.getElementById("sortByDate").addEventListener("change", sortdateHandler);
 
+
+// function testing(){
+//   console.log("helloooooo");
+// }
 
