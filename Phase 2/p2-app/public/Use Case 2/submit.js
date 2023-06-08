@@ -1,5 +1,8 @@
 // import {fs} from '/fs-extra'
 // // Imports
+
+// const { getReviewer } = require("@/app/api/app-repo");
+
 // const papersUrl = "../../papers.json"; 
 const usersJson = '../json/users.json';
 const institutionsJson = '../json/institutions.json';
@@ -179,6 +182,7 @@ async function loadPresenters() {
     console.log("testPresenters: ",testPresenters);
     console.log("testPresenters: ",testPresenters);
     const presentersID  = await (findUserByName(testPresenters) )
+    console.log("presentersIDpresentersID: ",presentersID);
     let presenters=[]
     for (let index = 0; index < testPresenters.length; index++) {
        presenters[index]=testPresenters[index]
@@ -209,16 +213,25 @@ async function getAuthors() {
 
 //gets an array of user obj{fname,lname}
 async function findUserByName(array) {
+    console.log("findUserByNameINPUT: ",array);
     const authors = await getAuthors()
     // const users  = await (await fetch(usersJson)).json();//users is an array
-
+console.log("findUserByNameauthors: ",authors);
     let authorsID =[]
 
     //looping for each email
-    for (let index = 0; index < array.length; index++) {
-        let id=0
-        let userIndex=0
-       
+    for (let index=0;index<array.length;index++) {
+
+        const authorFound = authors.find(
+        el=> el['first_name']==array[index]['first_name'] &&
+        el['last_name']==array[index]['last_name'] )
+
+        if (authorFound) {
+            authorsID[index]=authorFound['id']
+        }
+     
+    }
+
         //loop through all authors & save them in an array: only their IDs >> should 
     //     while (userIndex<users.length) {
     //         // compare submitted email with users.json's emails
@@ -234,16 +247,67 @@ async function findUserByName(array) {
     //         console.log("email not found");
     //         return false
     //     }
-    }
     return authorsID
+    }
+
+
+
+
+async function getReviewers(){
+    const API_URL= `/api/reviewers/`;
+  
+    const response = await fetch(API_URL);
+    // console.log("TESTCHECK!!getUser: ",response);
+    const reviewers= await response.json()
+    console.log("TESTCHECK!!getreviewersGETreviewers: ",reviewers);
+    return reviewers
+
 }
 
 
+async function getPapers(){
+    const API_URL= `/api/papers/`;
+  
+    const response = await fetch(API_URL);
+    // console.log("TESTCHECK!!getUser: ",response);
+    const papers= await response.json()
+    console.log("TESTCHECK!!getpapersGETpapers: ",papers);
+    return papers
+
+}
+
+async function addPaper(paper) {
+    const url = '/api/papers/';
+    console.log(url);
+    console.log(paper);
+    console.log(JSON.stringify(paper));
+    try {
+        // log(''); // Clear any error message displayed on the screen
+        await fetch(url, {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(paper)
+        });
+    } catch (e) {
+        console.log(e)
+    }
+}
 async function submitForm(event) {
+    //create new PAPER
+    //add it to its authors
+    //create 2 reviews (one is auto, need just to add ONE)
+
     event.preventDefault()
     //why this papers??? what's the relation with institutionsJson
-    const papers  = await (await fetch(papersJson)).json();
-    console.log(papers.length);
+
+
+    //PHASE1
+    // const papers  = await (await fetch(papersJson)).json();
+    // console.log(papers.length);
+    
+    // const papers  = await getPapers();
+    // console.log("papers lenght: ",papers.length);
+
     const paperTitle=document.querySelector('#title')
     const paperAbstract = document.querySelector('#paper-abstract')
     const paperPresenterID = document.querySelector('#presenter')
@@ -253,7 +317,9 @@ async function submitForm(event) {
     //save authors in paperAuthors (only their id???)
     const authorsID= await (saveAuthors())
     console.log(authorsID);
-    const reviewersArray = await getRole("reviewer")
+
+
+    const reviewersArray = await getReviewers()
     console.log("reviewers",reviewersArray);
     const reviewer1 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
     let reviewer2 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
@@ -264,37 +330,45 @@ console.log("rev2", reviewer2);
     reviewer2 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
         // console.log("check");
 }
-    const reviewArr = [
-        {
-            "reviewerID": reviewer1
-        },
-        {
-            "reviewerID": reviewer2
 
-        }      
-    ]
+    //PHASE1
+    // const reviewArr = [
+    //     {
+    //         "reviewerID": reviewer1
+    //     },
+    //     {
+    //         "reviewerID": reviewer2
+
+    //     }      
+    // ]
+
+    console.log("paperPresenterID: ",paperPresenterID.options[paperPresenterID.selectedIndex] );
+    console.log("paperPresenterID: ",paperPresenterID.options[paperPresenterID.selectedIndex].value );
 
     let newPaper = {
-        paperID: papers.length+1,
+        //PHASE1
+        // paperID: papers.length+1,
         title: paperTitle.value,
         abstract: paperAbstract.value,
-        authors: authorsID,
+        // authors: authorsID,
         //authors
-        presenterID: paperPresenterID.options[paperPresenterID.selectedIndex].value,
+        presenterID: parseInt(paperPresenterID.options[paperPresenterID.selectedIndex].value),
         pdfLink: paperPdfLink.value,
         //reviews are added on the fly when done, no need to include them now
-        review: reviewArr,
-        
-    }
 
-    console.log(paperPresenterID);
+        //PHASE1
+        // review: reviewArr,  
+    }
+    console.log("check: newPaper: ",newPaper);
+    const newAddedPaper = await addPaper(newPaper)
+    console.log("check: newAddedPaper: ",newAddedPaper);
     //can add a checker to check if these authors already submitted a paper before, or any other constraint (title name...etc)
     //save paper in localStorage
-    let papersArray = JSON.parse(localStorage.getItem("papers"))
-    console.log(papersArray);
-    papersArray.push(newPaper)
-    localStorage.setItem("papers",JSON.stringify(papersArray))
-window.location.href='../Main website/homepage.html'
+    // let papersArray = JSON.parse(localStorage.getItem("papers"))
+    // console.log(papersArray);
+    // papersArray.push(newPaper)
+    // localStorage.setItem("papers",JSON.stringify(papersArray))
+// window.location.href='../Main website/homepage.html'
     //save this new paper in the JSON file
 
 
@@ -324,8 +398,8 @@ async function saveAuthors() {
         authorsEmails[index]= authorEmail[index].value  
     }
     console.log(authorsEmails);
-    const users  = await (await fetch(usersJson)).json();//users is an array
-
+    // const users  = await (await fetch(usersJson)).json();//users is an array
+    const users = await getAuthors()
     let authorsID =[]
 
     //looping for each email

@@ -1,4 +1,4 @@
-import { getPapers ,getReviewer,addPaper} from '../app-repo';
+import { getPapers,addPaper} from '../app-repo';
 
 
 //works
