@@ -18,6 +18,14 @@ export async function POST(request){
     // console.log(paper);
     // console.log(paper);
     // console.log(paper.reviewer);
+    console.log("TESTTTTTT: ",typeof(paper[0]));
+    console.log("TESTTTTTT: ",typeof(paper[1]));
+    console.log("TESTTTTTT: ",typeof(paper[2]));
+    console.log("TESTTTTTT: ",(paper[0]));
+    console.log("TESTTTTTT: ",(paper[1]));
+    console.log("TESTTTTTT: ",(paper[2]));
+    console.log("TESTTTTTT: ",paper);
+    console.log("TESTTTTTT: ",paper['title']);
     console.log("TESTTTTTT: ",paper['title']);
     // paper['reviewer']=reviewer
 

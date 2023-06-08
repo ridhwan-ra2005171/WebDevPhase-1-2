@@ -276,22 +276,26 @@ async function getPapers(){
 
 }
 
-async function addPaper(paper) {
+async function addPaper(toAdd) {
     const url = '/api/papers/';
     console.log(url);
-    console.log(paper);
-    console.log(JSON.stringify(paper));
+    console.log(toAdd);
+    console.log(JSON.stringify(toAdd));
     try {
         // log(''); // Clear any error message displayed on the screen
-        await fetch(url, {
+        const result= await fetch(url, {
             method: "post",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(paper)
+            body: JSON.stringify(toAdd)
         });
+        return result
     } catch (e) {
         console.log(e)
     }
 }
+
+
+
 async function submitForm(event) {
     //create new PAPER
     //add it to its authors
@@ -321,8 +325,8 @@ async function submitForm(event) {
 
     const reviewersArray = await getReviewers()
     console.log("reviewers",reviewersArray);
-    const reviewer1 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
-    let reviewer2 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)]
+    const reviewer1 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)].reviewerId
+    let reviewer2 = reviewersArray[Math.floor(Math.random()*reviewersArray.length)].reviewerId
 console.log("rev1", reviewer1);
 console.log("rev2", reviewer2);
     //in case reviewer1==reviewer2 
@@ -359,8 +363,11 @@ console.log("rev2", reviewer2);
         //PHASE1
         // review: reviewArr,  
     }
-    console.log("check: newPaper: ",newPaper);
-    const newAddedPaper = await addPaper(newPaper)
+    const toAdd= [newPaper,reviewer1,reviewer2]
+    console.log("check: toAdd: ",toAdd);
+    const newAddedPaper = await addPaper(toAdd)
+
+    //why not showing??
     console.log("check: newAddedPaper: ",newAddedPaper);
     //can add a checker to check if these authors already submitted a paper before, or any other constraint (title name...etc)
     //save paper in localStorage
