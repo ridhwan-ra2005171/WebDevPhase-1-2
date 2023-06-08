@@ -1,3 +1,4 @@
+import * as loginService from "../js/services/login-services";
 // // Imports
 // const papersUrl = "../../papers.json";
 const usersJson = "users.json";
@@ -58,9 +59,11 @@ function getFormData(form) {
 async function login(event) {
   event.preventDefault();
   const userTocheck = getFormData(form);
-  console.log("USER"+userTocheck);
+  console.log("USER: "+userTocheck);
+  console.log("TESTCHECK!!: ");
   currentLogedIn = await findUser(userTocheck);
-  // console.log();
+  console.log("TESTCHECK!!: ");
+  console.log("currentLogedIn: ",currentLogedIn);
   // localStorage.currentUserID = currentLogedIn
   console.log("USER SSS: ",  currentLogedIn);
   if (currentLogedIn != undefined) { 
@@ -84,12 +87,11 @@ async function login(event) {
 async function findUser(userTocheck) {
   // const users = await getData(usersJson);
   // console.log(email);
-const url = '/api/users';
-    const response = await fetch(url);
 
-  const users = await (response).json();
-  console.log(users);
-  const user = users.find((user) => user["email"] == userTocheck.email);
+  // const users = await (await fetch(usersJson)).json();
+  const user = loginService.getUser(userTocheck)
+  console.log("userTESTCHECK: ", user);
+  // const user = users.find((user) => user["email"] == userTocheck.email);
   if (user !== undefined) {
     if (user.password == userTocheck.password) {
       // Added my Mohamad Allaham - store the user ID in local storage to be accessed by other js files
@@ -97,7 +99,7 @@ const url = '/api/users';
       console.log("loc: ", localStorage.currUserID);
       //---------------------------------------------------------
       console.log(user.id);
-      return user;
+      return user.id;
     } else {
       //better if it's an html response
       password.value = null;
