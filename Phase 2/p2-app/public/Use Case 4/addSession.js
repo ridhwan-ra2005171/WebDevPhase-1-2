@@ -1,11 +1,21 @@
 import * as locServices from '../js/services/location-services.js';
 
+//we can use this to load all papers:
+import * as paperServices from '../js/services/paper-services.js' 
+
+
 // const myloc = await locServices.getLocation(1);
 // console.log(myloc.building + ' ' + myloc.room);
 const allLoc = await locServices.getLocations(); //returns all locations (use in DL)
 allLoc.forEach((location) => {
   console.log(location);
 });
+
+//get all papers:
+const allPap = await paperServices.getPapers();
+// allPap.forEach((paper) => {
+//   console.log(paper);
+// });
 
 let myLocations = [];
 // schDates = JSON.parse(localStorage.schDates); //fetching my localstorage for dates
@@ -245,56 +255,59 @@ handleLocationChange(`location-${counter}`);
 
 //load paper========================================
 //we need to filter accepted papers here
-function loadAcceptedPapers(paperListID) {
+async function loadAcceptedPapers(paperListID) {
   // Get all papers from local storage
-  papersloc = JSON.parse(localStorage.papersloc);
-  // console.log("1: ", papersloc);
-  // Find the reviewed papers only
-  reviewedPapers = papersloc.filter((paper) => {
-    if (
-      paper.review
-        .map((rev) => Object.keys(rev).length)
-        .reduce((rev) => rev > 1)
-    )
-      return paper;
-  });
-  // console.log("2: ", reviewedPapers);
-  // console.log("P5: ", (papersloc[4].review.map(rev => Object.keys(rev).length)).reduce(rev => rev > 1));
+  // papersloc = JSON.parse(localStorage.papersloc);
+  // // console.log("1: ", papersloc);
+  // // Find the reviewed papers only
+  // reviewedPapers = papersloc.filter((paper) => {
+  //   if (
+  //     paper.review
+  //       .map((rev) => Object.keys(rev).length)
+  //       .reduce((rev) => rev > 1)
+  //   )
+  //     return paper;
+  // });
+  // // console.log("2: ", reviewedPapers);
+  // // console.log("P5: ", (papersloc[4].review.map(rev => Object.keys(rev).length)).reduce(rev => rev > 1));
 
-  if (reviewedPapers.length === 0) {
-    // if there is no reviews, break outta the function
-    console.log("There are no reviewed papers");
-    return;
-  }
+  // if (reviewedPapers.length === 0) {
+  //   // if there is no reviews, break outta the function
+  //   console.log("There are no reviewed papers");
+  //   return;
+  // }
 
-  // acceptedPapers = reviewedPapers.map(paper => [paper,paper.review.map(rev => rev.evaluation)])
-  // acceptedPapers = reviewedPapers.map(paper => paper.review.map(rev => rev.evaluation))
-  // Find the each papers' average evaluation and store the paper and avg eval in an array [paper, avg]
-  papersEvaluationAvg = reviewedPapers.map((paper) =>
-    paper.review
-      .map((rev) => rev.evaluation)
-      .reduce((a, b) => [paper, (parseInt(a) + parseInt(b)) / 2])
-  );
+  // // acceptedPapers = reviewedPapers.map(paper => [paper,paper.review.map(rev => rev.evaluation)])
+  // // acceptedPapers = reviewedPapers.map(paper => paper.review.map(rev => rev.evaluation))
+  // // Find the each papers' average evaluation and store the paper and avg eval in an array [paper, avg]
+
+  // papersEvaluationAvg = reviewedPapers.map((paper) =>
+  //   paper.review
+  //     .map((rev) => rev.evaluation)
+  //     .reduce((a, b) => [paper, (parseInt(a) + parseInt(b)) / 2])
+  // );
   // console.log("3: ", papersEvaluationAvg);
 
-  // Find accepted papers
-  // HINT change the 2 to 0 to see if it works ---------------------^
-  acceptedPapers = papersEvaluationAvg
-    .filter((paper) => paper[1] >= 1)
-    .map((paper) => paper[0]);
-  // console.log("4: ", acceptedPapers);
+  // // Find accepted papers
+  // // HINT change the 2 to 0 to see if it works ---------------------^
+  // acceptedPapers = papersEvaluationAvg
+  //   .filter((paper) => paper[1] >= 1)
+  //   .map((paper) => paper[0]);
+  // // console.log("4: ", acceptedPapers);
 
   const paperList = document.querySelector(`#${paperListID}`); // find the list
   // console.log("SMTH: ", paperList);
   let listHTML = `<option value="" selected disabled>-Select Paper-</option>`;
 
-  if (acceptedPapers.length === 0) {
-    // if there is no accepted papers, break outta the function
-    console.log("There are no accepted papers");
-    return;
-  }
+  // if (acceptedPapers.length === 0) {
+  //   // if there is no accepted papers, break outta the function
+  //   console.log("There are no accepted papers");
+  //   return;
+  // }
+
+  const tempPaper = await allPap.map(pap=>pap);
   // acceptedPapers.forEach((p) => console.log(p));
-  acceptedPapers.forEach(
+  allPap.forEach(
     (paper) =>
       (listHTML += `
         <option value="${paper.paperID}">${paper.title}</option>
@@ -306,10 +319,11 @@ function loadAcceptedPapers(paperListID) {
   // reviewedPapers = paperReviewsArray.filter()
   // console.log("3: ",reviewedPapers);
 }
+loadAcceptedPapers(`paper-${counter}`);
 
-document.getElementById(`paper-${counter}`).addEventListener("change", () => {
-  loadAcceptedPapers(`paper-${counter}`);
-});
+// document.getElementById(`paper-${counter}`).addEventListener("change", () => {
+//   loadAcceptedPapers(`paper-${counter}`);
+// });
 //--------------------------------------------------------------------------------
 
 //load presenter========================================
