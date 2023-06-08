@@ -39,7 +39,7 @@ export const getPapers = async()=> await prisma.paper.findMany();
 export const getPaper = async(paperID)=> await prisma.paper.findUnique({where:{paperID},include:{reviews:true}});
 
 export const getUsers= async ()=> await prisma.user.findMany();
-export const getUser= async (id)=> await prisma.user.findMany({where:{id}});
+export const getUser= async (email)=> await prisma.user.findMany({where:{email}});
 export const getAuthor= async (id)=> await prisma.author.findUnique({where:{id:+id},include:{authoredPaper:true}});
 export const getAuthors= async ()=> await prisma.author.findMany({include:{authoredPaper:true}});
 export const getReviewer= async (id)=> await prisma.reviewer.findUnique({where:{reviewerId:+id}});
