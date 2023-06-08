@@ -58,14 +58,12 @@ function getFormData(form) {
 }
 
 async function getUser(userTocheck) {
-  const API_URL= `/api/users/${userTocheck.email}`;
+  const API_URL= `/api/myusers/${userTocheck.email}`;
 
 const response = await fetch(API_URL);
-console.log("TESTCHECK!!: ",response);
-console.log("TESTCHECK!!: ");
-console.log("TESTCHECK!!: ");
-
+console.log("TESTCHECK!!getUser: ",response);
 const user= await response.json()
+console.log("TESTCHECK!!getUserGETUSER: ",user);
 return user
 }
 async function login(event) {
@@ -103,6 +101,7 @@ async function findUser(userTocheck) {
   // const user = loginService.getUser(userTocheck)
   const user = await getUser(userTocheck)
   console.log("userTESTCHECK: ", user);
+  
   // const user = users.find((user) => user["email"] == userTocheck.email);
   if (user !== undefined) {
     if (user.password == userTocheck.password) {
