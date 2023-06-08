@@ -1,4 +1,5 @@
-import * as locServices from '../js/services/location-services.js';
+import * as locServices from '../js/services/location-services.js'
+import * as schServices from '../js/services/schedule-services.js'
 
 //we can use this to load all papers:
 import * as paperServices from '../js/services/paper-services.js' 
@@ -410,8 +411,9 @@ async function addSession(counterParam) {
   console.log("paperTitle",myTitleSelected);
 
   const myPaperSelect = await document.querySelector(`#paper-${counterParam}`);
-  const paperSelected = myPaperSelect.value;
-  // console.log("selected paper= ", paperSelected);
+  const paperID = myPaperSelect.value;
+  const paperObj = await paperServices.getPaper(paperID);
+  console.log(paperObj);
 
   const myPresenterSelect = await document.querySelector(
     `#presenter-${counterParam}`
@@ -442,7 +444,7 @@ async function addSession(counterParam) {
     // sesID: Date.now(),
     title: myTitleSelected, //we assume paper is the title
     locationID: locationSelected, //this is locationID in prisma
-    paperID: paperSelected,
+    paperID: paperObj, //we need to return paper array/object here
     presenterID: presenterSelected,
     fromTime: startTimeSelected, //this is startTime in prisma
     endTime: endTimeSelected, //endTime in prisma
@@ -490,9 +492,17 @@ async function submitSession(event) {
     sessions: await collectSessions(),
   };
   console.log("newSch",newScheduleObject);
+  // schServices.addSchedule(newScheduleObject);
+//----------------------------------------------------
+//adding new schedule to prisma:
+schServices.addSchedule(newScheduleObject);
 
-  mySchedules.push(newScheduleObject);
-  localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to
+
+
+
+
+  // mySchedules.push(newScheduleObject);
+  // localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to
   // window.location.href = "/Use Case 4/conferenceSch.html"
   window.location.href= "/mainpage/homepage.html"
   // loadSchedules();

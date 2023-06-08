@@ -20,3 +20,16 @@ export async function GET(request) {
     );
   }
 }
+
+//addNew Schedules:
+export async function POST(request) {
+  try {
+      const newSchedule = await request.json();
+      const added = await scheduleRepo.addSchedule(newSchedule);
+
+      return Response.json(added, { status: 200 });
+  } catch (e) {
+      console.log(e);
+      return Response.json({ error: "There was an internal error" }, { status: 500 });
+  }
+}

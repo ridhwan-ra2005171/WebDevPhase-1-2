@@ -25,5 +25,10 @@
   "devDependencies": {
     "prisma": "^4.15.0",
     "prisma-dbml-generator": "^0.10.0"
+<<<<<<< Updated upstream
   } 
+=======
+  }
+  
+>>>>>>> Stashed changes
 }

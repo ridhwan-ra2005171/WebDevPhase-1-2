@@ -20,6 +20,22 @@ class paperListRepo{
           }
         
     }
+
+   //getlocation by ID its working in the repo-test
+   async getPaper(paperID) {
+    try {
+      return await prisma.paper.findUnique({
+        where: {
+            paperID: paperID,
+        },
+      });
+
+    } catch (e) {
+      console.log(e.message);
+      return { error: e.message };
+    }
+  }
+
 }
 
 export default new paperListRepo();
