@@ -8,3 +8,11 @@ export async function getUsers() {
     const data = await response.json() 
     return data;
 }
+
+export async function getOneUser(id) {
+    let response = [];
+    id= parseInt(id);
+    response = await  fetch(`${API_URL}/${id}`)
+    const data = await response.json() 
+    return data;
+}

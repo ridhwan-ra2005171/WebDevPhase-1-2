@@ -14,11 +14,11 @@ let currUser = null;
 
 loadNav();
 async function loadNav() {
-  // PRISMA ALERT
-  users = await userServ.getUsers(); 
-  console.log(users);
+  // get the users from the json file
+  // users = await (await fetch(usersJson)).json();
+  users = await userServ.getUsers(); // Using prisma
   // find the user from their id
-  currUser = users.find((u) => u.id == currUserID);
+  currUser = users.find((u) => u.id === currUserID);
   // console.log("Nav: Users: ",users);
   let html = `<header>
 

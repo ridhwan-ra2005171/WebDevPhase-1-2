@@ -86,9 +86,8 @@ async function findUser(userTocheck) {
   // console.log(email);
 const url = '/api/users';
     const response = await fetch(url);
-    return await response.json()
 
-  const users = await (await fetch(usersJson)).json();
+  const users = await (response).json();
   console.log(users);
   const user = users.find((user) => user["email"] == userTocheck.email);
   if (user !== undefined) {
@@ -98,7 +97,7 @@ const url = '/api/users';
       console.log("loc: ", localStorage.currUserID);
       //---------------------------------------------------------
       console.log(user.id);
-      return user.id;
+      return user;
     } else {
       //better if it's an html response
       password.value = null;

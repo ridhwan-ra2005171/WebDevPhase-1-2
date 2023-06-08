@@ -17,6 +17,14 @@ class userRepo{
         return users;
     }
 
+    async getOneUser(id) {
+        const data = await prisma.user.findUnique({
+            where : {
+                id
+            }
+        });
+        return user;
+    }
 
 }
 
