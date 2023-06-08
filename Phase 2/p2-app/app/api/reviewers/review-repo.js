@@ -48,6 +48,7 @@ class reviewRepo{
         });
         // data = data.map(obj => obj.paper);
         console.log("* Prisma review-repo, get papers to review");
+        console.log("o reviewDATA: ",data);
         return data;
       } catch (error) {
         throw new Error('Failed to get papers to review');
