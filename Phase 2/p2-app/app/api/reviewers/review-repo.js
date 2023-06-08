@@ -20,30 +20,15 @@ class reviewRepo{
       }
     }
 
-    async addReview(reviewData) {
-      try {
-        const data = await prisma.review.create({
-          data : {
-            reviewData
-          }
-        });
-        console.log("* Prisma review-repo, add review");
-        return data;
-      } catch (error) {
-        throw new Error('Failed to add review');
-      }
-    }
-
-    
     async updateReview(reviewID, reviewData) {
       try {
         const data = await prisma.review.update({
           where : {
             reviewID
           },
-          data : {
+          data : 
             reviewData
-          }
+  
         });
         console.log("* Prisma review-repo, update review");
         return data;
@@ -74,5 +59,14 @@ class reviewRepo{
 export default new reviewRepo();
 
 // const repo = new reviewRepo();
+// const obj = {
+//   reviewID: "climm1x76000h695stts5j6bj",
+//   overallEvaluation: 2,
+//   paperContribution: 5,
+//   paperStrength: "a",
+//   paperWeaknesses: "a",
+//   paperID: "1",
+//   reviewerId: 8
+// };
 
-// console.log(await repo.getReview(12,5));
+// console.log(await repo.updateReview("climm1x76000h695stts5j6bj",obj));

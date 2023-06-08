@@ -1,4 +1,4 @@
-import reviewRepo from "./review-repo.js";
+import reviewRepo from "../../review-repo.js";
 
 export async function GET(request, {params}) {
   try {

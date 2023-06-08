@@ -39,8 +39,8 @@ async function loadToForm() {
   // get the review (if there is) from prisma
   currentReview = await reviewServices.getReview(localStorage.reviewAtm);
   // console.log(currentReview);
+
   // check if there is previos review for this paper
-  document.querySelector("#reviewID").value = currentReview.reviewID; // set the review ID in a hidden input
   if (currentReview.paperStrength != "") {
     // Add the data to the form
     document.querySelector(
@@ -85,33 +85,6 @@ async function storeForm(e) {
   };
   console.log("STORE: ", newReview);
 
-  // store the reviewPaper in the papers.json
-
-  //First get the papers list from local storage
-  // const papers = JSON.parse(localStorage.papersloc);
-
-  // get the paper ID from local storage
-  // const targetPaperID = parseInt(JSON.parse(localStorage.paperAtm));
-  // console.log(targetPaperID);
-
-  // find the index of paper first
-  // const paperIndex = papers.findIndex(
-  //   (paper) => paper.paperID === targetPaperID
-  // );
-  // // console.log(papers[paperIndex]);
-
-  // // find the index inside the review array that exists in targetPaper, so that we can replace the old review with the new one
-  // const reviewIndex = papers[paperIndex].review.findIndex(
-  //   (review) => review.reviewerID === reviewerID
-  // );
-  // // console.log(papers[paperIndex].review[reviewIndex]);
-
-  // // now replace the old review with the new review aka reviewedPaper
-  // papers[paperIndex].review[reviewIndex] = reviewedPaper;
-
-  // //save into localStorage
-  // localStorage.papersloc = JSON.stringify(papers);
-
   // Confirmation of review submission
   let result = await swal({
     title: "Your Review has been Submitted Successfully!",
@@ -120,6 +93,8 @@ async function storeForm(e) {
   });
 
   if (result === true) {
+    // PRISMA ALERT
+    const updatedReview = await reviewServices.updateReview(currentReview.reviewID,newReview)
     location.href = "../reviewPapers/reviewPapers.html";
   }
 }
