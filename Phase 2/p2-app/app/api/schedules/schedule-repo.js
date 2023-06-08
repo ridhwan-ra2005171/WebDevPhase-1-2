@@ -76,8 +76,25 @@ class schedulesRepo{
             throw new Error('Failed to retrieve dates');
           }
         }
+
+        async updateScheduleSessions(scheduleID,newSessions){
+          try {
+            const data = await prisma.schedule.update({
+              where : {
+                schID : scheduleID
+              },
+              data : {
+                sessions : newSessions
+              }
+            });
+            return data;
+          } catch (error) {
+            console.error('Error updating schedule sessions:', error);
+            throw new Error('Failed to update schdeule session');
+          }
+        }
+
 }
 
 
 export default new schedulesRepo();
-
