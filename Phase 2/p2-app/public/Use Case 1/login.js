@@ -61,21 +61,21 @@ async function getUser(userTocheck) {
   const API_URL= `/api/myusers/${userTocheck.email}`;
 
 const response = await fetch(API_URL);
-console.log("TESTCHECK!!getUser: ",response);
+// console.log("TESTCHECK!!getUser: ",response);
 const user= await response.json()
-console.log("TESTCHECK!!getUserGETUSER: ",user);
+// console.log("TESTCHECK!!getUserGETUSER: ",user);
 return user
 }
 async function login(event) {
   event.preventDefault();
   const userTocheck = getFormData(form);
-  console.log("USER: "+userTocheck);
-  console.log("TESTCHECK!!: ");
+  // console.log("USER: "+userTocheck);
+  // console.log("TESTCHECK!!: ");
   currentLogedIn = await findUser(userTocheck);
-  console.log("TESTCHECK!!: ");
-  console.log("currentLogedIn: ",currentLogedIn);
+  // console.log("TESTCHECK!!: ");
+  // console.log("currentLogedIn: ",currentLogedIn);
   // localStorage.currentUserID = currentLogedIn
-  console.log("USER SSS: ",  currentLogedIn);
+  // console.log("USER SSS: ",  currentLogedIn);
   if (currentLogedIn != undefined) { 
   window.location.href = "/mainpage/homepage.html"
   }

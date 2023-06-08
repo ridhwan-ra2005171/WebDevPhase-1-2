@@ -45,6 +45,8 @@ export const getAuthors= async ()=> await prisma.author.findMany({include:{autho
 export const getReviewer= async (id)=> await prisma.reviewer.findUnique({where:{reviewerId:+id}});
 export const getReviewers= async ()=> await prisma.reviewer.findMany();
 
+export const getInstitutions= async ()=> await prisma.institution.findMany();
+
 
         // console.log("Get all users");
     

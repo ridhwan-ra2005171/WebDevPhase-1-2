@@ -1,6 +1,6 @@
 import {getAuthors} from "../app-repo";
 
-//to get all users
+//to get all authors
 export async function GET(request) {
     try {
         // console.log("**** I HAVE BEEN CALLED, app/api/recipes/route.js");
@@ -11,4 +11,5 @@ export async function GET(request) {
         console.log(e);
         return Response.json({ error: 'There was an internal error' }, { status: 500 })
     }
+
 }
