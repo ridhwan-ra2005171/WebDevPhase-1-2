@@ -68,7 +68,7 @@ form.addEventListener('submit', submitForm)
 async function getInstitutions() {
     const API_URL= `/api/institutions/`;
   
-  const response = await fetch(API_URL);
+  const response = await fetch(API_URL,{ cache: "force-cache" });
   // console.log("TESTCHECK!!getUser: ",response);
   const institutions= await response.json()
   console.log("TESTCHECK!!getinstitutionsGETinstitutions: ",institutions);
