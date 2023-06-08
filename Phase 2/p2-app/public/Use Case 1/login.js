@@ -107,7 +107,7 @@ const url = '/api/users';
         buttons: "Ok",
         closeOnClickOutside: false,
       });
-      alert("No email and password combination found, please try again");
+      // alert("No email and password combination found, please try again");
     }
   // } else {
   //   //better if it's an html response
@@ -121,7 +121,13 @@ const url = '/api/users';
   //   // prompt("No email and password combination found, please try again");
   // }
   }
-  alert("No email and password combination found, please try again");
+  swal({
+    title: "No email and password combination found, please try again",
+    icon: "error",
+    buttons: "Ok",
+    closeOnClickOutside: false,
+  });
+  // alert("No email and password combination found, please try again");
 
 }
 //load paper data into page

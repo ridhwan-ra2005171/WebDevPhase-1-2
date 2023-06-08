@@ -1,20 +1,39 @@
 [
   {
-   
     "overallEvaluation": 1,
     "paperContribution": 5,
     "paperStrength": "Strong paper 2",
     "paperWeaknesses": "No weaknesses 2",
     "paperID": "5",
-    "reviewerId" : 8
+    "reviewerId": 8
   },
   {
-  
     "overallEvaluation": 2,
     "paperContribution": 4,
     "paperStrength": "Strong paper 2",
     "paperWeaknesses": "No weaknesses 2",
     "paperID": "5",
-    "reviewerId" : 12
+    "reviewerId": 12
+  },
+  { "reviewerId": 12, "paperID": "4" },
+  {
+    "paperID": "4"
+  },
+  {
+    "paperID": "3"
+  },
+  {
+    "paperID": "3"
+  },
+  {
+    "paperID": "2"
+  },
+  {
+    "reviewerId": 12,
+    "paperID": "2"
+  },
+  { "reviewerId": 8, "paperID": "1" },
+  {
+    "paperID": "1"
   }
 ]
