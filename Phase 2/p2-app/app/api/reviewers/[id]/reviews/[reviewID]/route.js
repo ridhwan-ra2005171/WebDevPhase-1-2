@@ -1,17 +1,12 @@
 import reviewRepo from "../review-repo";
 
 
-// export async function GET(request, {params}) {
-//   const {reviewID,paperID} = params;
-//   // const data = {};
-//   const data = await reviewRepo.getReview(12,5);
-//   return new Response("Paper Id: "+paperID+" Rev Id: "+reviewID+" Data: "+data)
-// }
-
 export async function GET(request, {params}) {
   try {
       let {reviewID} = params
+      // console.log(reviewID);
       const data = await reviewRepo.getReview(reviewID);
+      // console.log(data);
       return Response.json(data, { status: 200 });
 
   } catch (e) {

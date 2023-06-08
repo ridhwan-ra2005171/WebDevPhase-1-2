@@ -5,12 +5,14 @@ class reviewRepo{
     async getReview(reviewID){
       try {
         // convert the id to the correct type if nessacery
-        reviewID = String(reviewID);
+        // reviewID = String(reviewID);
+        // console.log(reviewID);
         const data = await prisma.review.findFirst({
           where : {
             reviewID
           }
         });
+        // console.log(data);
         console.log("* Prisma review-repo, get review");
         return data;
       } catch (error) {
