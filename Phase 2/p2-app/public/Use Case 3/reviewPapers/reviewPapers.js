@@ -6,9 +6,10 @@ const USER_ID = parseInt(localStorage.currentUserID);
 const forReviewList = document.querySelector("#for-review-list");
 
 async function displayPapers() {
-  const assignedPapers = await reviewServices.getPapersOfReviewer(USER_ID);
-  forReviewList.innerHTML = assignedPapers
-    .map((paper) => cardTemplate(paper))
+  const reviewObjects = await reviewServices.getPapersOfReviewer(USER_ID);
+  // console.log(reviewObjects[0].paper);
+  forReviewList.innerHTML = reviewObjects
+    .map((reviewObj) => cardTemplate(reviewObj))
     .join("");
 
   // Event handler for the hiding and unhidnig of the Abstract body
@@ -37,9 +38,9 @@ async function hideAbstract(e) {
 }
 
 async function redirectReviewForm(e) {
-  const paperIdParam = e.target.parentNode.parentNode.id;
-  // console.log(paperIdParam);
-  localStorage.setItem("paperAtm", paperIdParam);
+  const _reviewID = e.target.parentNode.parentNode.id;
+  // console.log(_reviewID);
+  localStorage.setItem("reviewAtm", _reviewID);
   window.location.href = "../reviewForm/reviewForm.html";
 }
 
@@ -58,12 +59,13 @@ async function helpHandler(e) {
 }
 
 // HTML for the paper card
-function cardTemplate(paper) {
+function cardTemplate(reviewObject) {
+  const paper = reviewObject.paper; 
   // const link = null;
   // link = "https://www.africau.edu/images/default/sample.pdf";
 
   return `
-<div class="card" id=${paper.paperID}>
+<div class="card" id=${reviewObject.reviewID}>
 
   <h2 class="static">${paper.title}</h2>
   
