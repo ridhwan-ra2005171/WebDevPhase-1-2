@@ -1,4 +1,5 @@
-import * as loginService from "../js/services/login-services";
+// import * as loginService from "../js/services/login-services";
+// import {getUser} from "../js/services/login-services";
 // // Imports
 // const papersUrl = "../../papers.json";
 const usersJson = "users.json";
@@ -56,6 +57,17 @@ function getFormData(form) {
   return Object.fromEntries(formData.entries());
 }
 
+async function getUser(userTocheck) {
+  const API_URL= `/api/users/${userTocheck.email}`;
+
+const response = await fetch(API_URL);
+console.log("TESTCHECK!!: ",response);
+console.log("TESTCHECK!!: ");
+console.log("TESTCHECK!!: ");
+
+const user= await response.json()
+return user
+}
 async function login(event) {
   event.preventDefault();
   const userTocheck = getFormData(form);
@@ -87,9 +99,9 @@ async function login(event) {
 async function findUser(userTocheck) {
   // const users = await getData(usersJson);
   // console.log(email);
-
   // const users = await (await fetch(usersJson)).json();
-  const user = loginService.getUser(userTocheck)
+  // const user = loginService.getUser(userTocheck)
+  const user = await getUser(userTocheck)
   console.log("userTESTCHECK: ", user);
   // const user = users.find((user) => user["email"] == userTocheck.email);
   if (user !== undefined) {
