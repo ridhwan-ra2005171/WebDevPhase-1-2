@@ -10,6 +10,22 @@ async function main(){
 
         console.log(await locationRepo.getLocation(1))
 
+
+
+        // newSchedule={
+        //     "date": "2023-08-05"
+        //     "sessions" : array here
+        // }
+           
+        scheduleRepo.addSchedule();
+
+
+
+
+
+
+
+
     }catch(err){
         console.log(err);
         return {err: err.message}

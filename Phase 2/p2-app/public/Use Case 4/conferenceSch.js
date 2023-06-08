@@ -44,6 +44,7 @@ async function loadPage() {
 
   // form.addEventListert("submit", addSchedule)
 }
+window.onload = loadPage()
 //===========================================================================
 //loadSchedules:
 //===========================================================================
@@ -77,6 +78,7 @@ async function loadSchedules() {
   // console.log(schedulesContainer.innerHTML);
   dateLoader();
 }
+window.onload = loadSchedules;
 
 //this is to load each session objects, since it is an array itself inside the json
 function loadSessions(session) {

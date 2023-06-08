@@ -50,6 +50,20 @@ class schedulesRepo{
     }
 
 
+    //ADD SCHEDULE:
+    async addSchedule(schedule) {
+      try {
+          const newSchedule = await prisma.schedule.create({
+              data: schedule
+          })
+          return newSchedule
+      } catch (error) {
+          return { error: error.message }
+      }
+  }
+  
+
+
 
         //might not need this
         async getAllDates() {

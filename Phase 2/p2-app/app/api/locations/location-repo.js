@@ -8,6 +8,27 @@ class locationsRepo{
     constructor(){
     }
 
+    //get all locations:
+    async getLocations(){
+      try {
+        // const schedules = await prisma.location.findMany({
+        //   include: {
+        //     sessions:{
+        //       include:{
+        //         location : true
+        //       }
+        //     }
+        //     }
+        const locations= await prisma.location.findMany();
+        // });
+        
+        return locations;
+      } catch (error) {
+        console.error('Error retrieving dates:', error);
+        throw new Error('Failed to retrieve dates');
+      }
+    }
+
     //getlocation by ID its working in the repo-test
     async getLocation(locationID) {
         try {

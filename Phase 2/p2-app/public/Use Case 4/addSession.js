@@ -1,3 +1,12 @@
+import * as locServices from '../js/services/location-services.js';
+
+// const myloc = await locServices.getLocation(1);
+// console.log(myloc.building + ' ' + myloc.room);
+const allLoc = await locServices.getLocations(); //returns all locations (use in DL)
+allLoc.forEach((location) => {
+  console.log(location);
+});
+
 let myLocations = [];
 // schDates = JSON.parse(localStorage.schDates); //fetching my localstorage for dates
 let schDates =[];
@@ -40,7 +49,7 @@ let tempSchdule;
 // We are gonna use this state variable to check if the update button was clicked 
 const state = localStorage.updateState
 
-console.log(state);
+// console.log(state);
 if (state == "updateClicked") {
   tempSchdule= JSON.parse(localStorage.tempSchdule); //fetching local for update
   console.log("YES UPDATE");
@@ -113,8 +122,10 @@ async function loadSessionForm(counter) {
   // const locationList = document.querySelectorAll('#location-1')
   // locationList.addEventListener('load', handleLocationChange)
   // loadPresenters('presenter-${counter}','#paper-${counter}')
-  loadAcceptedPapers(`paper-${counter}`);
-  handleLocationChange(`location-${counter}`);
+  // loadAcceptedPapers(`paper-${counter}`);
+
+  // handleLocationChange(`location-${counter}`);
+
   if (tempSchdule) {
     console.log("CHECKKKKKK");
     loadToForm(tempSchdule,counter);
@@ -185,6 +196,7 @@ function deleteSession(sessionFormID) {
     // console.log("SESS TO DELETE: ", toDeleteSession);
   }
 }
+//================================================================================
 
 //load Location==========================================
 
@@ -200,21 +212,36 @@ function showInfo(data) {
 //================
 
 async function handleLocationChange(locationListID) {
-  const locationJson = "/json/locations.json";
-  const locations = await (await fetch(locationJson)).json();
-
-  const locationList = document.querySelector(`#${locationListID}`); // find the list
+  // const locationJson = "/json/locations.json";
+  // const locations = await (await fetch(locationJson)).json();
+  const tempLocs = await allLoc.map(loc=>loc)
+  console.log(tempLocs);
+  const locationDL = document.querySelector(`#${locationListID}`); // find the list
   // console.log("SMTH: ", locationList);
   let locHTML = `<option value="" selected disabled>-Select Location-</option>`;
 
-  locations.forEach(
-    (loc) =>
-      (locHTML += `
-        <option value="${loc.id}">${loc.building} - ${loc.room}</option>
+  allLoc.forEach((location) => {
+    console.log(location);
+    (locHTML += `
+        <option value="${location.locationID}">${location.building} - ${location.room}</option>
         `)
-  );
-  locationList.innerHTML = locHTML;
+  });
+
+
+  // tempLocs.forEach(
+  //   (loc) =>
+  //     (locHTML += `
+  //       <option value="${loc.id}">${loc.building} - ${loc.room}</option>
+  //       `)
+  // );
+  locationDL.innerHTML = locHTML;
 }
+// document.getElementById(`location-${counter}`).addEventListener("change", () => {
+//   handleLocationChange(`location-${counter}`);
+// });
+handleLocationChange(`location-${counter}`);
+//=======================
+
 
 //load paper========================================
 //we need to filter accepted papers here
@@ -280,6 +307,11 @@ function loadAcceptedPapers(paperListID) {
   // console.log("3: ",reviewedPapers);
 }
 
+document.getElementById(`paper-${counter}`).addEventListener("change", () => {
+  loadAcceptedPapers(`paper-${counter}`);
+});
+//--------------------------------------------------------------------------------
+
 //load presenter========================================
 
 async function loadPresenters(presenterListID, paperListID) {
@@ -312,8 +344,7 @@ async function loadPresenters(presenterListID, paperListID) {
   // console.log("PRES: ",presenters);
 
   const presenterList = document.querySelector(`#${presenterListID}`);
-  // const locationList = document.querySelector(`#${locationListID}`); // find the list
-  // console.log("SMTH: ", locationList);
+ 
   let presHTML = `<option value="" selected disabled>-Select Presenter-</option>`;
 
   presenters.forEach(
@@ -362,6 +393,7 @@ async function addSession(counterParam) {
 
   const myTitleText = await document.querySelector(`#title-${counterParam}`);
   const myTitleSelected = myTitleText.value;
+  console.log("paperTitle",myTitleSelected);
 
   const myPaperSelect = await document.querySelector(`#paper-${counterParam}`);
   const paperSelected = myPaperSelect.value;
@@ -376,29 +408,30 @@ async function addSession(counterParam) {
   const myLocationSelect = await document.querySelector(
     `#location-${counterParam}`
   );
+  // console.log("line410", myLocationSelect.value);
     // get location from the json file
   const locations = await(await fetch("/json/locations.json")).json();
   // console.log("Loc: ",locations);
   const locationID = myLocationSelect.value;
-  const locationSelected = locations.find(loc => loc.id == locationID);
-  // console.log("selected location= ", locationSelected);
+  const locationSelected = locationID;
+  console.log("selected location= ", locationSelected);
 
   const myStartTime = await document.querySelector(`#fromTime-${counterParam}`);
   const startTimeSelected = myStartTime.value;
-  // console.log("selected ST= ", startTimeSelected);
+  console.log("selected ST= ", startTimeSelected);
 
   const myEndTime = await document.querySelector(`#endTime-${counterParam}`);
   const endTimeSelected = myEndTime.value;
-  // console.log("selected ET= ", endTimeSelected);
+  console.log("selected ET= ", endTimeSelected);
 
-  sessionObj = {
-    sesID: Date.now(),
+  const sessionObj = {
+    // sesID: Date.now(),
     title: myTitleSelected, //we assume paper is the title
-    location: locationSelected,
+    locationID: locationSelected, //this is locationID in prisma
     paperID: paperSelected,
     presenterID: presenterSelected,
-    fromTime: startTimeSelected,
-    endTime: endTimeSelected,
+    fromTime: startTimeSelected, //this is startTime in prisma
+    endTime: endTimeSelected, //endTime in prisma
   };
   console.log("SESS obj: ", sessionObj);
 
@@ -438,14 +471,16 @@ async function submitSession(event) {
   let tempCounter = counter;
 
   const newScheduleObject = {
-    schID: Date.now(),
+    // schID: Date.now(),
     date: getDateFiltered(),
     sessions: await collectSessions(),
   };
+  console.log("newSch",newScheduleObject);
 
   mySchedules.push(newScheduleObject);
   localStorage.setItem("mySchedules", JSON.stringify(mySchedules)); //to save it again to
-  window.location.href = "/Use Case 4/conferenceSch.html"
+  // window.location.href = "/Use Case 4/conferenceSch.html"
+  window.location.href= "/mainpage/homepage.html"
   // loadSchedules();
 }
 
