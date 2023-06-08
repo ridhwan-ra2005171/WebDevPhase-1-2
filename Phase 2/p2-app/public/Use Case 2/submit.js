@@ -369,6 +369,13 @@ console.log("rev2", reviewer2);
 
     //why not showing??
     console.log("check: newAddedPaper: ",newAddedPaper);
+
+    swal({
+        title: "Paper submitted!",
+        text: "The paper has been added to the database",
+        icon: "success",
+        button: "Good",
+      });
     //can add a checker to check if these authors already submitted a paper before, or any other constraint (title name...etc)
     //save paper in localStorage
     // let papersArray = JSON.parse(localStorage.getItem("papers"))
