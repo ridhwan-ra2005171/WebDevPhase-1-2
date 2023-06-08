@@ -8,7 +8,26 @@ class statRepo{
 
     async countPapers() {
         const totalPapers = await prisma.paper.count();
-        return totalPapers;
+        const acceptedPapers = await prisma.paper.aggregate({
+          where : {
+            accepted : true
+          },
+          _count : {
+            accepted : true
+          }
+        })
+
+        const notAcceptedPapers = await prisma.paper.aggregate({
+          where : {
+            accepted : false
+          },
+          _count : {
+            accepted : true
+          }
+        })
+        return {totalPapers ,  acceptedPapers : acceptedPapers._count.accepted,
+          notAcceptedPapers : notAcceptedPapers._count.accepted
+        };
       }
 
 
@@ -39,3 +58,5 @@ class statRepo{
 }
 
 export default new statRepo();
+
+// console.log(await new statRepo().countPapers());
