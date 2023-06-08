@@ -1,6 +1,5 @@
 import reviewRepo from "../../../review-repo";
 
-
 export async function GET(request, {params}) {
   try {
       let {reviewID} = params
@@ -17,7 +16,6 @@ export async function GET(request, {params}) {
     );
   }
 }
-
 
 export async function PUT(request, {params}) {
   try {

@@ -20,7 +20,8 @@ const averageAuthorsElement = document.getElementById('averageAuthors');
 const averagePresentationsElement = document.getElementById('averagePresentations');
 
 // Update the HTML elements with the values from stats
-paperCountElement.textContent = stats[0].toString();
+const {totalPapers,acceptedPapers,notAcceptedPapers}  = stats[0];
+paperCountElement.textContent = `Number of papers submitted: ${totalPapers}, Accepted: ${acceptedPapers}, Not Accepted: ${notAcceptedPapers}`;
 averageAuthorsElement.textContent = stats[1].toString();
 const { totalSessions, presentationsPerSession } = stats[2];
 averagePresentationsElement.textContent = `Number of Sessions: ${totalSessions}, Average Presentations per Session: ${presentationsPerSession}`;

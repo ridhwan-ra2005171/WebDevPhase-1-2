@@ -5,8 +5,8 @@ const usersJson = '../json/users.json';
 const institutionsJson = '../json/institutions.json';
 const papersJson = '../json/papers.json';
 
-let papers=[]
-localStorage.setItem("papers",JSON.stringify(papers))
+// let papers=[]
+// localStorage.setItem("papers",JSON.stringify(papers))
 
 let papersloc = null;
 let usersloc = null;
@@ -64,11 +64,23 @@ presenterList.addEventListener('focus',loadPresenters)
 form.addEventListener('submit', submitForm)
 
 
-//PERFECTO
+
+async function getInstitutions() {
+    const API_URL= `/api/institutions/`;
+  
+  const response = await fetch(API_URL);
+  // console.log("TESTCHECK!!getUser: ",response);
+  const institutions= await response.json()
+  console.log("TESTCHECK!!getinstitutionsGETinstitutions: ",institutions);
+  return institutions
+  }
+
+
+//PERFECTOOO
 async function loadInstitutions() {
     //gotta take into consideration if one author or multiple >> by default consider multiple
 // console.log("check");
-    const institutions  = await (await fetch(institutionsJson)).json();
+    const institutions  = await getInstitutions()
     // console.log(institutions);
     let instHTML=''
     // let instNames = institutions.map(inst=> inst.name)
@@ -156,7 +168,6 @@ async function loadPresenters() {
 
     //adding the id of the presenter
 
-
     // console.log("test", testPresenters);
     //save actual authors in the paperAuthors
 
@@ -165,6 +176,8 @@ async function loadPresenters() {
     //but gotta make sure to change paperAuthor if any change occurs (so don't validate a presenter that has been deleted)
     //maybe include it as a check statement when submitting
     //if false reset presenter to null
+    console.log("testPresenters: ",testPresenters);
+    console.log("testPresenters: ",testPresenters);
     const presentersID  = await (findUserByName(testPresenters) )
     let presenters=[]
     for (let index = 0; index < testPresenters.length; index++) {
@@ -184,9 +197,20 @@ console.log("presenters: ",presenters);
         presenterList.innerHTML=presentHTML
 }
 
+async function getAuthors() {
+    const API_URL= `/api/authors/`;
+  
+  const response = await fetch(API_URL);
+  // console.log("TESTCHECK!!getUser: ",response);
+  const authors= await response.json()
+  console.log("TESTCHECK!!getauthorsGETauthors: ",authors);
+  return authors
+  }
+
 //gets an array of user obj{fname,lname}
 async function findUserByName(array) {
-    const users  = await (await fetch(usersJson)).json();//users is an array
+    const authors = await getAuthors()
+    // const users  = await (await fetch(usersJson)).json();//users is an array
 
     let authorsID =[]
 
@@ -196,20 +220,20 @@ async function findUserByName(array) {
         let userIndex=0
        
         //loop through all authors & save them in an array: only their IDs >> should 
-        while (userIndex<users.length) {
-            // compare submitted email with users.json's emails
-            if (users[userIndex]["first_name"]==array[index].first_name) {
-                //check if users is an array (starting from 0)
-                id = userIndex+1
-                authorsID[index]=id
-            }
-            userIndex+=1
-        }
+    //     while (userIndex<users.length) {
+    //         // compare submitted email with users.json's emails
+    //         if (users[userIndex]["first_name"]==array[index].first_name) {
+    //             //check if users is an array (starting from 0)
+    //             id = userIndex+1
+    //             authorsID[index]=id
+    //         }
+    //         userIndex+=1
+    //     }
 
-        if (id==0) {
-            console.log("email not found");
-            return false
-        }
+    //     if (id==0) {
+    //         console.log("email not found");
+    //         return false
+    //     }
     }
     return authorsID
 }

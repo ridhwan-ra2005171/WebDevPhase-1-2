@@ -28,7 +28,6 @@ class reviewRepo{
           },
           data : 
             reviewData
-  
         });
         console.log("* Prisma review-repo, update review");
         return data;
@@ -55,7 +54,6 @@ class reviewRepo{
       }
     }
 }
-
 export default new reviewRepo();
 
 // const repo = new reviewRepo();
