@@ -57,9 +57,17 @@ async function main() {
         // })
 
        
-        reviews.forEach(async (rev) => {
-            await prisma.review.create({ data: rev });
-        })
+        // reviews.forEach(async (rev) => {
+        //     await prisma.review.create({ data: rev });
+        // })
+
+        // reviewers.forEach(async (revr) => {
+        //     await prisma.reviewer.create({ data: revr });
+        // })
+        
+        // authors.forEach(async (auth)=> {
+        //     await prisma.author.create({ data : auth})
+        // })
         
         //---------------------------------------------------
         // confDates.forEach(async (date) => {
